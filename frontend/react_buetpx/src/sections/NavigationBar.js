@@ -7,17 +7,17 @@ function Nav() {
   return (
     <nav>
       {/* <Slogo clas="logo" /> */}
-      <div className="bowl_menu">
-        <Link to="/" className="block_menu">
+      <div className="nav_bowl">
+        <Link to="/" className="nav_block">
           <Tspan title="Discover" />
           {/* <SarrowBot /> */}
         </Link>
         
 
-        <Link to="/" className="block_menu">
+        <Link to="/" className="nav_block">
           <Tspan title="Quests" />
         </Link>
-        <Link to="/" className="block_menu">
+        <Link to="/" className="nav_block">
           <Tspan title="Blog" />
         </Link>
       </div>
