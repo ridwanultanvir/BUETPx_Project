@@ -11,3 +11,7 @@ npm install react-router-dom@6
 ```
 rmdir /S .git
 ```
+
+1. App.js 
+2. next assets/img folder create 
+3. components/Populartags.js create (eta website theke neya hoise: kajer easy te)
