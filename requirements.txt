@@ -1,0 +1,9 @@
+cd ..
+# install python
+# create venv
+python -m venv project_venv
+# activate
+project_venv/Scripts/activate
+# upgrade/install pip
+py -m pip install --upgrade pip
+
