@@ -14,7 +14,7 @@ function Nav() {
         </Link>
         
 
-        <Link to="{google.com}" className="nav_block">
+        <Link to={{pathname:"google.com"}} className="nav_block">
           <Tspan title="Quests" />
         </Link>
         <Link to="/" className="nav_block">
