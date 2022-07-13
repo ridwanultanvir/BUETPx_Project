@@ -33,8 +33,9 @@ rmdir /S .git
 2. next assets/img folder create 
 3. components/Populartags.js create (eta website theke neya hoise: kajer easy te)
 
-
 ##
+@Tanvir: 
+
 
 ```
 F:\L4T1_code\CSE408_project\dj_env1\Scripts\activate
@@ -42,3 +43,22 @@ F:\L4T1_code\CSE408_project\dj_env1\Scripts\activate
 ```
 (dj_env1) F:\L4T1_code\CSE408_project\BUETpx_project>cd Backend
 python manage.py runserver
+
+##
+open cmd: 
+```
+conda create --name js_env1
+conda activate js_env1
+conda deactivate
+
+conda init powershell
+```
+* ekhane npm er package gula rakhsi 
+
+* some weird reason : ager package.json file delete kore disilam
+```
+npm i @material-ui/core
+npm i @material-ui/icons
+npm i @material-ui/styles
+npm install
+```
