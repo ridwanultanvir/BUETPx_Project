@@ -69,3 +69,7 @@ Run the Python script:
 		
 		python manage.py makemigrations buetpx
 		python manage.py migrate buetpx
+ 
+ Run the server
+
+			python manage.py runserver
