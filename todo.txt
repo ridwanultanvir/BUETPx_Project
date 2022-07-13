@@ -1,0 +1,12 @@
+cd ..
+# install python
+# create venv
+python -m venv project_venv
+# activate
+project_venv/Scripts/activate
+# upgrade/install pip
+py -m pip install --upgrade pip
+
+pip install djangorestframework
+pip install psycopg2
+pip install django-cors-headers
