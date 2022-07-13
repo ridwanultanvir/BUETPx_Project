@@ -24,19 +24,20 @@ const useStyles = makeStyles(() => ({
 
    const MyCard = (props)=> {
     const {id,post_title,post_date,photo_url,owner,category,place,tags}=props
-    
+    // const {title}=props
     const classes = useStyles();
     return (
         
       <Card className={classes.Card}>
         <CardHeader
-        // avatar={<Avatar src={avatarUrl} />}
+        avatar={<Avatar/>}
         action={
           <IconButton aria-label="settings">
          
           </IconButton>
         }
         title={post_title}
+        // title="Title"
 
       />
 
@@ -45,6 +46,7 @@ const useStyles = makeStyles(() => ({
         component="img"
         image={photo_url}
         height='200'
+        
         width='100%'
         objectFit='cover'
         alt={photo_url}

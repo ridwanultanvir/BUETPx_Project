@@ -1,9 +1,10 @@
 import React from "react";
 import Card from "./Card";
-import { Grid } from "@material-ui/core";
-import photoList from "./data";
+import { Grid } from "@mui/material";
+import photoList from "./Constants";
 
 const Content = () => {
+
     const getPhotoCard = photoObj => {
       return (
         <Grid item xs={12} sm={4}>
@@ -14,6 +15,7 @@ const Content = () => {
   
     return (
       <Grid container spacing={2}>
+
         {photoList.map(photoObj => getPhotoCard(photoObj))}
       </Grid>
     );
