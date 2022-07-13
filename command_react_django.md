@@ -69,4 +69,5 @@ npm install --legacy-peer-deps @material-ui/core
 ```
 npm install --legacy-peer-deps @material-ui/icons
 npm install --legacy-peer-deps @material-ui/styles
+npm install --legacy-peer-deps @material-ui/styles
 ```
