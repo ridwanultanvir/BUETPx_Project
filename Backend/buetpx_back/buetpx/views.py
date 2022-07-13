@@ -8,9 +8,9 @@ from buetpx.models import Post
 from buetpx.serializers import TutorialSerializer
 from buetpx.serializers import PostSerializer
 from buetpx.serializers import CategorySerializer
-from buetpx.serializers import PlaceSerializer
-from buetpx.serializers import TagsSerializer
-from buetpx.serializers import UserAccountSerializer
+# from buetpx.serializers import PlaceSerializer
+# from buetpx.serializers import TagsSerializer
+# from buetpx.serializers import UserAccountSerializer
 from rest_framework.decorators import api_view
 
 
@@ -102,7 +102,7 @@ def post_list(request):
         post_serializer = PostSerializer(posts, many=True)
         return JsonResponse(post_serializer.data, safe=False)
 
-# Create a new object
+# # Create a new object
 
     elif request.method == 'POST':
         post_data = JSONParser().parse(request)
@@ -114,13 +114,22 @@ def post_list(request):
         return JsonResponse(post_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-    # GET list of tutorials, POST a new tutorial, DELETE all tutorials
+#     # GET list of tutorials, POST a new tutorial, DELETE all tutorials
  
 
-@api_view(['GET'])
+@api_view(['GET','POST'])
 def get_categories(request):
 
     if request.method == 'GET':
         categories = Category.objects.all()
         categories_serializer = CategorySerializer(categories, many=True)
         return JsonResponse(categories_serializer.data, safe=False)
+
+    elif request.method == 'POST':
+        cat_data = JSONParser().parse(request)
+        cat_serializer = CategorySerializer(data=cat_data)
+
+        if cat_serializer.is_valid():
+             cat_serializer.save()
+             return JsonResponse(cat_serializer.data, status=status.HTTP_201_CREATED) 
+        return JsonResponse(cat_serializer.errors, status=status.HTTP_400_BAD_REQUEST)

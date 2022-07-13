@@ -9,7 +9,7 @@ class UserAccount(models.Model):
     name = models.CharField(max_length=200)
     # make it unique
     email = models.EmailField(max_length=200, unique=True)
-    photo_url = models.URLField(max_length=200)
+    photo_url = models.URLField(max_length=1000)
     hashedpass = models.CharField(max_length=200)
     
     def __str__(self):
@@ -23,17 +23,15 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-    
 
-    def __str__(self):
-        return self.name
+    
         
 class Place(models.Model):
     name = models.CharField(max_length=500)
-    locality = models.CharField(max_length=500)
-    sublocality = models.CharField(max_length=500)
-    city = models.CharField(max_length=500)
-    country = models.CharField(max_length=500)
+    # locality = models.CharField(max_length=200)
+    # sublocality = models.CharField(max_length=200)
+    city = models.CharField(max_length=50)
+    country = models.CharField(max_length=50)
 
     def __str__(self):
         return self.name
@@ -54,10 +52,11 @@ class Post(models.Model):
     photo_url = models.URLField(max_length=500)
 
     owner = models.ForeignKey(
-        UserAccount, on_delete=models.CASCADE,
-         related_name='posts'
-         )
-         
+        UserAccount, 
+        on_delete=models.CASCADE,
+        related_name='posts'
+    )
+
     category = models.ForeignKey(
           Category, 
           on_delete=models.CASCADE,
@@ -99,12 +98,12 @@ class Comment(models.Model):
 
     
 
-class Gallery(models.Model):
-    title =  models.CharField(max_length=200)
-    description = models.TextField()
-    # if true then it is public
-    # if false then it is private
-    visibilty = models.BooleanField(default=True)
+# class Gallery(models.Model):
+#     title =  models.CharField(max_length=200)
+#     description = models.TextField()
+#     # if true then it is public
+#     # if false then it is private
+#     visibilty = models.BooleanField(default=True)
     
 
 class Tutorial(models.Model):

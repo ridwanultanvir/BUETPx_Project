@@ -26,7 +26,7 @@ class PostSerializer(serializers.ModelSerializer):
     # tags_name = serializers.ReadOnlyField(source='tags.name')
     
     class Meta:
-        ordering  = ['-post_date']
+        # ordering  = ['-post_date']
         model = Post
         fields = (
                   'id',
@@ -64,7 +64,7 @@ class CategorySerializer(serializers.ModelSerializer):
   
   class Meta:
 
-    ordering = ['-id']
+    # ordering = ['-id']
     model = Category
     fields = ('id',
               'name',
@@ -80,8 +80,8 @@ class PlaceSerializer(serializers.ModelSerializer):
     model = Place
     fields = ('id',
               'name',
-              'locality',
-              'sublocality',
+              # 'locality',
+              # 'sublocality',
               'city',
               'country',
               'posts'
@@ -93,7 +93,7 @@ class UserAccountSerializer(serializers.ModelSerializer):
 
   class Meta:
 
-    ordering = ['-id']
+    # ordering = ['-id']
     model = UserAccount
     fields = ('id',
               'email',
