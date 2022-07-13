@@ -4,7 +4,13 @@ from rest_framework.parsers import JSONParser
 from rest_framework import status
  
 from buetpx.models import Tutorial
+from buetpx.models import Post
 from buetpx.serializers import TutorialSerializer
+from buetpx.serializers import PostSerializer
+from buetpx.serializers import CategorySerializer
+from buetpx.serializers import PlaceSerializer
+from buetpx.serializers import TagsSerializer
+from buetpx.serializers import UserAccountSerializer
 from rest_framework.decorators import api_view
 
 
@@ -76,3 +82,45 @@ def tutorial_list_published(request):
     if request.method == 'GET': 
         tutorials_serializer = TutorialSerializer(tutorials, many=True)
         return JsonResponse(tutorials_serializer.data, safe=False)
+
+
+
+
+
+@api_view(['GET', 'POST'])
+def post_list(request):
+   
+# Retrieve objects (with condition)
+
+    if request.method == 'GET':
+        posts = Post.objects.all()
+        
+        title = request.GET.get('post_title', None)
+        if title is not None:
+            posts = posts.filter(title__icontains=title)
+        
+        post_serializer = PostSerializer(posts, many=True)
+        return JsonResponse(post_serializer.data, safe=False)
+
+# Create a new object
+
+    elif request.method == 'POST':
+        post_data = JSONParser().parse(request)
+        post_serializer = PostSerializer(data=post_data)
+
+        if post_serializer.is_valid():
+             post_serializer.save()
+             return JsonResponse(post_serializer.data, status=status.HTTP_201_CREATED) 
+        return JsonResponse(post_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+    # GET list of tutorials, POST a new tutorial, DELETE all tutorials
+ 
+
+@api_view(['GET'])
+def get_categories(request):
+
+    if request.method == 'GET':
+        categories = Category.objects.all()
+        categories_serializer = CategorySerializer(categories, many=True)
+        return JsonResponse(categories_serializer.data, safe=False)

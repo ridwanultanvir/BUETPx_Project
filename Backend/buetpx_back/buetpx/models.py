@@ -19,12 +19,21 @@ class UserAccount(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
+
     
 
     def __str__(self):
         return self.name
+        
 class Place(models.Model):
     name = models.CharField(max_length=500)
+    locality = models.CharField(max_length=500)
+    sublocality = models.CharField(max_length=500)
+    city = models.CharField(max_length=500)
+    country = models.CharField(max_length=500)
 
     def __str__(self):
         return self.name
@@ -44,18 +53,26 @@ class Post(models.Model):
     post_date = models.DateTimeField(auto_now_add=True)
     photo_url = models.URLField(max_length=500)
 
-    owner = models.ForeignKey(UserAccount, on_delete=models.CASCADE)
+    owner = models.ForeignKey(
+        UserAccount, on_delete=models.CASCADE,
+         related_name='posts'
+         )
+         
     category = models.ForeignKey(
           Category, 
-          on_delete=models.CASCADE
+          on_delete=models.CASCADE,
+          related_name='posts'
     )
     place = models.ForeignKey(
             Place,
-            on_delete=models.CASCADE
+            on_delete=models.CASCADE,
+            related_name='posts'
+
     )
     tags = models.ManyToManyField(
             Tags,
-            blank=True
+            blank=True,
+            related_name='posts'
         )
 
 
@@ -69,11 +86,13 @@ class Comment(models.Model):
     comment_date = models.DateTimeField(auto_now_add=True)
     post = models.ForeignKey(
             Post,
-            on_delete=models.CASCADE
+            on_delete=models.CASCADE,
+            related_name='comments'
     )
     user = models.ForeignKey(
             UserAccount,
-            on_delete= models.CASCADE
+            on_delete= models.CASCADE,
+            related_name='comments'
     )
 
 

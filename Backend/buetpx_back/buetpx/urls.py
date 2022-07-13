@@ -4,6 +4,9 @@ from buetpx import views
  
 urlpatterns = [ 
     path ('api/tutorials', views.tutorial_list),
+    path ('api/categories', views.get_categories),
+    path ('api/posts', views.post_list),
     path ('api/tutorials/published', views.tutorial_list_published),
     path ('api/tutorials/<pk>', views.tutorial_detail),
+    # path ('api/posts/<pk>', views.tutorial_detail),
 ]
