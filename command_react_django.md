@@ -57,8 +57,16 @@ conda init powershell
 
 * some weird reason : ager package.json file delete kore disilam
 ```
-npm i @material-ui/core
-npm i @material-ui/icons
-npm i @material-ui/styles
-npm install
+npm install @material-ui/core
+```
+* but eta error dey; 
+Fix: 
+```
+npm install --legacy-peer-deps @material-ui/core
+```
+
+
+```
+npm install --legacy-peer-deps @material-ui/icons
+npm install --legacy-peer-deps @material-ui/styles
 ```

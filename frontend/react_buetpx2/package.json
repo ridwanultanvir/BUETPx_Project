@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "@material-ui/core": "^4.12.4",
-    "@material-ui/icons": "^4.11.3",
-    "@material-ui/styles": "^4.11.5",
-    "react-scripts": "^5.0.1"
-  }
-}
