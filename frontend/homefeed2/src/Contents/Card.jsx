@@ -23,38 +23,31 @@ const useStyles = makeStyles(() => ({
 
 
    const MyCard = (props)=> {
-    const {title,avatarUrl,imageUrl}=props
+    const {id,post_title,post_date,photo_url,owner,category,place,tags}=props
+    
     const classes = useStyles();
     return (
         
       <Card className={classes.Card}>
         <CardHeader
-        avatar={<Avatar src={avatarUrl} />}
+        // avatar={<Avatar src={avatarUrl} />}
         action={
           <IconButton aria-label="settings">
          
           </IconButton>
         }
-        title={title}
+        title={post_title}
 
       />
-        {/* <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            
-          </Avatar>
-        }
-       
-        subheader="September 14, 2016"
-      /> */}
+
+        
       <CardMedia
         component="img"
-        image={imageUrl}
+        image={photo_url}
         height='200'
         width='100%'
         objectFit='cover'
-        // image="https://upload.wikimedia.org/wikipedia/en/thumb/e/e2/IMG_Academy_Logo.svg/330px-IMG_Academy_Logo.svg.png"
-        alt="Paella dish"
+        alt={photo_url}
         className={classes.Media}
       />
         {/* <CardContent height="50">

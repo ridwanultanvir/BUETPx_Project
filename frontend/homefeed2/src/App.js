@@ -1,8 +1,8 @@
 import './App.css';
 import React from 'react';
 import {Grid} from "@material-ui/core";
-import Header from './Header';
-import Body from './Body';
+import Header from './Contents/Header';
+import Body from './Contents/Body';
 
 function App() {
   return (

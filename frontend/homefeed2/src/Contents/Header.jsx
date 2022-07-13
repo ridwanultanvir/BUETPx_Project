@@ -2,6 +2,7 @@ import React from 'react'
 import {AppBar,Toolbar,Typography} from '@mui/material'
 import AcUnitRoundedIcon from "@mui/icons-material/AcUnitRounded";
 import { makeStyles } from "@mui/styles";
+import Button from '@mui/material/Button';
 
 const useStyles = makeStyles(() => ({
   typographyStyles: {
@@ -15,9 +16,11 @@ function Header() {
     <AppBar position='static'>
         <Toolbar>
             <Typography className={classes.typographyStyles}>
-                Naeem Ahmed
+                BUETpx
             </Typography>
+            {/* <Button size="small"><AcUnitRoundedIcon/></Button> */}
             <AcUnitRoundedIcon/>
+            
         </Toolbar>
     </AppBar>
   )
