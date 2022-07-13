@@ -1,5 +1,7 @@
 from rest_framework import serializers 
 from buetpx.models import Tutorial
+from buetpx.models import Post
+
  
  
 class TutorialSerializer(serializers.ModelSerializer):
@@ -11,7 +13,7 @@ class TutorialSerializer(serializers.ModelSerializer):
                   'description',
                   'published')
 
-class Post(serializers.ModelSerializer):
+class PostSerializer(serializers.ModelSerializer):
     posted_by = serializers.ReadOnlyField(source='owner.id')
     category_name = serializers.ReadOnlyField(source='category.name')
     place_name = serializers.ReadOnlyField(source='place.name')
