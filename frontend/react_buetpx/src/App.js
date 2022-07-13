@@ -8,7 +8,7 @@ function App() {
       <div className="App">
         {/* <h1> hello buetpx </h1> */}
         <NavigationBar />
-        
+       
       </div>
       {/* this route because router-react-dom dont work link without this lines */}
       <Routes>
