@@ -1,21 +1,23 @@
-import "./App.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import React from "react";
+import { Grid } from "@material-ui/core";
+import Header from "./Header";
+import Content from "./Content";
 
-import NavigationBar from "./sections/NavigationBar";
-function App() {
+const App = () => {
   return (
-    <Router>
-      <div className="App">
-        {/* <h1> hello buetpx </h1> */}
-        <NavigationBar />
-        
-      </div>
-      {/* this route because router-react-dom dont work link without this lines */}
-      <Routes>
-        <Route exact path="/" />
-      </Routes>
-    </Router>
+    <Grid container direction="column">
+      <Grid item>
+        <Header />
+      </Grid>
+      <Grid item container>
+        <Grid item xs={false} sm={2} />
+        <Grid item xs={12} sm={8}>
+          <Content />
+        </Grid>
+        <Grid item xs={false} sm={2} />
+      </Grid>
+    </Grid>
   );
-}
+};
 
 export default App;
