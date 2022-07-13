@@ -7,7 +7,6 @@ const App = () => {
   return (
     <Grid container direction="column">
       <Grid item>
-        
         <Header />
       </Grid>
       <Grid item container>
