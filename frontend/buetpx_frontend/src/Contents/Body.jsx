@@ -1,22 +1,24 @@
 import React from "react";
-import MyCard from "./Card";
+import Card from "./Card";
 import { Grid } from "@mui/material";
-import coffeMakerList from "./Constants";
+import photoList from "./Constants";
 
-const Content = () => {
-    const getCoffeMakerCard = coffeMakerObj => {
+const Body = () => {
+
+    const getPhotoCard = photoObj => {
       return (
         <Grid item xs={12} sm={4}>
-          <MyCard {...coffeMakerObj} />
+          <Card {...photoObj} />
         </Grid>
       );
     };
   
     return (
       <Grid container spacing={2}>
-        {coffeMakerList.map(coffeMakerObj => getCoffeMakerCard(coffeMakerObj))}
+
+        {photoList.map(photoObj => getPhotoCard(photoObj))}
       </Grid>
     );
   };
   
-  export default Content;
+  export default Body;
