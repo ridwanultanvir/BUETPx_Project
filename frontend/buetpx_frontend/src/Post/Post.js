@@ -53,12 +53,26 @@ function Post(props) {
             <Grid item container>
             
                 <Grid item xs={2}> <IconButton size="small"><ThumbUpIcon/></IconButton> </Grid>
-                <Grid item xs={8} />
+                <Grid item xs={6} />
                 <Grid item xs={2} ><IconButton size="small"><CommentIcon/></IconButton></Grid>
             </Grid>
           </Grid>
 
           <Grid item container xs={6} direction='column' >
+          <Grid item container spacing={10}>
+          <Grid item xs={2} > <Button variant="outlined" color="primary">   Category </Button> </Grid>
+          <Grid item xs={2}><Button variant="outlined" color="secondary">   {post_info[0].category} </Button> </Grid>
+
+          </Grid>
+       
+
+            
+
+            <Grid item>
+            <br></br>
+            <br></br>
+            </Grid>
+
             <Grid item>
             <Button variant="outlined" color="primary">   Keywords </Button>
             {/* <Button> Keywords:</Button> */}
@@ -67,25 +81,16 @@ function Post(props) {
 
             </Grid>
             {/* <Grid item> {post_info[0].tags.map(tag => getTag(tag))} </Grid> */}
-            <Grid item >
+            {/* <Grid item > */}
             
-            {/* <Content /> */}
-            <Button variant="outlined" color="primary">   Category </Button>
-            <Button variant="outlined" color="secondary">   {post_info[0].category} </Button>
-            </Grid>
+            
 
             
-            <Grid item >
             
-            {/* <h1> Hello </h1> */}
-            {/* <Box component="span" sx={{ p: 1, border: '1px dashed grey' }}>
-            Tags:
-            </Box> */}
-            <Grid/>
             {/* <Grid item xs={2}></Grid>
             <Chip label="Clickable" />
             <Chip label="Clickable" variant="outlined"  /> */}
-            </Grid>
+            
           </Grid>
       
         </Grid>
