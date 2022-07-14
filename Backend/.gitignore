@@ -1,2 +1,6 @@
 /env
 /venv
+# /buetpx_back/buetpx_back/_pycache_
+# /buetpx_back/buetpx/_pycache_
+/buetpx_back/buetpx/migrations
+/buetpx_back/buetpx/__pycache__
