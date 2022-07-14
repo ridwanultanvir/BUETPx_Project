@@ -1,7 +1,7 @@
-import './App.css';
+import '../App.css';
 import React from 'react';
 import {Grid} from "@mui/material";
-import Header from './Contents/Header';
+import Header from '../Contents/Header';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import CommentIcon from '@mui/icons-material/Comment';
 import {IconButton} from '@mui/material';
