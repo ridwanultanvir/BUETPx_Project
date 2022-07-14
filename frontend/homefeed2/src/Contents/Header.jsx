@@ -47,6 +47,8 @@ import Grid from '@mui/material/Grid';
 import CameraOutlinedIcon from '@mui/icons-material/CameraOutlined';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
+import MenuIcon from '@mui/icons-material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 const pages = ['Discover', 'Quest'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -73,7 +75,7 @@ function Header () {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="fixed">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <CameraOutlinedIcon 
@@ -98,7 +100,7 @@ function Header () {
             BUETpx
           </Typography>
 
-          {/* <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -135,8 +137,8 @@ function Header () {
                 </MenuItem>
               ))}
             </Menu>
-          </Box> */}
-          {/* <CameraOutlinedIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          </Box>
+          <CameraOutlinedIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -154,7 +156,7 @@ function Header () {
             }}
           >
             BUETpx
-          </Typography> */}
+          </Typography>
           {/* <Grid container>
             <Grid item xs={2}></Grid>
             <Grid item xs={8}> */}

@@ -11,6 +11,12 @@ function App() {
         <Grid item>
         <Header/>
         </Grid>
+        <Grid item>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+        </Grid>
 
         <Grid item container>
           <Grid item xs={0} sm={1}>
