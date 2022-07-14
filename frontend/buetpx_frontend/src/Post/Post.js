@@ -73,13 +73,13 @@ function Post(props) {
             <br></br>
             </Grid>
 
-            <Grid item container xs={6} direction='column' >
+            {/* <Grid item container xs={6} direction='column' > */}
           <Grid item container spacing={10} >
           <Grid item xs={2} > <Button variant="outlined" color="primary">   Keywords </Button> </Grid>
           {/* {post_info[0].tags.map(tag => getTag(tag))} */}
           <Grid item xs={2}>{post_info[0].tags.map(tag => getTag(tag))} </Grid>
 
-            </Grid>
+            {/* </Grid> */}
 
             {/* <Grid item>
             <Button variant="outlined" color="primary">   Keywords </Button>
