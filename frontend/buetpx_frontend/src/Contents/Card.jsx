@@ -64,9 +64,9 @@ const useStyles = makeStyles(() => ({
 
         <CardActions>
             <Grid container>
-                <Grid item xs={4}><Button size="small"><ThumbUpIcon/></Button></Grid>
+                <Grid item xs={4}><IconButton size="small"><ThumbUpIcon/></IconButton></Grid>
                 <Grid item xs={4} />
-                <Grid item xs={4}><Button size="small"><CommentIcon/></Button></Grid>
+                <Grid item xs={4}><IconButton size="small"><CommentIcon/></IconButton></Grid>
             </Grid>
           
         </CardActions>
