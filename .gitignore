@@ -1,2 +1,4 @@
 /node_modules
 /frontend/homefeed
+package-lock.json
+package.json
