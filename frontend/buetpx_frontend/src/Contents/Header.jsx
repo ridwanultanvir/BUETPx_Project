@@ -5,16 +5,13 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
-
+import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import Grid from '@mui/material/Grid';
-// import AdbIcon from '@mui/icons-material/Adb';
 import CameraOutlinedIcon from '@mui/icons-material/CameraOutlined';
-import Fab from '@mui/material/Fab';
-import AddIcon from '@mui/icons-material/Add';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
@@ -131,26 +128,29 @@ function Header () {
           >
             BUETpx
           </Typography>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           {/* <Grid container>
             <Grid item xs={2}></Grid>
             <Grid item xs={8}> */}
               <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               {pages.map((page) => (
-              
+                  
                   <Button
                     key={page}
-                    onClick={handleCloseNavMenu}
-                    sx={{ my: 2, color: 'white', display: 'block' }}
+                    onClick={handleCloseNavMenu} 
+                    sx={{ my: 2, color: 'white', display: 'block',
+                    fontSize:14,
+                    fontWeight:'bold' }}
                   >
                     {page}
                   </Button>
                  
+                  
+                 
               ))}
               </Box>
 
-              <Fab size="medium" color="white" aria-label="add" sx={{ display: { xs: 'none', md: 'flex' } }}>
-                  <AddIcon />
-              </Fab>
+              
             {/* </Grid> */}
             {/* <Grid item xs={2}>
             
@@ -158,8 +158,23 @@ function Header () {
           
           {/* </Grid> */}
 
+
+
+{/* user menu after click of pp */}
           
           <Box sx={{ flexGrow: 0 }}>
+              <Button 
+                    // onClick={} 
+                  sx={{
+                    color:'white',
+                    fontSize:14,
+                    fontWeight:'bold'
+                  }}
+                    >
+                      Upload
+                  <FileUploadOutlinedIcon size='large' />
+              </Button>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             
                 <Tooltip title="Open usermenu">
                   <IconButton 
@@ -169,9 +184,6 @@ function Header () {
                   </IconButton>
 
                 </Tooltip>
-              
-            
-          
             
             <Menu
               sx={{ mt: '45px' }}

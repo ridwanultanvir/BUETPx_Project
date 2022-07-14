@@ -11,7 +11,7 @@ import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles(() => ({
     Card: {
-        width: 250,
+        width: 300,
         margin: 'auto'
       },
       Media: {
