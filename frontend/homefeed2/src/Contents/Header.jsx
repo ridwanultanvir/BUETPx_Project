@@ -37,14 +37,16 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
+
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
+import Grid from '@mui/material/Grid';
+// import AdbIcon from '@mui/icons-material/Adb';
 import CameraOutlinedIcon from '@mui/icons-material/CameraOutlined';
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
 
 const pages = ['Discover', 'Quest'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -53,20 +55,22 @@ function Header () {
   // const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   // const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
-  // const handleOpenNavMenu = (event) => {
-  //   setAnchorElNav(event.currentTarget);
-  // };
-  // const handleOpenUserMenu = (event) => {
-  //   setAnchorElUser(event.currentTarget);
-  // };
+  const handleOpenNavMenu = (event) => {
+    console.log("clicked");
+    // setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    // setAnchorElUser(event.currentTarget);
+    console.log("clicked");
+  };
 
-  // const handleCloseNavMenu = () => {
-  //   setAnchorElNav(null);
-  // };
+  const handleCloseNavMenu = () => {
+    // setAnchorElNav(null);
+  };
 
-  // const handleCloseUserMenu = () => {
-  //   setAnchorElUser(null);
-  // };
+  const handleCloseUserMenu = () => {
+    // setAnchorElUser(null);
+  };
 
   return (
     <AppBar position="static">
@@ -94,13 +98,13 @@ function Header () {
             BUETpx
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          {/* <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
-              // onClick={handleOpenNavMenu}
+              onClick={handleOpenNavMenu}
               color="inherit"
             >
               <MenuIcon />
@@ -131,8 +135,8 @@ function Header () {
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
-          {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          </Box> */}
+          {/* <CameraOutlinedIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -142,35 +146,59 @@ function Header () {
               mr: 2,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
-              fontFamily: 'monospace',
+              fontFamily: 'revert-layer',
               fontWeight: 700,
-              letterSpacing: '.3rem',
+              // letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
             }}
           >
-            LOGO
+            BUETpx
           </Typography> */}
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                // onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
-          </Box>
+          {/* <Grid container>
+            <Grid item xs={2}></Grid>
+            <Grid item xs={8}> */}
+              <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+              {pages.map((page) => (
+              
+                  <Button
+                    key={page}
+                    // onClick={handleCloseNavMenu}
+                    sx={{ my: 2, color: 'white', display: 'block' }}
+                  >
+                    {page}
+                  </Button>
+                 
+             
+              ))}
+              </Box>
+              <Fab size="medium" color="white" aria-label="add" sx={{ display: { xs: 'none', md: 'flex' } }}>
+                  <AddIcon />
+              </Fab>
+            {/* </Grid> */}
+            {/* <Grid item xs={2}>
+            
+            </Grid> */}
+          
+          {/* </Grid> */}
 
+          
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton 
-              // onClick={handleOpenUserMenu} 
-              sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
+            
+              
+                
+           
+                <Tooltip title="Open settings">
+                  <IconButton 
+                    onClick={handleOpenUserMenu} 
+                    sx={{ p: 0 }}>
+                      <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                  </IconButton>
+              </Tooltip>
+              
+            
+          
+{/*             
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
@@ -187,15 +215,10 @@ function Header () {
               // open={Boolean(anchorElUser)}
               // onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} 
-                // onClick={handleCloseUserMenu}
-                >
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+              
+            </Menu> */}
           </Box>
+         
         </Toolbar>
       </Container>
     </AppBar>

@@ -1,6 +1,6 @@
 import React from "react";
 import MyCard from "./Card";
-import { Grid } from "@material-ui/core";
+import { Grid } from "@mui/material";
 import coffeMakerList from "./Constants";
 
 const Content = () => {

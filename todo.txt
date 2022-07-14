@@ -11,6 +11,5 @@ pip install djangorestframework
 pip install psycopg2
 pip install django-cors-headers
 
-yarn add @material-ui/core
-yarn add @material-ui/icons
-yarn add @material-ui/styles
+# for each of the apps
+yarn add @mui/styles @mui/material @mui/icon-material 

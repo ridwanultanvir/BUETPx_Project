@@ -4,7 +4,7 @@ import CardHeader from '@mui/material/CardHeader'
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import Grid from '@material-ui/core/Grid';
+import Grid from '@mui/material/Grid';
 import CommentIcon from '@mui/icons-material/Comment';
 import {IconButton,CardMedia,Avatar} from '@mui/material';
 import { makeStyles } from "@mui/styles";
