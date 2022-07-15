@@ -2,8 +2,8 @@
 ##
 buetpx_frontend ==> react 
 
-* navbar showing
-![](img/Screenshot%20(301).png)
+* a new page added
+![](img/Screenshot%20(325).png)
 
 ##
 

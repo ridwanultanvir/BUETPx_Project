@@ -1,4 +1,11 @@
 /env
 /venv
+<<<<<<< HEAD
 # ignore settings.py
 settings.py
+=======
+# /buetpx_back/buetpx_back/_pycache_
+# /buetpx_back/buetpx/_pycache_
+/buetpx_back/buetpx/migrations
+/buetpx_back/buetpx/__pycache__
+>>>>>>> d54e25d7b7ac5bbde342d4996800e1e612193e3a
