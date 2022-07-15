@@ -26,3 +26,12 @@ F:\L4T1_code\CSE408_project\dj_env1\Scripts\activate
 
 react-time-format
 ```
+
+##
+Category kothar foreign key?
+
+Post er ;
+
+So Post theke CategorySerializer() call kora jay
+
+Category class e kintu kono foreign key nei

@@ -42,10 +42,6 @@ class Tags(models.Model):
     def __str__(self):
         return self.name
 
-
-
-
-
 class Post(models.Model):
     post_title = models.CharField(max_length=500)
     post_date = models.DateTimeField(auto_now_add=True)
@@ -56,6 +52,11 @@ class Post(models.Model):
         on_delete=models.CASCADE,
         related_name='posts'
     )
+    # comment = models.ForeignKey(
+    #       Comment, 
+    #       on_delete=models.CASCADE,
+    #       related_name='comment'
+    # )
 
     category = models.ForeignKey(
           Category, 
@@ -73,12 +74,10 @@ class Post(models.Model):
             blank=True,
             related_name='posts'
         )
-
-
-
     def __str__(self):
         return self.post_title
-
+    
+    
 # comment entity
 class Comment(models.Model):
     comment_txt = models.CharField(max_length=500)
@@ -86,13 +85,17 @@ class Comment(models.Model):
     post = models.ForeignKey(
             Post,
             on_delete=models.CASCADE,
-            related_name='comments'
+            related_name='post'
     )
     user = models.ForeignKey(
             UserAccount,
             on_delete= models.CASCADE,
             related_name='comments'
     )
+
+    def __str__(self):
+        return self.comment_txt
+
 
 
 

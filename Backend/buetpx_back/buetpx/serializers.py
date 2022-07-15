@@ -121,27 +121,16 @@ class CommentSerializer(serializers.ModelSerializer):
               'user'
               )
 
-class CommentSerializer2(serializers.ModelSerializer):
-
-
-  class Meta:
-
-    ordering = ['-post']
-    model = Comment
-    fields = ('id',
-              'comment_txt',
-              'comment_date',
-              'post',
-              'user'
-              )
 
 
 # category; tag; location; comment; (num of like); 
 class SinglePostSerializer(serializers.ModelSerializer):
+    # comment = CommentSerializer()
+    
     place = PlaceSerializer()
     category = CategorySerializer()
     # tags = TagsSerializer()
-    # comment = CommentSerializer()
+    
     class Meta:
 
       ordering = ['-id']
@@ -154,3 +143,19 @@ class SinglePostSerializer(serializers.ModelSerializer):
                 # 'tags',
                 # 'comment',
                 )
+      
+      
+class CommentSerializer2(serializers.ModelSerializer):
+  post = SinglePostSerializer()
+
+  class Meta:
+
+    ordering = ['-post']
+    model = Comment
+    fields = ('id',
+              'comment_txt',
+              'comment_date',
+              'post',              
+              )
+
+

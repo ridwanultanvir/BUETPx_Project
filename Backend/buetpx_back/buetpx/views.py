@@ -7,7 +7,7 @@ from buetpx.models import Tutorial
 from buetpx.models import Post
 from buetpx.models import Comment
 from buetpx.models import UserAccount
-from buetpx.serializers import CommentSerializer, TutorialSerializer
+from buetpx.serializers import CommentSerializer, CommentSerializer2, TutorialSerializer
 from buetpx.serializers import PostSerializer
 from buetpx.serializers import SinglePostSerializer
 from buetpx.serializers import PlaceSerializer
@@ -141,7 +141,7 @@ def get_comment_by_id(request,id):
         comment = Comment.objects.get(pk=id)       
 
         
-        comment_serializer = CommentSerializer(comment)
+        comment_serializer = CommentSerializer2(comment)
         return JsonResponse(comment_serializer.data, safe=False)
 
 
