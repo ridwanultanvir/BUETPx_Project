@@ -20,10 +20,10 @@ class TutorialSerializer(serializers.ModelSerializer):
 
 
 class PostSerializer(serializers.ModelSerializer):
-    # posted_by = serializers.ReadOnlyField(source='owner.id')
-    # category_name = serializers.ReadOnlyField(source='category.name')
-    # place_name = serializers.ReadOnlyField(source='place.name')
-    # tags_name = serializers.ReadOnlyField(source='tags.name')
+    # owner = serializers.SlugRelatedField(read_only=True, slug_field='name' )
+    category = serializers.SlugRelatedField(read_only=True, slug_field='name' )
+    place = serializers.SlugRelatedField(read_only=True, slug_field='name' )
+    tags = serializers.StringRelatedField(many=True, read_only=True)
     
     class Meta:
         # ordering  = ['-post_date']
@@ -33,6 +33,7 @@ class PostSerializer(serializers.ModelSerializer):
                   'post_title',
                   'post_date',
                   'photo_url',
+                  
                   'owner',
                   'category',
                   'place',
@@ -86,6 +87,7 @@ class PlaceSerializer(serializers.ModelSerializer):
               'country',
               'posts'
               )
+
 
 
 class UserAccountSerializer(serializers.ModelSerializer):
