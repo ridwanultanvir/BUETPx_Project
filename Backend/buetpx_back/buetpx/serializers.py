@@ -17,13 +17,28 @@ class TutorialSerializer(serializers.ModelSerializer):
                   'title',
                   'description',
                   'published')
+        
+class UserAccountSerializer(serializers.ModelSerializer):
+  # posts = PostSerializer(many=True, read_only=True)
 
+  class Meta:
+
+    # ordering = ['-id']
+    model = UserAccount
+    fields = ('id',
+              'name',
+              'email',
+              'photo_url',
+              'hashedpass',
+              'posts'
+              )
 
 class PostSerializer(serializers.ModelSerializer):
-    # owner = serializers.SlugRelatedField(read_only=True, slug_field='name' )
-    category = serializers.SlugRelatedField(read_only=True, slug_field='name' )
-    place = serializers.SlugRelatedField(read_only=True, slug_field='name' )
-    tags = serializers.StringRelatedField(many=True, read_only=True)
+    owner = UserAccountSerializer()
+    # serializers.Sl
+    # category = serializers.SlugRelatedField(read_only=True, slug_field='name' )
+    # place = serializers.SlugRelatedField(read_only=True, slug_field='name' )
+    # tags = serializers.StringRelatedField(many=True, read_only=True)
     
     class Meta:
         # ordering  = ['-post_date']
@@ -33,15 +48,13 @@ class PostSerializer(serializers.ModelSerializer):
                   'post_title',
                   'post_date',
                   'photo_url',
-                  
                   'owner',
-                  'category',
-                  'place',
-                  'tags',
-                 
-
+                  # 'owner_name',
+                  # 'category',
+                  # 'place',
+                  # 'tags',
                   )
-        extra_kwargs = {'tags':{'required': False}}
+        # extra_kwargs = {'tags':{'required': False}}
 
 
 class TagsSerializer(serializers.ModelSerializer):
@@ -90,17 +103,3 @@ class PlaceSerializer(serializers.ModelSerializer):
 
 
 
-class UserAccountSerializer(serializers.ModelSerializer):
-  # posts = PostSerializer(many=True, read_only=True)
-
-  class Meta:
-
-    # ordering = ['-id']
-    model = UserAccount
-    fields = ('id',
-              'name',
-              'email',
-              'photo_url',
-              'hashedpass',
-              'posts'
-              )
