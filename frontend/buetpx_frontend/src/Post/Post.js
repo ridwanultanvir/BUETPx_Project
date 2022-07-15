@@ -30,130 +30,14 @@ import post_info from "../Contents/Constants.js";
 function Post(props) {
     const {id,post_title,post_date,photo_url,owner,category,place,tags}=props
     
-    const getTag = tag => {
-        return (
-          // <Grid item xs={2}  >
-
-        <Button variant="outlined" color="secondary" >   {tag} </Button>
-         
-
-        //  </Grid>
-        );
-      };
+    
   return (
-
-      <Grid container direction='column' spacing={2}>
-        <Grid item>
-          <Header/>
-        </Grid>
-        <Grid item>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-        </Grid>
-
-        <Grid item container marginLeft={4}>
-          
-          <Grid item container xs={6} direction='column'>
-            <Grid item >
-              <img src={photo_url} alt='1.jpg'width="600" height="500"></img>
-              <hr></hr>
-              </Grid>
-            <Grid item container>
-            
-                <Grid item xs={2}> <IconButton size="small"><ThumbUpIcon/></IconButton> </Grid>
-                <Grid item xs={6} />
-                <Grid item xs={2} ><IconButton size="small"><CommentIcon/></IconButton></Grid>
-            </Grid>
-          </Grid>
-
-          <Grid item container xs={6} direction='column' >
-          <Grid item container>
-          <Grid item xs={2} >
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'revert-layer',
-              fontWeight: 700,
-              // letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            Category
-          </Typography>
-
-          </Grid>
-
-          <Grid item xs={2}><Button variant="outlined" color="secondary">   {category} </Button> </Grid>
-
-          </Grid>
-       
-
-            
-
-            <Grid item>
-            <br></br>
-            <br></br>
-            </Grid>
-
-            {/* <Grid item container xs={6} direction='column' > */}
-          <Grid item container rowSpacing={2} columnSpacing={2} >
-          <Grid item xs={2} >    
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'revert-layer',
-              fontWeight: 700,
-              // letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            Keyword
-          </Typography>
-            
-          
-          
-          </Grid>
-          {/* {post_info[0].tags.map(tag => getTag(tag))} */}
-          <Grid item xs={10} >{{tags}.map(tag => getTag(tag))}</Grid>
-
-            {/* </Grid> */}
-
-            {/* <Grid item>
-            <Button variant="outlined" color="primary">   Keywords </Button>
- 
-            {post_info[0].tags.map(tag => getTag(tag))}
-            
-
-            </Grid> */}
-            </Grid>
-            
-            
-
-            
-            
-            {/* <Grid item xs={2}></Grid>
-            <Chip label="Clickable" />
-            <Chip label="Clickable" variant="outlined"  /> */}
-            
-          </Grid>
+      <div> 
+        <h1> {id} </h1> 
+        <h2> {photo_url} </h2>
+      </div>
       
-        </Grid>
-      </Grid>
-         
+      
   
   );
 }

@@ -9,8 +9,13 @@ import { TextField } from '@material-ui/core';
 import { Chip } from '@mui/material';
 import { Box } from '@mui/material';
 import Content from './post_content';
-import post_info from "./post_info";
+
 import Button from '@mui/material/Button';
+import FontPost from "./font"; 
+import {Typography} from '@mui/material';
+// import post_info from "./post_info";
+import post_info from "../Contents/Constants.js";
+
 // const sampleJSON = {
 //     id: 2005,
 //     post_title: "Sunny Day",
@@ -21,17 +26,22 @@ import Button from '@mui/material/Button';
 //     place: "Boston, MA",
 //     tags: ["sun", "cloud", "sky"]
 // };
-
+// props = 
 function Post(props) {
+    const {id,post_title,post_date,photo_url,owner,category,place,tags}=props
+    
     const getTag = tag => {
         return (
           // <Grid item xs={2}  >
+
         <Button variant="outlined" color="secondary" >   {tag} </Button>
+         
+
         //  </Grid>
         );
       };
   return (
-   
+
       <Grid container direction='column' spacing={2}>
         <Grid item>
           <Header/>
@@ -47,7 +57,7 @@ function Post(props) {
           
           <Grid item container xs={6} direction='column'>
             <Grid item >
-              <img src="https://photos.nomadicnotes.com/img/s/v-3/p2759081374-4.jpg" alt='1.jpg'width="600" height="500"></img>
+              <img src={photo_url} alt='1.jpg'width="600" height="500"></img>
               <hr></hr>
               </Grid>
             <Grid item container>
@@ -59,9 +69,29 @@ function Post(props) {
           </Grid>
 
           <Grid item container xs={6} direction='column' >
-          <Grid item container spacing={10}>
-          <Grid item xs={2} > <Button variant="outlined" color="primary">   Category </Button> </Grid>
-          <Grid item xs={2}><Button variant="outlined" color="secondary">   {post_info[0].category} </Button> </Grid>
+          <Grid item container>
+          <Grid item xs={2} >
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontFamily: 'revert-layer',
+              fontWeight: 700,
+              // letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            Category
+          </Typography>
+
+          </Grid>
+
+          <Grid item xs={2}><Button variant="outlined" color="secondary">   {category} </Button> </Grid>
 
           </Grid>
        
@@ -74,10 +104,31 @@ function Post(props) {
             </Grid>
 
             {/* <Grid item container xs={6} direction='column' > */}
-          <Grid item container spacing={10} >
-          <Grid item xs={2} > <Button variant="outlined" color="primary">   Keywords </Button> </Grid>
+          <Grid item container rowSpacing={2} columnSpacing={2} >
+          <Grid item xs={2} >    
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontFamily: 'revert-layer',
+              fontWeight: 700,
+              // letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            Keyword
+          </Typography>
+            
+          
+          
+          </Grid>
           {/* {post_info[0].tags.map(tag => getTag(tag))} */}
-          <Grid item xs={2}>{post_info[0].tags.map(tag => getTag(tag))} </Grid>
+          <Grid item xs={10} >{{tags}.map(tag => getTag(tag))}</Grid>
 
             {/* </Grid> */}
 
