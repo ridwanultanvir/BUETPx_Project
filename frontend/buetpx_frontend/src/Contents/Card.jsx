@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import Grid from '@mui/material/Grid';
 import CommentIcon from '@mui/icons-material/Comment';
-import {IconButton,CardMedia,Avatar} from '@mui/material';
+import {IconButton,CardMedia,Avatar,CardActionArea} from '@mui/material';
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles(() => ({
@@ -29,19 +29,22 @@ const useStyles = makeStyles(() => ({
     return (
         
       <Card className={classes.Card}>
+        
         <CardHeader
-        avatar={<Avatar/>}
+        avatar={<IconButton href="\"><Avatar /></IconButton>}
         action={
           <IconButton aria-label="settings">
          
           </IconButton>
         }
         title={post_title}
+        subheader={"by "+owner}
+        subsubheader={"on "+post_date}
         // title="Title"
 
       />
 
-        
+    <CardActionArea href="post">
       <CardMedia
         component="img"
         image={photo_url}
@@ -52,21 +55,13 @@ const useStyles = makeStyles(() => ({
         alt={photo_url}
         className={classes.Media}
       />
-        {/* <CardContent height="50">
-          <Grid container direction='column' xs={12}>
-            
-            <Typography>
-                {description}
-            </Typography>
-
-          </Grid>
-        </CardContent> */}
+       </CardActionArea>
 
         <CardActions>
             <Grid container>
-                <Grid item xs={4}><IconButton size="small"><ThumbUpIcon/></IconButton></Grid>
-                <Grid item xs={4} />
-                <Grid item xs={4}><IconButton size="small"><CommentIcon/></IconButton></Grid>
+                <Grid item xs={2}><IconButton size="small"><ThumbUpIcon/></IconButton></Grid>
+                <Grid item xs={.5} />
+                <Grid item xs={2}><IconButton size="small"><CommentIcon/></IconButton></Grid>
             </Grid>
           
         </CardActions>
