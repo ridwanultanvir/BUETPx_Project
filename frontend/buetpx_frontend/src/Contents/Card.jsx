@@ -6,9 +6,10 @@ import Button from '@mui/material/Button';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import Grid from '@mui/material/Grid';
 import CommentIcon from '@mui/icons-material/Comment';
-import {IconButton,CardMedia,Avatar,CardActionArea} from '@mui/material';
+import {IconButton,CardMedia,Avatar,CardActionArea,Typography} from '@mui/material';
 import { makeStyles } from "@mui/styles";
-import { fontSize } from '@mui/system';
+// import {Moment} from 'react-moment';
+import Time from 'react-time-format';
 
 const useStyles = makeStyles(() => ({
     Card: {
@@ -40,8 +41,27 @@ const useStyles = makeStyles(() => ({
          
         //   </IconButton>
         // }
-        title={"by "+owner}
-        subheader={"on "+date}
+        title={<Typography
+        // variant="h6"
+        noWrap
+        component="a"
+        href="/"
+        sx={{
+          mr: 2,
+          display: { xs: 'none', md: 'flex' },
+          fontFamily: 'revert-layer',
+          fontWeight: 500,
+          // letterSpacing: '.3rem',
+          color: 'inherit',
+          textDecoration: 'none',
+        }}
+      >
+        {owner}
+      </Typography>}
+        subheader={
+          // date
+        <Time value={date} format="YYYY-MM-DD HH:mm"/>
+      }
 
       />
 
