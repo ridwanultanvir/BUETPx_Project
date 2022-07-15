@@ -117,6 +117,17 @@ def post_list(request):
         return JsonResponse(post_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+# categroy; .. ; comment_list 
+# @api_view(['Get'])
+# def get_post_by_id(request,id):
+    
+#     if request.method == 'GET':
+#         comment = Comment.objects.get(pk=id)       
+
+        
+#         comment_serializer = CommentSerializer(comment)
+#         return JsonResponse(comment_serializer.data, safe=False)
+
 @api_view(['Get'])
 def get_comment_by_id(request,id):
     
