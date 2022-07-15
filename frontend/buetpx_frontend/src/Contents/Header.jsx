@@ -14,9 +14,10 @@ import Grid from '@mui/material/Grid';
 import CameraOutlinedIcon from '@mui/icons-material/CameraOutlined';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import { NavLink } from "react-router-dom";
 
 const pages = ['Discover', 'Quest'];
-const usermenu = ['Profile', 'Account', 'Logout'];
+const usermenu = ['Profile', 'Account Settings', 'Logout'];
 
 function Header () {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -99,11 +100,16 @@ function Header () {
             >
 {/* all pages linked to one of the menu items */}
               {pages.map((page) => (
+                <NavLink className="nav-link" to={`/${page}`}>
                 <MenuItem key={page} 
-                onClick={handleCloseNavMenu}
+                // onClick="\"{...page}
+                
                 >
-                  <Typography textAlign="center">{page}</Typography>
+                  
+                  <Typography textAlign="center" >{page}</Typography>
+                  
                 </MenuItem>
+                </NavLink>
               ))}
 
             </Menu>
@@ -134,16 +140,19 @@ function Header () {
             <Grid item xs={8}> */}
               <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               {pages.map((page) => (
-                  
+                  <NavLink className="nav-link" to={`/${page}`}>
                   <Button
                     key={page}
-                    onClick={handleCloseNavMenu} 
+                
                     sx={{ my: 2, color: 'white', display: 'block',
                     fontSize:14,
                     fontWeight:'bold' }}
                   >
-                    {page}
+                    
+                  {page}
+                  
                   </Button>
+                  </NavLink>
                  
                   
                  
@@ -163,6 +172,7 @@ function Header () {
 {/* user menu after click of pp */}
           
           <Box sx={{ flexGrow: 0 }}>
+          <NavLink className="nav-link" to="/">
               <Button 
                     // onClick={} 
                   sx={{
@@ -174,6 +184,7 @@ function Header () {
                       Upload
                   <FileUploadOutlinedIcon size='large' />
               </Button>
+              </NavLink>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             
                 <Tooltip title="Open usermenu">
@@ -202,9 +213,11 @@ function Header () {
               onClose={handleCloseUserMenu}
             >
               {usermenu.map((setting) => (
+                <NavLink className="nav-link"  to="/">
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
+                </NavLink>
               ))}
             </Menu>
           </Box>

@@ -98,6 +98,7 @@ class UserAccountSerializer(serializers.ModelSerializer):
     # ordering = ['-id']
     model = UserAccount
     fields = ('id',
+              'name',
               'email',
               'photo_url',
               'hashedpass',
