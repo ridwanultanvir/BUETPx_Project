@@ -9,6 +9,7 @@ from buetpx.models import Comment
 from buetpx.models import UserAccount
 from buetpx.serializers import CommentSerializer, TutorialSerializer
 from buetpx.serializers import PostSerializer
+from buetpx.serializers import SinglePostSerializer
 from buetpx.serializers import UserAccountSerializer
 from buetpx.serializers import CategorySerializer
 # from buetpx.serializers import PlaceSerializer
@@ -118,15 +119,19 @@ def post_list(request):
 
 
 # categroy; .. ; comment_list 
-# @api_view(['Get'])
-# def get_post_by_id(request,id):
+
+
+@api_view(['Get'])
+def get_post_by_id(request,id):
     
-#     if request.method == 'GET':
-#         comment = Comment.objects.get(pk=id)       
+    if request.method == 'GET':
+        comment = Comment.objects.get(pk=id)       
 
         
-#         comment_serializer = CommentSerializer(comment)
-#         return JsonResponse(comment_serializer.data, safe=False)
+        comment_serializer = SinglePostSerializer(comment)
+        return JsonResponse(comment_serializer.data, safe=False)
+
+
 
 @api_view(['Get'])
 def get_comment_by_id(request,id):
@@ -139,18 +144,7 @@ def get_comment_by_id(request,id):
         return JsonResponse(comment_serializer.data, safe=False)
 
 
-@api_view(['Get'])
-def get_post_by_id(request,id):
-    
-    if request.method == 'GET':
-        post = Post.objects.get(pk=id)
-        
-        # title = request.GET.get('post_title', None)
-        # if title is not None:
-        #     posts = posts.filter(title__icontains=title)
-        
-        post_serializer = PostSerializer(post, many=True)
-        return JsonResponse(post_serializer.data, safe=False)
+
 
     
 
