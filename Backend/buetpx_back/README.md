@@ -1,4 +1,7 @@
 ##
+Caution: settings.py file password: 1234 or 123 
+
+##
 
 new api create: 
 
