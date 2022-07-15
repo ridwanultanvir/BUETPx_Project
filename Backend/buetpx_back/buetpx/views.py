@@ -115,6 +115,20 @@ def post_list(request):
              return JsonResponse(post_serializer.data, status=status.HTTP_201_CREATED) 
         return JsonResponse(post_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['Get'])
+def get_post_by_id(request,id):
+    
+    if request.method == 'GET':
+        posts = Post.objects.get(pk=id)
+        
+        # title = request.GET.get('post_title', None)
+        # if title is not None:
+        #     posts = posts.filter(title__icontains=title)
+        
+        post_serializer = PostSerializer(posts, many=True)
+        return JsonResponse(post_serializer.data, safe=False)
+
+    
 
 #     # GET list of tutorials, POST a new tutorial, DELETE all tutorials
  
