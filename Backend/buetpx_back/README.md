@@ -1,4 +1,11 @@
 ##
+
+1. CategorySerializer Fix kora
+2. TagsSerializer wrong ?
+3. SinglePostSerializer
+4. CommentSerializer2
+
+##
 Caution: settings.py file password: 1234 or 123 
 
 ##

@@ -64,7 +64,7 @@ class PostSerializer(serializers.ModelSerializer):
 
 class TagsSerializer(serializers.ModelSerializer):
   
-  posts = PostSerializer(many=True, read_only=True)
+  # posts = PostSerializer(many=True, read_only=True)
 
   class Meta:
 
@@ -74,7 +74,7 @@ class TagsSerializer(serializers.ModelSerializer):
               'name',
               'posts'
               )
-    extra_kwargs = {'tags': {'required': False}}
+    # extra_kwargs = {'tags': {'required': False}}
 
 
 
@@ -140,7 +140,8 @@ class CommentSerializer2(serializers.ModelSerializer):
 class SinglePostSerializer(serializers.ModelSerializer):
     place = PlaceSerializer()
     category = CategorySerializer()
-    # comment = CommentSerializer2()
+    # tags = TagsSerializer()
+    # comment = CommentSerializer()
     class Meta:
 
       ordering = ['-id']
@@ -150,5 +151,6 @@ class SinglePostSerializer(serializers.ModelSerializer):
                 'photo_url',
                 'place',
                 'category',
+                # 'tags',
                 # 'comment',
                 )
