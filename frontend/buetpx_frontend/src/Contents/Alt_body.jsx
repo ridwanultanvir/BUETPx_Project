@@ -49,7 +49,7 @@ class Body extends Component{
         }
         getPhotoCard = photoObj => {
             return (
-                <Grid item xs={12} sm={12} md={6} lg={4}>
+                <Grid item xs={12} sm={4}>
                 <Card {...photoObj} />
                 </Grid>
             );
@@ -65,6 +65,22 @@ class Body extends Component{
                     );
         }
 
+// const Body = () => {
 
+//     const getPhotoCard = photoObj => {
+//       return (
+//         <Grid item xs={12} sm={4}>
+//           <Card {...photoObj} />
+//         </Grid>
+//       );
+//     };
+  
+//     return (
+//       <Grid container spacing={2}>
+
+//         {photoList.map(photoObj => getPhotoCard(photoObj))}
+//       </Grid>
+//     );
+//   };
 }
   export default Body;
