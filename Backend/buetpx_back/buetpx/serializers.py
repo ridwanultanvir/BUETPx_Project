@@ -20,7 +20,7 @@ class TutorialSerializer(serializers.ModelSerializer):
 
 
 class PostSerializer(serializers.ModelSerializer):
-    owner = serializers.SlugRelatedField(read_only=True, slug_field='name' )
+    # owner = serializers.SlugRelatedField(read_only=True, slug_field='name' )
     category = serializers.SlugRelatedField(read_only=True, slug_field='name' )
     place = serializers.SlugRelatedField(read_only=True, slug_field='name' )
     tags = serializers.StringRelatedField(many=True, read_only=True)

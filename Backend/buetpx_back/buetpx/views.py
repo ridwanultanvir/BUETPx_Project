@@ -5,8 +5,10 @@ from rest_framework import status
  
 from buetpx.models import Tutorial
 from buetpx.models import Post
+from buetpx.models import UserAccount
 from buetpx.serializers import TutorialSerializer
 from buetpx.serializers import PostSerializer
+from buetpx.serializers import UserAccountSerializer
 from buetpx.serializers import CategorySerializer
 # from buetpx.serializers import PlaceSerializer
 # from buetpx.serializers import TagsSerializer
@@ -133,3 +135,36 @@ def get_categories(request):
              cat_serializer.save()
              return JsonResponse(cat_serializer.data, status=status.HTTP_201_CREATED) 
         return JsonResponse(cat_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# get user by id
+@api_view(['GET', 'POST'])
+def get_user_by_id(request,id):
+   
+# Retrieve objects (with condition)
+
+    if request.method == 'GET':
+        
+
+        
+        user = UserAccount.objects.get(pk = id)
+        user_serializer = UserAccountSerializer(user)
+        return JsonResponse(user_serializer.data, safe=False)
+
+
+
+
+
+# get user by id
+@api_view(['GET', 'POST'])
+def get_all_user(request):
+   
+# Retrieve objects (with condition)
+
+        
+        # id = request.GET.get('id', None)
+        
+        
+        user = UserAccount.objects.all()
+        user_serializer = UserAccountSerializer(user, many=True)
+        return JsonResponse(user_serializer.data, safe=False)

@@ -17,7 +17,7 @@ export default [
   owner: 1000,
   category: "landscape",
   place: "Boston, MA",
-  tags: ["sun", "cloud", "sky"]
+  tags: ["travel", "boat", "sky"]
 },
 {
   id: 2002,

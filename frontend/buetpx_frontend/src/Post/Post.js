@@ -28,6 +28,7 @@ import {Typography} from '@mui/material';
 // };
 // props = 
 function Post(props) {
+  const {id,post_title,post_date,photo_url,owner,category,place,tags}=props
     const getTag = tag => {
         return (
           // <Grid item xs={2}  >
@@ -39,7 +40,7 @@ function Post(props) {
         );
       };
   return (
-   
+      
       <Grid container direction='column' spacing={2}>
         <Grid item>
           <Header/>
@@ -55,7 +56,7 @@ function Post(props) {
           
           <Grid item container xs={6} direction='column'>
             <Grid item >
-              <img src="https://photos.nomadicnotes.com/img/s/v-3/p2759081374-4.jpg" alt='1.jpg'width="600" height="500"></img>
+              <img src={photo_url} alt='1.jpg'width="600" height="500"></img>
               <hr></hr>
               </Grid>
             <Grid item container>
@@ -86,15 +87,10 @@ function Post(props) {
           >
             Category
           </Typography>
-            
-            {/* Category  */}
+
           </Grid>
-          {/* <Grid item xs={2} > 
-          <div style={{ fontSize: 6 }}>
-            <p> Category </p> 
-          </div> 
-          </Grid> */}
-          <Grid item xs={2}><Button variant="outlined" color="secondary">   {post_info[0].category} </Button> </Grid>
+
+          <Grid item xs={2}><Button variant="outlined" color="secondary">   {category} </Button> </Grid>
 
           </Grid>
        
@@ -108,28 +104,34 @@ function Post(props) {
 
             {/* <Grid item container xs={6} direction='column' > */}
           <Grid item container rowSpacing={2} columnSpacing={2} >
-          <Grid item xs={2} >    Keywords  </Grid>
+          <Grid item xs={2} >    
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontFamily: 'revert-layer',
+              fontWeight: 700,
+              // letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            Tags
+          </Typography>
+
+          
+          </Grid>
           {/* {post_info[0].tags.map(tag => getTag(tag))} */}
           <Grid item xs={10} >{post_info[0].tags.map(tag => getTag(tag))}</Grid>
 
-            {/* </Grid> */}
-
-            {/* <Grid item>
-            <Button variant="outlined" color="primary">   Keywords </Button>
- 
-            {post_info[0].tags.map(tag => getTag(tag))}
-            
-
-            </Grid> */}
-            </Grid>
+          
+          </Grid>
             
             
-
-            
-            
-            {/* <Grid item xs={2}></Grid>
-            <Chip label="Clickable" />
-            <Chip label="Clickable" variant="outlined"  /> */}
             
           </Grid>
       
