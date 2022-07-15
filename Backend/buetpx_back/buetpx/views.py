@@ -5,8 +5,9 @@ from rest_framework import status
  
 from buetpx.models import Tutorial
 from buetpx.models import Post
+from buetpx.models import Comment
 from buetpx.models import UserAccount
-from buetpx.serializers import TutorialSerializer
+from buetpx.serializers import CommentSerializer, TutorialSerializer
 from buetpx.serializers import PostSerializer
 from buetpx.serializers import UserAccountSerializer
 from buetpx.serializers import CategorySerializer
@@ -115,17 +116,29 @@ def post_list(request):
              return JsonResponse(post_serializer.data, status=status.HTTP_201_CREATED) 
         return JsonResponse(post_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+@api_view(['Get'])
+def get_comment_by_id(request,id):
+    
+    if request.method == 'GET':
+        comment = Comment.objects.get(pk=id)       
+
+        
+        comment_serializer = CommentSerializer(comment)
+        return JsonResponse(comment_serializer.data, safe=False)
+
+
 @api_view(['Get'])
 def get_post_by_id(request,id):
     
     if request.method == 'GET':
-        posts = Post.objects.get(pk=id)
+        post = Post.objects.get(pk=id)
         
         # title = request.GET.get('post_title', None)
         # if title is not None:
         #     posts = posts.filter(title__icontains=title)
         
-        post_serializer = PostSerializer(posts, many=True)
+        post_serializer = PostSerializer(post, many=True)
         return JsonResponse(post_serializer.data, safe=False)
 
     

@@ -33,6 +33,9 @@ class UserAccountSerializer(serializers.ModelSerializer):
               'posts'
               )
 
+# class SinglePostSerializer(serializers.ModelSerializer):
+# category; tag; location; comment; (num of like); 
+# 
 class PostSerializer(serializers.ModelSerializer):
     owner = UserAccountSerializer()
     # serializers.Sl
@@ -102,4 +105,17 @@ class PlaceSerializer(serializers.ModelSerializer):
               )
 
 
+# user_id  = je comment korse 
+class CommentSerializer(serializers.ModelSerializer):
 
+
+  class Meta:
+
+    ordering = ['-id']
+    model = Comment
+    fields = ('id',
+              'comment_txt',
+              'comment_date',
+              'post',
+              'user'
+              )
