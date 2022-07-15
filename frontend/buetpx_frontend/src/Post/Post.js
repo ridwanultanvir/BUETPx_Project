@@ -28,6 +28,7 @@ import {Typography} from '@mui/material';
 // };
 // props = 
 function Post(props) {
+  const {id,post_title,post_date,photo_url,owner,category,place,tags}=props
     const getTag = tag => {
         return (
           // <Grid item xs={2}  >
@@ -39,7 +40,7 @@ function Post(props) {
         );
       };
   return (
-   
+      
       <Grid container direction='column' spacing={2}>
         <Grid item>
           <Header/>
@@ -55,7 +56,7 @@ function Post(props) {
           
           <Grid item container xs={6} direction='column'>
             <Grid item >
-              <img src="https://photos.nomadicnotes.com/img/s/v-3/p2759081374-4.jpg" alt='1.jpg'width="600" height="500"></img>
+              <img src={photo_url} alt='1.jpg'width="600" height="500"></img>
               <hr></hr>
               </Grid>
             <Grid item container>
@@ -89,7 +90,7 @@ function Post(props) {
 
           </Grid>
 
-          <Grid item xs={2}><Button variant="outlined" color="secondary">   {post_info[0].category} </Button> </Grid>
+          <Grid item xs={2}><Button variant="outlined" color="secondary">   {category} </Button> </Grid>
 
           </Grid>
        

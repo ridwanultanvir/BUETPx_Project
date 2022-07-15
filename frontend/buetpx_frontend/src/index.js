@@ -18,7 +18,7 @@ ReactDOM.render(
 
       <Route path="/post" element={<Post {...post_single}/>} />
 
-      <Route path="/post" element={<Post />} />
+      {/* <Route path="/post" element={<Post />} /> */}
       {/* <Route path="/discover" element={<Discover />} /> */}
 
       
