@@ -125,7 +125,7 @@ def post_list(request):
 def get_post_by_id(request,id):
     
     if request.method == 'GET':
-        post = Comment.objects.get(pk=id)       
+        post = Post.objects.get(pk=id)       
 
         
         singe_post_serializer = SinglePostSerializer(post)

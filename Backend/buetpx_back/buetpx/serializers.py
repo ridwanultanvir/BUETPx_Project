@@ -41,12 +41,10 @@ class SinglePostSerializer(serializers.ModelSerializer):
     class Meta:
 
       ordering = ['-id']
-      model = Comment
+      model = Post
       fields = ('id',
-                'comment_txt',
-                'comment_date',
-                'post',
-                'user'
+                'post_title',
+                'photo_url',
                 )
  
 class PostSerializer(serializers.ModelSerializer):
