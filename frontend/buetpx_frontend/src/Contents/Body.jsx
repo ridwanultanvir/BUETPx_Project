@@ -47,10 +47,11 @@ class Body extends Component{
             }
           )
         }
-        getPhotoCard = photoObj => {
+
+        getPhotoCard = (photoObj) => {
             return (
                 <Grid item 
-               xxs={12} xs={12} sm={6} md={6} lg={4}
+               xs={12} sm={6} md={6} lg={4}
                 >
                 <Card {...photoObj} />
                 </Grid>

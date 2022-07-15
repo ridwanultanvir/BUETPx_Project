@@ -8,11 +8,13 @@ import Grid from '@mui/material/Grid';
 import CommentIcon from '@mui/icons-material/Comment';
 import {IconButton,CardMedia,Avatar,CardActionArea} from '@mui/material';
 import { makeStyles } from "@mui/styles";
+import { fontSize } from '@mui/system';
 
 const useStyles = makeStyles(() => ({
     Card: {
         width: 300,
         margin: 'auto'
+   
       },
       Media: {
         height: 300,
@@ -24,6 +26,7 @@ const useStyles = makeStyles(() => ({
 
    const MyCard = (props)=> {
     const {id,post_title,post_date,photo_url,owner,category,place,tags}=props
+    let date=post_date
     // const {title}=props
     const classes = useStyles();
     return (
@@ -32,15 +35,13 @@ const useStyles = makeStyles(() => ({
         
         <CardHeader
         avatar={<IconButton href="\"><Avatar /></IconButton>}
-        action={
-          <IconButton aria-label="settings">
+        // action={
+        //   <IconButton aria-label="settings">
          
-          </IconButton>
-        }
-        title={post_title}
-        subheader={"by "+owner}
-        subsubheader={"on "+post_date}
-        // title="Title"
+        //   </IconButton>
+        // }
+        title={"by "+owner}
+        subheader={"on "+date}
 
       />
 
@@ -59,9 +60,12 @@ const useStyles = makeStyles(() => ({
 
         <CardActions>
             <Grid container>
-                <Grid item xs={2}><IconButton size="small"><ThumbUpIcon/></IconButton></Grid>
                 <Grid item xs={.5} />
-                <Grid item xs={2}><IconButton size="small"><CommentIcon/></IconButton></Grid>
+                <Grid item xs={8} >{post_title}</Grid>
+                
+                <Grid item xs={2}><IconButton size="small"><ThumbUpIcon/></IconButton></Grid>
+                
+                <Grid item xs={1}><IconButton size="small"><CommentIcon/></IconButton></Grid>
             </Grid>
           
         </CardActions>
