@@ -125,11 +125,11 @@ def post_list(request):
 def get_post_by_id(request,id):
     
     if request.method == 'GET':
-        comment = Comment.objects.get(pk=id)       
+        post = Comment.objects.get(pk=id)       
 
         
-        comment_serializer = SinglePostSerializer(comment)
-        return JsonResponse(comment_serializer.data, safe=False)
+        singe_post_serializer = SinglePostSerializer(post)
+        return JsonResponse(singe_post_serializer.data, safe=False)
 
 
 
