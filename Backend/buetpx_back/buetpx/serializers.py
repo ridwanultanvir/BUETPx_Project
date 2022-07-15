@@ -1,3 +1,4 @@
+from unicodedata import category
 from rest_framework import serializers 
 from buetpx.models import Tutorial
 from buetpx.models import Post
@@ -120,9 +121,26 @@ class CommentSerializer(serializers.ModelSerializer):
               'user'
               )
 
+class CommentSerializer2(serializers.ModelSerializer):
+
+
+  class Meta:
+
+    ordering = ['-post']
+    model = Comment
+    fields = ('id',
+              'comment_txt',
+              'comment_date',
+              'post',
+              'user'
+              )
+
+
 # category; tag; location; comment; (num of like); 
 class SinglePostSerializer(serializers.ModelSerializer):
     place = PlaceSerializer()
+    category = CategorySerializer()
+    # comment = CommentSerializer2()
     class Meta:
 
       ordering = ['-id']
@@ -131,4 +149,6 @@ class SinglePostSerializer(serializers.ModelSerializer):
                 'post_title',
                 'photo_url',
                 'place',
+                'category',
+                # 'comment',
                 )
