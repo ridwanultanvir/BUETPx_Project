@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Homefeed from './Homefeed';
 import Post from "./Post/Post";
 import Discover from "./Component/Discover"; 
+import CommentExampleComment1 from "./Post/Comment/Comment"; 
 
 import post_single from "./Post/post_single"; 
 
@@ -21,6 +22,8 @@ ReactDOM.render(
 
       {/* <Route path="/post" element={<Post />} /> */}
       <Route path="/discover" element={<Discover />} />
+
+      <Route path="/comment" element={<CommentExampleComment1 />} />
 
       
     </Routes>

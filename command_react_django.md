@@ -77,4 +77,8 @@ npm install --legacy-peer-deps @material-ui/styles
 ```
 npm install --legacy-peer-deps 
 npm install --legacy-peer-deps react-time-format
+
+npm install --legacy-peer-deps semantic-ui-react semantic-ui-css
+
+npm install --legacy-peer-deps react-comments-section
 ```
