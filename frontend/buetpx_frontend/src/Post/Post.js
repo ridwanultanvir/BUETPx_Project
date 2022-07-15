@@ -123,7 +123,10 @@ function Post(props) {
           
           </Grid>
           </Grid>  
-        </Grid> 
+          </Grid> 
+          <Grid item container xs={6} direction='column'> 
+          <h1> Ami topu</h1>
+          </Grid>
     
       </Grid> 
     </Grid> 
