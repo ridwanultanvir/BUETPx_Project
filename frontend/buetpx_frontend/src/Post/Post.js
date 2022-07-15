@@ -104,7 +104,27 @@ function Post(props) {
 
             {/* <Grid item container xs={6} direction='column' > */}
           <Grid item container rowSpacing={2} columnSpacing={2} >
-          <Grid item xs={2} >    Keywords  </Grid>
+          <Grid item xs={2} >    
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontFamily: 'revert-layer',
+              fontWeight: 700,
+              // letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            Tags
+          </Typography>
+
+          
+          </Grid>
           {/* {post_info[0].tags.map(tag => getTag(tag))} */}
           <Grid item xs={10} >{post_info[0].tags.map(tag => getTag(tag))}</Grid>
 
@@ -112,10 +132,6 @@ function Post(props) {
           </Grid>
             
             
-
-            
-            
-     
             
           </Grid>
       
