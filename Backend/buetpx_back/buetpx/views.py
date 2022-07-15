@@ -165,6 +165,6 @@ def get_all_user(request):
         # id = request.GET.get('id', None)
         
         
-        user = UserAccount().objects.all()
-        user_serializer = UserAccountSerializer()(user, many=True)
+        user = UserAccount.objects.all()
+        user_serializer = UserAccountSerializer(user, many=True)
         return JsonResponse(user_serializer.data, safe=False)
