@@ -56,13 +56,13 @@ function Post(props) {
           
           <Grid item container xs={6} direction='column'>
             <Grid item >
-              <img src={photo_url} alt='1.jpg'width="600" height="500"></img>
-              <hr></hr>
+              <img src={photo_url} alt='1.jpg'width="400" height="300"></img>
+              {/* <hr></hr> */}
               </Grid>
             <Grid item container>
             
                 <Grid item xs={2}> <IconButton size="small"><ThumbUpIcon/></IconButton> </Grid>
-                <Grid item xs={6} />
+                <Grid item xs={4} />
                 <Grid item xs={2} ><IconButton size="small"><CommentIcon/></IconButton></Grid>
             </Grid>
           </Grid>
@@ -129,13 +129,30 @@ function Post(props) {
           <Grid item xs={10} >{post_info[0].tags.map(tag => getTag(tag))}</Grid>
 
           
-          </Grid>
-            
-            
+          {/* </Grid> */}
+          <Grid item>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+        </Grid>
+        <Grid item xs= {12} >
+        <TextField sx={{ width: 5}}
+          id="filled-multiline-static"
+          label="Add a Comment"
+          multiline
+          rows={4}
+          defaultValue=""
+          variant="filled"
+          inputProps={{style: {fontSize: 20}}}
+        />
+        <Button variant="outlined" color="secondary" >  Post  </Button>
+        </Grid>
             
           </Grid>
       
         </Grid>
+      </Grid>
       </Grid>
          
   
