@@ -10,6 +10,7 @@ from buetpx.models import UserAccount
 from buetpx.serializers import CommentSerializer, TutorialSerializer
 from buetpx.serializers import PostSerializer
 from buetpx.serializers import SinglePostSerializer
+from buetpx.serializers import PlaceSerializer
 from buetpx.serializers import UserAccountSerializer
 from buetpx.serializers import CategorySerializer
 # from buetpx.serializers import PlaceSerializer

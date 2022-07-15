@@ -35,17 +35,7 @@ class UserAccountSerializer(serializers.ModelSerializer):
 
 
 
-# category; tag; location; comment; (num of like); 
-class SinglePostSerializer(serializers.ModelSerializer):
 
-    class Meta:
-
-      ordering = ['-id']
-      model = Post
-      fields = ('id',
-                'post_title',
-                'photo_url',
-                )
  
 class PostSerializer(serializers.ModelSerializer):
     owner = UserAccountSerializer()
@@ -100,7 +90,7 @@ class CategorySerializer(serializers.ModelSerializer):
               )
 
 class PlaceSerializer(serializers.ModelSerializer):
-  # posts = PostSerializer(many=True, read_only=True)
+
 
   class Meta:
 
@@ -112,7 +102,6 @@ class PlaceSerializer(serializers.ModelSerializer):
               # 'sublocality',
               'city',
               'country',
-              'posts'
               )
 
 
@@ -130,3 +119,16 @@ class CommentSerializer(serializers.ModelSerializer):
               'post',
               'user'
               )
+
+# category; tag; location; comment; (num of like); 
+class SinglePostSerializer(serializers.ModelSerializer):
+    place = PlaceSerializer()
+    class Meta:
+
+      ordering = ['-id']
+      model = Post
+      fields = ('id',
+                'post_title',
+                'photo_url',
+                'place',
+                )
