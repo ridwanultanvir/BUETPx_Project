@@ -56,14 +56,13 @@ function Post(props) {
           
           <Grid item container xs={6} direction='column'>
             <Grid item >
-              <img src={photo_url} alt='1.jpg'width="400" height="300"></img>
+              <img src={photo_url} alt='1.jpg'width="450" height="300"></img>
               {/* <hr></hr> */}
               </Grid>
             <Grid item container>
             
                 <Grid item xs={2}> <IconButton size="small"><ThumbUpIcon/></IconButton> </Grid>
-                <Grid item xs={4} />
-                <Grid item xs={2} ><IconButton size="small"><CommentIcon/></IconButton></Grid>
+                
             </Grid>
             <Grid item container>
             <Grid item xs={2} sx={{fontSize:"16"}}>
@@ -76,7 +75,7 @@ function Post(props) {
                 mr: 2,
                 display: { xs: 'none', md: 'flex' },
                 fontFamily: 'revert-layer',
-                fontWeight: 700,
+                fontWeight: 600,
                 // letterSpacing: '.3rem',
                 color: 'inherit',
                 textDecoration: 'none',
@@ -124,12 +123,29 @@ function Post(props) {
           </Grid>
           </Grid>  
           </Grid> 
+          
           <Grid item container xs={6} direction='column'> 
-          <h1> Ami topu</h1>
+              {/* <h1> Ami topu</h1> */}
+              <Grid item container xs={6} > 
+                <TextField sx={{width: 10}}
+                id="filled-multiline-static"
+                label="Add a Comment"
+                multiline
+                rows={4}
+                defaultValue=""
+                variant="filled"
+                />
+              
+              </Grid>
+              {/* <Grid item> Hello Abcd</Grid> */}
+
+              
+              
           </Grid>
+          
     
       </Grid> 
-    </Grid> 
+      </Grid> 
           
  
   
