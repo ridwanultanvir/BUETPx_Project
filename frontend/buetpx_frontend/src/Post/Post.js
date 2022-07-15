@@ -34,7 +34,8 @@ function Post(props) {
   return (
       <div> 
         <h1> {id} </h1> 
-        <h2> {photo_url} </h2>
+        <img src={photo_url} alt='1.jpg'width="600" height="500"></img>
+        {/* <h2> {photo_url} </h2> */}
       </div>
       
       
