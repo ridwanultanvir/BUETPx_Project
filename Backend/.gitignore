@@ -1,0 +1,5 @@
+/env
+/venv
+/buetpx_back/buetpx/migrations
+/buetpx_back/buetpx/__pycache__
+posts.js
