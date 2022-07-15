@@ -70,3 +70,11 @@ npm install --legacy-peer-deps @material-ui/core
 npm install --legacy-peer-deps @material-ui/icons
 npm install --legacy-peer-deps @material-ui/styles
 ```
+
+
+##
+
+```
+npm install --legacy-peer-deps 
+npm install --legacy-peer-deps react-time-format
+```
