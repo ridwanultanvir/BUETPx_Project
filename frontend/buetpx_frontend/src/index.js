@@ -5,6 +5,7 @@ import "./index.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Homefeed from './Homefeed';
 import Post from "./Post/Post";
+import Discover from "./Component/Discover";
 // import {
 //   Navigation,
 //   Footer,
@@ -21,6 +22,7 @@ ReactDOM.render(
     <Routes>
       <Route path="/" element={<Homefeed />} />
       <Route path="/post" element={<Post />} />
+      <Route path="/discover" element={<Discover />} />
       
     </Routes>
     

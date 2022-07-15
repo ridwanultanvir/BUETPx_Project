@@ -3,7 +3,7 @@ import React from 'react';
 import {Grid} from "@mui/material";
 // import Header from './Contents/Header';
 import Header from './Contents/Header';
-import Body from './Contents/Alt_body';
+import Body from './Contents/Body';
 
 function Homefeed() {
   return (
