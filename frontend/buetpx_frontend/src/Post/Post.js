@@ -65,96 +65,70 @@ function Post(props) {
                 <Grid item xs={4} />
                 <Grid item xs={2} ><IconButton size="small"><CommentIcon/></IconButton></Grid>
             </Grid>
-          </Grid>
+            <Grid item container>
+            <Grid item xs={2} sx={{fontSize:"16"}}>
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              href="/"
+              sx={{
+                mr: 2,
+                display: { xs: 'none', md: 'flex' },
+                fontFamily: 'revert-layer',
+                fontWeight: 700,
+                // letterSpacing: '.3rem',
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+            >
+              Category
+            </Typography>
 
-          <Grid item container xs={6} direction='column' >
-          <Grid item container>
-          <Grid item xs={2} sx={{fontSize:"16"}}>
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'revert-layer',
-              fontWeight: 700,
-              // letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            Category
-          </Typography>
-
-          </Grid>
-
-          <Grid item xs={2}><Button variant="outlined" color="secondary">   {category} </Button> </Grid>
-
-          </Grid>
-       
-
-            
+            </Grid>
 
             <Grid item>
             <br></br>
             <br></br>
+            <br></br>
+            
             </Grid>
 
-            {/* <Grid item container xs={6} direction='column' > */}
-          <Grid item container rowSpacing={2} columnSpacing={2} >
-          <Grid item xs={2} >    
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'revert-layer',
-              fontWeight: 700,
-              // letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            Tags
-          </Typography>
+            <Grid item xs={2}><Button variant="outlined" color="secondary">   {category} </Button> </Grid>
+            <Grid item container rowSpacing={2} columnSpacing={2} >
+            <Grid item xs={2} >    
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              href="/"
+              sx={{
+                mr: 2,
+                display: { xs: 'none', md: 'flex' },
+                fontFamily: 'revert-layer',
+                fontWeight: 700,
+                // letterSpacing: '.3rem',
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+            >
+              Tags
+            </Typography>
 
-          
-          </Grid>
-          {/* {post_info[0].tags.map(tag => getTag(tag))} */}
-          <Grid item xs={10} >{post_info[0].tags.map(tag => getTag(tag))}</Grid>
-
-          
-          {/* </Grid> */}
-          <Grid item>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-        </Grid>
-        <Grid item xs= {12} >
-        <TextField sx={{ width: 5}}
-          id="filled-multiline-static"
-          label="Add a Comment"
-          multiline
-          rows={4}
-          defaultValue=""
-          variant="filled"
-          inputProps={{style: {fontSize: 20}}}
-        />
-        <Button variant="outlined" color="secondary" >  Post  </Button>
-        </Grid>
             
+            </Grid>
+            {/* {post_info[0].tags.map(tag => getTag(tag))} */}
+            <Grid item xs={10} >{post_info[0].tags.map(tag => getTag(tag))}</Grid>
+
+          
           </Grid>
-      
-        </Grid>
-      </Grid>
-      </Grid>
-         
+          </Grid>  
+        </Grid> 
+    
+      </Grid> 
+    </Grid> 
+          
+ 
   
   );
 }
