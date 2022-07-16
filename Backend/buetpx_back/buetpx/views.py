@@ -130,6 +130,7 @@ def get_post_by_id(request,id):
         singe_post_serializer = PostSerializer(post, context={'fields': ['id',
                 'post_title',
                 'photo_url',
+                'owner',
                 'place',
                 'category',
                 'tags']})
@@ -183,6 +184,7 @@ def get_categories(request):
              cat_serializer.save()
              return JsonResponse(cat_serializer.data, status=status.HTTP_201_CREATED) 
         return JsonResponse(cat_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 # get user by id
