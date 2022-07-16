@@ -78,6 +78,7 @@ class PostSerializer2(serializers.ModelSerializer):
                   'post_title',
                   'post_date',
                   'photo_url',
+                  'category',
                   
                   )
 

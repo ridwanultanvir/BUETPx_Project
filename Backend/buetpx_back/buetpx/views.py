@@ -171,7 +171,7 @@ def get_post_by_categorylist(request,list):
          
             posts = Post.objects.filter(category=list_id) 
                           
-            post_serializer = PostSerializer(posts,many = True)
+            post_serializer = PostSerializer2(posts,many = True)
        
             post_serializer_all.append(post_serializer.data)
             
