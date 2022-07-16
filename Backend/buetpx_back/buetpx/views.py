@@ -128,13 +128,16 @@ def get_post_by_id(request,id):
     
     if request.method == 'GET':
         post = Post.objects.get(pk=id)       
-        singe_post_serializer = PostSerializer(post, context={'fields': ['id',
-                'post_title',
-                'photo_url',
-                'owner',
-                'place',
-                'category',
-                'tags']})
+        singe_post_serializer = PostSerializer(post
+                , context={'fields': ['id',
+                  'post_title',
+                  'post_date',
+                  'photo_url',
+                  'owner',
+                  'category',
+                  'place',
+                  'tags']}
+                )
         return JsonResponse(singe_post_serializer.data, safe=False)
 
 

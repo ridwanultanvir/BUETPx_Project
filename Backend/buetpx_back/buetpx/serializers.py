@@ -39,7 +39,10 @@ class UserAccountSerializer(serializers.ModelSerializer):
 
  
 class PostSerializer(serializers.ModelSerializer):
-    owner = UserAccountSerializer()
+    owner =UserAccountSerializer()
+    # owner = serializers.SlugRelatedField(read_only=True, slug_field='name' )
+    # print("*******************This is owner*********************")
+    # print(owner)
     # serializers.Sl
     category = serializers.SlugRelatedField(read_only=True, slug_field='name' )
     place = serializers.SlugRelatedField(read_only=True, slug_field='name' )

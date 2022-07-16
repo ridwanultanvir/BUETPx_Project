@@ -15,8 +15,7 @@ import ButtonBase from '@mui/material/ButtonBase';
 import { styled } from '@mui/material/styles';
 
 import {useState, useEffect} from "react";
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader'
+import CollectionsOutlinedIcon from '@mui/icons-material/CollectionsOutlined';
 import {
   BrowserRouter as Router,
   Switch,
@@ -31,6 +30,7 @@ const Img = styled('img')({
   display: 'block',
   maxWidth: '100%',
   maxHeight: '100%',
+  alignContent:'left'
 });
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -67,7 +67,9 @@ const  Post=()=>{
             }
           )
       }, []);
+      
       const {post_title,post_date,photo_url,owner,category,place,tags}=post;
+      // console.log(post_title);
 
       useEffect(() => {
         fetch("http://localhost:8000/api/posts/"+id+"/comments")
@@ -101,15 +103,7 @@ const  Post=()=>{
         return (
         
           <CommentCard comment={comment}/>
-      
-      // <Grid item xs={8}>
-      // <Item>  {comment.comment_txt} By {comment.user} </Item>
-
-      
-      // </Grid>
-
-        
-
+    
         );
     };
 
@@ -119,26 +113,59 @@ const  Post=()=>{
             <Header/>
             </Grid>
      
-        {/* etar baire header contianer */}
             <Grid container spacing={2} marginLeft={4} >
 
-                {/* 1st Column  */}
-                <Grid container item xs={6} direction="row" >
+    
+                <Grid container item xs={12} >
                 <Grid item xs={12}>
-                {/* <h1> Header</h1> */}
-                </Grid>
-                <Grid item xs={12}>
-                    <ButtonBase sx={{ width: 500, height: 300 }}>
+                    <ButtonBase sx={{ width: '90%', maxHeight: '100%',maxWidth:'1080px' }}>
                         <Img src={photo_url} alt='1.jpg'/>
                     </ButtonBase>
+                    
                 </Grid>
-                {/* 2ND ROW  */}
+
+                
                 <Grid item container>
-                        <Grid item xs={1}></Grid>
-                        <Grid item xs={2}> <IconButton size="small"><ThumbUpIcon/></IconButton> </Grid>    
+
+                        <Grid item xs={12}>
+                        <hr></hr>
+                        </Grid>
+                        <Grid item xs={4}></Grid>
+                        <Grid item xs={2}> 
+                        <IconButton size="small"><ThumbUpIcon/></IconButton> 
+                        </Grid>    
+                        <Grid item xs={2}>
+                        <IconButton size="small"><CollectionsOutlinedIcon/></IconButton>
+                        <Grid item xs={4}></Grid>
+                         </Grid>    
+                         <Grid item xs={12}>
+                        <hr></hr>
+                        </Grid>
                 </Grid>
-                {/* 3rd ROW  */}
-                <Grid item xs={2} >
+
+     
+                <Grid item container xs={12} wrap="nowrap" spacing={2} >
+                      <Grid item sx={{rightMargin:3}}>
+                        <Avatar 
+                        // alt={owner.name} 
+              // ************ problem here ***************************************//
+                        sx={{ width: 56, height: 56 }} />
+                      </Grid>
+                      <Grid  item justifyContent="left" >
+                 
+                        <h3 style={{ margin: 0, textAlign: "left" }}>{post_title}</h3>
+                        
+                      
+                      </Grid>
+                  
+                  </Grid>
+
+                </Grid>
+                
+                <Grid item container sx={{marginTop:2}}>
+
+                  
+                <Grid item xs={1.5} >
                         <Typography
                         variant="h6"
                         noWrap
@@ -158,10 +185,18 @@ const  Post=()=>{
                         </Typography>
 
                 </Grid>
-                <Grid item xs={10}><Button variant="outlined" color="secondary">   {category} </Button> </Grid>
+                <Grid item xs={10.5}><Button variant="outlined" color="secondary">   {category} </Button> </Grid>
+                </Grid>
+
+                
+                  
+
+                  
+               
 
                 {/* 4th row */}
-                <Grid item xs={2} >
+                <Grid item container sx={{marginTop:2}}>
+                <Grid item xs={1.5} >
                         <Typography
                         variant="h6"
                         noWrap
@@ -181,35 +216,39 @@ const  Post=()=>{
                         </Typography>
 
                 </Grid>
-                <Grid item xs={10} >{tags?.map(tag => getTag(tag))}</Grid>
-                {/* <Grid item xs={10} >{tags}</Grid> */}
+                <Grid item xs={10.5} >{tags?.map(tag => getTag(tag))}</Grid>
+                
                 
                 </Grid>
 
+               
+
 
                 {/* 2nd Column */}
-                <Grid container item xs={6} direction="row" >
-                <Grid item xs={8}>
-                {/* <h1> Header </h1> */}
-                </Grid>
-                <Grid item xs={10}>
+                <Grid container item xs={12}   >
+              
+                <Grid item xs={10} sx={{marginBottom:2}}>
                 <TextField 
-                        // sx={{width: 10}}
+                       
                         id="filled-multiline-static"
                         label="Add a Comment"
                         multiline
-                        // rows={4}
+                        fullWidth 
+                        size="medium"
                         defaultValue=""
                         variant="outlined"
                         />
+                        
+                        
+                </Grid>
+               
+                <Grid item xs={12}>
+                <Button variant='outlined'>Submit</Button>
                 </Grid>
                 
                 
                 {comments.map(comment => getComment(comment))}
-                
-                <Grid item xs={8}>
-                {/* <h1> Hello 1234</h1> */}
-                </Grid>
+         
                 
                 </Grid>
             </Grid>
