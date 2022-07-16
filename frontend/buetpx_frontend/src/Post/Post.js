@@ -16,6 +16,8 @@ import FontPost from "./font";
 import {Typography} from '@mui/material';
 import ButtonBase from '@mui/material/ButtonBase';
 import { styled } from '@mui/material/styles';
+import CommentList from './CommentList'; 
+
 const Img = styled('img')({
   margin: 'auto',
   display: 'block',
@@ -81,7 +83,7 @@ function Post(props) {
 
           </Grid>
           <Grid item xs={10}><Button variant="outlined" color="secondary">   {category} </Button> </Grid>
-          
+
           {/* 4th row */}
           <Grid item xs={2} >
                 <Typography
@@ -115,7 +117,7 @@ function Post(props) {
         {/* 2nd Column */}
         <Grid container item xs={6} direction="row" >
           <Grid item xs={8}>
-           <h1> Hello 1234</h1>
+           <h1> {CommentList[0].comment_txt}</h1>
           </Grid>
           <Grid item xs={8}>
            <h1> Hello 1234</h1>

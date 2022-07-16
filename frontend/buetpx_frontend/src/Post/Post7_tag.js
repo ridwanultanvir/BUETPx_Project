@@ -81,7 +81,9 @@ function Post(props) {
 
           </Grid>
           <Grid item xs={10}><Button variant="outlined" color="secondary">   {category} </Button> </Grid>
-          
+          <Grid item xs={12}>
+            <h1> Junk</h1>
+          </Grid>
           {/* 4th row */}
           <Grid item xs={2} >
                 <Typography
