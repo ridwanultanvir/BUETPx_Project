@@ -13,8 +13,15 @@ import post_info from "./post_info";
 import Button from '@mui/material/Button';
 import FontPost from "./font"; 
 import {Typography} from '@mui/material';
+import ButtonBase from '@mui/material/ButtonBase';
+import { styled } from '@mui/material/styles';
 
-
+const Img = styled('img')({
+  margin: 'auto',
+  display: 'block',
+  maxWidth: '100%',
+  maxHeight: '100%',
+});
 
 // const sampleJSON = {
 //     id: 2005,
@@ -31,12 +38,12 @@ function Post(props) {
   const {id,post_title,post_date,photo_url,owner,category,place,tags}=props
     const getTag = tag => {
         return (
-          // <Grid item xs={2}  >
+          <Grid item marginLeft={2} >
 
-        <Button variant="outlined" color="secondary" >   {tag} </Button>
+            <Button variant="outlined" color="primary" >   {tag} </Button>
          
 
-        //  </Grid>
+         </Grid>
         );
       };
   return (
@@ -54,89 +61,94 @@ function Post(props) {
 
         <Grid item container marginLeft={4}>
           
-          <Grid item container xs={6} direction='column'>
+          <Grid item container xs={6} direction="column">
             <Grid item >
-              <img src={photo_url} alt='1.jpg'width="450" height="300"></img>
+            <ButtonBase sx={{ width: 500, height: 300 }}>
+              <Img src={photo_url} alt='1.jpg'/>
+              </ButtonBase>
               {/* <hr></hr> */}
               </Grid>
             <Grid item container>
-            
-                <Grid item xs={2}> <IconButton size="small"><ThumbUpIcon/></IconButton> </Grid>
-                
+                <Grid item xs={8}></Grid>
+                <Grid item xs={2}> <IconButton size="small"><ThumbUpIcon/></IconButton> </Grid>    
             </Grid>
+
             <Grid item container>
-            <Grid item xs={2} sx={{fontSize:"16"}}>
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                mr: 2,
-                display: { xs: 'none', md: 'flex' },
-                fontFamily: 'revert-layer',
-                fontWeight: 600,
-                // letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
-              }}
-            >
-              Category
-            </Typography>
+              <Grid item xs={2} sx={{fontSize:"12"}}>
+                <Typography
+                  variant="h6"
+                  noWrap
+                  component="a"
+                  href="/"
+                  sx={{
+                    mr: 2,
+                    display: { xs: 'none', md: 'flex' },
+                    fontFamily: 'revert-layer',
+                    fontWeight: 600,
+                    // letterSpacing: '.3rem',
+                    color: 'inherit',
+                    textDecoration: 'none',
+                  }}
+                >
+                  Category
+                </Typography>
 
-            </Grid>
+              </Grid>
+              <Grid item xs={2}><Button variant="outlined" color="secondary">   {category} </Button> </Grid>
 
-            <Grid item>
-            <br></br>
-            <br></br>
-            <br></br>
-            
-            </Grid>
+              <Grid item>
+              <br></br>
+              <br></br>
+              <br></br>
+              
+              </Grid>
 
-            <Grid item xs={2}><Button variant="outlined" color="secondary">   {category} </Button> </Grid>
-            <Grid item container rowSpacing={2} columnSpacing={2} >
-            <Grid item xs={2} >    
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                mr: 2,
-                display: { xs: 'none', md: 'flex' },
-                fontFamily: 'revert-layer',
-                fontWeight: 700,
-                // letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
-              }}
-            >
-              Tags
-            </Typography>
+              
+              <Grid item container rowSpacing={2} columnSpacing={2} >
+                <Grid item xs={2} >    
+                  <Typography
+                    variant="h6"
+                    noWrap
+                    component="a"
+                    href="/"
+                    sx={{
+                      mr: 2,
+                      display: { xs: 'none', md: 'flex' },
+                      fontFamily: 'revert-layer',
+                      fontWeight: 700,
+                      // letterSpacing: '.3rem',
+                      color: 'inherit',
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Tags
+                  </Typography>
 
-            
-            </Grid>
-            {/* {post_info[0].tags.map(tag => getTag(tag))} */}
-            <Grid item xs={10} >{post_info[0].tags.map(tag => getTag(tag))}</Grid>
+                
+                </Grid>
+              {/* {post_info[0].tags.map(tag => getTag(tag))} */}
+                <Grid item xs={10} direction="row">{post_info[0].tags.map(tag => getTag(tag))}</Grid>
 
           
-          </Grid>
-          </Grid>  
+              </Grid>
+            </Grid>  
           </Grid> 
           
-          <Grid item container xs={6} direction='column'> 
-              {/* <h1> Ami topu</h1> */}
-              <Grid item container xs={6} > 
-                <TextField sx={{width: 10}}
+          <Grid item container  direction='column' xs={6} sx={{ display: { xs: 'flex' } }}> 
+           
+              {/* <Grid item container xs={12}>  */}
+                <TextField 
+                // sx={{width: 10}}
                 id="filled-multiline-static"
                 label="Add a Comment"
                 multiline
-                rows={4}
+                // rows={4}
                 defaultValue=""
-                variant="filled"
+                variant="outlined"
                 />
               
-              </Grid>
+              {/* </Grid> */}
+      
               {/* <Grid item> Hello Abcd</Grid> */}
 
               
@@ -144,7 +156,7 @@ function Post(props) {
           </Grid>
           
     
-      </Grid> 
+        </Grid> 
       </Grid> 
           
  
