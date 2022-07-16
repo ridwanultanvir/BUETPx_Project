@@ -66,10 +66,24 @@ class PostSerializer(serializers.ModelSerializer):
                   )
         extra_kwargs = {'tags':{'required': False}}
 
+class PostSerializer2(serializers.ModelSerializer):
+    
+    
+    
+    class Meta:
+        # ordering  = ['-post_date']
+        model = Post
+        fields = (
+                  'id',
+                  'post_title',
+                  'post_date',
+                  'photo_url',
+                  
+                  )
 
 class TagsSerializer(serializers.ModelSerializer):
   
-  # posts = PostSerializer(many=True, read_only=True)
+  posts = PostSerializer(many=True, read_only=True)
 
   class Meta:
 
@@ -77,8 +91,9 @@ class TagsSerializer(serializers.ModelSerializer):
     model = Tags
     fields = ('id',
               'name'
+              'posts'
               )
-    # extra_kwargs = {'tags': {'required': False}}
+    extra_kwargs = {'tags': {'required': False}}
 
 
 
@@ -107,6 +122,7 @@ class PlaceSerializer(serializers.ModelSerializer):
               # 'sublocality',
               'city',
               'country',
+              'posts',
               )
 
 
