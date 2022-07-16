@@ -11,7 +11,9 @@ urlpatterns = [
     path ('api/posts', views.post_list),
     path ('api/posts/<id>', views.get_post_by_id),
     path ('api/post_detail', views.post_detail),
-    path ('api/posts/<postid>/comments', views.get_comments_by_postid),
+    path ('api/posts/<catname>', views.post_list_by_catname),
+
+    path ('ai/posts/<postid>/comments', views.get_comments_by_postid),
     path ('api/comments/<postid>', views.get_comments_by_postid),
     # path ('api/tags/<postid>', views.get_tags_by_postid),
 
