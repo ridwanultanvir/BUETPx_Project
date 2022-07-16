@@ -1,3 +1,4 @@
+from unicodedata import category
 from rest_framework import serializers 
 from buetpx.models import Tutorial
 from buetpx.models import Post
@@ -33,6 +34,10 @@ class UserAccountSerializer(serializers.ModelSerializer):
               'posts'
               )
 
+
+
+
+ 
 class PostSerializer(serializers.ModelSerializer):
     owner = UserAccountSerializer()
     # serializers.Sl
@@ -59,7 +64,7 @@ class PostSerializer(serializers.ModelSerializer):
 
 class TagsSerializer(serializers.ModelSerializer):
   
-  posts = PostSerializer(many=True, read_only=True)
+  # posts = PostSerializer(many=True, read_only=True)
 
   class Meta:
 
@@ -69,7 +74,7 @@ class TagsSerializer(serializers.ModelSerializer):
               'name',
               'posts'
               )
-    extra_kwargs = {'tags': {'required': False}}
+    # extra_kwargs = {'tags': {'required': False}}
 
 
 
@@ -86,7 +91,7 @@ class CategorySerializer(serializers.ModelSerializer):
               )
 
 class PlaceSerializer(serializers.ModelSerializer):
-  # posts = PostSerializer(many=True, read_only=True)
+
 
   class Meta:
 
@@ -98,8 +103,59 @@ class PlaceSerializer(serializers.ModelSerializer):
               # 'sublocality',
               'city',
               'country',
-              'posts'
               )
 
+
+# user_id  = je comment korse 
+class CommentSerializer(serializers.ModelSerializer):
+
+
+  class Meta:
+
+    ordering = ['-id']
+    model = Comment
+    fields = ('id',
+              'comment_txt',
+              'comment_date',
+              'post',
+              'user'
+              )
+
+
+
+# category; tag; location; comment; (num of like); 
+class SinglePostSerializer(serializers.ModelSerializer):
+    # comment = CommentSerializer()
+    
+    place = PlaceSerializer()
+    category = CategorySerializer()
+    # tags = TagsSerializer()
+    
+    class Meta:
+
+      ordering = ['-id']
+      model = Post
+      fields = ('id',
+                'post_title',
+                'photo_url',
+                'place',
+                'category',
+                # 'tags',
+                # 'comment',
+                )
+      
+      
+class CommentSerializer2(serializers.ModelSerializer):
+  post = SinglePostSerializer()
+
+  class Meta:
+
+    ordering = ['-post']
+    model = Comment
+    fields = ('id',
+              'comment_txt',
+              'comment_date',
+              'post',              
+              )
 
 
