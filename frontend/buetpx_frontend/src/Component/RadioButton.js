@@ -35,8 +35,9 @@ MyFormControlLabel.propTypes = {
 const RadioButton = props =>  {
   const {label, value} = props;
   return (
-    <RadioGroup name="use-radio-group" >
-      <MyFormControlLabel value="first" label={label} control={<Radio />} />
+    <RadioGroup name="use-radio-group" defaultValue="first">
+      <MyFormControlLabel value="newest" label="Newest" control={<Radio />} />
+      <MyFormControlLabel value="likes" label="Likes" control={<Radio />} />
     </RadioGroup>
   );
 }
