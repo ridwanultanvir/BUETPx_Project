@@ -163,8 +163,10 @@ def get_post_by_categoryid(request,id):
 
 def get_post_by_categorylist(request,list):
     
+    my_list = list.split(",")
+    
     if request.method == 'GET':
-        posts = Post.objects.filter(category=list[1])               
+        posts = Post.objects.filter(category=my_list[0])               
         post_serializer = PostSerializer(posts,many = True)
         return JsonResponse(post_serializer.data, safe=False)
 
