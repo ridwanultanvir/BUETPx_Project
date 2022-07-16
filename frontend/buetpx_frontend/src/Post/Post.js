@@ -35,7 +35,7 @@ function Post(props) {
   const {id,post_title,post_date,photo_url,owner,category,place,tags}=props
 
   return (
-    <Grid container spacing={2} >
+    <Grid container spacing={2} marginLeft={4} >
 
         {/* 1st Column  */}
         <Grid container item xs={6} direction="row" >
@@ -47,6 +47,33 @@ function Post(props) {
                 <Img src={photo_url} alt='1.jpg'/>
               </ButtonBase>
           </Grid>
+          {/* 2ND ROW  */}
+          <Grid item container>
+                <Grid item xs={1}></Grid>
+                <Grid item xs={2}> <IconButton size="small"><ThumbUpIcon/></IconButton> </Grid>    
+          </Grid>
+          {/* 3rd ROW  */}
+          <Grid item xs={4} >
+                <Typography
+                  variant="h6"
+                  noWrap
+                  component="a"
+                  href="/"
+                  sx={{
+                    mr: 2,
+                    display: { xs: 'none', md: 'flex' },
+                    fontFamily: 'revert-layer',
+                    fontWeight: 600,
+                    // letterSpacing: '.3rem',
+                    color: 'inherit',
+                    textDecoration: 'none',
+                  }}
+                >
+                  Category
+                </Typography>
+
+          </Grid>
+          <Grid item xs={4}><Button variant="outlined" color="secondary">   {category} </Button> </Grid>
           <Grid item xs={12}>
            <h1> Hello 1234</h1>
           </Grid>
