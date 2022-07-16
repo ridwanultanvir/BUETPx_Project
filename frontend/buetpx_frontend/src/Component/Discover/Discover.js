@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid } from '@mui/material';
 import Top from './Top';
-import Header from '../Contents/Header';
+import Header from '../../Static/Header';
 // import DiscoverContent from './Discover_Content';
 import DiscoverContent from './DiscoverContent';
 import FilterDrawer from './Drawer_Filter';

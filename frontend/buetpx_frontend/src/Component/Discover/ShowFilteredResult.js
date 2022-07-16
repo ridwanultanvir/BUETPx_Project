@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid } from '@mui/material';
 import Top from './Top';
-import Header from '../Contents/Header';
+import Header from '../../Static/Header';
 // import DiscoverContent from './Discover_Content';
 import DiscoverContent from './DiscoverContent';
 import FilterDrawer from './Drawer_Filter';
@@ -23,7 +23,7 @@ const ShowFilteredResult  = (props) => {
     // Note: the empty deps array [] means
     // this useEffect will run once
     // similar to componentDidMount()
-    let api = "http://localhost:8000/api/posts/" + catname;
+    let api = "http://localhost:8000/api/posts_by_cat/" + catname;
     useEffect(() => {
     fetch(api)
         .then(res => res.json())
