@@ -6,7 +6,7 @@ import Divider from '@mui/material/Divider';
 import RadioButton from "./RadioButton";
 import RadioButton2 from "./RadioButtonGroup";
 import Typography from "@mui/material";
-const Conent = () => {
+const Content = () => {
 
     
 const [error, setError] = useState(null);
@@ -95,4 +95,4 @@ useEffect(() => {
     );
 };
 
-export default Conent;
+export default Content;

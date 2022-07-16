@@ -84,10 +84,11 @@ def tutorial_list_published(request):
 def post_detail(request):
     # GET all published tutorials
     # fields = ('id','post_title','post_date','photo_url')
-    posts = Post.objects.values('id','post_title','post_date','photo_url')
+    # posts = Post.objects.values('id','post_title','post_date','photo_url','owner')
+    posts = Post.objects.all()
     
     if request.method == 'GET': 
-        posts_serializer = PostSerializer2(posts, many=True)
+        posts_serializer = PostSerializer(posts, many=True)
         return JsonResponse(posts_serializer.data, safe=False)
         
   
@@ -100,9 +101,9 @@ def post_list(request):
     if request.method == 'GET':
         posts = Post.objects.all()
         
-        title = request.GET.get('post_title', None)
-        if title is not None:
-            posts = posts.filter(title__icontains=title)
+        # title = request.GET.get('post_title', None)
+        # if title is not None:
+        #     posts = posts.filter(title__icontains=title)
         
         post_serializer = PostSerializer(posts, many=True)
         return JsonResponse(post_serializer.data, safe=False)

@@ -1,7 +1,9 @@
 import React from 'react';
 import { Grid } from '@mui/material';
 import Top from './Top';
+import Header from '../Contents/Header';
 import Discover_Content from './Discover_Content';
+import DiscoverContent from './DiscoverContent';
 import FilterDrawer from './Drawer_Filter';
 import Options from './Options';
 import Divider from '@mui/material';
@@ -13,7 +15,7 @@ class Discover extends React.Component {
                 
             <Grid container direction="column">
                 <Grid item >
-                <Top />
+                <Header />
                 </Grid>
                 <Grid item>
                     <h2> </h2>
@@ -37,7 +39,7 @@ class Discover extends React.Component {
                         <FilterDrawer />                      
                     </Grid>
                     <Grid item xs={12} sm={10}>
-                        <Discover_Content />
+                        <DiscoverContent />
 
                     </Grid>
 
