@@ -32,7 +32,8 @@ MyFormControlLabel.propTypes = {
   value: PropTypes.any,
 };
 
-export default function RadioButton() {
+const RadioButton = props =>  {
+  const {label, value} = props;
   return (
     <RadioGroup name="use-radio-group" defaultValue="first">
       <MyFormControlLabel value="newest" label="Newest" control={<Radio />} />
@@ -40,3 +41,5 @@ export default function RadioButton() {
     </RadioGroup>
   );
 }
+
+export default RadioButton;

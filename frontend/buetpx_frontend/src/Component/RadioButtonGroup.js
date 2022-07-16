@@ -1,4 +1,4 @@
-import * as React from 'react';
+import  React from 'react';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import RadioGroup, { useRadioGroup } from '@mui/material/RadioGroup';
@@ -45,6 +45,11 @@ export default function RadioButton() {
       <MyFormControlLabel value="citAndArchitecture" label="City and Architecture" control={<Radio />} />
       {/* <MyFormControlLabel value="second" label="Galaxy" control={<Radio />} /> */}
 
+  return (
+    <RadioGroup name="use-radio-group" >
+      <MyFormControlLabel value="first" label={name} control={<Radio />} />
     </RadioGroup>
   );
 }
+
+export default RadioButton2;

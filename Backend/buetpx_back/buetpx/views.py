@@ -3,7 +3,7 @@ from django.http.response import JsonResponse
 from rest_framework.parsers import JSONParser 
 from rest_framework import status
  
-from buetpx.models import Tutorial,Post,Comment,UserAccount,Tags
+from buetpx.models import Tutorial,Post,Comment,UserAccount,Tags, Category
 from buetpx.serializers import CommentSerializer, CommentSerializer2, TutorialSerializer,PostSerializer,PlaceSerializer,UserAccountSerializer,CategorySerializer
 from buetpx.serializers import PostSerializer2
 from rest_framework.decorators import api_view

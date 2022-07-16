@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "./Card";
+
 import { Grid } from "@mui/material";
 // import photoList from "./Constants";
 // import { Grid } from "@mui/material";
