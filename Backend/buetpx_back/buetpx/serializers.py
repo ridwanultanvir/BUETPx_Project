@@ -41,9 +41,15 @@ class UserAccountSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
     owner = UserAccountSerializer()
     # serializers.Sl
-    # category = serializers.SlugRelatedField(read_only=True, slug_field='name' )
-    # place = serializers.SlugRelatedField(read_only=True, slug_field='name' )
-    # tags = serializers.StringRelatedField(many=True, read_only=True)
+    category = serializers.SlugRelatedField(read_only=True, slug_field='name' )
+    place = serializers.SlugRelatedField(read_only=True, slug_field='name' )
+    tags = serializers.StringRelatedField(many=True, read_only=True)
+    def get_field_names(self, *args, **kwargs):
+        field_names = self.context.get('fields', None)
+        if field_names:
+            return field_names
+
+        return super(PostSerializer, self).get_field_names(*args, **kwargs)
     
     class Meta:
         # ordering  = ['-post_date']
@@ -54,12 +60,11 @@ class PostSerializer(serializers.ModelSerializer):
                   'post_date',
                   'photo_url',
                   'owner',
-                  # 'owner_name',
-                  # 'category',
-                  # 'place',
-                  # 'tags',
+                  'category',
+                  'place',
+                  'tags',
                   )
-        # extra_kwargs = {'tags':{'required': False}}
+        extra_kwargs = {'tags':{'required': False}}
 
 
 class TagsSerializer(serializers.ModelSerializer):
@@ -123,25 +128,25 @@ class CommentSerializer(serializers.ModelSerializer):
 
 
 # category; tag; location; comment; (num of like); 
-class SinglePostSerializer(serializers.ModelSerializer):
-    place = PlaceSerializer()
-    category = CategorySerializer()
-    # tags = TagsSerializer()
-    tags = serializers.StringRelatedField(many=True, read_only=True)
+# class SinglePostSerializer(serializers.ModelSerializer):
+#     place = PlaceSerializer()
+#     category = CategorySerializer()
+#     # tags = TagsSerializer()
+#     tags = serializers.StringRelatedField(many=True, read_only=True)
     
     
-    class Meta:
+#     class Meta:
 
-      ordering = ['-id']
-      model = Post
-      fields = ('id',
-                'post_title',
-                'photo_url',
-                'place',
-                'category',
-                'tags'
-                )
-      extra_kwargs = {'tags': {'required': True}}
+#       ordering = ['-id']
+#       model = Post
+#       fields = ('id',
+#                 'post_title',
+#                 'photo_url',
+#                 'place',
+#                 'category',
+#                 'tags'
+#                 )
+#       extra_kwargs = {'tags': {'required': True}}
 
     
       

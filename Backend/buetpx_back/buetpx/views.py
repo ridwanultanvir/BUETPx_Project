@@ -5,7 +5,7 @@ from rest_framework.parsers import JSONParser
 from rest_framework import status
  
 from buetpx.models import Tutorial,Post,Comment,UserAccount,Tags
-from buetpx.serializers import CommentSerializer, CommentSerializer2, TutorialSerializer,PostSerializer,SinglePostSerializer,PlaceSerializer,UserAccountSerializer,CategorySerializer
+from buetpx.serializers import CommentSerializer, CommentSerializer2, TutorialSerializer,PostSerializer,PlaceSerializer,UserAccountSerializer,CategorySerializer
 
 from rest_framework.decorators import api_view
 
@@ -118,10 +118,16 @@ def get_post_by_id(request,id):
     
     if request.method == 'GET':
         post = Post.objects.get(pk=id)       
-        singe_post_serializer = SinglePostSerializer(post)
+        singe_post_serializer = PostSerializer(post, context={'fields': ['id',
+                'post_title',
+                'photo_url',
+                'place',
+                'category',
+                'tags']})
         return JsonResponse(singe_post_serializer.data, safe=False)
 
 @api_view(['Get'])
+
 def get_comments_by_postid(request,postid):
     
     if request.method == 'GET':
@@ -178,9 +184,6 @@ def get_user_by_id(request,id):
 # Retrieve objects (with condition)
 
     if request.method == 'GET':
-        
-
-        
         user = UserAccount.objects.get(pk = id)
         user_serializer = UserAccountSerializer(user)
         return JsonResponse(user_serializer.data, safe=False)
