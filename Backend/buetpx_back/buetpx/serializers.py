@@ -109,6 +109,9 @@ class CategorySerializer(serializers.ModelSerializer):
               'posts'
               )
 
+
+
+
 class PlaceSerializer(serializers.ModelSerializer):
 
 

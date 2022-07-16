@@ -8,6 +8,11 @@ Post:
 
 ##
 
+Content =common jinish = static jinishpati
+
+
+##
+
 
 ```
 F:\L4T1_code\CSE408_project\dj_env1\Scripts\activate
