@@ -2,7 +2,9 @@
 
 Structured Way: 
 
-
+Post: 
+1. Post.js
+2. 
 
 ##
 
