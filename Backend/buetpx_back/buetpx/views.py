@@ -1,3 +1,4 @@
+from unicodedata import category
 from django.shortcuts import render
 from django.http.response import JsonResponse
 from rest_framework.parsers import JSONParser 
@@ -151,7 +152,44 @@ def get_comments_by_postid(request,postid):
         comment_serializer = CommentSerializer(comments,many = True)
         return JsonResponse(comment_serializer.data, safe=False)
 
+@api_view(['Get'])
 
+def get_post_by_categoryid(request,id):
+    
+    if request.method == 'GET':
+        posts = Post.objects.filter(category=id)               
+        post_serializer = PostSerializer(posts,many = True)
+        return JsonResponse(post_serializer.data, safe=False)
+
+
+@api_view(['Get'])
+
+def get_post_by_categorylist(request,list):
+    
+    my_list = list.split(",")
+
+    post_serializer_all = []
+    if request.method == 'GET':
+        for list_id in my_list:
+         
+            posts = Post.objects.filter(category=list_id) 
+                          
+            post_serializer = PostSerializer(posts,many = True)
+       
+            post_serializer_all.append(post_serializer.data)
+            
+        return JsonResponse(post_serializer_all, safe=False)
+
+@api_view(['Get'])
+
+def get_post_by_categoryname(request,name):
+    
+    if request.method == 'GET':
+        posts = Post.objects.filter(category=name)               
+        post_serializer = PostSerializer(posts,many = True)
+        return JsonResponse(post_serializer.data, safe=False)
+    
+    
 # @api_view(['Get'])
 # def get_comment_by_post_id(request,id):
 

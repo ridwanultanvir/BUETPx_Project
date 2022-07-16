@@ -81,7 +81,8 @@ class PostSerializer2(serializers.ModelSerializer):
                   'post_title',
                   'post_date',
                   'photo_url',
-                  
+                  'category',
+                  'tags',
                   )
 
 class TagsSerializer(serializers.ModelSerializer):
@@ -111,6 +112,9 @@ class CategorySerializer(serializers.ModelSerializer):
               'name',
               'posts'
               )
+
+
+
 
 class PlaceSerializer(serializers.ModelSerializer):
 

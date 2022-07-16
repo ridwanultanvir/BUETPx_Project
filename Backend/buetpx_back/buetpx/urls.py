@@ -4,6 +4,10 @@ from buetpx import views
  
 urlpatterns = [ 
     path ('api/categories', views.get_categories),
+    path ('api/categories/posts/<id>', views.get_post_by_categoryid),
+    # http://127.0.0.1:8000/api/categories/posts/list/1,2,3
+    path ('api/categories/posts/list/<list>', views.get_post_by_categorylist),
+    # path ('api/categories/<name>/posts', views.get_post_by_categoryname),
     path ('api/posts', views.post_list),
     path ('api/posts/<id>', views.get_post_by_id),
     path ('api/post_detail', views.post_detail),
