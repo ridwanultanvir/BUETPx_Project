@@ -1,7 +1,6 @@
 import React from "react";
 import { Grid } from "@mui/material";
 import MyCard from "./Card";
-import SourceData from "./constant"
 import {useState, useEffect} from "react";
 const Conent = () => {
 

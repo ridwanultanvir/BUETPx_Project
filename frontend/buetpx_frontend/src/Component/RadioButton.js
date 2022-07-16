@@ -32,11 +32,13 @@ MyFormControlLabel.propTypes = {
   value: PropTypes.any,
 };
 
-export default function RadioButton() {
+const RadioButton = props =>  {
+  const {label, value} = props;
   return (
-    <RadioGroup name="use-radio-group" defaultValue="first">
-      <MyFormControlLabel value="first" label="Newwst" control={<Radio />} />
-      <MyFormControlLabel value="second" label="Likes" control={<Radio />} />
+    <RadioGroup name="use-radio-group" >
+      <MyFormControlLabel value="first" label={label} control={<Radio />} />
     </RadioGroup>
   );
 }
+
+export default RadioButton;

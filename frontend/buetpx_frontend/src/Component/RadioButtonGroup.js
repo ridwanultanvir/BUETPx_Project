@@ -1,4 +1,4 @@
-import * as React from 'react';
+import  React from 'react';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import RadioGroup, { useRadioGroup } from '@mui/material/RadioGroup';
@@ -32,19 +32,15 @@ MyFormControlLabel.propTypes = {
   value: PropTypes.any,
 };
 
-export default function RadioButton() {
-  return (
-    <RadioGroup name="use-radio-group" defaultValue="first">
-      <MyFormControlLabel value="first" label="Landscape" control={<Radio />} />
-      <MyFormControlLabel value="second" label="Animal" control={<Radio />} />
-      <MyFormControlLabel value="second" label="People" control={<Radio />} />
-      <MyFormControlLabel value="second" label="Transport" control={<Radio />} />
-      <MyFormControlLabel value="second" label="Rain" control={<Radio />} />
-      <MyFormControlLabel value="second" label="Summer" control={<Radio />} />
-      <MyFormControlLabel value="second" label="Art" control={<Radio />} />
-      <MyFormControlLabel value="second" label="City & Architecture" control={<Radio />} />
-      <MyFormControlLabel value="second" label="Galaxy" control={<Radio />} />
+const RadioButton2 = props =>  {
 
+  const {id,name, posts} = props;
+
+  return (
+    <RadioGroup name="use-radio-group" >
+      <MyFormControlLabel value="first" label={name} control={<Radio />} />
     </RadioGroup>
   );
 }
+
+export default RadioButton2;
