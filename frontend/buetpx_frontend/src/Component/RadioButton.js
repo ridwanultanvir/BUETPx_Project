@@ -35,8 +35,8 @@ MyFormControlLabel.propTypes = {
 export default function RadioButton() {
   return (
     <RadioGroup name="use-radio-group" defaultValue="first">
-      <MyFormControlLabel value="first" label="Newwst" control={<Radio />} />
-      <MyFormControlLabel value="second" label="Likes" control={<Radio />} />
+      <MyFormControlLabel value="newest" label="Newest" control={<Radio />} />
+      <MyFormControlLabel value="likes" label="Likes" control={<Radio />} />
     </RadioGroup>
   );
 }

@@ -34,16 +34,16 @@ MyFormControlLabel.propTypes = {
 
 export default function RadioButton() {
   return (
-    <RadioGroup name="use-radio-group" defaultValue="first">
-      <MyFormControlLabel value="first" label="Landscape" control={<Radio />} />
-      <MyFormControlLabel value="second" label="Animal" control={<Radio />} />
-      <MyFormControlLabel value="second" label="People" control={<Radio />} />
-      <MyFormControlLabel value="second" label="Transport" control={<Radio />} />
-      <MyFormControlLabel value="second" label="Rain" control={<Radio />} />
-      <MyFormControlLabel value="second" label="Summer" control={<Radio />} />
-      <MyFormControlLabel value="second" label="Art" control={<Radio />} />
-      <MyFormControlLabel value="second" label="City & Architecture" control={<Radio />} />
-      <MyFormControlLabel value="second" label="Galaxy" control={<Radio />} />
+    <RadioGroup name="use-radio-group" defaultValue="landscape">
+      <MyFormControlLabel value="landscape" label="Landscape" control={<Radio />} />
+      <MyFormControlLabel value="animal" label="Animal" control={<Radio />} />
+      <MyFormControlLabel value="people" label="People" control={<Radio />} />
+      <MyFormControlLabel value="transport" label="Transport" control={<Radio />} />
+      <MyFormControlLabel value="rain" label="Rain" control={<Radio />} />
+      <MyFormControlLabel value="summer" label="Summer" control={<Radio />} />
+      <MyFormControlLabel value="art" label="Art" control={<Radio />} />
+      <MyFormControlLabel value="citAndArchitecture" label="City and Architecture" control={<Radio />} />
+      {/* <MyFormControlLabel value="second" label="Galaxy" control={<Radio />} /> */}
 
     </RadioGroup>
   );

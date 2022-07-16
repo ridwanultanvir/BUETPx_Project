@@ -3,7 +3,7 @@ import { Grid } from "@mui/material";
 import MyCard from "./Card";
 import SourceData from "./constant"
 import {useState, useEffect} from "react";
-const Conent = () => {
+const Content = () => {
 
    const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -75,4 +75,4 @@ const Conent = () => {
     );
 };
 
-export default Conent;
+export default Content;
