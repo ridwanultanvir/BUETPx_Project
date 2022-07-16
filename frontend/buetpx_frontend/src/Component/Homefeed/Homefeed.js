@@ -1,9 +1,8 @@
-import './App.css';
 import React from 'react';
 import {Grid} from "@mui/material";
 // import Header from './Contents/Header';
-import Header from './Contents/Header';
-import Body from './Contents/Body';
+import Header from '../../Static/Header';
+import Body from '../../Static/Body';
 
 function Homefeed() {
   return (

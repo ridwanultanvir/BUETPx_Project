@@ -1,16 +1,13 @@
-import '../App.css';
 import React from 'react';
 import {Avatar, Grid} from "@mui/material";
 import {Paper} from "@mui/material";
-import Header from '../Contents/Header';
+import Header from '../../Static/Header';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import CommentIcon from '@mui/icons-material/Comment';
 import {IconButton} from '@mui/material';
 import { TextField } from '@material-ui/core';
 import { Chip } from '@mui/material';
 import { Box } from '@mui/material';
-import Content from './post_content';
-// import post_info from "./post_info";
 import Button from '@mui/material/Button';
 
 import {Typography} from '@mui/material';
@@ -27,7 +24,7 @@ import {
   Link,
   useParams
 } from "react-router-dom";
-import CommentCard from './Comment/CommentCard';
+import CommentCard from './CommentCard';
 
 const Img = styled('img')({
   margin: 'auto',
@@ -93,10 +90,10 @@ const  Post=()=>{
     const getTag = tag => {
 
         return (
-
-            <Button variant="outlined" color="primary" >   {tag} </Button>
         
-
+            <Button variant="outlined" color="primary" sx={{
+              marginRight:2
+            }}>   {tag} </Button>
         );
     };
 
@@ -186,11 +183,6 @@ const  Post=()=>{
                 </Grid>
                 <Grid item xs={10} >{tags?.map(tag => getTag(tag))}</Grid>
                 {/* <Grid item xs={10} >{tags}</Grid> */}
-
-                
-                <Grid item xs={12}>
-                {/* <h1> Hello 1234</h1> */}
-                </Grid>
                 
                 </Grid>
 
