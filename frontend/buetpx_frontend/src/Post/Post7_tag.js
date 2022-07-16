@@ -9,15 +9,13 @@ import {IconButton} from '@mui/material';
 import { TextField } from '@material-ui/core';
 import { Chip } from '@mui/material';
 import { Box } from '@mui/material';
-
+import Content from './post_content';
 import post_info from "./post_info";
 import Button from '@mui/material/Button';
 import FontPost from "./font"; 
 import {Typography} from '@mui/material';
 import ButtonBase from '@mui/material/ButtonBase';
 import { styled } from '@mui/material/styles';
-import CommentList from './CommentList'; 
-
 const Img = styled('img')({
   margin: 'auto',
   display: 'block',
@@ -29,8 +27,8 @@ const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
   padding: theme.spacing(1),
-  textAlign: 'left',
-  color: theme.palette.text.primary,
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
 }));
 
 function Post(props) {
@@ -39,18 +37,6 @@ function Post(props) {
     return (
 
         <Button variant="outlined" color="primary" >   {tag} </Button>
-     
-
-    );
-  };
-  const getComment = comment => {
-    return (
-      <Grid item xs={8}>
-        <Item>  {comment.comment_txt} By {comment.user} </Item>
-
-        
-      </Grid>
-
      
 
     );
@@ -95,7 +81,9 @@ function Post(props) {
 
           </Grid>
           <Grid item xs={10}><Button variant="outlined" color="secondary">   {category} </Button> </Grid>
-
+          <Grid item xs={12}>
+            <h1> Junk</h1>
+          </Grid>
           {/* 4th row */}
           <Grid item xs={2} >
                 <Typography
@@ -129,11 +117,8 @@ function Post(props) {
         {/* 2nd Column */}
         <Grid container item xs={6} direction="row" >
           <Grid item xs={8}>
-           <h1> {CommentList[0].comment_txt}</h1>
+           <h1> Hello 1234</h1>
           </Grid>
-          
-          {CommentList.map(comment => getComment(comment))}
-
           <Grid item xs={8}>
            <h1> Hello 1234</h1>
           </Grid>
