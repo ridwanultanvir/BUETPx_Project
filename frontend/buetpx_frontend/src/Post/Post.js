@@ -33,17 +33,26 @@ function Post(props) {
     <Grid container spacing={2} >
 
         {/* 1st Column  */}
-        <Grid container item xs={6} direction="column" >
-          <TextField />
-          <TextField />
-          <TextField />
+        <Grid container item xs={6} direction="row" >
+          <Grid item xs={8}>
+           <h1> Hello 1234</h1>
+          </Grid>
+          <Grid item xs={8}>
+           <h1> Hello 1234</h1>
+          </Grid>
+          
         </Grid>
 
 
         {/* 2nd Column */}
-        <Grid container item xs={6} direction="column" >
-          <TextField />
-          <TextField />
+        <Grid container item xs={6} direction="row" >
+          <Grid item xs={8}>
+           <h1> Hello 1234</h1>
+          </Grid>
+          <Grid item xs={8}>
+           <h1> Hello 1234</h1>
+          </Grid>
+          
         </Grid>
     </Grid>
     
