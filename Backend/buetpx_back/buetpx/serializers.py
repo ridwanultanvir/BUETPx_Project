@@ -79,7 +79,7 @@ class PostSerializer2(serializers.ModelSerializer):
                   'post_date',
                   'photo_url',
                   'category',
-                  
+                  'tags',
                   )
 
 class TagsSerializer(serializers.ModelSerializer):
