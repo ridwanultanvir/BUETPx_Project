@@ -92,6 +92,7 @@ class Comment(models.Model):
             on_delete= models.CASCADE,
             related_name='comments'
     )
+    # here is 'comments' correct ?
 
     def __str__(self):
         return self.comment_txt

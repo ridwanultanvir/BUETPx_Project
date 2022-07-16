@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.http.response import JsonResponse
+# from Backend.buetpx_back.buetpx.serializers import TagsSerializer
 from rest_framework.parsers import JSONParser 
 from rest_framework import status
  
+<<<<<<< HEAD
 from buetpx.models import Tutorial
 from buetpx.models import Post
 from buetpx.models import Comment
@@ -16,6 +18,11 @@ from buetpx.serializers import CategorySerializer
 # from buetpx.serializers import PlaceSerializer
 # from buetpx.serializers import TagsSerializer
 # from buetpx.serializers import UserAccountSerializer
+=======
+from buetpx.models import Tutorial,Post,Comment,UserAccount,Tags
+from buetpx.serializers import CommentSerializer, CommentSerializer2, TutorialSerializer,PostSerializer,SinglePostSerializer,PlaceSerializer,UserAccountSerializer,CategorySerializer
+
+>>>>>>> 10134f7e360ba2bc24c49e6f784c72f04fab0816
 from rest_framework.decorators import api_view
 
 
@@ -126,22 +133,24 @@ def post_list(request):
 def get_post_by_id(request,id):
     
     if request.method == 'GET':
+<<<<<<< HEAD
         post = Post.objects.get(pk=id)  
              
 
         
+=======
+        post = Post.objects.get(pk=id)       
+>>>>>>> 10134f7e360ba2bc24c49e6f784c72f04fab0816
         singe_post_serializer = SinglePostSerializer(post)
         return JsonResponse(singe_post_serializer.data, safe=False)
 
-
-
 @api_view(['Get'])
-def get_comment_by_id(request,id):
+def get_comments_by_postid(request,postid):
     
     if request.method == 'GET':
-        comment = Comment.objects.get(pk=id)       
-
+        print("comments") 
         
+<<<<<<< HEAD
         comment_serializer = CommentSerializer(comment)
         return JsonResponse(comment_serializer.data, safe=False)
 
@@ -163,6 +172,27 @@ def get_comment_by_post_id(request,id):
         comment_serializer = CommentSerializer3(comments, many = True)
         return JsonResponse(comment_serializer.data, safe=False)
 
+=======
+        comments = Comment.objects.filter(post=postid)
+        
+        print(comments)    
+        
+        comment_serializer = CommentSerializer2(comments, many=True)
+        return JsonResponse(comment_serializer.data, safe=False)
+
+# @api_view(['Get'])
+# def get_comments_by_postid(request,postid):
+    
+#     if request.method == 'GET':
+#         print("tags") 
+        
+#         tags = Tags.objects.filter(post=postid)
+        
+#         print(tags)    
+        
+#         comment_serializer = TagsSerializer(tags, many=True)
+#         return JsonResponse(comment_serializer.data, safe=False)
+>>>>>>> 10134f7e360ba2bc24c49e6f784c72f04fab0816
 
 
     
@@ -211,11 +241,7 @@ def get_user_by_id(request,id):
 def get_all_user(request):
    
 # Retrieve objects (with condition)
-
-        
         # id = request.GET.get('id', None)
-        
-        
         user = UserAccount.objects.all()
         user_serializer = UserAccountSerializer(user, many=True)
         return JsonResponse(user_serializer.data, safe=False)
