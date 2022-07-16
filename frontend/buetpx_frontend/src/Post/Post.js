@@ -30,21 +30,23 @@ function Post(props) {
   const {id,post_title,post_date,photo_url,owner,category,place,tags}=props
 
   return (
-      
-    <Grid container spacing={2}>
-      <Grid item xs={6} md={8}>
-        <Item>xs=6 md=8</Item>
-      </Grid>
-      <Grid item xs={6} md={4}>
-        <Item>xs=6 md=4</Item>
-      </Grid>
-      <Grid item xs={6} md={4}>
-        <Item>xs=6 md=4</Item>
-      </Grid>
-      <Grid item xs={6} md={8}>
-        <Item>xs=6 md=8</Item>
-      </Grid>
+    <Grid container spacing={2} >
+
+        {/* 1st Column  */}
+        <Grid container item xs={6} direction="column" >
+          <TextField />
+          <TextField />
+          <TextField />
+        </Grid>
+
+
+        {/* 2nd Column */}
+        <Grid container item xs={6} direction="column" >
+          <TextField />
+          <TextField />
+        </Grid>
     </Grid>
+    
  
   
   );
