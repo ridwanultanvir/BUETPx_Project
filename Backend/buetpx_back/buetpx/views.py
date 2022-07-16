@@ -154,7 +154,7 @@ def get_comment_by_post_id(request,id):
     # if request.method == 'GET': 
     #     tutorials_serializer = TutorialSerializer(tutorials, many=True)
     #     return JsonResponse(tutorials_serializer.data, safe=False)
-    comments = Comment.objects.filter(post=1)  
+    comments = Comment.objects.filter(post=id)  
     if request.method == 'GET':
         
              
