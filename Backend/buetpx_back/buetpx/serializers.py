@@ -90,7 +90,7 @@ class TagsSerializer(serializers.ModelSerializer):
     ordering = ['-id']
     model = Tags
     fields = ('id',
-              'name'
+              'name',
               'posts'
               )
     extra_kwargs = {'tags': {'required': False}}
@@ -129,7 +129,7 @@ class PlaceSerializer(serializers.ModelSerializer):
 # user_id  = je comment korse 
 class CommentSerializer(serializers.ModelSerializer):
   
-
+  user = serializers.SlugRelatedField(read_only=True, slug_field='name' )
   class Meta:
 
     ordering = ['-id']
@@ -137,7 +137,6 @@ class CommentSerializer(serializers.ModelSerializer):
     fields = ('id',
               'comment_txt',
               'comment_date',
-              'post',
               'user'
               )
 

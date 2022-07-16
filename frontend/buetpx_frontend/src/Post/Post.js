@@ -1,6 +1,6 @@
 import '../App.css';
 import React from 'react';
-import {Grid} from "@mui/material";
+import {Avatar, Grid} from "@mui/material";
 import {Paper} from "@mui/material";
 import Header from '../Contents/Header';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
@@ -10,7 +10,7 @@ import { TextField } from '@material-ui/core';
 import { Chip } from '@mui/material';
 import { Box } from '@mui/material';
 import Content from './post_content';
-import post_info from "./post_info";
+// import post_info from "./post_info";
 import Button from '@mui/material/Button';
 import FontPost from "./font"; 
 import {Typography} from '@mui/material';
@@ -18,6 +18,8 @@ import ButtonBase from '@mui/material/ButtonBase';
 import { styled } from '@mui/material/styles';
 import CommentList from './CommentList'; 
 import {useState, useEffect} from "react";
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader'
 import {
   BrowserRouter as Router,
   Switch,
@@ -25,6 +27,7 @@ import {
   Link,
   useParams
 } from "react-router-dom";
+import CommentCard from './Comment/CommentCard';
 
 const Img = styled('img')({
   margin: 'auto',
@@ -41,7 +44,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.primary,
 }));
 
-const  Post=(props)=>{
+const  Post=()=>{
 
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -70,7 +73,7 @@ const  Post=(props)=>{
       const {post_title,post_date,photo_url,owner,category,place,tags}=post;
 
       useEffect(() => {
-        fetch("http://localhost:8000/api/comments/"+id)
+        fetch("http://localhost:8000/api/posts/"+id+"/comments")
           .then(res => res.json())
           .then(
             (result) => {
@@ -88,6 +91,7 @@ const  Post=(props)=>{
       }, []);
 
     const getTag = tag => {
+
         return (
 
             <Button variant="outlined" color="primary" >   {tag} </Button>
@@ -98,27 +102,26 @@ const  Post=(props)=>{
 
     const getComment = comment => {
         return (
-        <Grid item xs={8}>
-            <Item>  {comment.comment_txt} By {comment.user} </Item>
+        
+          <CommentCard comment={comment}/>
+      
+      // <Grid item xs={8}>
+      // <Item>  {comment.comment_txt} By {comment.user} </Item>
 
-            
-        </Grid>
+      
+      // </Grid>
 
         
 
         );
     };
+
     return (
         <Grid container direction='column' spacing={2}>
             <Grid item>
             <Header/>
             </Grid>
-            <Grid item>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            </Grid>
+     
         {/* etar baire header contianer */}
             <Grid container spacing={2} marginLeft={4} >
 
@@ -181,7 +184,9 @@ const  Post=(props)=>{
                         </Typography>
 
                 </Grid>
-                <Grid item xs={10} >{post_info[0].tags.map(tag => getTag(tag))}</Grid>
+                <Grid item xs={10} >{tags?.map(tag => getTag(tag))}</Grid>
+                {/* <Grid item xs={10} >{tags}</Grid> */}
+
                 
                 <Grid item xs={12}>
                 {/* <h1> Hello 1234</h1> */}
