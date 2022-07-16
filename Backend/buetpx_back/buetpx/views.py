@@ -157,6 +157,18 @@ def get_post_by_categoryid(request,id):
         posts = Post.objects.filter(category=id)               
         post_serializer = PostSerializer(posts,many = True)
         return JsonResponse(post_serializer.data, safe=False)
+
+
+@api_view(['Get'])
+
+def get_post_by_categoryname(request,name):
+    
+    if request.method == 'GET':
+        posts = Post.objects.filter(category=id)               
+        post_serializer = PostSerializer(posts,many = True)
+        return JsonResponse(post_serializer.data, safe=False)
+    
+    
 # @api_view(['Get'])
 # def get_comment_by_post_id(request,id):
 
