@@ -17,16 +17,10 @@ ReactDOM.render(
   <Router>
     <Routes>
       <Route path="/" element={<Homefeed />} />
-
-      {/* <Route path="/post/" element={<Post {...post_single}/>} />
-      PostByNaeem */}
-
-      <Route path="/post/:id" element={<Post />} />
+      <Route path="/posts" element={<Homefeed />} />
+      <Route path="/posts/:id" element={<Post />} />
       <Route path="/Discover" element={<Discover />} />
-
       <Route path="/comment" element={<CommentExampleComment1 />} />
-
-      
     </Routes>
     
   </Router>,
