@@ -79,7 +79,7 @@ function Post(props) {
             {/* 1st Column  */}
             <Grid container item xs={6} direction="row" >
               <Grid item xs={12}>
-              <h1> Header</h1>
+              {/* <h1> Header</h1> */}
               </Grid>
               <Grid item xs={12}>
                   <ButtonBase sx={{ width: 500, height: 300 }}>
@@ -147,7 +147,7 @@ function Post(props) {
             {/* 2nd Column */}
             <Grid container item xs={6} direction="row" >
             <Grid item xs={8}>
-              <h1> Header </h1>
+              {/* <h1> Header </h1> */}
               </Grid>
             <Grid item xs={10}>
               <TextField 
