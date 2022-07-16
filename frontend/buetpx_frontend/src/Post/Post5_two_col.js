@@ -16,12 +16,7 @@ import FontPost from "./font";
 import {Typography} from '@mui/material';
 import ButtonBase from '@mui/material/ButtonBase';
 import { styled } from '@mui/material/styles';
-const Img = styled('img')({
-  margin: 'auto',
-  display: 'block',
-  maxWidth: '100%',
-  maxHeight: '100%',
-});
+
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -39,15 +34,10 @@ function Post(props) {
 
         {/* 1st Column  */}
         <Grid container item xs={6} direction="row" >
-          <Grid item xs={12}>
-          <h1> Header</h1>
+          <Grid item xs={8}>
+           <h1> Hello 1234</h1>
           </Grid>
-          <Grid item xs={12}>
-              <ButtonBase sx={{ width: 500, height: 300 }}>
-                <Img src={photo_url} alt='1.jpg'/>
-              </ButtonBase>
-          </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={8}>
            <h1> Hello 1234</h1>
           </Grid>
           
