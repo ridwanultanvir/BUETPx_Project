@@ -12,11 +12,11 @@ import { Box } from '@mui/material';
 import Content from './post_content';
 // import post_info from "./post_info";
 import Button from '@mui/material/Button';
-import FontPost from "./font"; 
+
 import {Typography} from '@mui/material';
 import ButtonBase from '@mui/material/ButtonBase';
 import { styled } from '@mui/material/styles';
-import CommentList from './CommentList'; 
+
 import {useState, useEffect} from "react";
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader'

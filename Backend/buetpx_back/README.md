@@ -1,22 +1,10 @@
 ##
 
-1. CategorySerializer Fix kora
-2. TagsSerializer wrong ?
-3. SinglePostSerializer
-4. CommentSerializer2
+Structured Way: 
 
-##
-Caution: settings.py file password: 1234 or 123 
-
-##
-
-new api create: 
-
-extra_kwargs eta ki? 
-# tags er moto comment korbo 
-
-
-
+Post: 
+1. Post.js
+2. 
 
 ##
 
@@ -28,10 +16,3 @@ react-time-format
 ```
 
 ##
-Category kothar foreign key?
-
-Post er ;
-
-So Post theke CategorySerializer() call kora jay
-
-Category class e kintu kono foreign key nei
