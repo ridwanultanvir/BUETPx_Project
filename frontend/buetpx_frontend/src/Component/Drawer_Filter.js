@@ -55,9 +55,9 @@ useEffect(() => {
            <Grid item sm={2}>
             
             </Grid>
-            <Grid item sm={8}>
-                <RadioButton label="Newest" />
-                <RadioButton label="Likes" />
+                <Grid item sm={8}>
+                    <RadioButton label="Newest" />
+                    <RadioButton label="Likes" />
                 </Grid>
             <Grid item sm={2}/>
 

@@ -4,7 +4,7 @@ import { Grid } from "@mui/material";
 // import photoList from "./Constants";
 // import { Grid } from "@mui/material";
 import photoList from "./post_info";
-// import Card from '@mui/material/Card';
+import Card from '@mui/material/Card';
 const Content = () => {
 
     const getPhotoCard = photoObj => {
