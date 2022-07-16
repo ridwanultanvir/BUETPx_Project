@@ -8,25 +8,29 @@ import FilterDrawer from './Drawer_Filter';
 import Options from './Options';
 import Divider from '@mui/material';
 import ImageSearchIcon from '@mui/icons-material/ImageSearch';
+import { useParams } from 'react-router-dom';
 import {useState, useEffect} from "react";
 
-const Discover  = () => {
+
+const ShowFilteredResult  = (props) => {
+    const { catname } = useParams();
+    console.log(catname);
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [postList, setPostList] = useState([]);
+    const [posts, setposts] = useState([]);
     
 
     // Note: the empty deps array [] means
     // this useEffect will run once
     // similar to componentDidMount()
-
+    let api = "http://localhost:8000/api/posts/" + catname;
     useEffect(() => {
-    fetch("http://localhost:8000/api/post_detail")
+    fetch(api)
         .then(res => res.json())
         .then(
         (result) => {
             setIsLoaded(true);
-            setPostList(result);
+            setposts(result);
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
@@ -37,6 +41,13 @@ const Discover  = () => {
         }
         )
     }, [])
+
+    console.log("posts by cat:");
+    console.log(posts);
+
+    // api: http://localhost:8000/api/posts/landscape
+
+
         return (
             <div>
                 
@@ -66,7 +77,7 @@ const Discover  = () => {
                         <FilterDrawer />                      
                     </Grid>
                     <Grid item xs={12} sm={10}>
-                        <DiscoverContent postlist={postList} />
+                        <DiscoverContent postlist={posts}/>
 
                     </Grid>
 
@@ -74,7 +85,7 @@ const Discover  = () => {
             </Grid>
             </div>
         );
-    }
+}
 
 
-export default Discover;
+export default ShowFilteredResult;

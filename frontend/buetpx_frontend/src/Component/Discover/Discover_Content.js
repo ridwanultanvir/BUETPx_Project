@@ -1,43 +1,32 @@
 import React from "react";
 import { Grid } from "@mui/material";
-import MyCard from '../Contents/Card';
+import MyCard from "./Card";
 import {useState, useEffect} from "react";
+const Content = () => {
 
-const Content = (props) => {
-
-   const { postlist } = props;
-   console.log("postlist:");
-   console.log(postlist);
    const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [posts, setposts] = useState([]);
    
-   
-      // useEffect(() => {
-      //    fetch("http://localhost:8000/api/post_detail")
-      //      .then(res => res.json())
-      //      .then(
-      //        (result) => {
-      //          setIsLoaded(true);
+  
 
-      //          setposts(postlist);
-               
-      //          // if (postlist.length > 0) {
-      //          //     setposts(postlist);
-      //          // }
-      //          // else {
-      //          //    setposts(result);
-      //          // }
-      //        },
-      //        // Note: it's important to handle errors here
-      //        // instead of a catch() block so that we don't swallow
-      //        // exceptions from actual bugs in components.
-      //        (error) => {
-      //          setIsLoaded(true);
-      //          setError(error);
-      //        }
-      //      )
-      //  }, [])
+      useEffect(() => {
+         fetch("http://localhost:8000/api/post_detail")
+           .then(res => res.json())
+           .then(
+             (result) => {
+               setIsLoaded(true);
+               setposts(result);
+             },
+             // Note: it's important to handle errors here
+             // instead of a catch() block so that we don't swallow
+             // exceptions from actual bugs in components.
+             (error) => {
+               setIsLoaded(true);
+               setError(error);
+             }
+           )
+       }, [])
       
 
       
@@ -55,7 +44,7 @@ const Content = (props) => {
     return (
        <Grid container spacing={1}>
          {/* <Grid item xs={12} sm={4}> */}
-            {postlist.map(source => getSourceData(source))}
+            {posts.map(source => getSourceData(source))}
 
             {/* <MyCard /> */}
          {/* </Grid> */}
