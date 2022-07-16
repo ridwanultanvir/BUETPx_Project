@@ -53,7 +53,7 @@ function Post(props) {
                 <Grid item xs={2}> <IconButton size="small"><ThumbUpIcon/></IconButton> </Grid>    
           </Grid>
           {/* 3rd ROW  */}
-          <Grid item xs={2} >
+          <Grid item xs={4} >
                 <Typography
                   variant="h6"
                   noWrap
@@ -73,31 +73,7 @@ function Post(props) {
                 </Typography>
 
           </Grid>
-          <Grid item xs={10}><Button variant="outlined" color="secondary">   {category} </Button> </Grid>
-          
-          {/* 4th row */}
-          <Grid item xs={2} sx={{fontSize:"12"}}>
-                <Typography
-                  variant="h6"
-                  noWrap
-                  component="a"
-                  href="/"
-                  sx={{
-                    mr: 2,
-                    display: { xs: 'none', md: 'flex' },
-                    fontFamily: 'revert-layer',
-                    fontWeight: 600,
-                    // letterSpacing: '.3rem',
-                    color: 'inherit',
-                    textDecoration: 'none',
-                  }}
-                >
-                  Tags
-                </Typography>
-
-          </Grid>
-          
-          
+          <Grid item xs={4}><Button variant="outlined" color="secondary">   {category} </Button> </Grid>
           <Grid item xs={12}>
            <h1> Hello 1234</h1>
           </Grid>
