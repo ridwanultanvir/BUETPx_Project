@@ -9,7 +9,7 @@ import {IconButton} from '@mui/material';
 import { TextField } from '@material-ui/core';
 import { Chip } from '@mui/material';
 import { Box } from '@mui/material';
-
+import Content from './post_content';
 import post_info from "./post_info";
 import Button from '@mui/material/Button';
 import FontPost from "./font"; 
