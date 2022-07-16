@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.http.response import JsonResponse
-# from Backend.buetpx_back.buetpx.serializers import TagsSerializer
 from rest_framework.parsers import JSONParser 
 from rest_framework import status
  
@@ -126,32 +125,37 @@ def get_post_by_id(request,id):
                 'tags']})
         return JsonResponse(singe_post_serializer.data, safe=False)
 
+
+
 @api_view(['Get'])
 
 def get_comments_by_postid(request,postid):
     
     if request.method == 'GET':
-        print("comments") 
+        comment = Comment.objects.get(pk=id)       
+
         
-        comments = Comment.objects.filter(post=postid)
-        
-        print(comments)    
-        
-        comment_serializer = CommentSerializer2(comments, many=True)
+        comment_serializer = CommentSerializer(comment)
         return JsonResponse(comment_serializer.data, safe=False)
 
-# @api_view(['Get'])
-# def get_comments_by_postid(request,postid):
-    
-#     if request.method == 'GET':
-#         print("tags") 
+
+@api_view(['Get'])
+def get_comment_by_post_id(request,id):
+
+    # tutorials = Tutorial.objects.filter(published=True)
         
-#         tags = Tags.objects.filter(post=postid)
+    # if request.method == 'GET': 
+    #     tutorials_serializer = TutorialSerializer(tutorials, many=True)
+    #     return JsonResponse(tutorials_serializer.data, safe=False)
+    comments = Comment.objects.filter(post=id)  
+    if request.method == 'GET':
         
-#         print(tags)    
+             
+
         
-#         comment_serializer = TagsSerializer(tags, many=True)
-#         return JsonResponse(comment_serializer.data, safe=False)
+        comment_serializer = CommentSerializer3(comments, many = True)
+        return JsonResponse(comment_serializer.data, safe=False)
+
 
 
     
@@ -197,7 +201,11 @@ def get_user_by_id(request,id):
 def get_all_user(request):
    
 # Retrieve objects (with condition)
+
+        
         # id = request.GET.get('id', None)
+        
+        
         user = UserAccount.objects.all()
         user_serializer = UserAccountSerializer(user, many=True)
         return JsonResponse(user_serializer.data, safe=False)

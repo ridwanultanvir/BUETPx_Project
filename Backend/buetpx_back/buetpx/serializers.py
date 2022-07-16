@@ -161,3 +161,16 @@ class CommentSerializer2(serializers.ModelSerializer):
               )
 
 
+# user_id  = je comment korse 
+class CommentSerializer3(serializers.ModelSerializer):
+
+
+  class Meta:
+
+    model = Comment
+    fields = ('id',
+              'comment_txt',
+              'comment_date',
+              'post',
+              'user'
+              )
