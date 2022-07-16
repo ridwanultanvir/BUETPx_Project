@@ -7,7 +7,7 @@ from buetpx.models import Tutorial
 from buetpx.models import Post
 from buetpx.models import Comment
 from buetpx.models import UserAccount
-from buetpx.serializers import CommentSerializer, CommentSerializer2, TutorialSerializer
+from buetpx.serializers import CommentSerializer, CommentSerializer2, CommentSerializer3, TutorialSerializer
 from buetpx.serializers import PostSerializer
 from buetpx.serializers import SinglePostSerializer
 from buetpx.serializers import PlaceSerializer
@@ -126,7 +126,8 @@ def post_list(request):
 def get_post_by_id(request,id):
     
     if request.method == 'GET':
-        post = Post.objects.get(pk=id)       
+        post = Post.objects.get(pk=id)  
+             
 
         
         singe_post_serializer = SinglePostSerializer(post)
@@ -141,9 +142,26 @@ def get_comment_by_id(request,id):
         comment = Comment.objects.get(pk=id)       
 
         
-        comment_serializer = CommentSerializer2(comment)
+        comment_serializer = CommentSerializer(comment)
         return JsonResponse(comment_serializer.data, safe=False)
 
+
+@api_view(['Get'])
+def get_comment_by_post_id(request,id):
+
+    # tutorials = Tutorial.objects.filter(published=True)
+        
+    # if request.method == 'GET': 
+    #     tutorials_serializer = TutorialSerializer(tutorials, many=True)
+    #     return JsonResponse(tutorials_serializer.data, safe=False)
+    comments = Comment.objects.filter(post=1)  
+    if request.method == 'GET':
+        
+             
+
+        
+        comment_serializer = CommentSerializer3(comments, many = True)
+        return JsonResponse(comment_serializer.data, safe=False)
 
 
 
