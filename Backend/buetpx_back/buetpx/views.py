@@ -132,29 +132,23 @@ def get_post_by_id(request,id):
 def get_comments_by_postid(request,postid):
     
     if request.method == 'GET':
-        comment = Comment.objects.get(pk=id)       
-
-        
-        comment_serializer = CommentSerializer(comment)
+        comments = Comment.objects.filter(post=postid)               
+        comment_serializer = CommentSerializer(comments,many = True)
         return JsonResponse(comment_serializer.data, safe=False)
 
 
-@api_view(['Get'])
-def get_comment_by_post_id(request,id):
+# @api_view(['Get'])
+# def get_comment_by_post_id(request,id):
 
-    # tutorials = Tutorial.objects.filter(published=True)
+#     # tutorials = Tutorial.objects.filter(published=True)
         
-    # if request.method == 'GET': 
-    #     tutorials_serializer = TutorialSerializer(tutorials, many=True)
-    #     return JsonResponse(tutorials_serializer.data, safe=False)
-    comments = Comment.objects.filter(post=id)  
-    if request.method == 'GET':
-        
-             
-
-        
-        comment_serializer = CommentSerializer3(comments, many = True)
-        return JsonResponse(comment_serializer.data, safe=False)
+#     # if request.method == 'GET': 
+#     #     tutorials_serializer = TutorialSerializer(tutorials, many=True)
+#     #     return JsonResponse(tutorials_serializer.data, safe=False)
+#     comments = Comment.objects.filter(post=id)  
+#     if request.method == 'GET':
+#         comment_serializer = CommentSerializer3(comments, many = True)
+#         return JsonResponse(comment_serializer.data, safe=False)
 
 
 
