@@ -5,7 +5,7 @@ from rest_framework import status
  
 from buetpx.models import Tutorial,Post,Comment,UserAccount,Tags
 from buetpx.serializers import CommentSerializer, CommentSerializer2, TutorialSerializer,PostSerializer,PlaceSerializer,UserAccountSerializer,CategorySerializer
-
+from buetpx.serializers import PostSerializer2
 from rest_framework.decorators import api_view
 
 
@@ -80,7 +80,17 @@ def tutorial_list_published(request):
 
 
 
-
+@api_view(['GET'])
+def post_detail(request):
+    # GET all published tutorials
+    # fields = ('id','post_title','post_date','photo_url')
+    posts = Post.objects.values('id','post_title','post_date','photo_url')
+    
+    if request.method == 'GET': 
+        posts_serializer = PostSerializer2(posts, many=True)
+        return JsonResponse(posts_serializer.data, safe=False)
+        
+  
 
 @api_view(['GET', 'POST'])
 def post_list(request):

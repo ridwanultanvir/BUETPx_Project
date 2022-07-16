@@ -93,7 +93,11 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'buetpxdb',
         'USER': 'postgres',
+<<<<<<< HEAD
         'PASSWORD': '1234',
+=======
+        'PASSWORD': 'postgres',
+>>>>>>> c33d66da92b7b84fd4cf179a8f56065f2e39cf2f
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
