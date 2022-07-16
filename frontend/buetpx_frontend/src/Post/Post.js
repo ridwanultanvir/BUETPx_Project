@@ -17,6 +17,14 @@ import {Typography} from '@mui/material';
 import ButtonBase from '@mui/material/ButtonBase';
 import { styled } from '@mui/material/styles';
 import CommentList from './CommentList'; 
+import {useState, useEffect} from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams
+} from "react-router-dom";
 
 const Img = styled('img')({
   margin: 'auto',
@@ -33,149 +41,187 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.primary,
 }));
 
-function Post(props) {
-  const {id,post_title,post_date,photo_url,owner,category,place,tags}=props
-  const getTag = tag => {
-    return (
+const  Post=(props)=>{
 
-        <Button variant="outlined" color="primary" >   {tag} </Button>
-     
+    const [error, setError] = useState(null);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [post, setpost] = useState([]);  
+    const [comments, setcomments] = useState([]);
+    
+    const { id } = useParams();
 
-    );
-  };
-  // const handleInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormValues({
-  //     ...formValues,
-  //     [name]: value,
-  //   });
-  // };
-  const getComment = comment => {
-    return (
-      <Grid item xs={8}>
-        <Item>  {comment.comment_txt} By {comment.user} </Item>
+    useEffect(() => {
+        fetch("http://localhost:8000/api/posts/"+id)
+          .then(res => res.json())
+          .then(
+            (result) => {
+              setIsLoaded(true);
+              setpost(result);
+            },
+            // Note: it's important to handle errors here
+            // instead of a catch() block so that we don't swallow
+            // exceptions from actual bugs in components.
+            (error) => {
+              setIsLoaded(true);
+              setError(error);
+            }
+          )
+      }, []);
+      const {post_title,post_date,photo_url,owner,category,place,tags}=post;
+
+      useEffect(() => {
+        fetch("http://localhost:8000/api/comments/"+id)
+          .then(res => res.json())
+          .then(
+            (result) => {
+              setIsLoaded(true);
+              setcomments(result);
+            },
+            // Note: it's important to handle errors here
+            // instead of a catch() block so that we don't swallow
+            // exceptions from actual bugs in components.
+            (error) => {
+              setIsLoaded(true);
+              setError(error);
+            }
+          )
+      }, []);
+
+    const getTag = tag => {
+        return (
+
+            <Button variant="outlined" color="primary" >   {tag} </Button>
+        
+
+        );
+    };
+
+    const getComment = comment => {
+        return (
+        <Grid item xs={8}>
+            <Item>  {comment.comment_txt} By {comment.user} </Item>
+
+            
+        </Grid>
 
         
-      </Grid>
 
-     
+        );
+    };
+    return (
+        <Grid container direction='column' spacing={2}>
+            <Grid item>
+            <Header/>
+            </Grid>
+            <Grid item>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            </Grid>
+        {/* etar baire header contianer */}
+            <Grid container spacing={2} marginLeft={4} >
 
+                {/* 1st Column  */}
+                <Grid container item xs={6} direction="row" >
+                <Grid item xs={12}>
+                {/* <h1> Header</h1> */}
+                </Grid>
+                <Grid item xs={12}>
+                    <ButtonBase sx={{ width: 500, height: 300 }}>
+                        <Img src={photo_url} alt='1.jpg'/>
+                    </ButtonBase>
+                </Grid>
+                {/* 2ND ROW  */}
+                <Grid item container>
+                        <Grid item xs={1}></Grid>
+                        <Grid item xs={2}> <IconButton size="small"><ThumbUpIcon/></IconButton> </Grid>    
+                </Grid>
+                {/* 3rd ROW  */}
+                <Grid item xs={2} >
+                        <Typography
+                        variant="h6"
+                        noWrap
+                        component="a"
+                        href="/"
+                        sx={{
+                            mr: 2,
+                            display: { xs: 'none', md: 'flex' },
+                            fontFamily: 'revert-layer',
+                            fontWeight: 600,
+                            // letterSpacing: '.3rem',
+                            color: 'inherit',
+                            textDecoration: 'none',
+                        }}
+                        >
+                        Category
+                        </Typography>
+
+                </Grid>
+                <Grid item xs={10}><Button variant="outlined" color="secondary">   {category} </Button> </Grid>
+
+                {/* 4th row */}
+                <Grid item xs={2} >
+                        <Typography
+                        variant="h6"
+                        noWrap
+                        component="a"
+                        href="/"
+                        sx={{
+                            mr: 2,
+                            display: { xs: 'none', md: 'flex' },
+                            fontFamily: 'revert-layer',
+                            fontWeight: 600,
+                            // letterSpacing: '.3rem',
+                            color: 'inherit',
+                            textDecoration: 'none',
+                        }}
+                        >
+                        Tags
+                        </Typography>
+
+                </Grid>
+                <Grid item xs={10} >{post_info[0].tags.map(tag => getTag(tag))}</Grid>
+                
+                <Grid item xs={12}>
+                {/* <h1> Hello 1234</h1> */}
+                </Grid>
+                
+                </Grid>
+
+
+                {/* 2nd Column */}
+                <Grid container item xs={6} direction="row" >
+                <Grid item xs={8}>
+                {/* <h1> Header </h1> */}
+                </Grid>
+                <Grid item xs={10}>
+                <TextField 
+                        // sx={{width: 10}}
+                        id="filled-multiline-static"
+                        label="Add a Comment"
+                        multiline
+                        // rows={4}
+                        defaultValue=""
+                        variant="outlined"
+                        />
+                </Grid>
+                
+                
+                {comments.map(comment => getComment(comment))}
+                
+                <Grid item xs={8}>
+                {/* <h1> Hello 1234</h1> */}
+                </Grid>
+                
+                </Grid>
+            </Grid>
+
+        {/* etar baire header contianer */}
+        </Grid>  
+                        
+    
     );
-  };
-  return (
-    <Grid container direction='column' spacing={2}>
-        <Grid item>
-          <Header/>
-        </Grid>
-        <Grid item>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-        </Grid>
-    {/* etar baire header contianer */}
-        <Grid container spacing={2} marginLeft={4} >
+    }
 
-            {/* 1st Column  */}
-            <Grid container item xs={6} direction="row" >
-              <Grid item xs={12}>
-              {/* <h1> Header</h1> */}
-              </Grid>
-              <Grid item xs={12}>
-                  <ButtonBase sx={{ width: 500, height: 300 }}>
-                    <Img src={photo_url} alt='1.jpg'/>
-                  </ButtonBase>
-              </Grid>
-              {/* 2ND ROW  */}
-              <Grid item container>
-                    <Grid item xs={1}></Grid>
-                    <Grid item xs={2}> <IconButton size="small"><ThumbUpIcon/></IconButton> </Grid>    
-              </Grid>
-              {/* 3rd ROW  */}
-              <Grid item xs={2} >
-                    <Typography
-                      variant="h6"
-                      noWrap
-                      component="a"
-                      href="/"
-                      sx={{
-                        mr: 2,
-                        display: { xs: 'none', md: 'flex' },
-                        fontFamily: 'revert-layer',
-                        fontWeight: 600,
-                        // letterSpacing: '.3rem',
-                        color: 'inherit',
-                        textDecoration: 'none',
-                      }}
-                    >
-                      Category
-                    </Typography>
-
-              </Grid>
-              <Grid item xs={10}><Button variant="outlined" color="secondary">   {category} </Button> </Grid>
-
-              {/* 4th row */}
-              <Grid item xs={2} >
-                    <Typography
-                      variant="h6"
-                      noWrap
-                      component="a"
-                      href="/"
-                      sx={{
-                        mr: 2,
-                        display: { xs: 'none', md: 'flex' },
-                        fontFamily: 'revert-layer',
-                        fontWeight: 600,
-                        // letterSpacing: '.3rem',
-                        color: 'inherit',
-                        textDecoration: 'none',
-                      }}
-                    >
-                      Tags
-                    </Typography>
-
-              </Grid>
-              <Grid item xs={10} >{post_info[0].tags.map(tag => getTag(tag))}</Grid>
-              
-              <Grid item xs={12}>
-              {/* <h1> Hello 1234</h1> */}
-              </Grid>
-              
-            </Grid>
-
-
-            {/* 2nd Column */}
-            <Grid container item xs={6} direction="row" >
-            <Grid item xs={8}>
-              {/* <h1> Header </h1> */}
-              </Grid>
-            <Grid item xs={10}>
-              <TextField 
-                    // sx={{width: 10}}
-                    id="filled-multiline-static"
-                    label="Add a Comment"
-                    multiline
-                    // rows={4}
-                    defaultValue=""
-                    variant="outlined"
-                    />
-              </Grid>
-              
-              
-              {CommentList.map(comment => getComment(comment))}
-              
-              <Grid item xs={8}>
-              {/* <h1> Hello 1234</h1> */}
-              </Grid>
-              
-            </Grid>
-        </Grid>
-
-    {/* etar baire header contianer */}
-    </Grid>  
-                      
-  
-  );
-}
-
-export default Post;
+    export default Post;

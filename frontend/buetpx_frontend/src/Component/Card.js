@@ -72,19 +72,7 @@ const d = new Date(post_date);
       >
         
         </CardMedia>
-      {/* <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          Natural Baeuty
-        </Typography>
-      </CardContent> */}
-      {/* <CardActions disableSpacing> */}
-        
-        {/* share icon */}
-        {/* <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton> */}
-       
-      {/* </CardActions> */}
+    
      
     </Card>
   );

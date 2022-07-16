@@ -18,9 +18,10 @@ ReactDOM.render(
     <Routes>
       <Route path="/" element={<Homefeed />} />
 
-      <Route path="/post" element={<Post {...post_single}/>} />
+      {/* <Route path="/post/" element={<Post {...post_single}/>} />
+      PostByNaeem */}
 
-      {/* <Route path="/post" element={<Post />} /> */}
+      <Route path="/post/:id" element={<Post />} />
       <Route path="/Discover" element={<Discover />} />
 
       <Route path="/comment" element={<CommentExampleComment1 />} />
