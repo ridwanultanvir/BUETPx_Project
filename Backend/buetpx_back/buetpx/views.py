@@ -164,11 +164,18 @@ def get_post_by_categoryid(request,id):
 def get_post_by_categorylist(request,list):
     
     my_list = list.split(",")
-    
+    json_data = []
+    post_serializer_all = []
     if request.method == 'GET':
-        posts = Post.objects.filter(category=my_list[0])               
-        post_serializer = PostSerializer(posts,many = True)
-        return JsonResponse(post_serializer.data, safe=False)
+        for list_id in my_list:
+         
+            posts = Post.objects.filter(category=list_id) 
+                          
+            post_serializer = PostSerializer(posts,many = True)
+            # post_serializer_all.append(post_serializer)
+            json_data.append(post_serializer.data)
+            
+        return JsonResponse(json_data, safe=False)
 
 @api_view(['Get'])
 
