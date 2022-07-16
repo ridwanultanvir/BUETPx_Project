@@ -66,14 +66,7 @@ export default function CheckboxesGroup() {
         )
     }, [])
 
-    // console.log(nameList);
-    // console.log(nameList[2]);
-   
-    // const names = [categories.map(source => getCategoryName(source)+" ")];
-    // // seperate   category names by ,  and make an array of category names
-    // const nameArr = names[0].split(",");
-    // console.log(nameArr);
-
+    
     
 
    const [checked, setChecked] = useState([]);
@@ -119,18 +112,7 @@ export default function CheckboxesGroup() {
   
     return (
         
-    //   <div className="app">
-    //     {/* <div className="checkList"> */}
-    //       {/* <div className="title">Your CheckList:</div> */}
-    //       {/* <div className="list-container"> */}
-    //         {checkList.map((item, index) => (
-    //           <div key={index}>
-    //             <input value={item} type="checkbox" onChange={handleCheck} />
-    //             <span className={isChecked(item)}>{item}</span>
-    //           </div>
-    //         ))}
-    //       {/* </div> */}
-    //     </div>
+    
     <div className={classes.root}>
       <FormControl component="fieldset" className={classes.formControl}>
         {/* <FormLabel component="legend">Assign responsibility</FormLabel> */}

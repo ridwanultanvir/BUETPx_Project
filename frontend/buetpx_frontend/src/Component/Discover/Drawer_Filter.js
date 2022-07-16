@@ -27,7 +27,6 @@ const Content = () => {
             </Grid>
                 <Grid item sm={8}>
                     <RadioButton />
-                    {/* <RadioButton label="Likes" /> */}
 
                 </Grid>
             <Grid item sm={2}/>
