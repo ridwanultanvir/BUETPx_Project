@@ -1,44 +1,38 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
-import { styled } from '@mui/material/styles';
-import RadioGroup, { useRadioGroup } from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import { Grid } from "@mui/material";
+import {useState, useEffect} from "react";
+import Checkbox from '@mui/material/Checkbox';
 
-const StyledFormControlLabel = styled((props) => <FormControlLabel {...props} />)(
-  ({ theme, checked }) => ({
-    '.MuiFormControlLabel-label': checked && {
-      color: theme.palette.primary.main,
-    },
-  }),
-);
 
-function MyFormControlLabel(props) {
-  const radioGroup = useRadioGroup();
 
-  let checked = false;
+const RadioButtons = () => {
+   
 
-  if (radioGroup) {
-    checked = radioGroup.value === props.value;
-  }
+    
 
-  return <StyledFormControlLabel checked={checked} {...props} />;
-}
-
-MyFormControlLabel.propTypes = {
-  /**
-   * The value of the component.
-   */
-  value: PropTypes.any,
-};
-
-const RadioButton = props =>  {
-  const {label, value} = props;
   return (
-    <RadioGroup name="use-radio-group" >
-      <MyFormControlLabel value="first" label={label} control={<Radio />} />
-    </RadioGroup>
+    <FormControl>
+      <FormLabel id="demo-radio-buttons-group-label"></FormLabel>
+      <RadioGroup
+        aria-labelledby="demo-radio-buttons-group-label"
+        defaultValue="1"
+        name="radio-buttons-group"
+      > 
+         <Grid item  sm={8}>
+             <FormControlLabel value="newest" control={<Radio />} label="Newest" />
+             <FormControlLabel value="likes" control={<Radio />} label="Likes" />
+           </Grid>
+        {/* <FormControlLabel value="female" control={<Radio />} label="Female" />
+        <FormControlLabel value="male" control={<Radio />} label="Male" />
+        <FormControlLabel value="other" control={<Radio />} label="Other" /> */}
+      </RadioGroup>
+    </FormControl>
   );
 }
 
-export default RadioButton;
+export default RadioButtons

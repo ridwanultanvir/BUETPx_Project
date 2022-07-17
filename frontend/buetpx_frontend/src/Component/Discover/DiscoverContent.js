@@ -2,32 +2,17 @@ import React from "react";
 import { Grid } from "@mui/material";
 import MyCard from '../../Static/Card';
 import {useState, useEffect} from "react";
-const Content = () => {
 
+const Content = (props) => {
+
+   const { postlist } = props;
+   console.log("postlist:");
+   console.log(postlist);
    const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [posts, setposts] = useState([]);
    
-  
-
-      useEffect(() => {
-         fetch("http://localhost:8000/api/post_detail")
-           .then(res => res.json())
-           .then(
-             (result) => {
-               setIsLoaded(true);
-               setposts(result);
-             },
-             // Note: it's important to handle errors here
-             // instead of a catch() block so that we don't swallow
-             // exceptions from actual bugs in components.
-             (error) => {
-               setIsLoaded(true);
-               setError(error);
-             }
-           )
-       }, [])
-      
+   
 
       
     
@@ -43,32 +28,8 @@ const Content = () => {
 
     return (
        <Grid container spacing={1}>
-         {/* <Grid item xs={12} sm={4}> */}
-            {posts.map(source => getSourceData(source))}
-
-            {/* <MyCard /> */}
-         {/* </Grid> */}
-         {/* <Grid item xs  = {12} sm = {4}>
-            <MyCard/>
-         </Grid>
-         <Grid item xs ={12} sm = {4}>
-            <MyCard/>
-         </Grid>
-         <Grid item xs ={12} sm = {4}>
-            <MyCard/>
-         </Grid>
-         <Grid item xs ={12} sm = {4}>
-            <MyCard/>
-         </Grid>
-         <Grid item xs ={12} sm = {4}>
-            <MyCard/>
-         </Grid>
-         <Grid item xs ={12} sm = {4}>
-            <MyCard/>
-         </Grid>
-         <Grid item xs ={12} sm = {4}>
-            <MyCard/>
-         </Grid> */}
+            {postlist.map(source => getSourceData(source))}
+        
        </Grid>
             
     );

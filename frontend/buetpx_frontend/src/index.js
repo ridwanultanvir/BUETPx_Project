@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Homefeed from './Component/Homefeed/Homefeed';
 import Post from "./Component/Post/Post";
 import Discover from "./Component/Discover/Discover"; 
+import ShowFilteredResult from "./Component/Discover/ShowFilteredResult";
+
 
 
 ReactDOM.render(
@@ -15,6 +17,8 @@ ReactDOM.render(
       <Route path="/posts" element={<Homefeed />} />
       <Route path="/posts/:id" element={<Post />} />
       <Route path="/Discover" element={<Discover />} />
+	  <Route path="/discover/filtered/:catname" element={<ShowFilteredResult />} />
+
 
     </Routes>
     
