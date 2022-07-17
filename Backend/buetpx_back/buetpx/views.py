@@ -1,5 +1,4 @@
 from unicodedata import category
-# from bs4 import Tag
 from django.shortcuts import render
 from django.http.response import JsonResponse
 # from Backend.buetpx_back.buetpx.models import Place
@@ -139,20 +138,6 @@ def post_list_by_catname(request, catname):
         return JsonResponse(post_serializer.data, safe=False)
 
 
-# @Tanvir post_list_by_tagname
-@api_view(['GET', 'POST'])
-def post_list_by_tagname(request, tagname):
-       
-# Retrieve objects (with condition)
-
-    if request.method == 'GET':
-        posts = Post.objects.all()
-        # get posts by category name
-        posts = posts.filter(tags__name=tagname)
-        
-        post_serializer = PostSerializer(posts, many=True)
-        return JsonResponse(post_serializer.data, safe=False)
-
 @api_view(['Get'])
 def get_post_by_id(request,id):
     
@@ -214,18 +199,6 @@ def get_post_by_categoryid(request,id):
         post_serializer = PostSerializer(posts,many = True)
         return JsonResponse(post_serializer.data, safe=False)
 
-
-
-# notun add korsi @tanvir
-@api_view(['Get'])
-
-def get_post_by_tagid(request,id):
-    
-    if request.method == 'GET':
-        # posts = Post.objects.filter(posts__in=[id])    
-        posts = Post.objects.filter(tags__in = id)    
-        post_serializer = PostSerializer(posts,many = True)
-        return JsonResponse(post_serializer.data, safe=False)
 
 @api_view(['Get'])
 
