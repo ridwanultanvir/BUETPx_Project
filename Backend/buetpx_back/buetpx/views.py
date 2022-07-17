@@ -1,10 +1,11 @@
 from unicodedata import category
 from django.shortcuts import render
 from django.http.response import JsonResponse
+# from Backend.buetpx_back.buetpx.models import Place
 from rest_framework.parsers import JSONParser 
 from rest_framework import status
  
-from buetpx.models import Tutorial,Post,Comment,UserAccount,Tags, Category
+from buetpx.models import Tutorial,Post,Comment,UserAccount,Tags, Category,Place
 from buetpx.serializers import CommentSerializer, CommentSerializer2, TutorialSerializer,PostSerializer,PlaceSerializer,UserAccountSerializer,CategorySerializer
 from buetpx.serializers import PostSerializer2
 from rest_framework.decorators import api_view
@@ -154,7 +155,31 @@ def get_post_by_id(request,id):
                 )
         return JsonResponse(singe_post_serializer.data, safe=False)
 
+@api_view(['Get'])
+def get_place_by_id(request,id):
+    
+    if request.method == 'GET':
+        post = Place.objects.get(pk=id)       
+        place_serializer = PlaceSerializer(post
+                )
+        return JsonResponse(place_serializer.data, safe=False)
 
+@api_view(['Get'])
+def get_post_with_uid_by_id(request,id):
+    
+    if request.method == 'GET':
+        post = Post.objects.get(pk=id)       
+        singe_post_serializer = PostSerializer2(post
+                , context={'fields': ['id',
+                  'post_title',
+                  'post_date',
+                  'photo_url',
+                  'owner',
+                  'category',
+                  'place',
+                  'tags']}
+                )
+        return JsonResponse(singe_post_serializer.data, safe=False)
 
 @api_view(['Get'])
 
@@ -253,7 +278,7 @@ def get_user_by_id(request,id):
         user_serializer = UserAccountSerializer(user)
         return JsonResponse(user_serializer.data, safe=False)
 
-
+# get_post_with_uid_by_id
 
 
 

@@ -84,7 +84,7 @@ class MyCard extends Component{
     
           />
     
-        <CardActionArea href={"posts/"+id}>
+        <CardActionArea href={"/posts/"+id}>
           <CardMedia
             component="img"
             image={photo_url}

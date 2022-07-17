@@ -6,7 +6,7 @@ import Header from '../Contents/Header';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import CommentIcon from '@mui/icons-material/Comment';
 import {IconButton} from '@mui/material';
-import { TextField } from '@material-ui/core';
+import { TextField } from '@mui/material';
 import { Chip } from '@mui/material';
 import { Box } from '@mui/material';
 import Content from './post_content';
@@ -15,7 +15,7 @@ import Button from '@mui/material/Button';
 import FontPost from "./font"; 
 import {Typography} from '@mui/material';
 import ButtonBase from '@mui/material/ButtonBase';
-import { styled } from '@mui/material/styles';
+import { styled } from '@mui/styles';
 import CommentList from './CommentList'; 
 
 const Img = styled('img')({

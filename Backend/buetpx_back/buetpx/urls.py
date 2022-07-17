@@ -13,10 +13,11 @@ urlpatterns = [
 	path ('api/posts_by_cat/<catname>', views.post_list_by_catname),
 
     path ('api/posts/<id>', views.get_post_by_id),
+    path ('api/places/<id>', views.get_place_by_id),
     path ('api/post_detail', views.post_detail),
     path ('api/posts/<catname>', views.post_list_by_catname),
 
-    path ('ai/posts/<postid>/comments', views.get_comments_by_postid),
+    path ('api/posts/<postid>/comments', views.get_comments_by_postid),
     path ('api/comments/<postid>', views.get_comments_by_postid),
     # path ('api/tags/<postid>', views.get_tags_by_postid),
 
@@ -25,4 +26,5 @@ urlpatterns = [
 
     path ('api/users', views.get_all_user),
     path ('api/user/<id>', views.get_user_by_id),
+    path ('api/posts_with_uid/<id>', views.get_post_with_uid_by_id),
 ]
