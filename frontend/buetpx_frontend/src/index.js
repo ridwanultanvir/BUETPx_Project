@@ -16,8 +16,8 @@ ReactDOM.render(
     <Routes>
       <Route path="/" element={<Homefeed />} />
       <Route path="/posts" element={<Homefeed />} />
-      <Route path="/posts/:id" element={<Post />} />
-      <Route path="/tags_posts/:id" element={<Tags />} />
+      <Route path="/posts/:id" e1lement={<Post />} />
+      <Route path="/tag_specific_post/:tagname" element={<Tags />} />
       <Route path="/Discover" element={<Discover />} />
 	  <Route path="/discover/filtered/:catname" element={<ShowFilteredResult />} />
 

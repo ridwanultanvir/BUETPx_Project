@@ -51,7 +51,7 @@ const  Tags=()=>{
 
 
     useEffect(() => {
-        fetch("http://localhost:8000/api/posts_with_tagid/"+3)
+        fetch("http://localhost:8000/api/posts_by_tagname/"+tagname)
           .then(res => res.json())
           .then(
             (result) => {
@@ -67,13 +67,13 @@ const  Tags=()=>{
               setError(error);
             }
           )
-      }, [tagname]);
+      }, []);
       
       
 
       const getPost = post => {
         return (
-            <h1> {post.post_title}</h1>
+            <h2> {post.post_title}</h2>
 
     
     
@@ -84,7 +84,8 @@ const  Tags=()=>{
     return (
         <Grid container direction='column' spacing={2}>
             <Grid item>
-              TagName: {tagname}
+              <h2>TagName: {tagname} </h2>
+              Only PostTitle:
               {posts.map(post => getPost(post))}
             </Grid>
         </Grid>  
