@@ -24,7 +24,7 @@ class diagram er controller gula
 
 
 ##
-
+@Tanvir
 
 ```
 F:\L4T1_code\CSE408_project\dj_env1\Scripts\activate
@@ -41,3 +41,15 @@ Tags.js : only Tags show kore
 
 
 ## 
+
+Button Click kore another page e: 
+
+https://bobbyhadz.com/blog/react-onclick-redirect 
+
+
+## 
+
+Post e : Tags ManyToMany Filter ; so 
+https://stackoverflow.com/questions/2218327/django-manytomany-filter
+
+related_name='posts'

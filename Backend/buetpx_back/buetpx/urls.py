@@ -9,7 +9,8 @@ urlpatterns = [
     path ('api/categories/posts/list/<list>', views.get_post_by_categorylist),
     # path ('api/categories/<name>/posts', views.get_post_by_categoryname),
     path ('api/posts', views.post_list),
-	
+	path ('api/tags/<id>', views.get_post_by_tagid),
+ 
 	path ('api/posts_by_cat/<catname>', views.post_list_by_catname),
 
     path ('api/posts/<id>', views.get_post_by_id),

@@ -5,7 +5,7 @@ import "./index.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Homefeed from './Component/Homefeed/Homefeed';
 import Post from "./Component/Post/Post";
-import Tags from "./Component/Tags/Tags";
+import Tags from "./Component/Post/Tags/Tags";
 import Discover from "./Component/Discover/Discover"; 
 import ShowFilteredResult from "./Component/Discover/ShowFilteredResult";
 

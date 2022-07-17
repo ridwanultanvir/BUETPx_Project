@@ -1,6 +1,6 @@
 import React from 'react';
 import {Avatar, Grid} from "@mui/material";
-import Header from '../../Static/Header';
+import Header from '../../../Static/Header';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import CommentIcon from '@mui/icons-material/Comment';
 import {IconButton} from '@mui/material';
@@ -23,7 +23,8 @@ import {
   Switch,
   Route,
   Link,
-  useParams
+  useParams,
+  useNavigate
 } from "react-router-dom";
 
 
@@ -47,6 +48,11 @@ const  Tags=()=>{
     const [post_owner, setowner] = useState([]);
     
     const { id } = useParams();
+    const navigate = useNavigate();
+    const navigateToSpecificTag = () => {
+      // 👇️ navigate to /contacts
+      navigate('/Discover');
+    };
 
     useEffect(() => {
         fetch("http://localhost:8000/api/posts_with_uid/"+id)
@@ -112,7 +118,7 @@ const  Tags=()=>{
         
             <Button variant="outlined" color="primary" sx={{
               marginRight:2
-            }} onClick={() => { console.log(tag); }}>   
+            }} onClick={() => {navigateToSpecificTag(); console.log(tag); }}>   
             {tag} 
             
             </Button>
