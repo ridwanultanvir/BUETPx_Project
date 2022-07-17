@@ -108,9 +108,9 @@ const  Post=()=>{
       }, [post_owner]);
 
       const navigate = useNavigate();
-      const navigateToSpecificTag = () => {
+      const navigateToSpecificTag = (tagname) => {
         // 👇️ navigate to /contacts
-        navigate('/Discover');
+        navigate('/post_with_tags/'+tagname);
       };
 
     const getTag = tag => {
@@ -119,7 +119,7 @@ const  Post=()=>{
         
           <Button variant="outlined" color="primary" sx={{
             marginRight:2
-          }} onClick={() => {navigateToSpecificTag(); console.log(tag); }}>   
+          }} onClick={() => {navigateToSpecificTag(tag); console.log(tag); }}>   
           {tag} 
           
           </Button>
