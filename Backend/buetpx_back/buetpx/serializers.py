@@ -33,7 +33,18 @@ class UserAccountSerializer(serializers.ModelSerializer):
               'hashedpass',
               'posts'
               )
+    
+class PlaceSerializer(serializers.ModelSerializer):
+  # posts = PostSerializer(many=True, read_only=True)
 
+  class Meta:
+
+    # ordering = ['-id']
+    model = UserAccount
+    fields = ('id',
+              'city',
+              'country'
+              )
 
 
 
@@ -45,7 +56,8 @@ class PostSerializer(serializers.ModelSerializer):
     # print(owner)
     # serializers.Sl
     category = serializers.SlugRelatedField(read_only=True, slug_field='name' )
-    place = serializers.SlugRelatedField(read_only=True, slug_field='name' )
+    # place = serializers.SlugRelatedField(read_only=True, slug_field='name' )
+    # place = PlaceSerializer()
     tags = serializers.StringRelatedField(many=True, read_only=True)
     def get_field_names(self, *args, **kwargs):
         field_names = self.context.get('fields', None)
@@ -68,22 +80,34 @@ class PostSerializer(serializers.ModelSerializer):
                   'tags',
                   )
         extra_kwargs = {'tags':{'required': False}}
+        
+        
 
 class PostSerializer2(serializers.ModelSerializer):
-    
+    category = serializers.SlugRelatedField(read_only=True, slug_field='name' )
+    place = serializers.SlugRelatedField(read_only=True, slug_field='name' )
+    tags = serializers.StringRelatedField(many=True, read_only=True)
+    def get_field_names(self, *args, **kwargs):
+        field_names = self.context.get('fields', None)
+        if field_names:
+            return field_names    
     
     
     class Meta:
-        # ordering  = ['-post_date']
+
+          
         model = Post
         fields = (
                   'id',
                   'post_title',
                   'post_date',
                   'photo_url',
+                  'owner',
                   'category',
+                  'place',
                   'tags',
                   )
+        extra_kwargs = {'tags':{'required': False}}
 
 class TagsSerializer(serializers.ModelSerializer):
   

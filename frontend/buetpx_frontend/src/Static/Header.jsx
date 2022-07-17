@@ -42,7 +42,7 @@ function Header () {
 
   return (
     <div>
-    <AppBar position="fixed">
+    <AppBar position="absolute">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <CameraOutlinedIcon 
