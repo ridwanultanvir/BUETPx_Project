@@ -23,7 +23,8 @@ import {
   Switch,
   Route,
   Link,
-  useParams
+  useParams,
+  useNavigate
 } from "react-router-dom";
 import CommentCard from './CommentCard';
 
@@ -106,13 +107,22 @@ const  Post=()=>{
           // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [post_owner]);
 
+      const navigate = useNavigate();
+      const navigateToSpecificTag = () => {
+        // 👇️ navigate to /contacts
+        navigate('/Discover');
+      };
+
     const getTag = tag => {
 
         return (
         
-            <Button variant="outlined" color="primary" sx={{
-              marginRight:2
-            }}>   {tag} </Button>
+          <Button variant="outlined" color="primary" sx={{
+            marginRight:2
+          }} onClick={() => {navigateToSpecificTag(); console.log(tag); }}>   
+          {tag} 
+          
+          </Button>
         );
     };
 

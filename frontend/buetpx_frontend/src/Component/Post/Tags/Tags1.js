@@ -130,8 +130,38 @@ const  Tags=()=>{
     return (
         <Grid container direction='column' spacing={2}>
             <Grid item>
-              Hello
+            <Header/>
             </Grid>
+     
+            <Grid container spacing={2} marginLeft={4} >
+
+    
+                <Grid container item xs={12} >
+                <Grid item xs={12}>
+                    <ButtonBase sx={{ width: '90%', maxHeight: '100%',maxWidth:'1080px' }}>
+                        <Img src={photo_url} alt='1.jpg'/>
+                    </ButtonBase>
+                    
+                </Grid>  
+                
+                
+                {/* 4th row */}
+                <Grid item container sx={{marginTop:2}}>
+                <Grid item xs={1.5} >
+                        
+                        Tags
+
+                </Grid>
+                <Grid item xs={10.5} >{tags?.map(tag => getTag(tag))}</Grid>
+                
+                
+                </Grid>
+
+                </Grid>            
+
+            </Grid>
+
+        {/* etar baire header contianer */}
         </Grid>  
                         
     
