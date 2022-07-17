@@ -10,6 +10,7 @@ urlpatterns = [
     # path ('api/categories/<name>/posts', views.get_post_by_categoryname),
     path ('api/posts', views.post_list),
 	path ('api/posts_with_tagid/<id>', views.get_post_by_tagid),
+    path ('api/posts_by_tagname/<tagname>', views.post_list_by_tagname),
  
 	path ('api/posts_by_cat/<catname>', views.post_list_by_catname),
 

@@ -53,3 +53,8 @@ Post e : Tags ManyToMany Filter ; so
 https://stackoverflow.com/questions/2218327/django-manytomany-filter
 
 posts = Post.objects.filter(tags__in = id)  simple
+
+posts = posts.filter(tags__name=tagname) : works ok 
+
+
+##
