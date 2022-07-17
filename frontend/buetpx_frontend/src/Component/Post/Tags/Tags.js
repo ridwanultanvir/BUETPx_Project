@@ -43,25 +43,22 @@ const  Tags=()=>{
 
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [post, setpost] = useState([]);  
-    const [comments, setcomments] = useState([]);
-    const [post_owner, setowner] = useState([]);
+    const [posts, setposts] = useState([]); 
+    const  [tag, setTag] = useState([]); 
+
     
-    const { id } = useParams();
-    const navigate = useNavigate();
-    const navigateToSpecificTag = () => {
-      // 👇️ navigate to /contacts
-      navigate('/Discover');
-    };
+    const { tagname } = useParams();
+
 
     useEffect(() => {
-        fetch("http://localhost:8000/api/posts_with_uid/"+id)
+        fetch("http://localhost:8000/api/posts_by_tagname/"+tagname)
           .then(res => res.json())
           .then(
             (result) => {
               setIsLoaded(true);
-              setpost(result);
+              setposts(result);
             },
+            // setTag(tagname), 
             // Note: it's important to handle errors here
             // instead of a catch() block so that we don't swallow
             // exceptions from actual bugs in components.
@@ -70,67 +67,25 @@ const  Tags=()=>{
               setError(error);
             }
           )
-      }, []);
+      }, [tagname]);
       
-      const {post_title,post_date,photo_url,owner,category,place,tags}=post;
-      // console.log(post_title);
-      useEffect(() => {
-        fetch("http://localhost:8000/api/user/"+owner)
-          .then(res => res.json())
-          .then(
-            (result) => {
-              setIsLoaded(true);
-              setowner(result);
-            },
-            // Note: it's important to handle errors here
-            // instead of a catch() block so that we don't swallow
-            // exceptions from actual bugs in components.
-            (error) => {
-              setIsLoaded(true);
-              setError(error);
-            }
-          )
-          // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, [post]);
+      
 
-      useEffect(() => {
-        fetch("http://localhost:8000/api/posts/"+id+"/comments")
-          .then(res => res.json())
-          .then(
-            (result) => {
-              setIsLoaded(true);
-              setcomments(result);
-            },
-            // Note: it's important to handle errors here
-            // instead of a catch() block so that we don't swallow
-            // exceptions from actual bugs in components.
-            (error) => {
-              setIsLoaded(true);
-              setError(error);
-            }
-          )
-          // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, [post_owner]);
-
-    const getTag = tag => {
-
+      const getPost = post => {
         return (
-        
-            <Button variant="outlined" color="primary" sx={{
-              marginRight:2
-            }} onClick={() => {navigateToSpecificTag(); console.log(tag); }}>   
-            {tag} 
-            
-            </Button>
-        );
-    };
+            <h1> {post.post_title}</h1>
 
+    
+    
+        );
+      };
 
 
     return (
         <Grid container direction='column' spacing={2}>
             <Grid item>
-              Hello
+              TagName: {tagname}
+              {posts.map(post => getPost(post))}
             </Grid>
         </Grid>  
                         
