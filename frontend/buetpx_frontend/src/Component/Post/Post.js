@@ -108,9 +108,9 @@ const  Post=()=>{
       }, [post_owner]);
 
       const navigate = useNavigate();
-      const navigateToSpecificTag = () => {
+      const navigateToSpecificTag = (tag_name) => {
         // 👇️ navigate to /contacts
-        navigate('/Discover');
+        navigate('/tags_posts/'+tag_name);
       };
 
     const getTag = tag => {

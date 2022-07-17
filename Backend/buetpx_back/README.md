@@ -52,4 +52,4 @@ https://bobbyhadz.com/blog/react-onclick-redirect
 Post e : Tags ManyToMany Filter ; so 
 https://stackoverflow.com/questions/2218327/django-manytomany-filter
 
-related_name='posts'
+posts = Post.objects.filter(tags__in = id)  simple
