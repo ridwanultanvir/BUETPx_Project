@@ -50,6 +50,7 @@ class PlaceSerializer(serializers.ModelSerializer):
 
  
 class PostSerializer(serializers.ModelSerializer):
+  
     owner =UserAccountSerializer()
     # owner = serializers.SlugRelatedField(read_only=True, slug_field='name' )
     # print("*******************This is owner*********************")
@@ -68,6 +69,7 @@ class PostSerializer(serializers.ModelSerializer):
     
     class Meta:
         # ordering  = ['-post_date']
+        ordering = ['-category']
         model = Post
         fields = (
                   'id',
