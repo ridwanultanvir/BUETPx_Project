@@ -43,20 +43,22 @@ const  Tags=()=>{
 
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [post, setpost] = useState([]);  
+    const [posts, setposts] = useState([]); 
+    const  [tag, setTag] = useState([]); 
 
     
-    const { id } = useParams();
+    const { tagname } = useParams();
 
 
     useEffect(() => {
-        fetch("http://localhost:8000/api/posts_with_tagid/"+id)
+        fetch("http://localhost:8000/api/posts_with_tagid/"+3)
           .then(res => res.json())
           .then(
             (result) => {
               setIsLoaded(true);
-              setpost(result);
+              setposts(result);
             },
+            // setTag(tagname), 
             // Note: it's important to handle errors here
             // instead of a catch() block so that we don't swallow
             // exceptions from actual bugs in components.
@@ -65,17 +67,25 @@ const  Tags=()=>{
               setError(error);
             }
           )
-      }, [id]);
+      }, [tagname]);
       
       
 
+      const getPost = post => {
+        return (
+            <h1> {post.post_title}</h1>
 
+    
+    
+        );
+      };
 
 
     return (
         <Grid container direction='column' spacing={2}>
             <Grid item>
-              Hello
+              TagName: {tagname}
+              {posts.map(post => getPost(post))}
             </Grid>
         </Grid>  
                         
