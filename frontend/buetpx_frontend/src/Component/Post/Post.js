@@ -119,7 +119,7 @@ const  Post=()=>{
         
           <Button variant="outlined" color="primary" sx={{
             marginRight:2
-          }} onClick={() => {navigateToSpecificTag(); console.log(tag); }}>   
+          }} onClick={() => {navigateToSpecificTag(tag); console.log(tag); }}>   
           {tag} 
           
           </Button>
