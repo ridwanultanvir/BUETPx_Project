@@ -27,77 +27,47 @@ import Time from 'react-time-format';
 //     }
 // }));
 
-class TagCard extends Component{
-  constructor(props) {
-      super(props);
-      this.state = {
-        error: null,
-        isLoaded: false,
-        // userId: props.owner,
-        userName: "",
-      };
-      this.props=props;
-    }
-     
+const TagCard  = props => {
+  
+    const {id,post_title,post_date,photo_url} = props;
+    const date = new Date(post_date);
 
-      
-      render()
-      {
-        const {id,post_title,post_date,photo_url,owner,category,place,tags}=this.props
-        let date=post_date
-        // const {title}=props
-        // eslint-disable-next-line react-hooks/rules-of-hooks
+    const day = date.getDate();
+    const year = date.getFullYear();
 
-        return (
-            
-          // <Card className={classes.Card}>
-            <Card >
-            
-            <CardHeader
-            avatar={<IconButton href="\"><Avatar alt={owner.name} src={owner.photo_url} /></IconButton>}
+
+
+
+    return (
+        <Card sx={{ maxWidth: 345 }}>
+          <CardHeader
+            // avatar={
+            //   <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+            //     A
+            //   </Avatar>
+            // }
             // action={
             //   <IconButton aria-label="settings">
-             
+            //     <MoreVertIcon />
             //   </IconButton>
             // }
-            title={<Typography
-            // variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'revert-layer',
-              fontWeight: 500,
-              // letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            {owner.name}
-          </Typography>}
-            subheader={
-              // date
-            <Time value={date} format="YYYY-MM-DD HH:mm"/>
-          }
-    
+            title={post_title}
+            // subheader={dateString}
           />
-    
-        <CardActionArea href={"/posts/"+id}>
           <CardMedia
             component="img"
+            height="194"
             image={photo_url}
-            height='300'
+            alt="Image"
+          >
             
-            width='100%'
-            objectFit='cover'
-            alt={photo_url}
-            // className={classes.Media}
-          />
-           </CardActionArea>
-    
-            <CardActions>
+            </CardMedia>
+          {/* <CardContent>
+            <Typography variant="body2" color="text.secondary">
+              Natural Baeuty
+            </Typography>
+          </CardContent> */}
+           <CardActions>
                 <Grid container>
                     <Grid item xs={.5} />
                     <Grid item xs={8} >{post_title}</Grid>
@@ -108,12 +78,21 @@ class TagCard extends Component{
                 </Grid>
               
             </CardActions>
-          </Card>
-        );
-      }
-
-
+          {/* <CardActions disableSpacing> */}
+            
+            {/* share icon */}
+            {/* <IconButton aria-label="share">
+              <ShareIcon />
+            </IconButton> */}
+           
+          {/* </CardActions> */}
+         
+        </Card>
+      );
 }
+
+
+
 // export default withStyles(useStyles)(TagCard);
 export default TagCard;
 

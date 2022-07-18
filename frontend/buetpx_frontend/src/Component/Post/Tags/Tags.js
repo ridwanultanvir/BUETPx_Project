@@ -15,7 +15,7 @@ import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
 import {Typography} from '@mui/material';
 import ButtonBase from '@mui/material/ButtonBase';
 import { styled } from '@mui/material/styles';
-
+import TagCard  from './TagCard';
 import {useState, useEffect} from "react";
 
 import {
@@ -71,6 +71,19 @@ const  Tags=()=>{
       
       
 
+      const getPost1 = post => {
+        return (
+          <Grid item 
+          xs={12} sm={6} md={6} lg={4}
+           >
+           <TagCard {...post} />
+           </Grid>
+
+    
+    
+        );
+      };
+
       const getPost = post => {
         return (
             <h1> {post.post_title}</h1>
@@ -79,6 +92,7 @@ const  Tags=()=>{
     
         );
       };
+
 
 
     return (
@@ -103,7 +117,7 @@ const  Tags=()=>{
         <Grid item xs={12} sm={10} >
                 <Grid container spacing={2}>
             
-                         {posts.map(post => getPost(post))}    
+                         {posts.map(post => getPost1(post))}    
                 </Grid>
         </Grid>
 
