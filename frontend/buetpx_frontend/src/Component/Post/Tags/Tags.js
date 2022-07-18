@@ -82,12 +82,38 @@ const  Tags=()=>{
 
 
     return (
-        <Grid container direction='column' spacing={2}>
-            <Grid item>
-              TagName: {tagname}
-              {posts.map(post => getPost(post))}
-            </Grid>
-        </Grid>  
+        // <Grid container direction='column' spacing={2}>
+        //     <Grid item>
+        //       TagName: {tagname}
+        //       {posts.map(post => getPost(post))}
+        //     </Grid>
+        // </Grid>  
+
+      <Grid container direction='column'>
+      <Grid item>
+      <Header/>
+      </Grid>
+
+
+      <Grid item container>
+        <Grid item xs={0} sm={1}>
+
+        </Grid>
+
+        <Grid item xs={12} sm={10} >
+                <Grid container spacing={2}>
+            
+                         {posts.map(post => getPost(post))}    
+                </Grid>
+        </Grid>
+
+        <Grid item xs={0} sm={1} >
+
+        </Grid>
+      
+
+      </Grid>
+  </Grid>
                         
     
     );
