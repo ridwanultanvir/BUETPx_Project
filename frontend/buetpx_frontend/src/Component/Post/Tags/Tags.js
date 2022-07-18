@@ -115,6 +115,27 @@ const  Tags=()=>{
         </Grid>
 
         <Grid item xs={12} sm={10} >
+                <Grid item> 
+                <Typography
+                        variant="h6"
+                        noWrap
+                        component="a"
+                        href=""
+                        sx={{
+                            mr: 2,
+                            display: { xs: 'none', md: 'flex' },
+                            fontFamily: 'revert-layer',
+                            fontWeight: 600,
+                            // letterSpacing: '.3rem',
+                            color: 'inherit',
+                            textDecoration: 'none',
+                        }}
+                        >
+                          <StyleOutlinedIcon sx={{marginRight:2}}/>
+                        Tag : {tagname}
+                        </Typography>
+                
+                </Grid>
                 <Grid container spacing={2}>
             
                          {posts.map(post => getPost1(post))}    
