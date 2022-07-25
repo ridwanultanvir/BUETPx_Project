@@ -10,6 +10,8 @@ dimensions = img.shape
 height = img.shape[0]
 width = img.shape[1]
 channels = img.shape[2]
+
+# channels = RGB erokom  koyta 
  
 print('Image Dimension    : ',dimensions)
 print('Image Height       : ',height)
