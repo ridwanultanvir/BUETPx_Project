@@ -11,11 +11,11 @@ from buetpx.serializers import LikeSerializer,CommentSerializer, CommentSerializ
 from buetpx.serializers import PostSerializer2, LikeSerializer2
 from rest_framework.decorators import api_view
 from django.db.models import Count
-
+import json
 
 # notun add korsi 
 from django.db.models.query import QuerySet
-
+from django.http import HttpResponse
 
 
 @api_view(['GET', 'POST', 'DELETE'])
@@ -234,9 +234,14 @@ def get_likes_by_postid(request,postid):
         #         .order_by()
         #     )           
         print(type(num_likes))  
-        print("likes:", num_likes)  
-        like_serializer = LikeSerializer(likes,many = True)
-        return JsonResponse(like_serializer.data, safe=False)
+        print("likes:", num_likes) 
+        
+        response_data = {}
+        response_data['num_likes'] = num_likes
+        
+   
+        # like_serializer = LikeSerializer(likes,many = True)
+        return JsonResponse(response_data, safe=False)
 
 
 @api_view(['Get'])
