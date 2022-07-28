@@ -6,6 +6,7 @@ from buetpx.models import Place
 from buetpx.models import Tags
 from buetpx.models import Category
 from buetpx.models import Comment
+from buetpx.models import Like
 from buetpx.models import UserAccount
 
  
@@ -171,6 +172,29 @@ class CommentSerializer(serializers.ModelSerializer):
               'user'
               )
 
+
+class LikeSerializer(serializers.ModelSerializer):
+  
+  user = serializers.SlugRelatedField(read_only=True, slug_field='name' )
+  
+  num_likes = serializers.SerializerMethodField()
+
+  def get_num_likes(self, obj):
+    try:
+        return obj.num_likes
+    except:
+        return None
+  
+  class Meta:
+
+    ordering = ['-id']
+    model = Like
+    fields = ('id',
+              'post',
+              'user',
+              'like_date',
+              'num_likes'
+              )
 
 
 # category; tag; location; comment; (num of like); 
