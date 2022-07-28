@@ -173,13 +173,6 @@ class CommentSerializer(serializers.ModelSerializer):
               )
 
 
-class LikeSerializer2(serializers.ModelSerializer):
-  class Meta:
-
-    
-    fields = ('num_likes'
-              )
-
 class LikeSerializer(serializers.ModelSerializer):
   
   user = serializers.SlugRelatedField(read_only=True, slug_field='name' )
