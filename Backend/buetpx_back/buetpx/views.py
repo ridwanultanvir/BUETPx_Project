@@ -213,7 +213,21 @@ def get_comments_by_postid(request,postid):
 
 @api_view(['Get'])
 
-def get_likes_by_postid(request,postid):
+def get_num_likes_by_postid(request,postid):
+    
+    if request.method == 'GET':       
+
+        num_likes = Like.objects.filter(post=postid).count()
+        print("likes:", num_likes)         
+        response_data = {}
+        response_data['num_likes'] = num_likes
+        return JsonResponse(response_data, safe=False)
+
+
+
+@api_view(['Get'])
+
+def get_likes_by_postid_prev(request,postid):
     
     if request.method == 'GET':
         likes = Like.objects.filter(post=postid)
