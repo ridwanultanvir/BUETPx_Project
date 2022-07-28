@@ -27,16 +27,17 @@ import {
   useNavigate
 } from "react-router-dom";
 import CommentCard from './CommentCard';
-
+import Time from 'react-time-format'
 const Img = styled('img')({
   margin: 'auto',
   display: 'block',
   maxWidth: '100%',
-  height: 500,
+  maxHeight: 500,
   alignContent:'left'
 });
-// import Time from 'react-time-format'
+
 // import Moment from 'react-moment';
+
 
 
 const  Post=()=>{
@@ -352,7 +353,7 @@ const  Post=()=>{
                         </Typography>
 
                 </Grid>
-                <Grid item xs={10.5} >{post_date}</Grid>
+                <Grid item xs={10.5} ><Time value={post_date} format="YYYY-MM-DD HH:mm"/></Grid>
                 
                 
                 </Grid>
