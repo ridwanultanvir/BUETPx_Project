@@ -176,6 +176,15 @@ class CommentSerializer(serializers.ModelSerializer):
 class LikeSerializer(serializers.ModelSerializer):
   
   user = serializers.SlugRelatedField(read_only=True, slug_field='name' )
+  
+  num_likes = serializers.SerializerMethodField()
+
+  def get_num_likes(self, obj):
+    try:
+        return obj.num_likes
+    except:
+        return None
+  
   class Meta:
 
     ordering = ['-id']
@@ -183,7 +192,8 @@ class LikeSerializer(serializers.ModelSerializer):
     fields = ('id',
               'post',
               'user',
-              'like_date'
+              'like_date',
+              'num_likes'
               )
 
 

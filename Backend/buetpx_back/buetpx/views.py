@@ -222,7 +222,7 @@ def get_likes_by_postid(request,postid):
         # likes.group_by = ['post']
         # likes = QuerySet(query=likes, model=Like)
         # pubs = Publisher.objects.annotate(num_books=Count('book'))
-        q = likes.annotate(Count('post'))
+        q = likes.annotate(num_likes=Count('post'))
         # likes = (Like.objects
         #         .values('post')
         #         .annotate(dcount=Count('post'))
