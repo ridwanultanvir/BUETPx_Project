@@ -11,8 +11,8 @@ urlpatterns = [
     path ('api/posts', views.post_list),
 	
 	path ('api/posts_by_cat/<catname>', views.post_list_by_catname),
-
     path ('api/posts/<id>', views.get_post_by_id),
+  
     path ('api/places/<id>', views.get_place_by_id),
     path ('api/post_detail', views.post_detail),
     path ('api/posts/<catname>', views.post_list_by_catname),
