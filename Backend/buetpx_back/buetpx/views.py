@@ -10,6 +10,11 @@ from buetpx.models import Tutorial,Post,Comment,UserAccount,Tags, Category,Place
 from buetpx.serializers import LikeSerializer,CommentSerializer, CommentSerializer2, TutorialSerializer,PostSerializer,PlaceSerializer,UserAccountSerializer,CategorySerializer
 from buetpx.serializers import PostSerializer2
 from rest_framework.decorators import api_view
+from django.db.models import Count
+
+
+# notun add korsi 
+from django.db.models.query import QuerySet
 
 
 
@@ -211,7 +216,16 @@ def get_comments_by_postid(request,postid):
 def get_likes_by_postid(request,postid):
     
     if request.method == 'GET':
-        likes = Like.objects.filter(post=postid)               
+        # likes = Like.objects.filter(post=postid)
+        # results = Members.objects.raw('SELECT * FROM myapp_members GROUP BY designation')  
+        likes = Like.objects.all().query
+        likes.group_by = ['post']
+        likes = QuerySet(query=likes, model=Like)
+        # likes = (Like.objects
+        #         .values('post')
+        #         .annotate(dcount=Count('post'))
+        #         .order_by()
+        #     )               
         like_serializer = LikeSerializer(likes,many = True)
         return JsonResponse(like_serializer.data, safe=False)
 
