@@ -13,3 +13,8 @@ pip install django-cors-headers
 
 # for each of the apps
 yarn add @mui/styles @mui/material @mui/icon-material 
+
+npm install axios --save
+# to resolve version conflict
+npm config set legacy-peer-deps true
+npm i
