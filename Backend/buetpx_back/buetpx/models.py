@@ -76,7 +76,23 @@ class Post(models.Model):
         )
     def __str__(self):
         return self.post_title
+
+# Like er respect e : # of likes in this post 
+class Like(models.Model):
+    post = models.ForeignKey(
+            Post,
+            on_delete=models.CASCADE,
+            related_name='likes'
+    )  
+    user = models.ForeignKey(
+            UserAccount,
+            on_delete= models.CASCADE,
+            related_name='likes'
+    )
+    like_date = models.DateTimeField(auto_now_add=True)
     
+    
+
     
 # comment entity
 class Comment(models.Model):

@@ -6,8 +6,8 @@ from django.http.response import JsonResponse
 from rest_framework.parsers import JSONParser 
 from rest_framework import status
  
-from buetpx.models import Tutorial,Post,Comment,UserAccount,Tags, Category,Place
-from buetpx.serializers import CommentSerializer, CommentSerializer2, TutorialSerializer,PostSerializer,PlaceSerializer,UserAccountSerializer,CategorySerializer
+from buetpx.models import Tutorial,Post,Comment,UserAccount,Tags, Category,Place, Like
+from buetpx.serializers import LikeSerializer,CommentSerializer, CommentSerializer2, TutorialSerializer,PostSerializer,PlaceSerializer,UserAccountSerializer,CategorySerializer
 from buetpx.serializers import PostSerializer2
 from rest_framework.decorators import api_view
 
@@ -204,6 +204,17 @@ def get_comments_by_postid(request,postid):
         comments = Comment.objects.filter(post=postid)               
         comment_serializer = CommentSerializer(comments,many = True)
         return JsonResponse(comment_serializer.data, safe=False)
+    
+
+@api_view(['Get'])
+
+def get_likes_by_postid(request,postid):
+    
+    if request.method == 'GET':
+        likes = Like.objects.filter(post=postid)               
+        like_serializer = LikeSerializer(likes,many = True)
+        return JsonResponse(like_serializer.data, safe=False)
+
 
 @api_view(['Get'])
 
