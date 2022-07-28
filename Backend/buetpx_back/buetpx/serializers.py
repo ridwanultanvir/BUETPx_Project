@@ -156,6 +156,19 @@ class PlaceSerializer(serializers.ModelSerializer):
               'posts',
               )
 
+# user_id  = je comment korse 
+class ReactionSerializer(serializers.ModelSerializer):
+  
+  post = serializers.SlugRelatedField(read_only=True, slug_field='post_title' )
+  class Meta:
+
+    ordering = ['-id']
+    model = Comment
+    fields = ('id',
+              'comment_txt',
+              'comment_date',
+              'post'
+              )
 
 # user_id  = je comment korse 
 class CommentSerializer(serializers.ModelSerializer):

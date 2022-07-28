@@ -99,7 +99,20 @@ class Comment(models.Model):
 
 
 
-
+class reaction(models.Model):
+    
+    reaction_date = models.DateTimeField(auto_now_add=True)
+    post = models.ForeignKey(
+            Post,
+            on_delete=models.CASCADE,
+            related_name='reactions'
+    )
+    user = models.ForeignKey(
+            UserAccount,
+            on_delete= models.CASCADE,
+            related_name='reactions'
+    )
+    
     
 
 # class Gallery(models.Model):
