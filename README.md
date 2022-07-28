@@ -2,8 +2,8 @@
 ##
 buetpx_frontend ==> react 
 
-* a new page added
-![](img/Screenshot%20(325).png)
+* Speicfic Tag Posts showing 
+![](img/Screenshot%20(354).png)
 
 ##
 
