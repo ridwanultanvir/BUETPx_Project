@@ -216,17 +216,19 @@ def get_comments_by_postid(request,postid):
 def get_likes_by_postid(request,postid):
     
     if request.method == 'GET':
-        # likes = Like.objects.filter(post=postid)
+        likes = Like.objects.filter(post=postid)
         # results = Members.objects.raw('SELECT * FROM myapp_members GROUP BY designation')  
-        likes = Like.objects.all().query
-        likes.group_by = ['post']
-        likes = QuerySet(query=likes, model=Like)
+        # likes = Like.objects.all().query
+        # likes.group_by = ['post']
+        # likes = QuerySet(query=likes, model=Like)
+        # pubs = Publisher.objects.annotate(num_books=Count('book'))
+        q = likes.annotate(Count('post'))
         # likes = (Like.objects
         #         .values('post')
         #         .annotate(dcount=Count('post'))
         #         .order_by()
         #     )               
-        like_serializer = LikeSerializer(likes,many = True)
+        like_serializer = LikeSerializer(q,many = True)
         return JsonResponse(like_serializer.data, safe=False)
 
 
