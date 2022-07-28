@@ -8,7 +8,7 @@ from rest_framework import status
  
 from buetpx.models import Tutorial,Post,Comment,UserAccount,Tags, Category,Place, Like
 from buetpx.serializers import LikeSerializer,CommentSerializer, CommentSerializer2, TutorialSerializer,PostSerializer,PlaceSerializer,UserAccountSerializer,CategorySerializer
-from buetpx.serializers import PostSerializer2
+from buetpx.serializers import PostSerializer2, LikeSerializer2
 from rest_framework.decorators import api_view
 from django.db.models import Count
 
@@ -218,17 +218,24 @@ def get_likes_by_postid(request,postid):
     if request.method == 'GET':
         likes = Like.objects.filter(post=postid)
         # results = Members.objects.raw('SELECT * FROM myapp_members GROUP BY designation')  
+        
+        # count = Entry.objects.filter(headline__contains='Lennon').count()
+        num_likes = Like.objects.filter(post=postid).count()
+        # another ===
         # likes = Like.objects.all().query
         # likes.group_by = ['post']
         # likes = QuerySet(query=likes, model=Like)
+        # another ===
         # pubs = Publisher.objects.annotate(num_books=Count('book'))
-        q = likes.annotate(num_likes=Count('post'))
+        likes = likes.annotate(num_likes=Count('post'))
         # likes = (Like.objects
         #         .values('post')
         #         .annotate(dcount=Count('post'))
         #         .order_by()
-        #     )               
-        like_serializer = LikeSerializer(q,many = True)
+        #     )           
+        print(type(num_likes))  
+        print("likes:", num_likes)  
+        like_serializer = LikeSerializer(likes,many = True)
         return JsonResponse(like_serializer.data, safe=False)
 
 
