@@ -6,11 +6,17 @@ from django.http.response import JsonResponse
 from rest_framework.parsers import JSONParser 
 from rest_framework import status
  
-from buetpx.models import Tutorial,Post,Comment,UserAccount,Tags, Category,Place
-from buetpx.serializers import CommentSerializer, CommentSerializer2, TutorialSerializer,PostSerializer,PlaceSerializer,UserAccountSerializer,CategorySerializer
-from buetpx.serializers import PostSerializer2
+from buetpx.models import Tutorial,Post,Comment,UserAccount,Tags, Category,Place, Like
+from buetpx.serializers import LikeSerializer,CommentSerializer, CommentSerializer2, TutorialSerializer,PostSerializer,PlaceSerializer,UserAccountSerializer,CategorySerializer
+from buetpx.serializers import PostSerializer2, CommentInsertSerializer
 from rest_framework.decorators import api_view
 
+from django.db.models import Count
+import json
+
+# notun add korsi 
+from django.db.models.query import QuerySet
+from django.http import HttpResponse
 
 
 @api_view(['GET', 'POST', 'DELETE'])
@@ -94,7 +100,20 @@ def post_detail(request):
         posts_serializer = PostSerializer(posts, many=True)
         return JsonResponse(posts_serializer.data, safe=False)
         
-  
+
+# json field server accept 
+@api_view(['POST'])
+def insert_comment(request):
+   
+    if request.method == 'POST':
+        
+        comment_data = JSONParser().parse(request)
+        comment_serializer = CommentInsertSerializer(data=comment_data)
+
+        if comment_serializer.is_valid():
+                comment_serializer.save()
+                return JsonResponse(comment_serializer.data, status=status.HTTP_201_CREATED) 
+        return JsonResponse(comment_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'POST'])
 def post_list(request):
@@ -204,6 +223,54 @@ def get_comments_by_postid(request,postid):
         comments = Comment.objects.filter(post=postid)               
         comment_serializer = CommentSerializer(comments,many = True)
         return JsonResponse(comment_serializer.data, safe=False)
+    
+
+@api_view(['Get'])
+
+def get_num_likes_by_postid(request,postid):
+    
+    if request.method == 'GET':       
+
+        num_likes = Like.objects.filter(post=postid).count()
+        print("likes:", num_likes)         
+        response_data = {}
+        response_data['num_likes'] = num_likes
+        return JsonResponse(response_data, safe=False)
+
+
+
+@api_view(['Get'])
+
+def get_likes_by_postid_prev(request,postid):
+    
+    if request.method == 'GET':
+        likes = Like.objects.filter(post=postid)
+        # results = Members.objects.raw('SELECT * FROM myapp_members GROUP BY designation')  
+        
+        # count = Entry.objects.filter(headline__contains='Lennon').count()
+        num_likes = Like.objects.filter(post=postid).count()
+        # another ===
+        # likes = Like.objects.all().query
+        # likes.group_by = ['post']
+        # likes = QuerySet(query=likes, model=Like)
+        # another ===
+        # pubs = Publisher.objects.annotate(num_books=Count('book'))
+        likes = likes.annotate(num_likes=Count('post'))
+        # likes = (Like.objects
+        #         .values('post')
+        #         .annotate(dcount=Count('post'))
+        #         .order_by()
+        #     )           
+        print(type(num_likes))  
+        print("likes:", num_likes) 
+        
+        response_data = {}
+        response_data['num_likes'] = num_likes
+        
+   
+        # like_serializer = LikeSerializer(likes,many = True)
+        return JsonResponse(response_data, safe=False)
+
 
 @api_view(['Get'])
 
