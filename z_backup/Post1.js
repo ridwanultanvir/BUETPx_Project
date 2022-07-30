@@ -1,6 +1,6 @@
 import React from 'react';
 import {Avatar, Grid} from "@mui/material";
-import Header from '../../Static/Header';
+import Header from '../frontend/buetpx_frontend/src/Static/Header';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import CommentIcon from '@mui/icons-material/Comment';
 import {IconButton} from '@mui/material';
@@ -25,7 +25,7 @@ import {
   Link,
   useParams
 } from "react-router-dom";
-import CommentCard from './CommentCard';
+import CommentCard from '../frontend/buetpx_frontend/src/Component/Post/CommentCard';
 
 const Img = styled('img')({
   margin: 'auto',

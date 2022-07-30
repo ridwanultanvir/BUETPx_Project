@@ -16,6 +16,8 @@ class Body extends Component{
 
       componentDidMount() {
         fetch("http://127.0.0.1:8000/api/posts",
+        // fetch("http://127.0.0.1:8000/api/getposts",
+
         {
             method: "GET", // *Type of request GET, POST, PUT, DELETE
             mode: "cors", // Type of mode of the request

@@ -1,5 +1,4 @@
 from unicodedata import category
-# from bs4 import Tag
 from django.shortcuts import render
 from django.http.response import JsonResponse
 # from Backend.buetpx_back.buetpx.models import Place

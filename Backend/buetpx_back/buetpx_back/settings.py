@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 	'rest_framework',
     'buetpx.apps.BuetpxConfig',
+    'post.apps.PostConfig',
     'corsheaders',
 ]
 REST_FRAMEWORK = {

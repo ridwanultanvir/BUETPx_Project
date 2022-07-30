@@ -8,7 +8,7 @@ import Post from "./Component/Post/Post";
 import Tags from "./Component/Post/Tags/Tags";
 import Discover from "./Component/Discover/Discover"; 
 import ShowFilteredResult from "./Component/Discover/ShowFilteredResult";
-import Upload from "./Component/Photo_Upload/Upload_page"
+import Upload from "./Component/Upload/Upload"
 
 
 
