@@ -85,6 +85,7 @@ class PostSerializer(serializers.ModelSerializer):
 
 class PostSerializer2(serializers.ModelSerializer):
     category = serializers.SlugRelatedField(read_only=True, slug_field='name' )
+    owner = serializers.SlugRelatedField(read_only=True, slug_field='name' )
     place = serializers.SlugRelatedField(read_only=True, slug_field='name' )
     tags = serializers.StringRelatedField(many=True, read_only=True)
     def get_field_names(self, *args, **kwargs):

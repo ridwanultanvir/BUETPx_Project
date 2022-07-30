@@ -11,6 +11,7 @@ urlpatterns = [
     # path ('discover/categories/<name>/posts', views.get_post_by_categoryname),
 	path ('discover/posts_by_cat/<catname>', views.post_list_by_catname),
 	path ('discover/newest_posts/', views.get_newest_posts),
+    path ('discover/search/<list>', views.get_search_result),
 
 
     

@@ -2,6 +2,7 @@ from unicodedata import category
 # from bs4 import Tag
 from django.shortcuts import render
 from django.http.response import JsonResponse
+from django.db.models import Q
 # from Backend.buetpx_back.buetpx.models import Place
 from rest_framework.parsers import JSONParser 
 from rest_framework import status
@@ -55,24 +56,6 @@ def get_post_by_categories(request,list):
 
         post_serializer = PostSerializer(posts, many=True)
         return JsonResponse(post_serializer.data, safe=False)
-
-@api_view(['Get'])
-
-def get_post_by_categorylist(request,list):
-    
-    my_list = list.split(",")
-
-    post_serializer_all = []
-    if request.method == 'GET':
-        for list_id in my_list:
-         
-            posts = Post.objects.filter(category=list_id) 
-                          
-            post_serializer = PostSerializer(posts,many = True)
-       
-            post_serializer_all.append(post_serializer.data)
-            
-        return JsonResponse(post_serializer_all, safe=False)
 
 
 @api_view(['Get'])
@@ -131,3 +114,68 @@ def get_user_by_id(request,id):
 
 
 
+# get search result
+@api_view(['GET'])
+def get_search_result(request,list):
+    
+    my_list = list.split("&")
+    option = my_list[0]
+    keyword = my_list[1]
+    # convert to lower case
+    option = option.lower()
+    keyword = keyword.lower()
+    
+    print(keyword)
+    
+    
+    # id = Place.objects.only('id').get(name='Azimpur').id
+    # print("id: ",id)
+    
+    # get posts by place id
+    if option == 'location':
+        # if name contains keyword
+
+        name_filter = Q(name__iexact=keyword)
+        location = Place.objects.filter(name_filter)
+        
+        # print loc type
+        print(type(location))
+        if len(location) == 0:
+            return JsonResponse({"message":"No result found"}, status=status.HTTP_404_NOT_FOUND)
+       
+        # get id of location
+        id = location[0].id
+        print("location_id: ")
+        print(id)
+        posts = Post.objects.filter(place=id)
+    elif option == 'photographer':
+        # name_filter = Q(name__iexact=keyword)
+        # photographer = UserAccount.objects.filter(name=keyword)
+        # search by name if name contains keyword
+
+        name_filter = Q(name__icontains=keyword)
+        photographer = UserAccount.objects.filter(name_filter)
+        # photographer = UserAccount.objects.filter(name__iexact=keyword,__name__icontains=keyword)
+        # print loc type
+        print(type(photographer))
+        if len(photographer) == 0:
+            return JsonResponse({"message":"No result found"}, status=status.HTTP_404_NOT_FOUND)
+        # get id of location
+        pid = photographer[0].id
+        print("photographer: ")
+        print(pid)
+        posts = Post.objects.filter(owner=pid)
+
+    elif option == 'tag':
+        posts = Post.objects.filter(tags__name=keyword)
+
+
+    # print("posts: ",posts)/
+
+    post_serializer = PostSerializer(posts, many=True)
+    return JsonResponse(post_serializer.data, safe=False)
+    
+
+
+# id = Place.objects.only('id').get(name='Azimpur').id
+            # print("id: ",id)
