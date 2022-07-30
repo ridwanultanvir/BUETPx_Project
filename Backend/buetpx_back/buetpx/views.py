@@ -8,8 +8,9 @@ from rest_framework import status
  
 from buetpx.models import Tutorial,Post,Comment,UserAccount,Tags, Category,Place, Like
 from buetpx.serializers import LikeSerializer,CommentSerializer, CommentSerializer2, TutorialSerializer,PostSerializer,PlaceSerializer,UserAccountSerializer,CategorySerializer
-from buetpx.serializers import PostSerializer2
+from buetpx.serializers import PostSerializer2, CommentInsertSerializer
 from rest_framework.decorators import api_view
+
 from django.db.models import Count
 import json
 
@@ -99,7 +100,20 @@ def post_detail(request):
         posts_serializer = PostSerializer(posts, many=True)
         return JsonResponse(posts_serializer.data, safe=False)
         
-  
+
+# json field server accept 
+@api_view(['POST'])
+def insert_comment(request):
+   
+    if request.method == 'POST':
+        
+        comment_data = JSONParser().parse(request)
+        comment_serializer = CommentInsertSerializer(data=comment_data)
+
+        if comment_serializer.is_valid():
+                comment_serializer.save()
+                return JsonResponse(comment_serializer.data, status=status.HTTP_201_CREATED) 
+        return JsonResponse(comment_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'POST'])
 def post_list(request):
