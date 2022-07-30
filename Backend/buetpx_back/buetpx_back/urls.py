@@ -22,4 +22,5 @@ from django.conf.urls import  include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path ('', include('buetpx.urls')),
+    path ('', include('discover.urls')),
 ]
