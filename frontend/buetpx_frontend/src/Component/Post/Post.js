@@ -19,10 +19,6 @@ import { styled } from '@mui/material/styles';
 import {useState, useEffect} from "react";
 
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
   useParams,
   useNavigate
 } from "react-router-dom";
@@ -72,7 +68,9 @@ const  Post=()=>{
       const {post_title,post_date,photo_url,owner,category,place,tags}=post;
       // console.log(post_title);
       useEffect(() => {
-        fetch("http://localhost:8000/api/user/"+owner)
+        if(owner)
+        {
+          fetch("http://localhost:8000/api/user/"+owner)
           .then(res => res.json())
           .then(
             (result) => {
@@ -87,6 +85,7 @@ const  Post=()=>{
               setError(error);
             }
           )
+        }
           // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [post]);
 
@@ -145,32 +144,32 @@ const  Post=()=>{
         );
     };
 
-    const getTypographed=title=>
-    {
-      return(
-<Grid item xs={1.5} >
-                        <Typography
-                        variant="h6"
-                        noWrap
-                        component="a"
-                        href=""
-                        sx={{
-                            mr: 2,
-                            display: { xs: 'none', md: 'flex' },
-                            fontFamily: 'revert-layer',
-                            fontWeight: 600,
-                            // letterSpacing: '.3rem',
-                            color: 'inherit',
-                            textDecoration: 'none',
-                        }}
-                        >
-                          <LocationOnOutlinedIcon sx={{marginRight:2}}/>
-                        {title}
-                        </Typography>
+//     const getTypographed=title=>
+//     {
+//       return(
+// <Grid item xs={1.5} >
+//                         <Typography
+//                         variant="h6"
+//                         noWrap
+//                         component="a"
+//                         href=""
+//                         sx={{
+//                             mr: 2,
+//                             display: { xs: 'none', md: 'flex' },
+//                             fontFamily: 'revert-layer',
+//                             fontWeight: 600,
+//                             // letterSpacing: '.3rem',
+//                             color: 'inherit',
+//                             textDecoration: 'none',
+//                         }}
+//                         >
+//                           <LocationOnOutlinedIcon sx={{marginRight:2}}/>
+//                         {title}
+//                         </Typography>
 
-                </Grid>
-      );
-    }
+//                 </Grid>
+//       );
+//     }
 
     return (
         <Grid container direction='column' spacing={2}>
@@ -361,8 +360,10 @@ const  Post=()=>{
                         Time
                         </Typography>
 
-                </Grid>
+                </Grid>  
+                {/* toDateString() */}
                 <Grid item xs={10.5} ><Time value={post_date} format="YYYY-MM-DD HH:mm"/></Grid>
+                {/* <Grid item xs={10.5} >{post_date.toDateString()}</Grid> */}
                 
                 
                 </Grid>

@@ -9,7 +9,9 @@ import Post1 from "./Component/Post/Post1";
 import Tags from "./Component/Post/Tags/Tags";
 import Discover from "./Component/Discover/Discover"; 
 import ShowFilteredResult from "./Component/Discover/ShowFilteredResult";
-import Upload from "./Component/Photo_Upload/Upload_page"
+import Upload from "./Component/Upload/Upload";
+
+// import Upload from "./Component/Photo_Upload/Upload_page";
 import Explore from "./Component/Discover/Explore";
 
 
