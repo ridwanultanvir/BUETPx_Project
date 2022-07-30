@@ -86,6 +86,7 @@ class PostSerializer(serializers.ModelSerializer):
 
 class PostSerializer2(serializers.ModelSerializer):
     category = serializers.SlugRelatedField(read_only=True, slug_field='name' )
+    owner = serializers.SlugRelatedField(read_only=True, slug_field='name' )
     place = serializers.SlugRelatedField(read_only=True, slug_field='name' )
     tags = serializers.StringRelatedField(many=True, read_only=True)
     def get_field_names(self, *args, **kwargs):
@@ -157,6 +158,19 @@ class PlaceSerializer(serializers.ModelSerializer):
               'posts',
               )
 
+# user_id  = je comment korse 
+class ReactionSerializer(serializers.ModelSerializer):
+  
+  post = serializers.SlugRelatedField(read_only=True, slug_field='post_title' )
+  class Meta:
+
+    ordering = ['-id']
+    model = Comment
+    fields = ('id',
+              'comment_txt',
+              'comment_date',
+              'post'
+              )
 
 # user_id  = je comment korse 
 class CommentSerializer(serializers.ModelSerializer):

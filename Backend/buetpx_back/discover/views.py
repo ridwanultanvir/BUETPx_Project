@@ -1,6 +1,3 @@
-from django.shortcuts import render
-
-# Create your views here.
 from unicodedata import category
 # from bs4 import Tag
 from django.shortcuts import render
