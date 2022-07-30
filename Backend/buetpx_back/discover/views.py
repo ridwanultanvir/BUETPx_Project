@@ -1,3 +1,6 @@
+from django.shortcuts import render
+
+# Create your views here.
 from unicodedata import category
 # from bs4 import Tag
 from django.shortcuts import render
@@ -10,7 +13,7 @@ from rest_framework import status
 
 from buetpx.models import Tutorial,Post,Comment,UserAccount,Tags, Category,Place
 from buetpx.serializers import CommentSerializer, CommentSerializer2, TutorialSerializer,PostSerializer,PlaceSerializer,UserAccountSerializer,CategorySerializer
-# from buetpx.serializers import PostSerializer2
+from buetpx.serializers import PostSerializer2
 from rest_framework.decorators import api_view
 
 

@@ -1,4 +1,22 @@
 ##
+http://localhost:8000/api/comment_insert
+{
+  "id":8,
+  "comment_txt":"Good Pic 8th",
+  "comment_date":"2020-10-02 00:00:00+06",
+  "user":2,
+  "post":1
+}
+
+
+
+
+
+
+
+
+
+##
 
 Structured Way: 
 

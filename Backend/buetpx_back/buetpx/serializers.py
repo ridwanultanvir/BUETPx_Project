@@ -162,6 +162,7 @@ class PlaceSerializer(serializers.ModelSerializer):
 class CommentSerializer(serializers.ModelSerializer):
   
   user = serializers.SlugRelatedField(read_only=True, slug_field='name' )
+  
   class Meta:
 
     ordering = ['-id']
@@ -171,6 +172,22 @@ class CommentSerializer(serializers.ModelSerializer):
               'comment_date',
               'user'
               )
+
+
+
+class CommentInsertSerializer(serializers.ModelSerializer):
+   
+  
+  class Meta:
+
+    model = Comment
+    fields = ('id',
+              'comment_txt',
+              'comment_date',
+              'user',
+              'post'
+              )
+
 
 
 class LikeSerializer(serializers.ModelSerializer):
