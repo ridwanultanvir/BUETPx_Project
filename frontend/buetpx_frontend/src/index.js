@@ -5,6 +5,7 @@ import "./index.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Homefeed from './Component/Homefeed/Homefeed';
 import Post from "./Component/Post/Post";
+// import Post1 from "./Component/Post/Post1";
 import Tags from "./Component/Post/Tags/Tags";
 import Discover from "./Component/Discover/Discover"; 
 import ShowFilteredResult from "./Component/Discover/ShowFilteredResult";
@@ -19,6 +20,7 @@ ReactDOM.render(
     <Routes>
       <Route path="/" element={<Homefeed />} />
       <Route path="/posts" element={<Homefeed />} />
+      {/* <Route path="/posts/:id" element={<Post />} /> */}
       <Route path="/posts/:id" element={<Post />} />
       <Route path="/post_with_tags/:tagname" element={<Tags />} />
       <Route path="/Discover" element={<Explore />} />

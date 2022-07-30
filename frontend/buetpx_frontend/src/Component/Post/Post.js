@@ -34,6 +34,7 @@ const Img = styled('img')({
 
 // import Moment from 'react-moment';
 
+const uid = 1001;
 
 
 const  Post=()=>{
@@ -113,6 +114,24 @@ const  Post=()=>{
         console.log("button clicked! ");
         console.log("commentTxt");
         console.log(commentTxt);
+        const requestOptions = {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            "comment_txt": commentTxt,
+            "user": uid,
+            "post": id
+          })
+        };
+        fetch("http://localhost:8000/api/comment_insert", requestOptions)
+          .then(response => response.json())
+          .then(data => {
+            console.log(data);
+            // setcomments(data);
+            setcommentTxt("");
+          }
+          )
+          .catch(error => console.log('error', error));
         
       }
 

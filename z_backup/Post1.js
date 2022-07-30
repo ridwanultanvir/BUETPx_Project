@@ -23,20 +23,27 @@ import {
   Switch,
   Route,
   Link,
-  useParams
+  useParams,
+  useNavigate
 } from "react-router-dom";
+<<<<<<< HEAD:frontend/buetpx_frontend/src/Component/Post/Post1.js
+import CommentCard from './CommentCard';
+import Time from 'react-time-format'
+=======
 import CommentCard from '../frontend/buetpx_frontend/src/Component/Post/CommentCard';
 
+>>>>>>> 84bd0b431a76b1dddafc719dc04da175a3103120:z_backup/Post1.js
 const Img = styled('img')({
   margin: 'auto',
   display: 'block',
   maxWidth: '100%',
-  height: 500,
+  maxHeight: 500,
   alignContent:'left'
 });
-// import Time from 'react-time-format'
+
 // import Moment from 'react-moment';
 
+const uid = 1001;
 
 const  Post=()=>{
 
@@ -44,6 +51,7 @@ const  Post=()=>{
     const [isLoaded, setIsLoaded] = useState(false);
     const [post, setpost] = useState([]);  
     const [comments, setcomments] = useState([]);
+    const [commentTxt, setcommentTxt] = useState("");
     const [post_owner, setowner] = useState([]);
     
     const { id } = useParams();
@@ -106,13 +114,50 @@ const  Post=()=>{
           // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [post_owner]);
 
+      const handleComment = (e) => {
+        e.preventDefault();
+        console.log("button clicked! ");
+        console.log("commentTxt");
+        console.log(commentTxt);
+
+       const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          "comment_txt": commentTxt,
+          "user": uid,
+          "post": id
+        })
+      };
+      fetch("http://localhost:8000/api/comment_insert", requestOptions)
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+          // setcomments(data);
+          setcommentTxt("");
+        }
+        )
+        .catch(error => console.log('error', error));
+
+
+      }
+
+      const navigate = useNavigate();
+      const navigateToSpecificTag = (tagname) => {
+        // 👇️ navigate to /contacts
+        navigate('/post_with_tags/'+tagname);
+      };
+
     const getTag = tag => {
 
         return (
         
-            <Button variant="outlined" color="primary" sx={{
-              marginRight:2
-            }}>   {tag} </Button>
+          <Button variant="outlined" color="primary" sx={{
+            marginRight:2
+          }} onClick={() => {navigateToSpecificTag(tag); console.log(tag); }}>   
+          {tag} 
+          
+          </Button>
         );
     };
 
@@ -342,7 +387,7 @@ const  Post=()=>{
                         </Typography>
 
                 </Grid>
-                <Grid item xs={10.5} >{post_date}</Grid>
+                <Grid item xs={10.5} ><Time value={post_date} format="YYYY-MM-DD HH:mm"/></Grid>
                 
                 
                 </Grid>
@@ -387,13 +432,14 @@ const  Post=()=>{
                         size="medium"
                         defaultValue=""
                         variant="outlined"
+                        onInputCapture={(e) => setcommentTxt(e.target.value)}
                         />
                         
                         
                 </Grid>
                
                 <Grid item xs={12}>
-                <Button variant='outlined'>Submit</Button>
+                <Button variant='outlined' onClick={handleComment}>Submit</Button>
                 </Grid>
                 
                 
