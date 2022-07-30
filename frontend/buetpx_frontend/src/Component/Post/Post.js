@@ -42,6 +42,7 @@ const  Post=()=>{
     const [isLoaded, setIsLoaded] = useState(false);
     const [post, setpost] = useState([]);  
     const [comments, setcomments] = useState([]);
+    const [commentTxt, setcommentTxt] = useState("");
     const [post_owner, setowner] = useState([]);
     
     const { id } = useParams();
@@ -106,6 +107,14 @@ const  Post=()=>{
           )
           // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [post_owner]);
+
+      const handleComment = (e) => {
+        e.preventDefault();
+        console.log("button clicked! ");
+        console.log("commentTxt");
+        console.log(commentTxt);
+        
+      }
 
       const navigate = useNavigate();
       const navigateToSpecificTag = (tagname) => {
@@ -399,13 +408,14 @@ const  Post=()=>{
                         size="medium"
                         defaultValue=""
                         variant="outlined"
+                        onInputCapture={(e) => setcommentTxt(e.target.value)}
                         />
                         
                         
                 </Grid>
                
                 <Grid item xs={12}>
-                <Button variant='outlined'>Submit</Button>
+                <Button variant='outlined' onClick={handleComment}>Submit</Button>
                 </Grid>
                 
                 

@@ -6,6 +6,7 @@ from buetpx.models import Place
 from buetpx.models import Tags
 from buetpx.models import Category
 from buetpx.models import Comment
+from buetpx.models import Like
 from buetpx.models import UserAccount
 
  
@@ -85,6 +86,7 @@ class PostSerializer(serializers.ModelSerializer):
 
 class PostSerializer2(serializers.ModelSerializer):
     category = serializers.SlugRelatedField(read_only=True, slug_field='name' )
+    owner = serializers.SlugRelatedField(read_only=True, slug_field='name' )
     place = serializers.SlugRelatedField(read_only=True, slug_field='name' )
     tags = serializers.StringRelatedField(many=True, read_only=True)
     def get_field_names(self, *args, **kwargs):
@@ -156,11 +158,25 @@ class PlaceSerializer(serializers.ModelSerializer):
               'posts',
               )
 
+# user_id  = je comment korse 
+class ReactionSerializer(serializers.ModelSerializer):
+  
+  post = serializers.SlugRelatedField(read_only=True, slug_field='post_title' )
+  class Meta:
+
+    ordering = ['-id']
+    model = Comment
+    fields = ('id',
+              'comment_txt',
+              'comment_date',
+              'post'
+              )
 
 # user_id  = je comment korse 
 class CommentSerializer(serializers.ModelSerializer):
   
   user = serializers.SlugRelatedField(read_only=True, slug_field='name' )
+  
   class Meta:
 
     ordering = ['-id']
@@ -171,6 +187,45 @@ class CommentSerializer(serializers.ModelSerializer):
               'user'
               )
 
+
+
+class CommentInsertSerializer(serializers.ModelSerializer):
+   
+  
+  class Meta:
+
+    model = Comment
+    fields = ('id',
+              'comment_txt',
+              'comment_date',
+              'user',
+              'post'
+              )
+
+
+
+class LikeSerializer(serializers.ModelSerializer):
+  
+  user = serializers.SlugRelatedField(read_only=True, slug_field='name' )
+  
+  num_likes = serializers.SerializerMethodField()
+
+  def get_num_likes(self, obj):
+    try:
+        return obj.num_likes
+    except:
+        return None
+  
+  class Meta:
+
+    ordering = ['-id']
+    model = Like
+    fields = ('id',
+              'post',
+              'user',
+              'like_date',
+              'num_likes'
+              )
 
 
 # category; tag; location; comment; (num of like); 

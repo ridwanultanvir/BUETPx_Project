@@ -1,3 +1,10 @@
+##
+```
+F:\L4T1_code\CSE408_project\dj_env1\Scripts\activate
+cd frontend/buetpx_frontend
+
+```
+
 
 ##
 buetpx_frontend ==> react 
