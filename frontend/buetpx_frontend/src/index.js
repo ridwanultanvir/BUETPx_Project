@@ -11,6 +11,8 @@ import Discover from "./Component/Discover/Discover";
 import ShowFilteredResult from "./Component/Discover/ShowFilteredResult";
 import Upload from "./Component/Upload/Upload";
 
+import TestForm from "./Component/TestForm/TestFrom";
+
 // import Upload from "./Component/Photo_Upload/Upload_page";
 import Explore from "./Component/Discover/Explore";
 
@@ -26,6 +28,7 @@ ReactDOM.render(
       <Route path="/Discover" element={<Explore />} />
       {/* <Route path="/Discover_" element={<Explore />} /> */}
       <Route path="/Upload" element={<Upload />} />
+      <Route path="/TestForm" element={<TestForm />} />
 	  <Route path="/discover/filtered/:catname" element={<ShowFilteredResult />} />
 
 
