@@ -1,6 +1,7 @@
 ##
 ```
 F:\L4T1_code\CSE408_project\dj_env1\Scripts\activate
+python manage.py runserver 
 cd frontend/buetpx_frontend
 
 ```
