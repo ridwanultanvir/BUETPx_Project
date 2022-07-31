@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { Grid,TextField,Button,MenuItem,InputLabel,Select,FormControl,Box} from "@mui/material";
 import Header from '../../Static/Header';
 import {useState, useEffect} from "react";
+import Autocomplete from '@mui/material/Autocomplete';
 
 
 const  Upload=()=>{
@@ -14,6 +15,11 @@ const  Upload=()=>{
     const [City, setCity] = useState('');
     const [Country, setCountry] = useState('');
     const [photo_url, setPhotoUrl] = useState('');
+    const places=[
+        {area: 'Azimpur',city:'Dhaka',country: 'Bangladesh'},
+        {area: 'Sonaimuri',city:'Noakhali',country: 'Bangladesh'},
+        {area: 'Padma',city:'Rajshahi',country: 'Bangladesh'},
+    ]
 
     const getCategory=category=>{
         return(
@@ -98,7 +104,7 @@ const  Upload=()=>{
                     onChange={e => setPostDesc(e.target.value)}
                     />
                     <label>Location</label><br></br>
-                    <TextField
+                    {/* <TextField
                     id="LocationArea"
                     label="Area"
                     sx={{
@@ -130,7 +136,37 @@ const  Upload=()=>{
                         
                     }}
                     onChange={e => setCountry(e.target.value)}
-                    />
+                    /> */}
+
+                    <Autocomplete
+                        id="place-select"
+                        sx={{ width: 300 }}
+                        options={places}
+                        autoHighlight
+                        getOptionLabel={(option) => option.label}
+                        renderOption={(props, option) => (
+                            <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
+                            <img
+                                loading="lazy"
+                                width="20"
+                                src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
+                                srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
+                                alt=""
+                            />
+                            {option.label} ({option.code}) +{option.phone}
+                            </Box>
+                        )}
+                        renderInput={(params) => (
+                            <TextField
+                            {...params}
+                            label="Choose a country"
+                            inputProps={{
+                                ...params.inputProps,
+                                autoComplete: 'new-password', // disable autocomplete and autofill
+                            }}
+                            />
+                        )}
+                        />
                 <label>Keywords</label><br></br>
                 
                     <TextField
