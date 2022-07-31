@@ -1,29 +1,91 @@
 
 import React, { Component } from 'react'
-import { Grid,TextField} from "@mui/material";
+import { Grid,TextField,Button,MenuItem,InputLabel,Select,FormControl,Box} from "@mui/material";
 import Header from '../../Static/Header';
+import {useState, useEffect} from "react";
 
 
-class Upload extends Component {
-  render() {
+const  Upload=()=>{
+    const [CategoryList, setCategoryList] = useState([]);
+    const [Category, setCategory] = useState('');
+    const [post_title, setPostTitle] = useState('');
+    const [PostDesc, setPostDesc] = useState('');
+    const [Area, setArea] = useState('');
+    const [City, setCity] = useState('');
+    const [Country, setCountry] = useState('');
+    const [photo_url, setPhotoUrl] = useState('');
+
+    const getCategory=category=>{
+        return(
+            <MenuItem value={category.id}>{category.name}</MenuItem>
+        )
+    }
+
+    const submitPost=(e)=>
+    {   
+      
+        e.preventDefault();
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+            //   "comment_txt": commentTxt,
+            //   "user": uid,
+            //   "post": id
+            })
+          };
+          fetch("http://localhost:8000/api/comment_insert", requestOptions)
+          .then(response => response.json())
+          .then(data => {
+            console.log(data);
+            // setcomments(data);
+          
+          }
+          )
+          .catch(error => console.log('error', error));
+    }
+
+
+    useEffect(() => {
+        fetch("http://localhost:8000/api/categories")
+          .then(res => res.json())
+          .then(
+            (result) => {
+              setCategoryList(result);
+            }
+            // 
+          )
+      }, []);
+    
     return ( //flexGrow={1} display="flex"
     <div>
     <Header/>
       <Grid container>
         <Grid item container xs={6} >
-            
+            <TextField
+                        id="PhotoUrl"
+                        label="Photo Url"
+                        sx={{
+                            marginBottom:4,
+                            marginLeft:4,
+                            // marginRight:4,
+                            
+                        }}
+                        />
         </Grid>
 {/* style={{overflowY: 'auto'}} */}
-        <Grid item container xs={6} >
-            <Grid item container direction="column" >
-                <TextField id="demo-helper-text-misaligned-no-helper" label="Post Title" sx={{
+        {/* <Grid item container xs={6} > */}
+            <Grid item container xs={6} direction="column" >
+                <TextField id="postTitle" label="Post Title" sx={{
                     marginBottom:4,
                     marginRight:4,
                     
                 }}
+                onChange={e => setPostTitle(e.target.value)}
             
                 />
                 <TextField
+                    id="postDescription"
                     multiline
                     rows={2}
                     maxRows={5}
@@ -33,11 +95,11 @@ class Upload extends Component {
                         marginRight:4,
                         
                     }}
+                    onChange={e => setPostDesc(e.target.value)}
                     />
                     <label>Location</label><br></br>
                     <TextField
-                    multiline
-       
+                    id="LocationArea"
                     label="Area"
                     sx={{
                         marginBottom:4,
@@ -45,10 +107,10 @@ class Upload extends Component {
                         marginRight:4,
                         
                     }}
+                    onChange={e => setArea(e.target.value)}
                     />
                     <TextField
-                    multiline
-
+                    id="LocationCity"
                     label="City"
                     sx={{
                         marginBottom:4,
@@ -56,27 +118,87 @@ class Upload extends Component {
                         marginRight:4,
                         
                     }}
+                    onChange={e => setCity(e.target.value)}
                     />
                     <TextField
-                    multiline
-             
+                    id="LocationCountry"
                     label="Country"
+                    sx={{
+                        marginBottom:2,
+                        marginLeft:4,
+                        marginRight:4,
+                        
+                    }}
+                    onChange={e => setCountry(e.target.value)}
+                    />
+                <label>Keywords</label><br></br>
+                
+                    <TextField
+                        id="AddKeyword"
+                        label="Add Keyword"
+                        sx={{
+                            marginBottom:4,
+                            marginLeft:4,
+                            marginRight:4,
+                            
+                        }}
+                        // onChange={e => setKeywords(e.target.value)}
+                        />
+                        {/* <Button variant="outlined" 
+                        sx={{
+                            marginBottom:4,
+                            marginLeft:4,
+                            marginRight:4,
+                        }}
+                        > Add </Button> */}
+                    
+                
+                
+                    
+                    {/* <TextField
+                    label="Suggested Keywords"
                     sx={{
                         marginBottom:4,
                         marginLeft:4,
                         marginRight:4,
                         
                     }}
-                    />
-                
+                    /> */}
+                    {/* <label>Keywords</label> */}
+                <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">Category</InputLabel>
+                    <Select
+                        // labelId="demo-simple-select-label"
+                        // id="demo-simple-select"
+                        // value={Category}
+                        label="Category"
+                        onChange={e => setCategory(e.target.value)}
+                        >
+                        <MenuItem value="">
+                                    <em>None</em>
+                        </MenuItem>
+                        {CategoryList.map(category=>getCategory(category))}
+                    </Select>
+                </FormControl>
+
+                <Button variant="outlined" 
+                        sx={{
+                            marginTop:4,
+                            marginBottom:4,
+                            marginLeft:4,
+                            marginRight:4,
+                        }}
+                        onClick={submitPost}
+                        > Post </Button>
+
+                          
             </Grid>
-        </Grid>
 
 
       </Grid>
       </div>
     )
   }
-}
+
 
 export default Upload

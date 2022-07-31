@@ -34,7 +34,7 @@ const Img = styled('img')({
 
 // import Moment from 'react-moment';
 
-const uid = 1001;
+const uid = 2001;
 
 
 const  Post=()=>{
