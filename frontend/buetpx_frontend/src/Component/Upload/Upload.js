@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { Grid,TextField,Button,MenuItem,InputLabel,Select,FormControl,Box} from "@mui/material";
 import Header from '../../Static/Header';
 import {useState, useEffect} from "react";
+import Autocomplete from '@mui/material/Autocomplete';
 
 
 const  Upload=()=>{
@@ -10,10 +11,16 @@ const  Upload=()=>{
     const [Category, setCategory] = useState('');
     const [post_title, setPostTitle] = useState('');
     const [PostDesc, setPostDesc] = useState('');
-    const [Area, setArea] = useState('');
-    const [City, setCity] = useState('');
-    const [Country, setCountry] = useState('');
+    // const [Area, setArea] = useState('');
+    // const [City, setCity] = useState('');
+    // const [Country, setCountry] = useState('');
+    const [PlaceID,setPlace]=useState();
     const [photo_url, setPhotoUrl] = useState('');
+    const places=[
+        {id:1,name: 'Azimpur',city:'Dhaka',country: 'Bangladesh'},
+        {id:2,name: 'Sonaimuri',city:'Noakhali',country: 'Bangladesh'},
+        {id:3,name: 'Padma',city:'Rajshahi',country: 'Bangladesh'},
+    ]
 
     const getCategory=category=>{
         return(
@@ -98,7 +105,7 @@ const  Upload=()=>{
                     onChange={e => setPostDesc(e.target.value)}
                     />
                     <label>Location</label><br></br>
-                    <TextField
+                    {/* <TextField
                     id="LocationArea"
                     label="Area"
                     sx={{
@@ -130,7 +137,36 @@ const  Upload=()=>{
                         
                     }}
                     onChange={e => setCountry(e.target.value)}
-                    />
+                    /> */}
+
+                    <Autocomplete
+                        id="place-select"
+                        sx={{ width: 300 }}
+                        value={PlaceID}
+                        onChange={(event, newValue) => {
+                        console.log(newValue.id);
+                        setPlace(newValue.id);
+                        
+                        }}
+                        options={places}
+                        autoHighlight
+                        getOptionLabel={(option) => option.name+' , '+option.city+' , '+option.country}
+                        renderOption={(props, option) => (
+                            <Box component="li" {...props} >
+                            {option.name} , {option.city} , {option.country}
+                            </Box>
+                        )}
+                        renderInput={(params) => (
+                            <TextField
+                            {...params}
+                            label="Choose a place"
+                            inputProps={{
+                                ...params.inputProps,
+                                autoComplete: 'new-password', // disable autocomplete and autofill
+                            }}
+                            />
+                        )}
+                        />
                 <label>Keywords</label><br></br>
                 
                     <TextField
@@ -170,7 +206,8 @@ const  Upload=()=>{
                     <Select
                         // labelId="demo-simple-select-label"
                         // id="demo-simple-select"
-                        // value={Category}
+                        value={Category}
+                        // defaultValue = ""
                         label="Category"
                         onChange={e => setCategory(e.target.value)}
                         >

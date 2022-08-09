@@ -1,6 +1,7 @@
 from unicodedata import category
 from django.shortcuts import render
 from django.http.response import JsonResponse
+from buetpx.serializers import TagsSerializer,TagInsertSerializer
 # from Backend.buetpx_back.buetpx.models import Place
 from rest_framework.parsers import JSONParser 
 from rest_framework import status
@@ -388,3 +389,16 @@ def get_all_user(request):
         user = UserAccount.objects.all()
         user_serializer = UserAccountSerializer(user, many=True)
         return JsonResponse(user_serializer.data, safe=False)
+
+@api_view(['POST'])
+def insert_tag(request):
+    if request.method == 'POST':
+        
+        tag = JSONParser().parse(request)
+        tag_serializer = TagInsertSerializer(data=tag)
+        print(tag)
+
+        if tag_serializer.is_valid():
+                tag_serializer.save()
+                return JsonResponse(tag_serializer.data, status=status.HTTP_201_CREATED) 
+        return JsonResponse(tag_serializer.errors, status=status.HTTP_400_BAD_REQUEST)

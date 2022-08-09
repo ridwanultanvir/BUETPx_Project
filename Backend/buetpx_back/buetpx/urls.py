@@ -31,6 +31,9 @@ urlpatterns = [
     path ('api/user/<id>', views.get_user_by_id),
     path ('api/posts_with_uid/<id>', views.get_post_with_uid_by_id),
     path ('api/comment_insert', views.insert_comment),
+    path ('api/tag_insert', views.insert_tag),
     
+    # api/tag_insert
+
     
 ]
