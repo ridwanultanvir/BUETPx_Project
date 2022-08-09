@@ -124,6 +124,18 @@ class TagsSerializer(serializers.ModelSerializer):
               'posts'
               )
     extra_kwargs = {'tags': {'required': False}}
+    
+class TagInsertSerializer(serializers.ModelSerializer):
+  
+  # posts = PostSerializer(many=True, read_only=True)
+
+  class Meta:
+    model = Tags
+    fields = ('id',
+              'name',
+              # 'posts'
+              )
+    # extra_kwargs = {'tags': {'required': False}}
 
 
 
@@ -147,12 +159,9 @@ class PlaceSerializer(serializers.ModelSerializer):
 
   class Meta:
 
-    ordering = ['-id']
     model = Place
     fields = ('id',
               'name',
-              # 'locality',
-              # 'sublocality',
               'city',
               'country',
               'posts',

@@ -11,14 +11,15 @@ const  Upload=()=>{
     const [Category, setCategory] = useState('');
     const [post_title, setPostTitle] = useState('');
     const [PostDesc, setPostDesc] = useState('');
-    const [Area, setArea] = useState('');
-    const [City, setCity] = useState('');
-    const [Country, setCountry] = useState('');
+    // const [Area, setArea] = useState('');
+    // const [City, setCity] = useState('');
+    // const [Country, setCountry] = useState('');
+    const [PlaceID,setPlace]=useState();
     const [photo_url, setPhotoUrl] = useState('');
     const places=[
-        {area: 'Azimpur',city:'Dhaka',country: 'Bangladesh'},
-        {area: 'Sonaimuri',city:'Noakhali',country: 'Bangladesh'},
-        {area: 'Padma',city:'Rajshahi',country: 'Bangladesh'},
+        {id:1,name: 'Azimpur',city:'Dhaka',country: 'Bangladesh'},
+        {id:2,name: 'Sonaimuri',city:'Noakhali',country: 'Bangladesh'},
+        {id:3,name: 'Padma',city:'Rajshahi',country: 'Bangladesh'},
     ]
 
     const getCategory=category=>{
@@ -141,25 +142,24 @@ const  Upload=()=>{
                     <Autocomplete
                         id="place-select"
                         sx={{ width: 300 }}
+                        value={PlaceID}
+                        onChange={(event, newValue) => {
+                        console.log(newValue.id);
+                        setPlace(newValue.id);
+                        
+                        }}
                         options={places}
                         autoHighlight
-                        getOptionLabel={(option) => option.label}
+                        getOptionLabel={(option) => option.name+' , '+option.city+' , '+option.country}
                         renderOption={(props, option) => (
-                            <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
-                            <img
-                                loading="lazy"
-                                width="20"
-                                src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
-                                srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
-                                alt=""
-                            />
-                            {option.label} ({option.code}) +{option.phone}
+                            <Box component="li" {...props} >
+                            {option.name} , {option.city} , {option.country}
                             </Box>
                         )}
                         renderInput={(params) => (
                             <TextField
                             {...params}
-                            label="Choose a country"
+                            label="Choose a place"
                             inputProps={{
                                 ...params.inputProps,
                                 autoComplete: 'new-password', // disable autocomplete and autofill
@@ -206,7 +206,8 @@ const  Upload=()=>{
                     <Select
                         // labelId="demo-simple-select-label"
                         // id="demo-simple-select"
-                        // value={Category}
+                        value={Category}
+                        // defaultValue = ""
                         label="Category"
                         onChange={e => setCategory(e.target.value)}
                         >
