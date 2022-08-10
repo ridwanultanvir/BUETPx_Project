@@ -3,6 +3,8 @@ import {Grid} from "@mui/material";
 // import Header from './Contents/Header';
 import Header from '../../Static/Header';
 import Body from '../../Static/Body';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
 
 const itemData = [
   {
@@ -75,7 +77,7 @@ function srcset(image: string, size: number, rows = 1, cols = 1) {
   };
 }
 
-function ImageList() {
+function MyImageList() {
   return (
    
       <Grid container direction='column'>
@@ -90,7 +92,22 @@ function ImageList() {
           </Grid>
 
           <Grid item xs={12} sm={10} >
-          <h1> Ami Tanvir</h1>
+          <ImageList
+            sx={{ width: 500, height: 450 }}
+            variant="quilted"
+            cols={4}
+            rowHeight={121}
+          >
+            {itemData.map((item) => (
+              <ImageListItem key={item.img} cols={item.cols || 1} rows={item.rows || 1}>
+                <img
+                  {...srcset(item.img, 121, item.rows, item.cols)}
+                  alt={item.title}
+                  loading="lazy"
+                />
+              </ImageListItem>
+            ))}
+          </ImageList>
           </Grid>
 
           <Grid item xs={0} sm={1} >
@@ -104,4 +121,4 @@ function ImageList() {
   );
 }
 
-export default ImageList;
+export default MyImageList;
