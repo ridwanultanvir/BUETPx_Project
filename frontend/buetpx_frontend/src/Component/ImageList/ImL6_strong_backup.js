@@ -100,8 +100,8 @@ const  MyImageList=()=>{
 
         <Grid item xs={12} sm={10} >
                 
-        <Box sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-          <ImageList variant="masonry" cols={3} gap={10}>
+        <Box sx={{ width: 500, height: 450, overflowY: 'scroll' }}>
+          <ImageList variant="masonry" cols={3} gap={8}>
             {posts.map((post) => (
               <ImageListItem key={post.photo_url}>
                 <img
