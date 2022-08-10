@@ -1,113 +1,74 @@
-import React from 'react';
-import { Grid} from "@mui/material";
-import Header from '../../Static/Header';
-import StyleOutlinedIcon from '@mui/icons-material/StyleOutlined';
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
 
-import {Typography} from '@mui/material';
-import { styled } from '@mui/material/styles';
-import Card from '../../Static/Card';
-import {useState, useEffect} from "react";
+export default function MyImageList() {
+  return (
+    <Box sx={{ width: 500, height: 450, overflowY: 'scroll' }}>
+      <ImageList variant="masonry" cols={3} gap={8}>
+        {itemData.map((item) => (
+          <ImageListItem key={item.img}>
+            <img
+              src={`${item.img}?w=248&fit=crop&auto=format`}
+              srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+              alt={item.title}
+              loading="lazy"
+            />
+          </ImageListItem>
+        ))}
+      </ImageList>
+    </Box>
+  );
+}
 
-import {
-  useParams
-} from "react-router-dom";
-
-
-const Img = styled('img')({
-  margin: 'auto',
-  display: 'block',
-  maxWidth: '100%',
-  height: 500,
-  alignContent:'left'
-});
-// import Time from 'react-time-format'
-// import Moment from 'react-moment';
-
-
-const  MyImageList=()=>{
-
-    const [error, setError] = useState(null);
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [posts, setposts] = useState([]); 
-    const  [tag, setTag] = useState([]); 
-
-    
-    const { tagname } = useParams();
-
-
-    useEffect(() => {
-        fetch("http://127.0.0.1:8000/api/posts")
-          .then(res => res.json())
-          .then(
-            (result) => {
-              setIsLoaded(true);
-              setposts(result);
-            },
-            // setTag(tagname), 
-            // Note: it's important to handle errors here
-            // instead of a catch() block so that we don't swallow
-            // exceptions from actual bugs in components.
-            (error) => {
-              setIsLoaded(true);
-              setError(error);
-            }
-          )
-      }, []);
-      
-      
-
-      const getPost = post => {
-        return (
-          <Grid item 
-          xs={12} sm={6} md={6} lg={4}
-           >
-           <Card {...post} />
-           </Grid>
-
-    
-    
-        );
-      };
-
-
-
-    return (
-        // <Grid container direction='column' spacing={2}>
-        //     <Grid item>
-        //       TagName: {tagname}
-        //       {posts.map(post => getPost(post))}
-        //     </Grid>
-        // </Grid>  
-
-      <Grid container direction='column'>
-      <Grid item>
-      <Header/>
-      </Grid>
-
-
-      <Grid item container>
-        <Grid item xs={0} sm={1}>
-
-        </Grid>
-
-        <Grid item xs={12} sm={10} >
-                
-                <Grid container spacing={2}>
-            
-                         {posts.map(post => getPost(post))}    
-                </Grid>
-        </Grid>
-
-        <Grid item xs={0} sm={1} >
-
-        </Grid>
-      
-
-        </Grid>
-      </Grid>
-                        
-    
-    );
-    }
-
-    export default MyImageList;
+const itemData = [
+  {
+    img: 'https://images.unsplash.com/photo-1549388604-817d15aa0110',
+    title: 'Bed',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1525097487452-6278ff080c31',
+    title: 'Books',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1523413651479-597eb2da0ad6',
+    title: 'Sink',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1563298723-dcfebaa392e3',
+    title: 'Kitchen',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1588436706487-9d55d73a39e3',
+    title: 'Blinds',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1574180045827-681f8a1a9622',
+    title: 'Chairs',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1530731141654-5993c3016c77',
+    title: 'Laptop',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1481277542470-605612bd2d61',
+    title: 'Doors',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1517487881594-2787fef5ebf7',
+    title: 'Coffee',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1516455207990-7a41ce80f7ee',
+    title: 'Storage',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1597262975002-c5c3b14bbd62',
+    title: 'Candle',
+  },
+  {
+    img: 'https://images.unsplash.com/photo-1519710164239-da123dc03ef4',
+    title: 'Coffee table',
+  },
+];
