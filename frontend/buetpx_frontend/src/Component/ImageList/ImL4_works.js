@@ -7,7 +7,6 @@ import {Typography} from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Card from '../../Static/Card';
 import {useState, useEffect} from "react";
-import Box from '@mui/material/Box';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem'
 import {
@@ -100,20 +99,25 @@ const  MyImageList=()=>{
 
         <Grid item xs={12} sm={10} >
                 
-        <Box sx={{ width: 500, height: 450, overflowY: 'scroll' }}>
-          <ImageList variant="masonry" cols={3} gap={8}>
+        <ImageList
+            // sx={{ width: 500, height: 450 }}
+            sx={{ width: '100%', height: '100%' }}
+            variant="quilted"
+            cols={4}
+            rowHeight={121}
+          >
             {posts.map((post) => (
-              <ImageListItem key={post.photo_url}>
+
+
+              <ImageListItem key={post.img} cols={post.cols || 1} rows={post.rows || 1}>
                 <img
-                  src={`${post.photo_url}?w=248&fit=crop&auto=format`}
-                  srcSet={`${post.photo_url}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                  {...srcset(post.photo_url, 121, post.rows, post.cols)}
                   alt={post.post_title}
                   loading="lazy"
                 />
               </ImageListItem>
             ))}
           </ImageList>
-        </Box>
         </Grid>
 
         <Grid item xs={0} sm={1} >
