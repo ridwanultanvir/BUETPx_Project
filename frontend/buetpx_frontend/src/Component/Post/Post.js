@@ -34,7 +34,7 @@ const Img = styled('img')({
 
 // import Moment from 'react-moment';
 
-const uid = 1001;
+const uid = 2001;
 
 
 const  Post=()=>{
@@ -129,6 +129,7 @@ const  Post=()=>{
             console.log(data);
             // setcomments(data);
             setcommentTxt("");
+            window.location.reload(false);
           }
           )
           .catch(error => console.log('error', error));

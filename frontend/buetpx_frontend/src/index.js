@@ -13,6 +13,8 @@ import Upload from "./Component/Upload/Upload";
 
 // import Upload from "./Component/Photo_Upload/Upload_page";
 import Explore from "./Component/Discover/Explore";
+import SignUp from "./Component/Signup/Signup";
+import Login from "./Component/Login/Login";
 
 
 ReactDOM.render(
@@ -26,6 +28,8 @@ ReactDOM.render(
       <Route path="/Discover" element={<Explore />} />
       {/* <Route path="/Discover_" element={<Explore />} /> */}
       <Route path="/Upload" element={<Upload />} />
+      <Route path="/Signup" element={<SignUp />} />
+      <Route path="/Login" element={<Login />} />
 	  <Route path="/discover/filtered/:catname" element={<ShowFilteredResult />} />
 
 

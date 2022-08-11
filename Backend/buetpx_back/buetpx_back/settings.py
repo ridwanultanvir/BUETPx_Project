@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 	'rest_framework',
     'buetpx.apps.BuetpxConfig',
     'post.apps.PostConfig',
+    'signup_login.apps.SignupLoginConfig',
     'corsheaders',
 ]
 REST_FRAMEWORK = {
