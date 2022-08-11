@@ -30,6 +30,8 @@ ReactDOM.render(
       <Route path="/Discover" element={<Explore />} />
       {/* <Route path="/Discover_" element={<Explore />} /> */}
       <Route path="/Upload" element={<Upload />} />
+      <Route path="/Signup" element={<SignUp />} />
+      <Route path="/Login" element={<Login />} />
 	  <Route path="/discover/filtered/:catname" element={<ShowFilteredResult />} />
 
 
