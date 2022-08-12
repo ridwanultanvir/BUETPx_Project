@@ -6,7 +6,7 @@ from buetpx.models import Place
 from buetpx.models import Tags
 from buetpx.models import Category
 from buetpx.models import Comment
-from buetpx.models import Like
+from buetpx.models import Like, LikeCount
 from buetpx.models import UserAccount
 
  
@@ -124,18 +124,6 @@ class TagsSerializer(serializers.ModelSerializer):
               'posts'
               )
     extra_kwargs = {'tags': {'required': False}}
-    
-class TagInsertSerializer(serializers.ModelSerializer):
-  
-  # posts = PostSerializer(many=True, read_only=True)
-
-  class Meta:
-    model = Tags
-    fields = ('id',
-              'name',
-              # 'posts'
-              )
-    # extra_kwargs = {'tags': {'required': False}}
 
 
 
@@ -159,9 +147,12 @@ class PlaceSerializer(serializers.ModelSerializer):
 
   class Meta:
 
+    ordering = ['-id']
     model = Place
     fields = ('id',
               'name',
+              # 'locality',
+              # 'sublocality',
               'city',
               'country',
               'posts',
@@ -210,10 +201,54 @@ class CommentInsertSerializer(serializers.ModelSerializer):
               'user',
               'post'
               )
+class LikeInsertSerializer(serializers.ModelSerializer):
+    
+  class Meta:
 
+    ordering = ['-id']
+    model = Like
+    fields = ('id',
+              'post',
+              'user',
+              'like_date'
+              )
+    
+class LikeInsertSerializer2(serializers.ModelSerializer):
+    
+  class Meta:
 
+    ordering = ['-id']
+    model = LikeCount
+    fields = ('id',
+              'post',
+              'likecnt'
+              )
+class LikeCountInsertSerializer(serializers.ModelSerializer):
+    
+  class Meta:
+
+    ordering = ['-id']
+    model = LikeCount
+    fields = ('id',
+              'post',
+              'likecnt'
+              )
 
 class LikeSerializer(serializers.ModelSerializer):
+  
+  user = serializers.SlugRelatedField(read_only=True, slug_field='name' ) 
+  
+  class Meta:
+
+    ordering = ['-id']
+    model = Like
+    fields = ('id',
+              'post',
+              'user',
+              'like_date'
+              )
+
+class LikeSerializer2(serializers.ModelSerializer):
   
   user = serializers.SlugRelatedField(read_only=True, slug_field='name' )
   
@@ -232,8 +267,7 @@ class LikeSerializer(serializers.ModelSerializer):
     fields = ('id',
               'post',
               'user',
-              'like_date',
-              'num_likes'
+              'like_date'
               )
 
 
