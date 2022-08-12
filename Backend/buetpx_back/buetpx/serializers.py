@@ -301,7 +301,7 @@ class CommentSerializer2(serializers.ModelSerializer):
     fields = ('id',
               'comment_txt',
               'comment_date',
-              'post',              
+              'posts',              
               )
 
 

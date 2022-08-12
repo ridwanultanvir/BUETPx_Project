@@ -19,7 +19,7 @@ import { NavLink } from "react-router-dom";
 const pages = ['Discover', 'Quest'];
 const usermenu = ['Profile', 'Account Settings', 'Logout'];
 
-function Header () {
+const Header = ()=> {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -41,7 +41,7 @@ function Header () {
   };
 
   return (
-    <div>
+    <React.Fragment>
     <AppBar position="absolute">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -230,7 +230,7 @@ function Header () {
     <br></br>
     <br></br>
     <br></br>
-    </div>
+    </React.Fragment>
   )
 }
 export default Header;

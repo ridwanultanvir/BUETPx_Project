@@ -34,7 +34,7 @@ const Img = styled('img')({
 
 // import Moment from 'react-moment';
 
-const uid = 1001;
+const uid = 2001;
 
 
 const  Post=()=>{
@@ -67,6 +67,7 @@ const  Post=()=>{
       }, []);
       
       const {post_title,post_date,photo_url,owner,category,place,tags}=post;
+      
       // console.log(post_title);
       useEffect(() => {
         if(owner)
@@ -129,6 +130,7 @@ const  Post=()=>{
             console.log(data);
             // setcomments(data);
             setcommentTxt("");
+            window.location.reload(false);
           }
           )
           .catch(error => console.log('error', error));
