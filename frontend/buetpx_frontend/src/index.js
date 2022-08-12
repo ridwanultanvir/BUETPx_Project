@@ -47,8 +47,7 @@ root.render(
       <Route path="/Galleries" element={<Galleries />} />
       <Route path="/Gallery/:id" element={<Gallery />} />
 
-	    
->>>>>>> fa6f532b35eba989c21d689d6397b98f24a57a63
+
 
 
     </Routes>
