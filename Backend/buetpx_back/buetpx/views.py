@@ -122,6 +122,9 @@ def delete_like(request, post_id, user_id):
     # find tutorial by pk (id)
     try: 
         like_obj = Like.objects.filter(post_id=post_id, user_id=user_id)
+        if not like_obj.exists():
+            print("The like does NOT exist")
+            return JsonResponse({'message': 'The like does NOT exist'})
 
         if request.method == 'DELETE': 
             like_obj.delete() 

@@ -6,7 +6,7 @@ cd frontend/buetpx_frontend
 npm start
 ```
 
-http://localhost:8000/api/delete_like/1/4
+http://localhost:8000/api/delete_like/3/2
 
 
 ##
