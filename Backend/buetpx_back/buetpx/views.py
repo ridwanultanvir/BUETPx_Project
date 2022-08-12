@@ -13,6 +13,7 @@ from rest_framework.decorators import api_view
 from django.db.models import Count
 import json
 
+
 # notun add korsi 
 from django.db.models.query import QuerySet
 from django.http import HttpResponse
@@ -388,3 +389,31 @@ def get_all_user(request):
         user = UserAccount.objects.all()
         user_serializer = UserAccountSerializer(user, many=True)
         return JsonResponse(user_serializer.data, safe=False)
+
+@api_view(['DELETE'])
+
+def delete_comment(request,list):
+     my_list = list.split("&")
+
+     comment_id = my_list[0]
+     user_id = my_list[1]
+
+     print(comment_id)
+     print(user_id)
+     comment_id = int(comment_id)
+
+
+     comment =  Comment.objects.get(pk=comment_id) 
+     print(comment)
+
+     if request.method == 'DELETE': 
+            comment.delete() 
+            return JsonResponse({'message': 'comment was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['GET'])
+def get_places(request):
+    if request.method == 'GET':
+        places = Place.objects.all()
+        place_serializer = PlaceSerializer(places, many=True)
+        return JsonResponse(place_serializer.data, safe=False)

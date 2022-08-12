@@ -275,3 +275,34 @@ class CommentSerializer3(serializers.ModelSerializer):
               'post',
               'user'
               )
+
+# migration command
+# python manage.py makemigrations
+# python manage.py migrate
+
+
+class PostUpSerializer(serializers.ModelSerializer):
+    
+    # category = serializers.SlugRelatedField(read_only=True, slug_field='name' )
+    # owner = serializers.SlugRelatedField(read_only=True, slug_field='name' )
+    # place = serializers.SlugRelatedField(read_only=True, slug_field='name' )
+    
+    # tags = serializers.StringRelatedField(many=True, read_only=True)
+    
+    class Meta:
+
+          
+        model = Post
+        fields = (
+                  'id',
+                  'post_title',
+                  'post_date',
+                  'description',
+                  'photo_url',
+                  'owner',
+                  'category',
+                  'place',
+                  'tags',
+                  
+                  )
+        # extra_kwargs = {'tags':{'required': False}}

@@ -63,6 +63,7 @@ MIDDLEWARE = [
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:8081',
+    'http://localhost:3000',
 )
 
 ROOT_URLCONF = 'buetpx_back.urls'
@@ -94,8 +95,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'buetpxdb',
         'USER': 'postgres',
-
-        'PASSWORD': '123',
+        'PASSWORD': 'postgres',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }

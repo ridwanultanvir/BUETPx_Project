@@ -28,9 +28,14 @@ urlpatterns = [
     # path ('api/comments_post/<id>', views.get_comment_by_post_id),
 
     path ('api/users', views.get_all_user),
+    
     path ('api/user/<id>', views.get_user_by_id),
     path ('api/posts_with_uid/<id>', views.get_post_with_uid_by_id),
     path ('api/comment_insert', views.insert_comment),
+    path ('api/comment_delete/<list>', views.delete_comment),
+
+    path ('api/places', views.get_places),
+
     
     
 ]

@@ -67,13 +67,15 @@ def get_post_by_categoryname(request,name):
         return JsonResponse(post_serializer.data, safe=False)
     
 @api_view(['GET'])
-def get_newest_posts(request):
+def get_newest_posts(request,keyword):
     
     if request.method == 'GET':
         # get newest 100 posts
         
+        
         # posts = Post.objects.values_list('id','post_title','post_date','category').order_by('-post_date')[:100]
-        posts = Post.objects.all().order_by('-post_date')[:10]
+        posts = Post.objects.all().order_by('-post_date')
+
         # return just title, post_date and description
         
         post_serializer = PostSerializer(posts,many = True)
@@ -85,6 +87,8 @@ def get_categories(request):
 
     if request.method == 'GET':
         categories = Category.objects.all()
+
+        # Category.objects.raw("SQL_QUERY")
         categories_serializer = CategorySerializer(categories, many=True)
         return JsonResponse(categories_serializer.data, safe=False)
 
@@ -118,6 +122,7 @@ def get_user_by_id(request,id):
 @api_view(['GET'])
 def get_search_result(request,list):
     
+    # "option&searchkey"
     my_list = list.split("&")
     option = my_list[0]
     keyword = my_list[1]
@@ -125,7 +130,15 @@ def get_search_result(request,list):
     option = option.lower()
     keyword = keyword.lower()
     
+    
     print(keyword)
+    sortoption = ""
+    print(len(my_list))
+    if len(my_list) > 2:
+        
+        sortoption = my_list[2]
+    
+    print("sortoption:", sortoption)
     
     
     # id = Place.objects.only('id').get(name='Azimpur').id
@@ -167,11 +180,15 @@ def get_search_result(request,list):
         posts = Post.objects.filter(owner=pid)
 
     elif option == 'tag':
+        
         posts = Post.objects.filter(tags__name=keyword)
 
 
     # print("posts: ",posts)/
-
+    if sortoption == "newest":
+        posts = posts.order_by('-post_date')
+        print("sorted")
+        
     post_serializer = PostSerializer(posts, many=True)
     return JsonResponse(post_serializer.data, safe=False)
     

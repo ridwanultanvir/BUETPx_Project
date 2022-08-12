@@ -173,7 +173,7 @@ function Header () {
 {/* user menu after click of pp */}
           
           <Box sx={{ flexGrow: 0 }}>
-          <NavLink className="nav-link" to="/">
+          <NavLink className="nav-link" to="/putphoto">
               <Button 
                     // onClick={} 
                   sx={{

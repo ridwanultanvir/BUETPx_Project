@@ -27,7 +27,7 @@ const Content = (props) => {
    };
 
     return (
-       <Grid container spacing={1}>
+       <Grid container spacing={1} style={{maxHeight:2000,overflow:'auto'}}>
             {postlist.map(source => getSourceData(source))}
         
        </Grid>

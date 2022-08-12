@@ -45,7 +45,8 @@ class Tags(models.Model):
 class Post(models.Model):
     post_title = models.CharField(max_length=500)
     post_date = models.DateTimeField(auto_now_add=True)
-    photo_url = models.URLField(max_length=500)
+    photo_url = models.URLField(max_length=1000)
+    description = models.CharField(max_length=1000)
 
     owner = models.ForeignKey(
         UserAccount, 

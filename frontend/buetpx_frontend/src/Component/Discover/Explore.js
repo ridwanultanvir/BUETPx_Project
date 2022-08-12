@@ -169,16 +169,38 @@ const Explore  = () => {
       }
 
       const sortPosts = (option) => {
+
+        console.log("before sorted by newest:");
+            console.log(postList);
+           let searchString = optionKey+"&"+searchKey+"&"+"newest";
         if (option === "newest") {
+           
+            fetch("http://localhost:8000/discover/search/"+searchString)
+            .then(res => res.json())
+            .then(
+            (result) => {
+                setIsLoaded(true);
+                setPostList(result);
+            },
+            
+            );
+
+            // postList.sort(function (a, b) {
+            //     var dateA = new Date(a.post_date), dateB = new Date(b.post_date)
+            //     return dateA - dateB
+            // });
+
             // sort postList by post_date
             // postList Contains all posts
-            postList.sort(function(a, b) {
-                return new Date(b.post_date) - new Date(a.post_date);
-            });
+            // postList.sort(function(a, b) {
+            //     return new Date(b.post_date) - new Date(a.post_date);
+            // });
 
-            setPostList(postList);
+            // setPostList(postList);
             console.log("sorted by newest:");
             console.log(postList);
+            console.log("searchkey:");
+            console.log(searchKey);
 
             
 
@@ -371,7 +393,7 @@ const Explore  = () => {
                             
                             </Grid>
                             
-                            <Grid item sm={8}>
+                            <Grid item sm={8} style={{maxHeight:600,overflow:'auto'}}>
                                 
                                 <div className={classes.root}>  
                                 <FormControl component="fieldset" className={classes.formControl}>

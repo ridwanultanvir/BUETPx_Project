@@ -1,16 +1,13 @@
 import axios from 'axios';
 
 import React,{Component} from 'react';
-import { Grid} from "@mui/material";
-import Header from '../../Static/Header';
 
-class PhotoUpload extends Component {
+class Upload extends Component {
 
 	state = {
 
 	// Initially, no file is selected
-	selectedFile: null,
-	photoUrl :""
+	selectedFile: null
 	};
 	
 	// On file select (from the pop up)
@@ -18,10 +15,6 @@ class PhotoUpload extends Component {
 	
 	// Update the state
 	this.setState({ selectedFile: event.target.files[0] });
-	
-	console.log(this.state.selectedFile);
-	var reader = new FileReader();
-	this.setState({ photoUrl: reader.readAsDataURL(event.target.files[0]) });
 	
 	};
 	
@@ -31,19 +24,19 @@ class PhotoUpload extends Component {
 	// Create an object of formData
 	const formData = new FormData();
 	
-	// // Update the formData object
-	// formData.append(
-	// 	"myFile",
-	// 	this.state.selectedFile,
-	// 	this.state.selectedFile.name
-	// );
+	// Update the formData object
+	formData.append(
+		"myFile",
+		this.state.selectedFile,
+		this.state.selectedFile.name
+	);
 	
 	// Details of the uploaded file
-	console.log("photourl",this.state.photoUrl);
+	console.log(this.state.selectedFile);
 	
 	// Request made to the backend api
 	// Send formData object
-	// axios.post("http://localhost:8000/api/upload", formData);
+	axios.post("api/uploadfile", formData);
 	};
 	
 	// File content to be displayed after
@@ -57,7 +50,6 @@ class PhotoUpload extends Component {
 			<h2>File Details:</h2>
 			
 <p>File Name: {this.state.selectedFile.name}</p>
-
 
 			
 <p>File Type: {this.state.selectedFile.type}</p>
@@ -83,11 +75,6 @@ class PhotoUpload extends Component {
 	render() {
 	
 	return (
-		<Grid container direction='column' spacing={2}>
-            <Grid item>
-            <Header/>
-            </Grid>
-			<Grid item>
 		<div>
 			<h1>
 			GeeksforGeeks
@@ -103,10 +90,8 @@ class PhotoUpload extends Component {
 			</div>
 		{this.fileData()}
 		</div>
-		</Grid>
-		</Grid>
 	);
 	}
 }
 
-export default PhotoUpload;
+export default Upload;
