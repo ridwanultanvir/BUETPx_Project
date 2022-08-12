@@ -5,7 +5,6 @@ import {Grid, Button,FormControl,InputLabel,Box, Select, Typography,MenuItem, Te
 import Header from "../../Static/Header";
 import useStyles from './ImageStyle';
 import Panel from './Panel';
-import UpButton from './UpButton';
 
 const FireUpload = () => {
     
