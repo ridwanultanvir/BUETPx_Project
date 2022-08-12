@@ -60,8 +60,7 @@ class Post(models.Model):
     category = models.ForeignKey(
           Category, 
           on_delete=models.CASCADE,
-          related_name='posts',
-          unique=True
+          related_name='posts'
     )
     place = models.ForeignKey(
             Place,
@@ -90,16 +89,6 @@ class Like(models.Model):
             related_name='likes'
     )
     like_date = models.DateTimeField(auto_now_add=True)
-    
-    
-class LikeCount(models.Model):
-    post = models.ForeignKey(
-            Post,
-            on_delete=models.CASCADE,
-            related_name='likecount'
-    )  
-    
-    likecnt = models.IntegerField()
     
     
 

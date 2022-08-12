@@ -22,7 +22,6 @@ urlpatterns = [
     path ('api/posts/<postid>/comments', views.get_comments_by_postid),
     path ('api/comments/<postid>', views.get_comments_by_postid),
     path ('api/likes/<postid>', views.get_num_likes_by_postid),
-    path ('api/check_likes/<postid>/<user_id>', views.get_check_if_user_already_liked),
     # path ('api/tags/<postid>', views.get_tags_by_postid),
 
     # path ('api/comments/<id>', views.get_comment_by_id),
@@ -32,10 +31,9 @@ urlpatterns = [
     path ('api/user/<id>', views.get_user_by_id),
     path ('api/posts_with_uid/<id>', views.get_post_with_uid_by_id),
     path ('api/comment_insert', views.insert_comment),
-    path ('api/insert_like', views.insert_like),
-
-    # path ('api/insert_like2', views.insert_like2),
-    # api: photo_url pathabi; request query theke; pic tar ekta tag list return 
+    path ('api/tag_insert', views.insert_tag),
     
+    # api/tag_insert
+
     
 ]
