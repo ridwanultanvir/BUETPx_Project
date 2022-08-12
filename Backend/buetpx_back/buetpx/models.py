@@ -1,6 +1,7 @@
 from django.db import models
 
-
+# Create your models here.
+from django.db import models
 
 # need to add specialization
 class UserAccount(models.Model):
@@ -44,7 +45,7 @@ class Tags(models.Model):
 class Post(models.Model):
     post_title = models.CharField(max_length=500)
     post_date = models.DateTimeField(auto_now_add=True)
-    photo_url = models.URLField(max_length=500)
+    photo_url = models.CharField(max_length=500)
 
     owner = models.ForeignKey(
         UserAccount, 
@@ -89,6 +90,16 @@ class Like(models.Model):
             related_name='likes'
     )
     like_date = models.DateTimeField(auto_now_add=True)
+    
+    
+class LikeCount(models.Model):
+    post = models.ForeignKey(
+            Post,
+            on_delete=models.CASCADE,
+            related_name='likecount'
+    )  
+    
+    likecnt = models.IntegerField()
     
     
 

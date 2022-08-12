@@ -1,16 +1,14 @@
 from unicodedata import category
-from rest_framework.parsers import JSONParser 
-from rest_framework import status
-from rest_framework.decorators import api_view
 from django.shortcuts import render
 from django.http.response import JsonResponse
-from buetpx.serializers import TagsSerializer,TagInsertSerializer
 # from Backend.buetpx_back.buetpx.models import Place
-
+from rest_framework.parsers import JSONParser 
+from rest_framework import status
+ 
 from buetpx.models import Tutorial,Post,Comment,UserAccount,Tags, Category,Place, Like
 from buetpx.serializers import LikeSerializer,CommentSerializer, CommentSerializer2, TutorialSerializer,PostSerializer,PlaceSerializer,UserAccountSerializer,CategorySerializer
-from buetpx.serializers import PostSerializer2, CommentInsertSerializer
-
+from buetpx.serializers import PostSerializer2, CommentInsertSerializer, LikeInsertSerializer, LikeInsertSerializer2
+from rest_framework.decorators import api_view
 
 from django.db.models import Count
 import json
@@ -101,6 +99,37 @@ def post_detail(request):
         posts_serializer = PostSerializer(posts, many=True)
         return JsonResponse(posts_serializer.data, safe=False)
         
+
+
+# NOTUN korsi =========
+@api_view(['POST'])
+def insert_like(request):
+   
+    if request.method == 'POST':
+        print("")
+        
+        like_data = JSONParser().parse(request)
+        like_serializer = LikeInsertSerializer(data=like_data)
+
+        if like_serializer.is_valid():
+                like_serializer.save()
+                return JsonResponse(like_serializer.data, status=status.HTTP_201_CREATED) 
+        return JsonResponse(like_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+# @api_view(['POST'])
+# def insert_like(request):
+   
+#     if request.method == 'POST':
+        
+#         like_data = JSONParser().parse(request)
+#         like_serializer = LikeInsertSerializer2(data=like_data)
+
+#         if like_serializer.is_valid():
+#                 like_serializer.save()
+#                 return JsonResponse(like_serializer.data, status=status.HTTP_201_CREATED) 
+#         return JsonResponse(like_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 
 # json field server accept 
 @api_view(['POST'])
@@ -199,6 +228,10 @@ def get_place_by_id(request,id):
                 )
         return JsonResponse(place_serializer.data, safe=False)
 
+
+
+    
+
 @api_view(['Get'])
 def get_post_with_uid_by_id(request,id):
     
@@ -239,7 +272,36 @@ def get_num_likes_by_postid(request,postid):
         return JsonResponse(response_data, safe=False)
 
 
+#  notun add kortesi 11 Aug ; check korte je already like deya ase kina 
+@api_view(['Get'])
+def get_check_if_user_already_liked(request,postid,user_id):
+    
+    if request.method == 'GET':       
 
+        this_post_likes = Like.objects.filter(post=postid)
+        this_post_user_likes = this_post_likes.filter(user=user_id)
+        response_data = {}
+        response_data['num_likes_this_user'] = 1
+        if this_post_user_likes.count() == 0:
+            response_data['num_likes_this_user'] = 0
+            
+        return JsonResponse(response_data, safe=False)    
+
+
+# oi post_id er all like dey
+@api_view(['Get'])
+def get_like_info_this_post(request,postid,user_id):
+    
+    if request.method == 'GET':       
+
+        this_post_likes = Like.objects.filter(post=postid)
+        print("this_post_likes:", this_post_likes)
+        print("likes:", this_post_likes)         
+        response_data = {}
+        response_data['num_likes'] = 1
+        like_serializer = LikeSerializer(this_post_likes, many=True)
+        return JsonResponse(like_serializer.data, safe=False)
+    
 @api_view(['Get'])
 
 def get_likes_by_postid_prev(request,postid):
@@ -390,16 +452,3 @@ def get_all_user(request):
         user = UserAccount.objects.all()
         user_serializer = UserAccountSerializer(user, many=True)
         return JsonResponse(user_serializer.data, safe=False)
-
-@api_view(['POST'])
-def insert_tag(request):
-    if request.method == 'POST':
-        
-        tag = JSONParser().parse(request)
-        tag_serializer = TagInsertSerializer(data=tag)
-        print(tag)
-
-        if tag_serializer.is_valid():
-                tag_serializer.save()
-                return JsonResponse(tag_serializer.data, status=status.HTTP_201_CREATED) 
-        return JsonResponse(tag_serializer.errors, status=status.HTTP_400_BAD_REQUEST)

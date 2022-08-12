@@ -24,6 +24,5 @@ urlpatterns = [
     path ('', include('buetpx.urls')),
     path ('', include('post.urls')),
     path ('', include('discover.urls')),
-    path ('', include('signup_login.urls')),
-    path ('', include('gallery.urls')),
+    path ('', include('testform.urls')),
 ]
