@@ -1,10 +1,11 @@
 import sys
-
-import getopt, sys
+# this is called by views.py for auto tag generate 
+import sys
 from testform.image_tag.Model.PredictionModel import PredictionModel
 
 def tag_generate(url):
     # url = "https://geographical.co.uk/wp-content/uploads/somalaya-mountain-range-title.jpg"
+    
     predictions = PredictionModel()
     mytags = predictions.computePredictions3(url)
     # print(predictions.m_classRules.getClassInformation())

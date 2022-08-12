@@ -42,8 +42,7 @@ def tag_suggest(request):
 
 
 @api_view(['Get'])
-def tag_suggest2(request): 
-    
+def tag_suggest2(request):     
     if request.method == 'GET':       
         url = "https://geographical.co.uk/wp-content/uploads/somalaya-mountain-range-title.jpg"
         tags = tag_generate(url)
