@@ -67,6 +67,7 @@ const  Post=()=>{
       }, []);
       
       const {post_title,post_date,photo_url,owner,category,place,tags}=post;
+      
       // console.log(post_title);
       useEffect(() => {
         if(owner)

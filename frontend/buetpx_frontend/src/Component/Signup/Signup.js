@@ -11,6 +11,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@mui/material/Container";
 import Header from "../../Static/Header";
 import {useState, useEffect} from "react";
+import Paper from "@mui/material/Paper";
 
 
 
@@ -40,8 +41,11 @@ const useStyles = makeStyles((theme) => ({
 const  SignUp=()=> {
 
     const [user_name, setusername] = useState('');
+    const [first_name, setfirstname] = useState('');
+    const [last_name, setlastname] = useState('');
     const [user_mail, setusermail] = useState('');
     const [user_pass, setuserpass] = useState('');
+    const [user_pass2, setuserpass2] = useState('');
     const classes = useStyles();
 
     const ButtonClicked =(event)=>
@@ -52,23 +56,43 @@ const  SignUp=()=> {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                  "name": user_name,
+                  "username": user_name,
+                  "first_name":first_name,
+                  "last_name":last_name,
                   "email": user_mail,
                 //   photo url needs to be taken from uploaded photo
                   "photo_url": 'http://tiny.cc/namira123',
                 //   hashing will be done in the backend
-                  "hashedpass":user_pass
+                  "password":user_pass,
+                  "password2":user_pass2
                 })
               };
-              fetch("http://localhost:8000/api/signup", requestOptions)
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
+              
+              
+              fetch("http://localhost:8000/api/register", requestOptions)
+                .then(response => 
+                  {
+                    // response.json()
+                    console.log(response);
+                    if (response.ok) {  
+                      response.json()
+                      // window.location.href="\\";
+                    }
+                    else
+                    {
+                      throw new Error('User already exists') 
+                    }
+                  })
+                .catch(error =>
+                    {
+                      // window.location.reload(false);
+                      console.log( error)
+                      alert(error)
+        
+                    });
                 
-                  }
-                  )
-                .catch(error => console.log('error', error));
-                window.location.reload(false);
+                
+                // 
             
         }
 
@@ -76,6 +100,7 @@ const  SignUp=()=> {
         <Container component="main" maxWidth="xs">
             <Header/>
         <CssBaseline />
+
 
         <div className={classes.paper} >
             <Avatar className={classes.avatar}>
@@ -86,6 +111,32 @@ const  SignUp=()=> {
             </Typography>
             <form className={classes.form} noValidate>
             <Grid container spacing={2}>
+            <Grid item xs={6} >
+                <TextField
+                    autoComplete="name"
+                    name="firstname"
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="firstname"
+                    label="First Name"
+                    onInputCapture={(e) => setfirstname(e.target.value)}
+                    autoFocus
+                />
+                </Grid>
+                <Grid item xs={6} >
+                <TextField
+                    autoComplete="name"
+                    name="lastname"
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="lastname"
+                    label="Last Name"
+                    onInputCapture={(e) => setlastname(e.target.value)}
+                    autoFocus
+                />
+                </Grid>
                 <Grid item xs={12} >
                 <TextField
                     autoComplete="name"
@@ -121,31 +172,51 @@ const  SignUp=()=> {
                     label="Password"
                     type="password"
                     id="password"
-                    autoComplete="current-password"
+                    // autoComplete="current-password"
                     onInputCapture={(e) => setuserpass(e.target.value)}
                 />
                 </Grid>
-        
-            </Grid>
-            <Button
+
+                <Grid item xs={12}>
+                <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    name="password2"
+                    label="Confirm Password"
+                    type="password"
+                    id="password2"
+                    // autoComplete="current-password"
+                    onInputCapture={(e) => setuserpass2(e.target.value)}
+                />
+                </Grid>
+
+                <Grid item xs={12}>
+
+                <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 color="primary"
                 className={classes.submit}
                 onClick={ButtonClicked}
-            >
-                Sign Up
-            </Button>
-            <Grid container justify="flex-end">
-                <Grid item>
+                >
+                    Sign Up
+                </Button>
+                </Grid>
+              <Grid item xs={12} container justify="flex-end">
+               
                 <Link href="/Login" variant="body2">
                     Already have an account? Sign in
                 </Link>
-                </Grid>
+               
             </Grid>
+        
+            </Grid>
+            
             </form>
         </div>
+
     
         </Container>
     );

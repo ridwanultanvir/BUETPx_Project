@@ -25,4 +25,5 @@ urlpatterns = [
     path ('', include('post.urls')),
     path ('', include('discover.urls')),
     path ('', include('signup_login.urls')),
+    path ('', include('gallery.urls')),
 ]

@@ -12,7 +12,8 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import authService from "./authService";
-import Header from "../../Static/Header";
+import Header from "../../Static/Header"
+import {useState, useEffect} from "react";;
 
 
 const useStyles = makeStyles((theme) => ({
@@ -64,33 +65,56 @@ export default function SignInSide(props) {
 
 //   }
 
+const [user_name, setusername] = useState('');
+const [user_mail, setusermail] = useState('');
+const [user_pass, setuserpass] = useState('');
+
   const classes = useStyles();
 
 //   console.log(typeof classes.root);
 
-  const [account, setAccount] = React.useState({username:"",password:""});
 
-  const handelAccount = (property,event)=>{
+  const isVarifiedUser=(usermail, password)=>{
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          "email": usermail,
+          "password":password
+        })
+      };
+      
+      
+      fetch("http://localhost:8000/api/signup", requestOptions)
+        .then(response => 
+          {
+            // response.json()
+            console.log(response);
+            if (response.ok) {  
+              response.json()
+              window.location.href="\\";
+            }
+            else
+            {
+              throw new Error('User already exists') 
+            }
+          })
+        .catch(error =>
+            {
+              // window.location.reload(false);
+              console.log( error)
+              alert(error)
 
-    const accountCopy = {...account};
-    accountCopy[property] = event.target.value;
-
-    setAccount(accountCopy);
-
-  }
-
-  const isVarifiedUser=(username, password)=>{
-
-    return true;
-
+            });
   };
 
 
   const handelLogin = ()=>{
-      if(isVarifiedUser(account.username,account.password)){
-        authService.doLogIn(account.username);
-        setAccount({username:"",password:""});
-        props.history.push("/home");
+      if(isVarifiedUser(user_mail,user_pass)){
+        authService.doLogIn(user_mail);
+        setusermail("");
+        setuserpass("");
+        // props.history.push("/home");
 
       }
   };
@@ -106,7 +130,7 @@ export default function SignInSide(props) {
         xs={12}
         sm={8}
         md={5}
-        component={Paper}
+        // component={Paper}
         elevation={1}
         square
       >
@@ -118,7 +142,7 @@ export default function SignInSide(props) {
             Sign in
           </Typography>
           <form className={classes.form} noValidate>
-            <TextField
+            {/* <TextField
             onChange={(event)=>handelAccount("username",event)}
               variant="outlined"
               margin="normal"
@@ -128,9 +152,21 @@ export default function SignInSide(props) {
               label="Username"
               name="username"
               autoFocus
+            /> */}
+
+            <TextField
+            onChange={(event)=>setusermail(event.target.value)}
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email"
+              name="email"
+              autoFocus
             />
             <TextField
-            onChange={(event)=>handelAccount("password",event)}
+            onChange={(event)=>setuserpass(event.target.value)}
               variant="outlined"
               margin="normal"
               required
@@ -140,10 +176,6 @@ export default function SignInSide(props) {
               type="password"
               id="password"
               autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
             />
             <Button
               type="submit"

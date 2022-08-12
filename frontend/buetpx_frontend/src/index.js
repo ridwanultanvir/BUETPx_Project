@@ -1,5 +1,6 @@
 import React from "react";
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import "./index.css";
 // import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -17,9 +18,11 @@ import TestForm from "./Component/TestForm/TestFrom";
 import Explore from "./Component/Discover/Explore";
 import SignUp from "./Component/Signup/Signup";
 import Login from "./Component/Login/Login";
+import Galleries from "./Component/Gallery/Galleries";
+import Gallery from "./Component/Gallery/Gallery";
 
-
-ReactDOM.render(
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
   <Router>
     <Routes>
       <Route path="/" element={<Homefeed />} />
@@ -27,19 +30,24 @@ ReactDOM.render(
       {/* <Route path="/posts/:id" element={<Post />} /> */}
       <Route path="/posts/:id" element={<Post />} />
       <Route path="/post_with_tags/:tagname" element={<Tags />} />
+      
       <Route path="/Discover" element={<Explore />} />
+      <Route path="/discover/filtered/:catname" element={<ShowFilteredResult />} />
       {/* <Route path="/Discover_" element={<Explore />} /> */}
       <Route path="/Upload" element={<Upload />} />
+
       <Route path="/Signup" element={<SignUp />} />
       <Route path="/Login" element={<Login />} />
-	  <Route path="/discover/filtered/:catname" element={<ShowFilteredResult />} />
+
+      <Route path="/Galleries" element={<Galleries />} />
+      <Route path="/Gallery/:id" element={<Gallery />} />
+
+	    
 
 
     </Routes>
     
-  </Router>,
-
-  document.getElementById("root")
+  </Router>
 );
 
 // serviceWorker.unregister();
