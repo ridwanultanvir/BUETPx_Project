@@ -35,11 +35,11 @@ root.render(
       <Route path="/discover/filtered/:catname" element={<ShowFilteredResult />} />
       {/* <Route path="/Discover_" element={<Explore />} /> */}
       <Route path="/Upload" element={<Upload />} />
-<<<<<<< HEAD
+
       <Route path="/TestForm" element={<TestForm />} />
       <Route path="/ImageList" element={<MyImageList />} />
 	  <Route path="/discover/filtered/:catname" element={<ShowFilteredResult />} />
-=======
+
 
       <Route path="/Signup" element={<SignUp />} />
       <Route path="/Login" element={<Login />} />
