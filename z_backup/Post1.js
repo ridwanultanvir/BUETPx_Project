@@ -26,13 +26,13 @@ import {
   useParams,
   useNavigate
 } from "react-router-dom";
-<<<<<<< HEAD:frontend/buetpx_frontend/src/Component/Post/Post1.js
+
 import CommentCard from './CommentCard';
 import Time from 'react-time-format'
-=======
+
 import CommentCard from '../frontend/buetpx_frontend/src/Component/Post/CommentCard';
 
->>>>>>> 84bd0b431a76b1dddafc719dc04da175a3103120:z_backup/Post1.js
+
 const Img = styled('img')({
   margin: 'auto',
   display: 'block',
