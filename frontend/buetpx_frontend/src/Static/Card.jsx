@@ -91,7 +91,7 @@ class MyCard extends Component{
             height='300'
             
             width='100%'
-            objectFit='cover'
+            objectfit='cover'
             alt={photo_url}
             // className={classes.Media}
           />

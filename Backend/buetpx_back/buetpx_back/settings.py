@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     'buetpx.apps.BuetpxConfig',
     'post.apps.PostConfig',
     'corsheaders',
+    'signup_login.apps.SignupLoginConfig',
+    'gallery.apps.GalleryConfig',
+
 ]
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',

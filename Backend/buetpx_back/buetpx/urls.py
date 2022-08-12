@@ -22,6 +22,7 @@ urlpatterns = [
     path ('api/posts/<postid>/comments', views.get_comments_by_postid),
     path ('api/comments/<postid>', views.get_comments_by_postid),
     path ('api/likes/<postid>', views.get_num_likes_by_postid),
+    path ('api/check_likes/<postid>/<user_id>', views.get_check_if_user_already_liked),
     # path ('api/tags/<postid>', views.get_tags_by_postid),
 
     # path ('api/comments/<id>', views.get_comment_by_id),
