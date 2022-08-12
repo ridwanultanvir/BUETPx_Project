@@ -29,11 +29,11 @@ urlpatterns = [
     # path ('api/comments_post/<id>', views.get_comment_by_post_id),
 
     path ('api/users', views.get_all_user),
+    
     path ('api/user/<id>', views.get_user_by_id),
     path ('api/posts_with_uid/<id>', views.get_post_with_uid_by_id),
     path ('api/comment_insert', views.insert_comment),
     path ('api/insert_like', views.insert_like),
-    path ('api/delete_like/<post_id>/<user_id>', views.delete_like),
 
     # path ('api/insert_like2', views.insert_like2),
     # api: photo_url pathabi; request query theke; pic tar ekta tag list return 
