@@ -116,19 +116,21 @@ def insert_like(request):
                 return JsonResponse(like_serializer.data, status=status.HTTP_201_CREATED) 
         return JsonResponse(like_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-# @api_view(['POST'])
-# def insert_like(request):
+@api_view(['DELETE'])
+def delete_like(request, post_id, user_id):
+    # find tutorial by pk (id)
+    try: 
+        like_obj = Like.objects.filter(post_id=post_id, user_id=user_id)
+
+        if request.method == 'DELETE': 
+            like_obj.delete() 
+            return JsonResponse({'message': 'Like was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
    
-#     if request.method == 'POST':
-        
-#         like_data = JSONParser().parse(request)
-#         like_serializer = LikeInsertSerializer2(data=like_data)
+    except Tutorial.DoesNotExist: 
+        return JsonResponse({'message': 'The like does NOT exist'}, status=status.HTTP_404_NOT_FOUND) 
+ 
 
-#         if like_serializer.is_valid():
-#                 like_serializer.save()
-#                 return JsonResponse(like_serializer.data, status=status.HTTP_201_CREATED) 
-#         return JsonResponse(like_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+    
 
 
 # json field server accept 

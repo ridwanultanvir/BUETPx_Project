@@ -6,6 +6,12 @@ cd frontend/buetpx_frontend
 npm start
 ```
 
+http://localhost:8000/api/delete_like/1/4
+
+
+##
+
+http://localhost:8000/api/
 
 ##
 buetpx_frontend ==> react 
@@ -22,15 +28,5 @@ opencv image properties : https://www.javatpoint.com/opencv-basic-operation-on-i
 object detection : https://www.youtube.com/watch?v=HXDD7-EnGBY&ab_channel=Murtaza%27sWorkshop-RoboticsandAI 
 
 
-
-##
-django.db.migrations.exceptions.NodeNotFoundError
-
-delete migrations folder 
-```
-python manage.py makemigrations
-python manage.py migrate
-```
-manage.py er location e ei command: 
 
 
