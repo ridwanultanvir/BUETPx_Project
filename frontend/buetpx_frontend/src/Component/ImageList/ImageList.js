@@ -112,8 +112,8 @@ const  MyImageList=()=>{
               
 
                   <ImageListItemBar
-                  title={"abul"}
-                  subtitle={"cholo"}
+                  title={post.post_title}
+                  subtitle={post.owner.name}
                   actionIcon={
                     <IconButton
                       sx={{ color: 'rgba(255, 255, 255, 0.54)' }}

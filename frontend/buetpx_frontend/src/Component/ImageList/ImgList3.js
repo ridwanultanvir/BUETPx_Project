@@ -112,12 +112,12 @@ const  MyImageList=()=>{
               
 
                   <ImageListItemBar
-                  title={post.post_title}
-                  subtitle={post.owner}
+                  title={"abul"}
+                  subtitle={"cholo"}
                   actionIcon={
                     <IconButton
                       sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
-                      aria-label={`info about ${post.post_title}`}
+                      aria-label={`info about ${"jai"}`}
                     >
                       <InfoIcon />
                     </IconButton>
