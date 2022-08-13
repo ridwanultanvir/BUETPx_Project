@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import ImgCard from "./ImgCard";
-import { Grid } from "@mui/material";
+import { Grid, ImageList } from "@mui/material";
 // import photoList from "./Constants";
-
+import Box from '@mui/material/Box';
 class ImgBody extends Component{
     constructor(props) {
         super(props);
@@ -61,10 +61,13 @@ class ImgBody extends Component{
         render()
         {
             return (
-                      <Grid container spacing={2}>
-                
-                        {this.state.photoList.map(photoObj => this.getPhotoCard(photoObj))}
-                      </Grid>
+                <Box sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                <ImageList variant="masonry" cols={3} gap={20}>
+                {this.state.photoList.map(photoObj => this.getPhotoCard(photoObj))}
+                </ImageList>
+                </Box>
+
+
                     );
         }
 
