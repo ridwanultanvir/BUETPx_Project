@@ -3,7 +3,6 @@ import {Grid} from "@mui/material";
 // import Header from './Contents/Header';
 import Header from '../../Static/Header';
 import Body from '../../Static/Body';
-import ImgBody from './ImgBody';
 
 function ImageList() {
   return (
@@ -20,7 +19,7 @@ function ImageList() {
           </Grid>
 
           <Grid item xs={12} sm={10} >
-          <ImgBody/>
+          <Body/>
           </Grid>
 
           <Grid item xs={0} sm={1} >
