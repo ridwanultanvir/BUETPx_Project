@@ -11,7 +11,7 @@ import Box from '@mui/material/Box';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem'
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-
+import Img2 from './Img2';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import ListSubheader from '@mui/material/ListSubheader';
 import IconButton from '@mui/material/IconButton';
@@ -120,12 +120,14 @@ const  MyImageList=()=>{
       
       }
       const getLikeCount = (post) => {
+        console.log("getLikeCount: post",post);
         fetch("http://localhost:8000/api/likes/"+post.id)
         .then(res => res.json())
         .then(
           (result) => {
             setIsLoaded(true);
             setnumLike(result);
+            post.num_likes = result; 
           },
   
           (error) => {
@@ -181,13 +183,6 @@ const  MyImageList=()=>{
           .then(
             (result) => {
               setIsLoaded(true);
-              // add isLike field to result 
-   
-              result.map(post => {
-                                      post.isLiked = false;
-                                      post.num_likes = 1; 
-                                      return post;
-              });
               setposts(result);
             },
             
@@ -200,18 +195,7 @@ const  MyImageList=()=>{
       
       
 
-      const getPost = post => {
-        return (
-          <Grid item 
-          xs={12} sm={6} md={6} lg={4}
-           >
-           <Card {...post} />
-           </Grid>
 
-    
-    
-        );
-      };
 
 
 
@@ -241,30 +225,7 @@ const  MyImageList=()=>{
         <Box sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
           <ImageList variant="masonry" cols={3} gap={20}>
             {posts.map((post) => (
-              <ImageListItem key={post.photo_url}>
-                <img
-                  src={`${post.photo_url}?w=248&fit=crop&auto=format`}
-                  srcSet={`${post.photo_url}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                  alt={post.post_title}
-                  loading="lazy"
-                />
-              
-
-                  <ImageListItemBar
-                  title={post.post_title}
-                  subtitle={post.owner.name}
-                  actionIcon={
-                    <IconButton
-                      sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
-                      aria-label={`info about ${post.post_title}`}
-                    >
-                    <ThumbUpIcon ></ThumbUpIcon>
-                    <h5> {post.num_likes} </h5>
-                    </IconButton>
-                  }
-                  />
-
-        </ImageListItem>
+              <Img2 {...post}> </Img2>
             ))}
           </ImageList>
         </Box>
@@ -283,3 +244,4 @@ const  MyImageList=()=>{
     }
 
     export default MyImageList;
+

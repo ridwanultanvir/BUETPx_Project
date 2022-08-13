@@ -120,12 +120,14 @@ const  MyImageList=()=>{
       
       }
       const getLikeCount = (post) => {
+        console.log("getLikeCount: post",post);
         fetch("http://localhost:8000/api/likes/"+post.id)
         .then(res => res.json())
         .then(
           (result) => {
             setIsLoaded(true);
             setnumLike(result);
+            post.num_likes = result; 
           },
   
           (error) => {
@@ -181,13 +183,6 @@ const  MyImageList=()=>{
           .then(
             (result) => {
               setIsLoaded(true);
-              // add isLike field to result 
-   
-              result.map(post => {
-                                      post.isLiked = false;
-                                      post.num_likes = 1; 
-                                      return post;
-              });
               setposts(result);
             },
             
@@ -259,7 +254,7 @@ const  MyImageList=()=>{
                       aria-label={`info about ${post.post_title}`}
                     >
                     <ThumbUpIcon ></ThumbUpIcon>
-                    <h5> {post.num_likes} </h5>
+                    <h5> 10 </h5>
                     </IconButton>
                   }
                   />
@@ -283,3 +278,4 @@ const  MyImageList=()=>{
     }
 
     export default MyImageList;
+
