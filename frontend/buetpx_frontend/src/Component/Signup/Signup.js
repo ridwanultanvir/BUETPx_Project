@@ -48,7 +48,7 @@ const  SignUp=()=> {
     const [user_pass2, setuserpass2] = useState('');
     const classes = useStyles();
 
-    const ButtonClicked =(event)=>
+    const ButtonClicked = async (event)=>
         {
             // alert('Button clicked!');
             event.preventDefault();
@@ -56,43 +56,61 @@ const  SignUp=()=> {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                  "username": user_name,
+                  "username": user_mail,
+                  "password":user_pass,
+                  "password2":user_pass2,
+                  "email": user_mail,
                   "first_name":first_name,
                   "last_name":last_name,
-                  "email": user_mail,
                 //   photo url needs to be taken from uploaded photo
-                  "photo_url": 'http://tiny.cc/namira123',
+                  // "photo_url": 'http://tiny.cc/namira123',
                 //   hashing will be done in the backend
-                  "password":user_pass,
-                  "password2":user_pass2
                 })
               };
-              
-              
-              fetch("http://localhost:8000/api/register", requestOptions)
-                .then(response => 
+
+              await fetch("http://localhost:8000/api/register", requestOptions)
+                .then(async response => 
                   {
-                    // response.json()
-                    console.log(response);
-                    if (response.ok) {  
-                      response.json()
-                      // window.location.href="\\";
+                    if (response.ok) {
+                    // let user = await response.json()
+                    const user=await response.json()
+                    console.log(user)
+                    // window.location.href="\\login";
+                    // window.location.reload(false);
                     }
                     else
                     {
-                      throw new Error('User already exists') 
+                      const error=await response.json()
+                      if (error['email'])
+                        {
+                          console.log(error['email'][0])
+                          throw new Error('Email field must be unique')
+                        }
+                      if(error['password'])
+                       {
+                        console.log(error['password'][0])
+                        throw new Error(error['password'][0])
+                       }
+                       
                     }
-                  })
-                .catch(error =>
+                  }
+                  )
+                  .catch(error =>
                     {
                       // window.location.reload(false);
                       console.log( error)
                       alert(error)
         
                     });
+
+              //   let response= await fetch("http://localhost:8000/api/register", requestOptions)
+              //   // let user = await response.json().then(result=>result.data);
+              //   if (response.ok) { 
+              //   let user = await response.json();
+              //   console.log(user['username'])
+              // }
                 
-                
-                // 
+      
             
         }
 
@@ -134,10 +152,10 @@ const  SignUp=()=> {
                     id="lastname"
                     label="Last Name"
                     onInputCapture={(e) => setlastname(e.target.value)}
-                    autoFocus
+                    
                 />
                 </Grid>
-                <Grid item xs={12} >
+                {/* <Grid item xs={12} >
                 <TextField
                     autoComplete="name"
                     name="Name"
@@ -147,9 +165,9 @@ const  SignUp=()=> {
                     id="Name"
                     label="Name"
                     onInputCapture={(e) => setusername(e.target.value)}
-                    autoFocus
+                 
                 />
-                </Grid>
+                </Grid> */}
                 <Grid item xs={12}>
                 <TextField
                     variant="outlined"
