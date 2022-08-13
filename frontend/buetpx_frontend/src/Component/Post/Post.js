@@ -92,7 +92,7 @@ const  Post=()=>{
     
     }
 
-    const insertLikeFunc = () => {
+    const insertLikeFunc = async () => {
       const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -102,7 +102,7 @@ const  Post=()=>{
           "post": id
         })
       };
-      fetch("http://localhost:8000/api/insert_like", requestOptions)
+      await fetch("http://localhost:8000/api/insert_like", requestOptions)
           .then(response => response.json())
           .then(data => {
             console.log(data);
@@ -111,6 +111,27 @@ const  Post=()=>{
           )
           .catch(error => console.log('error', error));
     }
+
+    const deleteLikeFunc = async () => {
+      await fetch("http://localhost:8000/api/delete_like/"+id+"/"+uid, { method: 'DELETE' })
+          .then(res => res.json())
+          .then(
+            (result) => {
+              setIsLoaded(true);
+              
+              console.log("delete_result",result);
+
+              
+            },
+
+            (error) => {
+              setIsLoaded(true);
+              setError(error);
+            }
+          )
+      
+      
+      }
 
 
     const handleLikeClick = () => {
@@ -125,6 +146,7 @@ const  Post=()=>{
       }
       else {
         console.log("already liked; so NO insert!!!");
+        deleteLikeFunc(); // delete like if user already liked this post
       
       }
 
