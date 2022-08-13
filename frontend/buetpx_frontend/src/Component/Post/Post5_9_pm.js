@@ -93,12 +93,6 @@ const  Post=()=>{
       console.log("---checklike",checklike);   
       console.log("ami checkLikeFunc er sheshe"); 
       setcheck1(true);    
-      if(checklike.num_likes_this_user === 0){
-        setIsLike(false); 
-      }else{
-        setIsLike(true); 
-      }
-      
       console.log("check1",check1);
       
       
@@ -181,13 +175,13 @@ const  Post=()=>{
       console.log("ami check1 true e");
       if(isLike){
         console.log("delete like");
-        deleteLikeFunc();
-        setIsLike(false);
+        // deleteLikeFunc();
+        // setIsLike(false);
         // setCountUp(countUp - 1);
       }else{
         console.log("insert like");
-        insertLikeFunc();
-        setIsLike(true);
+        // insertLikeFunc();
+        // setIsLike(true);
         // setCountUp(countUp + 1);
       }
       
