@@ -2,6 +2,7 @@ import React from 'react';
 import {Avatar, Grid} from "@mui/material";
 import Header from '../../Static/Header';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import CommentIcon from '@mui/icons-material/Comment';
 import {IconButton} from '@mui/material';
 import { TextField } from '@mui/material';
@@ -132,8 +133,8 @@ const  Post=()=>{
       
       
       }
-      const getLikeCount = () => {
-        fetch("http://localhost:8000/api/likes/"+id)
+      const getLikeCount = async () => {
+        await fetch("http://localhost:8000/api/likes/"+id)
         .then(res => res.json())
         .then(
           (result) => {
@@ -149,25 +150,18 @@ const  Post=()=>{
       }
 
     const handleLikeClick = () => {
-      setIsLike(!isLike);
+
       console.log("Like Clicked ");
-      
-      checkLikeFunc(); // check if user already liked this post
-      setTimeout(() => {console.log("The meaning of life")
-        if (checklike.num_likes_this_user == 0) {
-          console.log("not liked; so INSERT------------------------------");
-          insertLikeFunc();
-        }
-        else {
-          console.log("already liked; so NO insert!!!");
-          deleteLikeFunc(); // delete like if user already liked this post
-        
-        }
-        getLikeCount();
-      }, 1000);
       
       
 
+      
+    }
+
+    const handleDislikeClick = () => {
+
+      console.log("DisLike Clicked ");
+      
       
 
       
@@ -369,12 +363,8 @@ const  Post=()=>{
 
                         
                         <ThumbUpIcon onClick={handleLikeClick} ></ThumbUpIcon>
+                        <ThumbDownIcon onClick={handleDislikeClick}></ThumbDownIcon>
 
-                        {/* <h1> {checklike.num_like_this_user}</h1> */}
-                        
-                        {/* <ThumbUpIcon onClick={handleLikeClick} style={  colorStyle}></ThumbUpIcon> */}
-
-                        {/* <Grid item xs={2}> 2400 </Grid> */}
                         <Grid item xs={2}> {numLike.num_likes}  </Grid>
 
                         </Grid>    
