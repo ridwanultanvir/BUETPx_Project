@@ -66,33 +66,15 @@ const  Post=()=>{
 
     }
 
-
+    const colorStyle = {color:"blue"}; 
 
     const [numLike, setnumLike] = useState([]);  
 
-    const checkLikeFunc = async () => {
-      await fetch("http://localhost:8000/api/check_likes/"+id+"/"+uid)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          setIsLoaded(true);
-          setchecklike(result);
-          console.log("---checklike",result);   
-          console.log("ami checkLikeFunc er sheshe");       
-          
-        },
-        (error) => {
-          setIsLoaded(true);
-          setError(error);
-        }
-      )
-      
-      
-      
-    
-    }
 
-    const insertLikeFunc = () => {
+    const handleLikeClick = () => {
+      setIsLike(!isLike);
+      console.log("Like Clicked ");
+      
       const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -102,7 +84,33 @@ const  Post=()=>{
           "post": id
         })
       };
-      fetch("http://localhost:8000/api/insert_like", requestOptions)
+      // notun add
+      // console.log("checklike.num_likes_this_user:", checklike.num_likes_this_user); 
+      //if (checklike.num_likes_this_user === 0) {
+      //eta kaj korbe NA; amake again api fetch korte hobe; karon eta to update hoye gese
+      fetch("http://localhost:8000/api/check_likes/"+id+"/"+uid)
+        .then(res => res.json())
+        .then(
+          (result) => {
+            setIsLoaded(true);
+            setchecklike(result);
+            console.log("checklike",result);
+            // console.log("checklike.num_likes_this_user",{checklike.num_likes_this_user});
+            
+          },
+        
+          // Note: it's important to handle errors here
+          // instead of a catch() block so that we don't swallow
+          // exceptions from actual bugs in components.
+          (error) => {
+            setIsLoaded(true);
+            setError(error);
+          }
+        )
+      console.log("checklike.num_likes_this_user:", checklike.num_likes_this_user); 
+      if (checklike.num_likes_this_user === 0) {
+        console.log("inside if");
+        fetch("http://localhost:8000/api/insert_like", requestOptions)
           .then(response => response.json())
           .then(data => {
             console.log(data);
@@ -110,30 +118,85 @@ const  Post=()=>{
           }
           )
           .catch(error => console.log('error', error));
+      } else {
+        console.log("inside else");
+        // const requestOptionsDelete = {
+        //   method: 'DELETE',
+        //   headers: { 'Content-Type': 'application/json' },
+        //   body: JSON.stringify({
+        //     "post_id": id,
+        //     "user_id": uid,
+            
+        //   })
+        // };
+          // fetch('https://jsonplaceholder.typicode.com/posts/1', { method: 'DELETE' })
+     
+          fetch("http://localhost:8000/api/delete_like/"+id+"/"+uid, { method: 'DELETE' })
+          .then(res => res.json())
+          .then(
+            (result) => {
+              setIsLoaded(true);
+              
+              console.log("delete_result",result);
+
+              
+            },
+
+            (error) => {
+              setIsLoaded(true);
+              setError(error);
+            }
+          )
+      
+      
+      }
+
+     
+      // jate immediate update kore like er count 
+      fetch("http://localhost:8000/api/likes/"+id)
+          .then(res => res.json())
+          .then(
+            (result) => {
+              setIsLoaded(true);
+              setnumLike(result);
+            },
+            // Note: it's important to handle errors here
+            // instead of a catch() block so that we don't swallow
+            // exceptions from actual bugs in components.
+            (error) => {
+              setIsLoaded(true);
+              setError(error);
+            }
+          )
+      
     }
 
-
-    const handleLikeClick = () => {
-      setIsLike(!isLike);
-      console.log("Like Clicked ");
-      
-      checkLikeFunc(); // check if user already liked this post
-      
-      if (checklike.num_likes_this_user === 0) {
-        console.log("not liked; so INSERT------------------------------");
-        insertLikeFunc();
+    const handleLikeClick2 = () => {
+        setIsLike(!isLike);
+        console.log("Like Clicked ");
+        
+        const requestOptions = {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            "like_date": new Date(),
+            "user": uid,
+            "post": id
+          })
+        };
+        // notun add
+        
+        fetch("http://localhost:8000/api/insert_like", requestOptions)
+          .then(response => response.json())
+          .then(data => {
+            console.log(data);
+            
+          }
+          )
+          .catch(error => console.log('error', error));
+        
       }
-      else {
-        console.log("already liked; so NO insert!!!");
-      
-      }
 
-      
-
-      
-    }
-
- 
         
 
     
@@ -146,7 +209,8 @@ const  Post=()=>{
           (result) => {
             setIsLoaded(true);
             setchecklike(result);
-            
+            console.log("checklike",result);
+            // console.log("checklike.num_likes_this_user",{checklike.num_likes_this_user});
             
           },
         
@@ -325,10 +389,11 @@ const  Post=()=>{
                         </Grid>
                         <Grid item xs={4}></Grid>
                         <Grid item xs={2}> 
-                        
+                        {/* <IconButton size="small"><ThumbUpIcon/></IconButton>  */}
 
-                        
-                        <ThumbUpIcon onClick={handleLikeClick} ></ThumbUpIcon>
+                        {/* NOTUN ADD KORSI  */}
+                        {/* <Button onClick={() => setCountUp(countUp + 1)}><ThumbUpIcon />{`${countUp === 0 ? '' : countUp}`}</Button> */}
+                        <ThumbUpIcon onClick={handleLikeClick} style={handleCheckIfLiked() ? colorStyle : null}></ThumbUpIcon>
 
                         {/* <h1> {checklike.num_like_this_user}</h1> */}
                         
