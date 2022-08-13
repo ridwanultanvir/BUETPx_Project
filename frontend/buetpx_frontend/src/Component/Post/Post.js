@@ -132,7 +132,21 @@ const  Post=()=>{
       
       
       }
-
+      const getLikeCount = () => {
+        fetch("http://localhost:8000/api/likes/"+id)
+        .then(res => res.json())
+        .then(
+          (result) => {
+            setIsLoaded(true);
+            setnumLike(result);
+          },
+  
+          (error) => {
+            setIsLoaded(true);
+            setError(error);
+          }
+        )
+      }
 
     const handleLikeClick = () => {
       setIsLike(!isLike);
@@ -140,7 +154,7 @@ const  Post=()=>{
       
       checkLikeFunc(); // check if user already liked this post
       setTimeout(() => {console.log("The meaning of life")
-        if (checklike.num_likes_this_user === 0) {
+        if (checklike.num_likes_this_user == 0) {
           console.log("not liked; so INSERT------------------------------");
           insertLikeFunc();
         }
@@ -149,8 +163,9 @@ const  Post=()=>{
           deleteLikeFunc(); // delete like if user already liked this post
         
         }
-    
+        getLikeCount();
       }, 1000);
+      
       
 
       
