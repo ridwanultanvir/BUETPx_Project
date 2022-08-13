@@ -2,6 +2,7 @@ import React from 'react';
 import {Avatar, Grid} from "@mui/material";
 import Header from '../../Static/Header';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import CommentIcon from '@mui/icons-material/Comment';
 import {IconButton} from '@mui/material';
 import { TextField } from '@mui/material';
@@ -32,9 +33,9 @@ const Img = styled('img')({
   alignContent:'left'
 });
 
-// import Moment from 'react-moment';
+// import Moment from 'react-moment';s
 
-const uid = 1;
+const uid = 2001;
 
 
 const  Post=()=>{
@@ -42,20 +43,228 @@ const  Post=()=>{
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [post, setpost] = useState([]);  
+    const [checklike, setchecklike] = useState([]); 
+    // const[checklikebool, setchecklikebool] = useState(false);
     const [comments, setcomments] = useState([]);
     const [commentTxt, setcommentTxt] = useState("");
     const [post_owner, setowner] = useState([]);
-    const [new_tag, setNewTag] = useState([]);
 
-    const { id } = useParams();
+    // ===   NOTUN ADD KORSI =====================
+    const [countUp, setCountUp] = useState(0); 
 
-    useEffect(() => {
-        fetch("http://localhost:8000/api/posts_with_uid/"+id)
+    const[isLike, setIsLike] = useState(false);
+
+    const[check1, setcheck1] = useState(false);
+
+
+
+    const handleCheckIfLiked = () => {
+      if (checklike.num_likes_this_user === 0) {
+        // console.log("not liked------------------------------");
+        return 0; 
+        
+      } else {
+        // console.log("liked==============================");
+        return 1; 
+      }
+
+    }
+
+
+
+    const [numLike, setnumLike] = useState([]);  
+
+    const checkLikeFunc = () => {
+      fetch("http://localhost:8000/api/check_likes/"+id+"/"+uid)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          setIsLoaded(true);
+          setchecklike(result);
+            
+          
+        },
+        (error) => {
+          setIsLoaded(true);
+          setError(error);
+        }
+      )
+
+      console.log("---checklike",checklike);   
+      console.log("ami checkLikeFunc er sheshe"); 
+      setcheck1(true);    
+      console.log("check1",check1);
+      if(checklike.num_likes_this_user === 0){
+        setIsLike(false); 
+      }else{
+        setIsLike(true); 
+      }
+      
+      
+      
+      
+      
+    
+    }
+
+    const insertLikeFunc = () => {
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          "like_date": new Date(),
+          "user": uid,
+          "post": id
+        })
+      };
+      fetch("http://localhost:8000/api/insert_like", requestOptions)
+          .then(response => response.json())
+          .then(data => {
+            console.log(data);
+            
+          }
+          )
+          .catch(error => console.log('error', error));
+    }
+
+    const deleteLikeFunc = () => {
+      fetch("http://localhost:8000/api/delete_like/"+id+"/"+uid, { method: 'DELETE' })
           .then(res => res.json())
           .then(
             (result) => {
               setIsLoaded(true);
-              setpost(result);
+              
+              console.log("delete_result",result);
+
+              
+            },
+
+            (error) => {
+              setIsLoaded(true);
+              setError(error);
+            }
+          )
+      
+      
+      }
+      const getLikeCount = () => {
+        fetch("http://localhost:8000/api/likes/"+id)
+        .then(res => res.json())
+        .then(
+          (result) => {
+            setIsLoaded(true);
+            setnumLike(result);
+          },
+  
+          (error) => {
+            setIsLoaded(true);
+            setError(error);
+          }
+        )
+      }
+
+    const handleLikeClick = () => {
+
+      console.log("Like Clicked ");
+      checkLikeFunc();
+      /*
+      while(check1 === false){
+        console.log("ami check1 e");
+      }
+      */
+     while(check1 === false){
+      console.log("ami check1 false e");
+      setTimeout(() => {console.log("The meaning of life")
+        
+      }, 1000);
+      break; 
+     }
+    
+      
+      
+
+      console.log("ami check1 true e");
+      if(isLike){
+        console.log("delete like");
+        deleteLikeFunc();
+        setIsLike(false);
+        // setCountUp(countUp - 1);
+      }else{
+        console.log("insert like");
+        insertLikeFunc();
+        setIsLike(true);
+        // setCountUp(countUp + 1);
+      }
+      
+      
+
+      
+    }
+
+    const handleDislikeClick = () => {
+
+      console.log("DisLike Clicked ");
+      
+      
+
+      
+    }
+
+ 
+        
+
+    
+    const { id } = useParams();
+
+    useEffect(() => {
+      fetch("http://localhost:8000/api/check_likes/"+id+"/"+uid)
+        .then(res => res.json())
+        .then(
+          (result) => {
+            setIsLoaded(true);
+            setchecklike(result);
+            
+            
+          },
+        
+          // Note: it's important to handle errors here
+          // instead of a catch() block so that we don't swallow
+          // exceptions from actual bugs in components.
+          (error) => {
+            setIsLoaded(true);
+            setError(error);
+          }
+        )
+    }, []);
+
+    useEffect(() => {
+      fetch("http://localhost:8000/api/posts_with_uid/"+id)
+        .then(res => res.json())
+        .then(
+          (result) => {
+            setIsLoaded(true);
+            setpost(result);
+          },
+          // Note: it's important to handle errors here
+          // instead of a catch() block so that we don't swallow
+          // exceptions from actual bugs in components.
+          (error) => {
+            setIsLoaded(true);
+            setError(error);
+          }
+        )
+    }, [checklike]);
+
+
+    
+
+    useEffect(() => {
+        fetch("http://localhost:8000/api/likes/"+id)
+          .then(res => res.json())
+          .then(
+            (result) => {
+              setIsLoaded(true);
+              setnumLike(result);
             },
             // Note: it's important to handle errors here
             // instead of a catch() block so that we don't swallow
@@ -65,7 +274,7 @@ const  Post=()=>{
               setError(error);
             }
           )
-      }, []);
+      }, [post]);
       
       const {post_title,post_date,photo_url,owner,category,place,tags}=post;
       // console.log(post_title);
@@ -89,7 +298,7 @@ const  Post=()=>{
           )
         }
           // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, [post]);
+      }, [numLike]);
 
       useEffect(() => {
         fetch("http://localhost:8000/api/posts/"+id+"/comments")
@@ -109,6 +318,8 @@ const  Post=()=>{
           )
           // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [post_owner]);
+
+      
 
       const handleComment = (e) => {
         e.preventDefault();
@@ -165,64 +376,6 @@ const  Post=()=>{
     };
 
 
-    // online here
-
-    const handleNewTagUpload=(e)=>
-    {
-      if(owner === uid)
-      {
-        e.preventDefault();
-      const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          "name": new_tag,
-         
-        })
-      };
-      fetch("http://localhost:8000/api/tag_insert", requestOptions)
-        .then(response => response.json())
-        .then(data => {
-          console.log(data);
-          // setcomments(data);
-          setNewTag("");
-        }
-        )
-        .catch(error => console.log('error', error));
-      }
-
-      else
-      {
-        alert("You are not the owner");
-      }
-    }
-
-//     const getTypographed=title=>
-//     {
-//       return(
-// <Grid item xs={1.5} >
-//                         <Typography
-//                         variant="h6"
-//                         noWrap
-//                         component="a"
-//                         href=""
-//                         sx={{
-//                             mr: 2,
-//                             display: { xs: 'none', md: 'flex' },
-//                             fontFamily: 'revert-layer',
-//                             fontWeight: 600,
-//                             // letterSpacing: '.3rem',
-//                             color: 'inherit',
-//                             textDecoration: 'none',
-//                         }}
-//                         >
-//                           <LocationOnOutlinedIcon sx={{marginRight:2}}/>
-//                         {title}
-//                         </Typography>
-
-//                 </Grid>
-//       );
-//     }
 
     return (
         <Grid container direction='column' spacing={2}>
@@ -249,7 +402,18 @@ const  Post=()=>{
                         </Grid>
                         <Grid item xs={4}></Grid>
                         <Grid item xs={2}> 
-                        <IconButton size="small"><ThumbUpIcon/></IconButton> 
+                        
+
+                        <Grid item xs={2}> 
+                        <ThumbUpIcon onClick={handleLikeClick} ></ThumbUpIcon>
+                        </Grid>
+                        {/* <Grid item xs={2}> 
+                        <ThumbDownIcon onClick={handleDislikeClick}></ThumbDownIcon>
+                        </Grid>
+                         */}
+
+                        <Grid item xs={2}> {numLike.num_likes}  </Grid>
+
                         </Grid>    
                         <Grid item xs={2}>
                         <IconButton size="small"><CollectionsOutlinedIcon/></IconButton>
@@ -288,6 +452,7 @@ const  Post=()=>{
             }}
           >
             by {post_owner.name}
+            by123 {checklike.num_likes_this_user}
           </Typography>
 
                       
@@ -355,58 +520,6 @@ const  Post=()=>{
 
                 </Grid>
                 <Grid item xs={10.5} >{tags?.map(tag => getTag(tag))}</Grid>
-  {/* online here */}
-                
-                </Grid>
-
-                {/* onChange={e => setPostTitle(e.target.value)} */}
-                <Grid item container sx={{marginTop:2}}>
-                <Grid item xs={2} >
-                        <Typography
-                        variant="h6"
-                        noWrap
-                        component="a"
-                        href=""
-                        sx={{
-                            mr: 2,
-                            display: { xs: 'none', md: 'flex' },
-                            fontFamily: 'revert-layer',
-                            fontWeight: 600,
-                            // letterSpacing: '.3rem',
-                            color: 'inherit',
-                            textDecoration: 'none',
-                        }}
-                        >
-                          <StyleOutlinedIcon sx={{marginRight:2}}/>
-                        Add Tag
-                        </Typography>
-
-                </Grid>
-                <Grid item xs={5} >
-                <TextField
-                        id="NewTag"
-                        label="New Tag"
-                        sx={{
-                            marginBottom:4,
-                            marginLeft:4,
-                            // marginRight:4,
-                            
-                        }}
-
-                        onChange={e => setNewTag(e.target.value)}
-
-                        />
-                </Grid>
-                <Grid item xs={5} >
-
-                <Button variant="outlined" color="primary" sx={{
-            marginRight:2
-          }} onClick={handleNewTagUpload}>   
-          Submit
-          
-          </Button>
-                      
-                </Grid>
                 
                 
                 </Grid>
