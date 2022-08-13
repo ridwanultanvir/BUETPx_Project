@@ -1,9 +1,16 @@
 ##
 ```
 F:\L4T1_code\CSE408_project\dj_env1\Scripts\activate
+cd Backend/buetpx_back
 python manage.py runserver 
 cd frontend/buetpx_frontend
+conda activate js_env1
 npm start
+```
+
+```
+
+npm install --legacy-peer-deps --save firebase
 ```
 
 http://localhost:8000/api/delete_like/3/2
