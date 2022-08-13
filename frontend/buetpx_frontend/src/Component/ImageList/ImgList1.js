@@ -10,12 +10,6 @@ import {useState, useEffect} from "react";
 import Box from '@mui/material/Box';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem'
-
-
-import ImageListItemBar from '@mui/material/ImageListItemBar';
-import ListSubheader from '@mui/material/ListSubheader';
-import IconButton from '@mui/material/IconButton';
-import InfoIcon from '@mui/icons-material/Info';
 import {
   useParams
 } from "react-router-dom";
@@ -30,7 +24,14 @@ const Img = styled('img')({
 });
 // import Time from 'react-time-format'
 // import Moment from 'react-moment';
-
+function srcset(image: string, size: number, rows = 1, cols = 1) {
+  return {
+    src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
+    srcSet: `${image}?w=${size * cols}&h=${
+      size * rows
+    }&fit=crop&auto=format&dpr=2 2x`,
+  };
+}
 
 const  MyImageList=()=>{
 
@@ -109,22 +110,7 @@ const  MyImageList=()=>{
                   alt={post.post_title}
                   loading="lazy"
                 />
-              
-
-                  <ImageListItemBar
-                  title={"abul"}
-                  subtitle={"cholo"}
-                  actionIcon={
-                    <IconButton
-                      sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
-                      aria-label={`info about ${"jai"}`}
-                    >
-                      <InfoIcon />
-                    </IconButton>
-                  }
-                  />
-
-        </ImageListItem>
+              </ImageListItem>
             ))}
           </ImageList>
         </Box>
