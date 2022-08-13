@@ -35,7 +35,7 @@ const Img = styled('img')({
 
 // import Moment from 'react-moment';s
 
-const uid = 2001;
+const uid = 4;
 
 
 const  Post=()=>{
@@ -93,14 +93,13 @@ const  Post=()=>{
       console.log("---checklike",checklike);   
       console.log("ami checkLikeFunc er sheshe"); 
       setcheck1(true);    
-      console.log("check1",check1);
       if(checklike.num_likes_this_user === 0){
         setIsLike(false); 
       }else{
         setIsLike(true); 
       }
       
-      
+      console.log("check1",check1);
       
       
       
@@ -174,10 +173,6 @@ const  Post=()=>{
       */
      while(check1 === false){
       console.log("ami check1 false e");
-      setTimeout(() => {console.log("The meaning of life")
-        
-      }, 1000);
-      break; 
      }
     
       
