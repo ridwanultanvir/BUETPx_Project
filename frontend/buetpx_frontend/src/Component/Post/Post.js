@@ -139,16 +139,19 @@ const  Post=()=>{
       console.log("Like Clicked ");
       
       checkLikeFunc(); // check if user already liked this post
+      setTimeout(() => {console.log("The meaning of life")
+        if (checklike.num_likes_this_user === 0) {
+          console.log("not liked; so INSERT------------------------------");
+          insertLikeFunc();
+        }
+        else {
+          console.log("already liked; so NO insert!!!");
+          deleteLikeFunc(); // delete like if user already liked this post
+        
+        }
+    
+      }, 1000);
       
-      if (checklike.num_likes_this_user === 0) {
-        console.log("not liked; so INSERT------------------------------");
-        insertLikeFunc();
-      }
-      else {
-        console.log("already liked; so NO insert!!!");
-        deleteLikeFunc(); // delete like if user already liked this post
-      
-      }
 
       
 
