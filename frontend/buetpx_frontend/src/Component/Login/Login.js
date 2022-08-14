@@ -90,11 +90,7 @@ const [user_pass, setuserpass] = useState('');
             // response.json()
             console.log(response);
             if (response.ok) {  
-              const token = await response.json()
-              
-              localStorage.setItem('token',token['token'])
-              console.log(localStorage.getItem('token'))
-
+              response.json()
               window.location.href="\\";
             }
             else

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 	'rest_framework',
     'buetpx.apps.BuetpxConfig',
     'post.apps.PostConfig',
+    'corsheaders',
     'signup_login.apps.SignupLoginConfig',
     'gallery.apps.GalleryConfig',
     'corsheaders',
@@ -72,6 +73,7 @@ MIDDLEWARE = [
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:8081',
+    'http://localhost:3000',
 )
 
 ROOT_URLCONF = 'buetpx_back.urls'
@@ -103,8 +105,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'buetpxdb',
         'USER': 'postgres',
-
-        'PASSWORD': '123',
+        'PASSWORD': 'postgres',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
@@ -117,6 +118,8 @@ PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.Argon2PasswordHasher',
     'django.contrib.auth.hashers.ScryptPasswordHasher',
 ]
+
+
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
@@ -157,5 +160,3 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# AUTH_USER_MODEL = 'signup_login.MyUser'

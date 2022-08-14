@@ -18,7 +18,6 @@ from django.urls import path
 # from django.conf.urls import re_path , include 
 from django.conf.urls import  include 
 from rest_framework.authtoken import views
-# path('api-token-auth', views.obtain_auth_token)
 
 
 urlpatterns = [
@@ -26,7 +25,10 @@ urlpatterns = [
     path ('', include('buetpx.urls')),
     path ('', include('post.urls')),
     path ('', include('discover.urls')),
-    path ('', include('signup_login.urls')),
+    path ('', include('testform.urls')),
     path ('', include('gallery.urls')),
-    path('api-token-auth', views.obtain_auth_token)
+    path ('', include('signup_login.urls')),
+    path ('', include('upload.urls')),
+    path('api-token-auth', views.obtain_auth_token),
+    
 ]

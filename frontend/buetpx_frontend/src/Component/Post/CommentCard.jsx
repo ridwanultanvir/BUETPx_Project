@@ -1,13 +1,43 @@
 import React, { Component } from 'react'
-import {Card,CardContent,CardHeader,Grid,Paper} from '@mui/material';
+import {Card,CardContent,CardHeader,Grid,Paper, Button} from '@mui/material';
 // import CardHeader from '@mui/material/CardHeader'
 import CardActions from '@mui/material/CardActions';
 import {IconButton,CardMedia,Avatar,CardActionArea,Typography} from '@mui/material';
-import Time from 'react-time-format';
+// import Time from 'react-time-format';
 
 
 function CommentCard(props) {
   const {id,comment_txt,comment_date,user}=props.comment
+
+  const deleteCmment = () =>{
+    // api
+    // api/comment_delete/
+    console.log("deleting comment..");
+    console.log(id);
+    console.log(user);
+    
+    const user_id = 1001;
+    
+    const ids = id+"&"+user_id;
+    const requestOption = { method: 'DELETE'};
+    fetch("http://localhost:8000/api/comment_delete/"+ids, requestOption)
+        .then(res => res.json())
+        .then(
+        (result) => {
+           console.log(result);
+
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+             console.log("error occured")
+        }
+        )
+
+
+  }
+  
   return (
     // <Card sx={{ width: 500,marginTop:2 }}>
             
@@ -67,6 +97,7 @@ function CommentCard(props) {
               posted 1 minute ago
             </p> */}
           </Grid>
+          <Button  variant='contained' onClick={deleteCmment}>Delete</Button>
         </Grid>
       </Paper>
       

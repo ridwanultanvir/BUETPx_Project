@@ -46,6 +46,7 @@ const Explore  = () => {
     const [allPost, setAllPost] = useState([]);
     const [checkList, setCheckList] = useState([]);
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [sortOption, setSortOption] = useState();
     
     const open = Boolean(anchorEl);
     // const handleOptionClick = (event) => {
@@ -214,16 +215,38 @@ const Explore  = () => {
       }
 
       const sortPosts = (option) => {
+
+        console.log("before sorted by newest:");
+            console.log(postList);
+           let searchString = optionKey+"&"+searchKey+"&"+"newest";
         if (option === "newest") {
+           
+            fetch("http://localhost:8000/discover/search/"+searchString)
+            .then(res => res.json())
+            .then(
+            (result) => {
+                setIsLoaded(true);
+                setPostList(result);
+            },
+            
+            );
+
+            // postList.sort(function (a, b) {
+            //     var dateA = new Date(a.post_date), dateB = new Date(b.post_date)
+            //     return dateA - dateB
+            // });
+
             // sort postList by post_date
             // postList Contains all posts
-            postList.sort(function(a, b) {
-                return new Date(b.post_date) - new Date(a.post_date);
-            });
+            // postList.sort(function(a, b) {
+            //     return new Date(b.post_date) - new Date(a.post_date);
+            // });
 
-            setPostList(postList);
+            // setPostList(postList);
             console.log("sorted by newest:");
             console.log(postList);
+            console.log("searchkey:");
+            console.log(searchKey);
 
             
 
@@ -246,6 +269,9 @@ const Explore  = () => {
         sortPosts(event.target.value);
 
       }
+
+
+
       const handleSubmit = (event) => {
         event.preventDefault();
         console.log("searching for: "+searchKey);
@@ -290,6 +316,24 @@ const Explore  = () => {
         console.log(event.target.value);
         setOptionKey(event.target.value);
       }
+
+      useEffect(() => {
+            if(sortOption){
+                if( sortOption === "newest") {
+                    // modify postList to be sorted by date
+                    console.log("before sorted by newest", postList);
+                    postList.sort(function(a, b) {
+                        return new Date(b.post_date) - new Date(a.post_date);
+                    }
+                    );
+
+                    console.log("after sorted by newest", postList);
+                    setPostList(postList);
+                    
+
+                }
+            }
+      }, [sortOption])
         
 
      
@@ -404,8 +448,15 @@ const Explore  = () => {
                                                 name="radio-buttons-group"
                                             > 
                                                 <Grid item  sm={8}>
-                                                    <FormControlLabel value="newest" control={<Radio />} label="Newest" onClick={handleRadioClick} />
-                                                    <FormControlLabel value="likes" control={<Radio />} label="Likes" onClick={handleRadioClick} />
+                                                    <FormControlLabel value="newest" control={<Radio />} label="Newest" onClick={(e)=>{
+                                                        setSortOption(e.target.value);
+                                                        console.log(e.target.value);
+                                                    }} />
+                                                    <FormControlLabel value="likes" control={<Radio />} label="Likes" onClick={(e)=>{
+                                                        setSortOption(e.target.value);
+                                                        console.log(e.target.value);
+                                                        
+                                                    }} />
                                                 </Grid>
                                                 {/* <FormControlLabel value="female" control={<Radio />} label="Female" />
                                                 <FormControlLabel value="male" control={<Radio />} label="Male" />
@@ -431,7 +482,7 @@ const Explore  = () => {
                             
                             </Grid>
                             
-                            <Grid item sm={8}>
+                            <Grid item sm={8} style={{maxHeight:600,overflow:'auto'}}>
                                 
                                 <div className={classes.root}>  
                                 <FormControl component="fieldset" className={classes.formControl}>

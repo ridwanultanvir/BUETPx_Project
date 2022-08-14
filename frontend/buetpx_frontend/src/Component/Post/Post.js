@@ -2,6 +2,7 @@ import React from 'react';
 import {Avatar, Grid} from "@mui/material";
 import Header from '../../Static/Header';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import CommentIcon from '@mui/icons-material/Comment';
 import {IconButton} from '@mui/material';
 import { TextField } from '@mui/material';
@@ -32,9 +33,9 @@ const Img = styled('img')({
   alignContent:'left'
 });
 
-// import Moment from 'react-moment';
+// import Moment from 'react-moment';s
 
-const uid = 2001;
+const uid = 2002;
 
 
 const  Post=()=>{
@@ -42,29 +43,181 @@ const  Post=()=>{
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [post, setpost] = useState([]);  
+    const [checklike, setchecklike] = useState([]); 
+    // const[checklikebool, setchecklikebool] = useState(false);
     const [comments, setcomments] = useState([]);
     const [commentTxt, setcommentTxt] = useState("");
     const [post_owner, setowner] = useState([]);
+
+    // ===   NOTUN ADD KORSI =====================
+    const [countUp, setCountUp] = useState(0); 
+
+    const[isLike, setIsLike] = useState(false);
+
+    const[check1, setcheck1] = useState(false);
+
+    const colorStyle = {color:"blue"}; 
+
+    const handleCheckIfLiked = () => {
+      if (checklike.num_likes_this_user === 0) {
+        // console.log("not liked------------------------------");
+        return 0; 
+        
+      } else {
+        // console.log("liked==============================");
+        return 1; 
+      }
+
+    }
+
+
+
+    const [numLike, setnumLike] = useState([]);  
+
+    const checkLikeFunc = () => {
+      fetch("http://localhost:8000/api/check_likes/"+id+"/"+uid)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          setIsLoaded(true);
+          setchecklike(result);
+            
+          
+        },
+        (error) => {
+          setIsLoaded(true);
+          setError(error);
+        }
+      )
+
+      console.log("---checklike",checklike);   
+      console.log("ami checkLikeFunc er sheshe"); 
+      setcheck1(true);    
+      console.log("check1",check1);
+      if(checklike.num_likes_this_user === 0){
+        setIsLike(false); 
+      }else{
+        setIsLike(true); 
+      }
+      
+      
+      
+      
+      
+    
+    }
+
+    const insertLikeFunc = () => {
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          "like_date": new Date(),
+          "user": uid,
+          "post": id
+        })
+      };
+      fetch("http://localhost:8000/api/insert_like", requestOptions)
+          .then(response => response.json())
+          .then(data => {
+            console.log(data);
+            
+          }
+          )
+          .catch(error => console.log('error', error));
+    }
+
+    const deleteLikeFunc = () => {
+      fetch("http://localhost:8000/api/delete_like/"+id+"/"+uid, { method: 'DELETE' })
+          .then(res => res.json())
+          .then(
+            (result) => {
+              setIsLoaded(true);
+              
+              console.log("delete_result",result);
+
+              
+            },
+
+            (error) => {
+              setIsLoaded(true);
+              setError(error);
+            }
+          )
+      
+      
+      }
+      const getLikeCount = () => {
+        fetch("http://localhost:8000/api/likes/"+id)
+        .then(res => res.json())
+        .then(
+          (result) => {
+            setIsLoaded(true);
+            setnumLike(result);
+          },
+  
+          (error) => {
+            setIsLoaded(true);
+            setError(error);
+          }
+        )
+      }
+
+    const handleLikeClick = () => {
+
+      console.log("Like Clicked ");
+      checkLikeFunc();
+      /*
+      while(check1 === false){
+        console.log("ami check1 e");
+      }
+      */
+     while(check1 === false){
+      console.log("ami check1 false e");
+      setTimeout(() => {console.log("The meaning of life")
+        
+      }, 1000);
+      break; 
+     }
+    
+      
+      
+
+      console.log("ami check1 true e");
+      if(isLike){
+        console.log("delete like");
+        deleteLikeFunc();
+        setIsLike(false);
+        // setCountUp(countUp - 1);
+      }else{
+        console.log("insert like");
+        insertLikeFunc();
+        setIsLike(true);
+        // setCountUp(countUp + 1);
+      }
+      
+      
+
+      
+    }
+
+    const handleDislikeClick = () => {
+
+      console.log("DisLike Clicked ");
+      
+      
+
+      
+    }
+
+ 
+        
+
     
     const { id } = useParams();
 
     useEffect(() => {
-        fetch("http://localhost:8000/api/posts_with_uid/"+id,
-        {
-          method: "GET", // *Type of request GET, POST, PUT, DELETE
-          mode: "cors", // Type of mode of the request
-          cache: "no-cache", // options like default, no-cache, reload, force-cache
-          credentials: "same-origin", // options like include, *same-origin, omit
-          headers: {
-            "Content-Type": "application/json" // request content type,
-            ,
-            "Authorization": 'Token ' + localStorage.getItem('token')
-            
-          },
-          redirect: "follow", // manual, *follow, error
-          referrerPolicy: "no-referrer", // no-referrer, *client
-      }
-        )
+        fetch("http://localhost:8000/api/posts_with_uid/"+id)
           .then(res => res.json())
           .then(
             (result) => {
@@ -119,7 +272,7 @@ const  Post=()=>{
           )
         }
           // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, [post]);
+      }, [numLike]);
 
       useEffect(() => {
         fetch("http://localhost:8000/api/posts/"+id+"/comments",
@@ -154,6 +307,8 @@ const  Post=()=>{
           )
           // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [post_owner]);
+
+      
 
       const handleComment = (e) => {
         e.preventDefault();
@@ -190,7 +345,6 @@ const  Post=()=>{
             console.log(data);
             // setcomments(data);
             setcommentTxt("");
-            window.location.reload(false);
           }
           )
           .catch(error => console.log('error', error));
@@ -225,32 +379,7 @@ const  Post=()=>{
         );
     };
 
-//     const getTypographed=title=>
-//     {
-//       return(
-// <Grid item xs={1.5} >
-//                         <Typography
-//                         variant="h6"
-//                         noWrap
-//                         component="a"
-//                         href=""
-//                         sx={{
-//                             mr: 2,
-//                             display: { xs: 'none', md: 'flex' },
-//                             fontFamily: 'revert-layer',
-//                             fontWeight: 600,
-//                             // letterSpacing: '.3rem',
-//                             color: 'inherit',
-//                             textDecoration: 'none',
-//                         }}
-//                         >
-//                           <LocationOnOutlinedIcon sx={{marginRight:2}}/>
-//                         {title}
-//                         </Typography>
 
-//                 </Grid>
-//       );
-//     }
 
     return (
         <Grid container direction='column' spacing={2}>
@@ -277,7 +406,18 @@ const  Post=()=>{
                         </Grid>
                         <Grid item xs={4}></Grid>
                         <Grid item xs={2}> 
-                        <IconButton size="small"><ThumbUpIcon/></IconButton> 
+                        
+
+                        <Grid item xs={2}> 
+                        <ThumbUpIcon onClick={handleLikeClick} style={isLike ? colorStyle : null}></ThumbUpIcon>
+                        </Grid>
+                        {/* <Grid item xs={2}> 
+                        <ThumbDownIcon onClick={handleDislikeClick}></ThumbDownIcon>
+                        </Grid>
+                         */}
+
+                        <Grid item xs={2}> {numLike.num_likes}  </Grid>
+
                         </Grid>    
                         <Grid item xs={2}>
                         <IconButton size="small"><CollectionsOutlinedIcon/></IconButton>
@@ -316,6 +456,7 @@ const  Post=()=>{
             }}
           >
             by {post_owner.name}
+            by123 {checklike.num_likes_this_user}
           </Typography>
 
                       

@@ -1,11 +1,31 @@
 ##
 ```
 F:\L4T1_code\CSE408_project\dj_env1\Scripts\activate
+cd Backend/buetpx_back
 python manage.py runserver 
 cd frontend/buetpx_frontend
+conda activate js_env1
+npm start
+```
 
 ```
 
+npm install --legacy-peer-deps --save firebase
+```
+
+http://localhost:8000/api/delete_like/3/2
+
+
+##
+
+props.id use 
+
+
+useeffect e [post]); lekha mane dependency ase; uporerta call NA howa porjonto call hobe NA
+
+##
+
+http://localhost:8000/api/
 
 ##
 buetpx_frontend ==> react 
@@ -20,3 +40,7 @@ buetpx_frontend ==> react
 opencv image properties : https://www.javatpoint.com/opencv-basic-operation-on-images 
 
 object detection : https://www.youtube.com/watch?v=HXDD7-EnGBY&ab_channel=Murtaza%27sWorkshop-RoboticsandAI 
+
+
+
+
