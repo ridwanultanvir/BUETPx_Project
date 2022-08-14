@@ -34,7 +34,14 @@ import {
   useNavigate
 } from "react-router-dom";
 
-
+import Time from 'react-time-format'
+const Img = styled('img')({
+  margin: 'auto',
+  display: 'block',
+  maxWidth: '100%',
+  maxHeight: 500,
+  alignContent:'left'
+});
 
 // import Moment from 'react-moment';s
 
@@ -74,20 +81,15 @@ const  ImgPost=(props)=>{
 
     }
 
+
+
     const [numLike, setnumLike] = useState([]);  
 
-    const imageClick = () => {
-        
-        console.log('imageClick korso ');
-        navigateToSpecificPost(); 
-    }
+    
 
-    const navigate = useNavigate();
-    const navigateToSpecificPost = () => {
-    // 👇️ navigate to /contacts
-    navigate('/posts/' + props.id);
-    };
+    
 
+    
 
     useEffect(() => {
         fetch("http://localhost:8000/api/likes/"+props.id)
@@ -107,6 +109,32 @@ const  ImgPost=(props)=>{
           )
       }, [post]);
       
+      const {post_title,post_date,photo_url,owner,category,place,tags}=post;
+      // console.log(post_title);
+      useEffect(() => {
+        if(owner)
+        {
+          fetch("http://localhost:8000/api/user/"+owner)
+          .then(res => res.json())
+          .then(
+            (result) => {
+              setIsLoaded(true);
+              setowner(result);
+            },
+            // Note: it's important to handle errors here
+            // instead of a catch() block so that we don't swallow
+            // exceptions from actual bugs in components.
+            (error) => {
+              setIsLoaded(true);
+              setError(error);
+            }
+          )
+        }
+          // eslint-disable-next-line react-hooks/exhaustive-deps
+      }, [numLike]);
+
+    
+
      console.log("num_like",numLike);
 
 
@@ -120,7 +148,6 @@ const  ImgPost=(props)=>{
                   srcSet={`${props.photo_url}?w=248&fit=crop&auto=format&dpr=2 2x`}
                   alt={props.post_title}
                   loading="lazy"
-                  onClick={() => imageClick()}
                 />
               
 

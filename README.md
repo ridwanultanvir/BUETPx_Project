@@ -18,6 +18,13 @@ http://localhost:8000/api/delete_like/3/2
 
 ##
 
+props.id use 
+
+
+useeffect e [post]); lekha mane dependency ase; uporerta call NA howa porjonto call hobe NA
+
+##
+
 http://localhost:8000/api/
 
 ##
