@@ -75,7 +75,7 @@ const  SignUp=()=> {
                     // let user = await response.json()
                     const user=await response.json()
                     console.log(user)
-                    // window.location.href="\\login";
+                    window.location.href="\\login";
                     // window.location.reload(false);
                     }
                     else

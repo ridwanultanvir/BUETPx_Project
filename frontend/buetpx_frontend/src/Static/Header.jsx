@@ -17,7 +17,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { NavLink } from "react-router-dom";
 import {useState, useEffect} from "react";
 
-const pages = ['Discover', 'Quest'];
+const pages = ['Discover', 'Quest','Galleries'];
 const usermenu = ['Profile', 'Account Settings', 'Logout'];
 
 

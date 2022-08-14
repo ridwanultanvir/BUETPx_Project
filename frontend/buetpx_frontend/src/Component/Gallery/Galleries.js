@@ -1,6 +1,6 @@
 import React from 'react';
 import {useState, useEffect} from "react";
-import {Grid} from "@mui/material";
+import {Grid,Button,Typography} from "@mui/material";
 import Header from '../../Static/Header';
 
 const Galleries = ()=>
@@ -13,7 +13,10 @@ const Galleries = ()=>
     {
 
         return (
-            <li><a href = {"/Gallery/"+gallery.id}>{gallery.title}</a></li>
+          
+
+          <Button sx={{marginRight:2}} href = {"/Gallery/"+gallery.id} variant='outlined' >{gallery.title}</Button>
+  
         )
     }
 
@@ -97,7 +100,25 @@ const Galleries = ()=>
                 <Header/>
                 </Grid>
                 <Grid item container>
-                    User Name : {user.name} 
+                <Typography
+                        variant="h6"
+                        noWrap
+                        component="a"
+                        href=""
+                        sx={{
+                            mr: 2,
+                            display: { xs: 'none', md: 'flex' },
+                            fontFamily: 'revert-layer',
+                            fontWeight: 600,
+                            // letterSpacing: '.3rem',
+                            color: 'inherit',
+                            textDecoration: 'none',
+                        }}
+                        >
+                    Galleries
+                    </Typography>
+                    </Grid>
+                    <Grid item container>
                     <ul>
                     {galleries?.map(gallery=>getGallery(gallery))}
                     </ul>
