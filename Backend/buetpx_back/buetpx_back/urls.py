@@ -18,6 +18,7 @@ from django.urls import path
 # from django.conf.urls import re_path , include 
 from django.conf.urls import  include 
 from rest_framework.authtoken import views
+# path('api-token-auth', views.obtain_auth_token)
 
 
 urlpatterns = [

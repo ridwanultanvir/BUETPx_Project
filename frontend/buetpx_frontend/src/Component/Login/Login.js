@@ -13,7 +13,7 @@ import Typography from "@mui/material/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import authService from "./authService";
 import Header from "../../Static/Header"
-import {useState, useEffect} from "react";;
+import {useState, useEffect} from "react";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -65,7 +65,6 @@ export default function SignInSide(props) {
 
 //   }
 
-const [user_name, setusername] = useState('');
 const [user_mail, setusermail] = useState('');
 const [user_pass, setuserpass] = useState('');
 
@@ -74,29 +73,33 @@ const [user_pass, setuserpass] = useState('');
 //   console.log(typeof classes.root);
 
 
-  const isVarifiedUser=(usermail, password)=>{
+  const isVarifiedUser=async (usermail, password)=>{
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          "email": usermail,
+          "username": usermail,
           "password":password
         })
       };
       
       
-      fetch("http://localhost:8000/api/signup", requestOptions)
-        .then(response => 
+      await fetch("http://localhost:8000/api-token-auth", requestOptions)
+        .then(async response => 
           {
             // response.json()
             console.log(response);
             if (response.ok) {  
-              response.json()
+              const token = await response.json()
+              
+              localStorage.setItem('token',token['token'])
+              console.log(localStorage.getItem('token'))
+
               window.location.href="\\";
             }
             else
             {
-              throw new Error('User already exists') 
+              throw new Error('Check email and password') 
             }
           })
         .catch(error =>
@@ -109,8 +112,9 @@ const [user_pass, setuserpass] = useState('');
   };
 
 
-  const handelLogin = ()=>{
-      if(isVarifiedUser(user_mail,user_pass)){
+  const handelLogin = async (event)=>{
+      event.preventDefault();
+      if(await isVarifiedUser(user_mail,user_pass)){
         authService.doLogIn(user_mail);
         setusermail("");
         setuserpass("");
@@ -119,6 +123,10 @@ const [user_pass, setuserpass] = useState('');
       }
   };
 
+  const handelLogout = async (event)=>{
+    event.preventDefault();
+    
+};
   return (
     <Grid container component="main" className={classes.root}>
          <Header/>

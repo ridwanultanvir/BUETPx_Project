@@ -4,7 +4,7 @@ import {Grid} from "@mui/material";
 import Header from '../../Static/Header';
 import Body from '../../Static/Body';
 
-function Homefeed() {
+function Homefeed(props) {
   return (
    
       <Grid container direction='column'>

@@ -17,17 +17,16 @@ import MenuItem from '@mui/material/MenuItem';
 import { NavLink } from "react-router-dom";
 import {useState, useEffect} from "react";
 
+
 const pages = ['Discover', 'Quest'];
 const usermenu = ['Profile', 'Account Settings', 'Logout'];
 
+const Header = async (props)=> {
+    const [anchorElNav, setAnchorElNav] = useState(null);
+    const [anchorElUser, setAnchorElUser] = useState(null);
+    const [user, setuser] = useState();
+    const [menu, setmenu] = useState();
 
-const Header = ()=> {
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
-    const [user, setuser] = React.useState();
-    const [menu, setmenu] = React.useState();
-    // const [token, settoken] = React.useState(localStorage.getItem('token'));
-    const token=localStorage.getItem('token');
 
   const handleOpenNavMenu = (event) => {
     console.log("clicked");
@@ -55,73 +54,80 @@ const Header = ()=> {
   {
 
   }
+  // const token=localStorage.getItem('token')
+  // // const requestOptions = {
+  // //   method: 'GET',
+  // //   headers: { 'Content-Type': 'application/json' ,
+  // //             'Authorization': `Token ${token}` },
+  // // };
 
-
-  // console.log(token)
-  useEffect(() => {
-    async function authentication()
-    {
-      if(token != null)
-    {
-      console.log(token)
-      const requestOptions = {
-          method: 'GET',
-          headers: { 'Content-Type': 'application/json' ,
-                    'Authorization': `Token ${token}` },
-        };
-      
-        await fetch("http://localhost:8000/api/getuserdetails", requestOptions)
-          .then(async response => 
-            {
-              // response.json()
-              console.log(response);
-              if (response.ok) {  
-                const currentUser = await response.json()
-                console.log('currentuser',currentUser)
-                setuser(currentUser)
-                
-                console.log(user)
-  
-                setmenu(
-                  <MenuItem key='logout'
-                  onClick={logout}
-                  
-                  >
-                    
-                    <Typography textAlign="center" >Log Out</Typography>
-                    
-                  </MenuItem>
-                )
-      
-                // window.location.href="\\";
-              }
-              else
-              {
-                setmenu(
-                  <MenuItem key='login'
-                  onClick={login}
-                  
-                  >
-                    
-                    <Typography textAlign="center" >Log In</Typography>
-                    
-                  </MenuItem>
-                )
-              }
-            })
-      
-  
+  // if(token != null)
+  // {
+  //   console.log(token)
+  //   const requestOptions = {
+  //       method: 'GET',
+  //       headers: { 'Content-Type': 'application/json' ,
+  //                 'Authorization': `Token ${token}` },
+  //     };
+    
+  //     await fetch("http://localhost:8000/api/getuserdetails", requestOptions)
+  //       .then(async response => 
+  //         {
+  //           // response.json()
+  //           console.log(response);
+  //           if (response.ok) {  
+  //             const currentUser = await response.json()
+  //             console.log('currentuser',currentUser)
+  //             setuser(currentUser)
               
+  //             console.log(user)
+
+  //             setmenu(
+  //               <MenuItem key='logout'
+  //               onClick={logout}
+                
+  //               >
+                  
+  //                 <Typography textAlign="center" >Log Out</Typography>
+                  
+  //               </MenuItem>
+  //             )
+    
+  //             // window.location.href="\\";
+  //           }
+  //           else
+  //           {
+  //             setmenu(
+  //               <MenuItem key='logout'
+  //               onClick={logout}
+                
+  //               >
+                  
+  //                 <Typography textAlign="center" >Log Out</Typography>
+                  
+  //               </MenuItem>
+  //             )
+  //           }
+  //         })
+    
+
+            
+    
+  // }
+
+  // else{
+  //   setmenu(
+  //     <MenuItem key='login'
+  //     onClick={login}
       
-    }
-    }
+  //     >
+        
+  //       <Typography textAlign="center" >Log In</Typography>
+        
+  //     </MenuItem>
+  //   )
+  // }
 
-    authentication();
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  
-
-  
 
   return (
     <React.Fragment>
@@ -195,6 +201,8 @@ const Header = ()=> {
                 </MenuItem>
                 </NavLink>
               ))} */}
+              
+              {/* {menu} */}
 
             </Menu>
           </Box>
@@ -296,7 +304,13 @@ const Header = ()=> {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {menu}
+              {usermenu.map((setting) => (
+                <NavLink className="nav-link"  to="/">
+                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">{setting}</Typography>
+                </MenuItem>
+                </NavLink>
+              ))}
             </Menu>
           </Box>
          

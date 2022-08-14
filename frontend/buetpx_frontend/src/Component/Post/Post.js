@@ -49,7 +49,22 @@ const  Post=()=>{
     const { id } = useParams();
 
     useEffect(() => {
-        fetch("http://localhost:8000/api/posts_with_uid/"+id)
+        fetch("http://localhost:8000/api/posts_with_uid/"+id,
+        {
+          method: "GET", // *Type of request GET, POST, PUT, DELETE
+          mode: "cors", // Type of mode of the request
+          cache: "no-cache", // options like default, no-cache, reload, force-cache
+          credentials: "same-origin", // options like include, *same-origin, omit
+          headers: {
+            "Content-Type": "application/json" // request content type,
+            ,
+            "Authorization": 'Token ' + localStorage.getItem('token')
+            
+          },
+          redirect: "follow", // manual, *follow, error
+          referrerPolicy: "no-referrer", // no-referrer, *client
+      }
+        )
           .then(res => res.json())
           .then(
             (result) => {
@@ -72,7 +87,22 @@ const  Post=()=>{
       useEffect(() => {
         if(owner)
         {
-          fetch("http://localhost:8000/api/user/"+owner)
+          fetch("http://localhost:8000/api/user/"+owner,
+          {
+            method: "GET", // *Type of request GET, POST, PUT, DELETE
+            mode: "cors", // Type of mode of the request
+            cache: "no-cache", // options like default, no-cache, reload, force-cache
+            credentials: "same-origin", // options like include, *same-origin, omit
+            headers: {
+              "Content-Type": "application/json" // request content type,
+              ,
+              "Authorization": 'Token ' + localStorage.getItem('token')
+              
+            },
+            redirect: "follow", // manual, *follow, error
+            referrerPolicy: "no-referrer", // no-referrer, *client
+        }
+          )
           .then(res => res.json())
           .then(
             (result) => {
@@ -92,7 +122,22 @@ const  Post=()=>{
       }, [post]);
 
       useEffect(() => {
-        fetch("http://localhost:8000/api/posts/"+id+"/comments")
+        fetch("http://localhost:8000/api/posts/"+id+"/comments",
+        {
+          method: "GET", // *Type of request GET, POST, PUT, DELETE
+          mode: "cors", // Type of mode of the request
+          cache: "no-cache", // options like default, no-cache, reload, force-cache
+          credentials: "same-origin", // options like include, *same-origin, omit
+          headers: {
+            "Content-Type": "application/json" // request content type,
+            ,
+            "Authorization": 'Token ' + localStorage.getItem('token')
+            
+          },
+          redirect: "follow", // manual, *follow, error
+          referrerPolicy: "no-referrer", // no-referrer, *client
+      }
+        )
           .then(res => res.json())
           .then(
             (result) => {
@@ -124,7 +169,22 @@ const  Post=()=>{
             "post": id
           })
         };
-        fetch("http://localhost:8000/api/comment_insert", requestOptions)
+        fetch("http://localhost:8000/api/comment_insert", requestOptions,
+        {
+          method: "GET", // *Type of request GET, POST, PUT, DELETE
+          mode: "cors", // Type of mode of the request
+          cache: "no-cache", // options like default, no-cache, reload, force-cache
+          credentials: "same-origin", // options like include, *same-origin, omit
+          headers: {
+            "Content-Type": "application/json" // request content type,
+            ,
+            "Authorization": 'Token ' + localStorage.getItem('token')
+            
+          },
+          redirect: "follow", // manual, *follow, error
+          referrerPolicy: "no-referrer", // no-referrer, *client
+      }
+        )
           .then(response => response.json())
           .then(data => {
             console.log(data);

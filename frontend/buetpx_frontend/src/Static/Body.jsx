@@ -24,11 +24,15 @@ class Body extends Component{
             cache: "no-cache", // options like default, no-cache, reload, force-cache
             credentials: "same-origin", // options like include, *same-origin, omit
             headers: {
-              "Content-Type": "application/json" // request content type
+              "Content-Type": "application/json" // request content type,
+              ,
+              "Authorization": 'Token ' + localStorage.getItem('token')
+              
             },
             redirect: "follow", // manual, *follow, error
             referrerPolicy: "no-referrer", // no-referrer, *client
         }
+
         )
           .then(res => res.json())
           .then(
@@ -64,7 +68,10 @@ class Body extends Component{
         {
             return (
                       <Grid container spacing={2}>
-                
+                        {console.log('here')}
+                        {/* <Grid item>
+                          <h1>Hello</h1>
+                        </Grid> */}
                         {this.state.photoList.map(photoObj => this.getPhotoCard(photoObj))}
                       </Grid>
                     );

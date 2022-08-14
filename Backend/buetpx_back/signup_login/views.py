@@ -38,6 +38,7 @@ class UserDetailAPI(APIView):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (AllowAny,)
     def get(self,request,*args,**kwargs):
+        print(request)
         user = User.objects.get(id=request.user.id)
         serializer = UserSerializer2(user)
         return Response(serializer.data)

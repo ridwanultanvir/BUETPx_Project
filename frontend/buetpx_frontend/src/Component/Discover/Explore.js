@@ -68,7 +68,22 @@ const Explore  = () => {
    }
 
    useEffect(() => {
-    fetch("http://localhost:8000/api/categories")
+    fetch("http://localhost:8000/api/categories",
+    {
+        method: "GET", // *Type of request GET, POST, PUT, DELETE
+        mode: "cors", // Type of mode of the request
+        cache: "no-cache", // options like default, no-cache, reload, force-cache
+        credentials: "same-origin", // options like include, *same-origin, omit
+        headers: {
+          "Content-Type": "application/json" // request content type,
+          ,
+          "Authorization": 'Token ' + localStorage.getItem('token')
+          
+        },
+        redirect: "follow", // manual, *follow, error
+        referrerPolicy: "no-referrer", // no-referrer, *client
+    }
+    )
         .then(res => res.json())
         .then(
         (result) => {
@@ -97,7 +112,22 @@ const Explore  = () => {
    
     useEffect(() => {
         // fetch(checkList.length > 0 ? "http://localhost:8000/discover/posts_by_cat/Panaroma"  : "http://localhost:8000/api/post_detail")
-        fetch("http://localhost:8000/api/post_detail")
+        fetch("http://localhost:8000/api/post_detail",
+        {
+            method: "GET", // *Type of request GET, POST, PUT, DELETE
+            mode: "cors", // Type of mode of the request
+            cache: "no-cache", // options like default, no-cache, reload, force-cache
+            credentials: "same-origin", // options like include, *same-origin, omit
+            headers: {
+              "Content-Type": "application/json" // request content type,
+              ,
+              "Authorization": 'Token ' + localStorage.getItem('token')
+              
+            },
+            redirect: "follow", // manual, *follow, error
+            referrerPolicy: "no-referrer", // no-referrer, *client
+        }
+        )
         .then(res => res.json())
         .then(
         (result) => {
@@ -116,7 +146,22 @@ const Explore  = () => {
     }, [])
 
     const updatePostList = (catList) => {
-        fetch( "http://localhost:8000/discover/posts_by_catlist/"+catList.toString())
+        fetch( "http://localhost:8000/discover/posts_by_catlist/"+catList.toString(),
+        {
+            method: "GET", // *Type of request GET, POST, PUT, DELETE
+            mode: "cors", // Type of mode of the request
+            cache: "no-cache", // options like default, no-cache, reload, force-cache
+            credentials: "same-origin", // options like include, *same-origin, omit
+            headers: {
+              "Content-Type": "application/json" // request content type,
+              ,
+              "Authorization": 'Token ' + localStorage.getItem('token')
+              
+            },
+            redirect: "follow", // manual, *follow, error
+            referrerPolicy: "no-referrer", // no-referrer, *client
+        }
+        )
         .then(res => res.json())
         .then(
         (result) => {
@@ -206,7 +251,22 @@ const Explore  = () => {
         console.log("searching for: "+searchKey);
         let searchString = optionKey + "&" + searchKey;
         console.log(searchString);
-        fetch("http://localhost:8000/discover/search/"+searchString)
+        fetch("http://localhost:8000/discover/search/"+searchString,
+        {
+            method: "GET", // *Type of request GET, POST, PUT, DELETE
+            mode: "cors", // Type of mode of the request
+            cache: "no-cache", // options like default, no-cache, reload, force-cache
+            credentials: "same-origin", // options like include, *same-origin, omit
+            headers: {
+              "Content-Type": "application/json" // request content type,
+              ,
+              "Authorization": 'Token ' + localStorage.getItem('token')
+              
+            },
+            redirect: "follow", // manual, *follow, error
+            referrerPolicy: "no-referrer", // no-referrer, *client
+        }
+        )
         .then(res => res.json())
         .then(
         (result) => {
