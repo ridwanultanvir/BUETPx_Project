@@ -42,10 +42,16 @@ class Tags(models.Model):
     def __str__(self):
         return self.name
 
+
+# make migration
+
+# makemigrations
+# migrate
 class Post(models.Model):
     post_title = models.CharField(max_length=500)
     post_date = models.DateTimeField(auto_now_add=True)
     photo_url = models.CharField(max_length=500)
+    description = models.TextField()
 
     owner = models.ForeignKey(
         UserAccount, 

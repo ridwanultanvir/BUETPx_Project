@@ -401,7 +401,7 @@ def get_post_by_categoryname(request,name):
 
 
 
-    
+  
 
 #     # GET list of tutorials, POST a new tutorial, DELETE all tutorials
  
