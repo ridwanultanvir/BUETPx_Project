@@ -34,7 +34,7 @@ const Img = styled('img')({
 // import Moment from 'react-moment';
 const uid = 2002;
 
-const  Homefeed=()=>{
+const  MyImageList=()=>{
 
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -117,7 +117,31 @@ const  Homefeed=()=>{
           <ImageList variant="masonry" cols={3} gap={20}>
             {posts.map((post) => (
               <ImgPost {...post}/>
-                  
+        //       <ImageListItem key={post.photo_url}>
+        //         <img
+        //           src={`${post.photo_url}?w=248&fit=crop&auto=format`}
+        //           srcSet={`${post.photo_url}?w=248&fit=crop&auto=format&dpr=2 2x`}
+        //           alt={post.post_title}
+        //           loading="lazy"
+        //         />
+              
+
+        //           <ImageListItemBar
+        //           title={post.post_title}
+        //           subtitle={post.owner.name}
+        //           actionIcon={
+        //             <IconButton
+        //               sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+        //               aria-label={`info about ${post.post_title}`}
+        //             >
+                      
+        //             <ThumbUpIcon onClick={post.num_likes+1} style={post.isLike ? colorStyle : null}></ThumbUpIcon>
+        //             <h5> {post.num_likes} </h5>
+        //             </IconButton>
+        //           }
+        //           />
+
+        // </ImageListItem>
             ))}
           </ImageList>
         </Box>
@@ -135,4 +159,4 @@ const  Homefeed=()=>{
     );
     }
 
-    export default Homefeed;
+    export default MyImageList;
