@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'corsheaders',
     'signup_login.apps.SignupLoginConfig',
     'gallery.apps.GalleryConfig',
-    'corsheaders',
     'rest_framework.authtoken',
 ]
 REST_FRAMEWORK = {
