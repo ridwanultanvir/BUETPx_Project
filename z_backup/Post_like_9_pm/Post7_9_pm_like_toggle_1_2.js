@@ -2,6 +2,7 @@ import React from 'react';
 import {Avatar, Grid} from "@mui/material";
 import Header from '../../Static/Header';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import CommentIcon from '@mui/icons-material/Comment';
 import {IconButton} from '@mui/material';
 import { TextField } from '@mui/material';
@@ -19,23 +20,22 @@ import { styled } from '@mui/material/styles';
 import {useState, useEffect} from "react";
 
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useParams
+  useParams,
+  useNavigate
 } from "react-router-dom";
 import CommentCard from './CommentCard';
-
+import Time from 'react-time-format'
 const Img = styled('img')({
   margin: 'auto',
   display: 'block',
   maxWidth: '100%',
-  height: 500,
+  maxHeight: 500,
   alignContent:'left'
 });
-// import Time from 'react-time-format'
-// import Moment from 'react-moment';
+
+// import Moment from 'react-moment';s
+
+const uid = 2001;
 
 
 const  Post=()=>{
@@ -43,18 +43,228 @@ const  Post=()=>{
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [post, setpost] = useState([]);  
+    const [checklike, setchecklike] = useState([]); 
+    // const[checklikebool, setchecklikebool] = useState(false);
     const [comments, setcomments] = useState([]);
+    const [commentTxt, setcommentTxt] = useState("");
     const [post_owner, setowner] = useState([]);
-    
-    const { id } = useParams();
 
-    useEffect(() => {
-        fetch("http://localhost:8000/api/posts_with_uid/"+id)
+    // ===   NOTUN ADD KORSI =====================
+    const [countUp, setCountUp] = useState(0); 
+
+    const[isLike, setIsLike] = useState(false);
+
+    const[check1, setcheck1] = useState(false);
+
+
+
+    const handleCheckIfLiked = () => {
+      if (checklike.num_likes_this_user === 0) {
+        // console.log("not liked------------------------------");
+        return 0; 
+        
+      } else {
+        // console.log("liked==============================");
+        return 1; 
+      }
+
+    }
+
+
+
+    const [numLike, setnumLike] = useState([]);  
+
+    const checkLikeFunc = () => {
+      fetch("http://localhost:8000/api/check_likes/"+id+"/"+uid)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          setIsLoaded(true);
+          setchecklike(result);
+            
+          
+        },
+        (error) => {
+          setIsLoaded(true);
+          setError(error);
+        }
+      )
+
+      console.log("---checklike",checklike);   
+      console.log("ami checkLikeFunc er sheshe"); 
+      setcheck1(true);    
+      console.log("check1",check1);
+      if(checklike.num_likes_this_user === 0){
+        setIsLike(false); 
+      }else{
+        setIsLike(true); 
+      }
+      
+      
+      
+      
+      
+    
+    }
+
+    const insertLikeFunc = () => {
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          "like_date": new Date(),
+          "user": uid,
+          "post": id
+        })
+      };
+      fetch("http://localhost:8000/api/insert_like", requestOptions)
+          .then(response => response.json())
+          .then(data => {
+            console.log(data);
+            
+          }
+          )
+          .catch(error => console.log('error', error));
+    }
+
+    const deleteLikeFunc = () => {
+      fetch("http://localhost:8000/api/delete_like/"+id+"/"+uid, { method: 'DELETE' })
           .then(res => res.json())
           .then(
             (result) => {
               setIsLoaded(true);
-              setpost(result);
+              
+              console.log("delete_result",result);
+
+              
+            },
+
+            (error) => {
+              setIsLoaded(true);
+              setError(error);
+            }
+          )
+      
+      
+      }
+      const getLikeCount = () => {
+        fetch("http://localhost:8000/api/likes/"+id)
+        .then(res => res.json())
+        .then(
+          (result) => {
+            setIsLoaded(true);
+            setnumLike(result);
+          },
+  
+          (error) => {
+            setIsLoaded(true);
+            setError(error);
+          }
+        )
+      }
+
+    const handleLikeClick = () => {
+
+      console.log("Like Clicked ");
+      checkLikeFunc();
+      /*
+      while(check1 === false){
+        console.log("ami check1 e");
+      }
+      */
+     while(check1 === false){
+      console.log("ami check1 false e");
+      setTimeout(() => {console.log("The meaning of life")
+        
+      }, 1000);
+      break; 
+     }
+    
+      
+      
+
+      console.log("ami check1 true e");
+      if(isLike){
+        console.log("delete like");
+        deleteLikeFunc();
+        setIsLike(false);
+        // setCountUp(countUp - 1);
+      }else{
+        console.log("insert like");
+        insertLikeFunc();
+        setIsLike(true);
+        // setCountUp(countUp + 1);
+      }
+      
+      
+
+      
+    }
+
+    const handleDislikeClick = () => {
+
+      console.log("DisLike Clicked ");
+      
+      
+
+      
+    }
+
+ 
+        
+
+    
+    const { id } = useParams();
+
+    useEffect(() => {
+      fetch("http://localhost:8000/api/check_likes/"+id+"/"+uid)
+        .then(res => res.json())
+        .then(
+          (result) => {
+            setIsLoaded(true);
+            setchecklike(result);
+            
+            
+          },
+        
+          // Note: it's important to handle errors here
+          // instead of a catch() block so that we don't swallow
+          // exceptions from actual bugs in components.
+          (error) => {
+            setIsLoaded(true);
+            setError(error);
+          }
+        )
+    }, []);
+
+    useEffect(() => {
+      fetch("http://localhost:8000/api/posts_with_uid/"+id)
+        .then(res => res.json())
+        .then(
+          (result) => {
+            setIsLoaded(true);
+            setpost(result);
+          },
+          // Note: it's important to handle errors here
+          // instead of a catch() block so that we don't swallow
+          // exceptions from actual bugs in components.
+          (error) => {
+            setIsLoaded(true);
+            setError(error);
+          }
+        )
+    }, [checklike]);
+
+
+    
+
+    useEffect(() => {
+        fetch("http://localhost:8000/api/likes/"+id)
+          .then(res => res.json())
+          .then(
+            (result) => {
+              setIsLoaded(true);
+              setnumLike(result);
             },
             // Note: it's important to handle errors here
             // instead of a catch() block so that we don't swallow
@@ -64,12 +274,14 @@ const  Post=()=>{
               setError(error);
             }
           )
-      }, []);
+      }, [post]);
       
       const {post_title,post_date,photo_url,owner,category,place,tags}=post;
       // console.log(post_title);
       useEffect(() => {
-        fetch("http://localhost:8000/api/user/"+owner)
+        if(owner)
+        {
+          fetch("http://localhost:8000/api/user/"+owner)
           .then(res => res.json())
           .then(
             (result) => {
@@ -84,8 +296,9 @@ const  Post=()=>{
               setError(error);
             }
           )
+        }
           // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, [post]);
+      }, [numLike]);
 
       useEffect(() => {
         fetch("http://localhost:8000/api/posts/"+id+"/comments")
@@ -106,13 +319,50 @@ const  Post=()=>{
           // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [post_owner]);
 
+      
+
+      const handleComment = (e) => {
+        e.preventDefault();
+        console.log("button clicked! ");
+        console.log("commentTxt");
+        console.log(commentTxt);
+        const requestOptions = {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            "comment_txt": commentTxt,
+            "user": uid,
+            "post": id
+          })
+        };
+        fetch("http://localhost:8000/api/comment_insert", requestOptions)
+          .then(response => response.json())
+          .then(data => {
+            console.log(data);
+            // setcomments(data);
+            setcommentTxt("");
+          }
+          )
+          .catch(error => console.log('error', error));
+        
+      }
+
+      const navigate = useNavigate();
+      const navigateToSpecificTag = (tagname) => {
+        // 👇️ navigate to /contacts
+        navigate('/post_with_tags/'+tagname);
+      };
+
     const getTag = tag => {
 
         return (
         
-            <Button variant="outlined" color="primary" sx={{
-              marginRight:2
-            }}>   {tag} </Button>
+          <Button variant="outlined" color="primary" sx={{
+            marginRight:2
+          }} onClick={() => {navigateToSpecificTag(tag); console.log(tag); }}>   
+          {tag} 
+          
+          </Button>
         );
     };
 
@@ -125,32 +375,7 @@ const  Post=()=>{
         );
     };
 
-    const getTypographed=title=>
-    {
-      return(
-<Grid item xs={1.5} >
-                        <Typography
-                        variant="h6"
-                        noWrap
-                        component="a"
-                        href=""
-                        sx={{
-                            mr: 2,
-                            display: { xs: 'none', md: 'flex' },
-                            fontFamily: 'revert-layer',
-                            fontWeight: 600,
-                            // letterSpacing: '.3rem',
-                            color: 'inherit',
-                            textDecoration: 'none',
-                        }}
-                        >
-                          <LocationOnOutlinedIcon sx={{marginRight:2}}/>
-                        {title}
-                        </Typography>
 
-                </Grid>
-      );
-    }
 
     return (
         <Grid container direction='column' spacing={2}>
@@ -177,7 +402,18 @@ const  Post=()=>{
                         </Grid>
                         <Grid item xs={4}></Grid>
                         <Grid item xs={2}> 
-                        <IconButton size="small"><ThumbUpIcon/></IconButton> 
+                        
+
+                        <Grid item xs={2}> 
+                        <ThumbUpIcon onClick={handleLikeClick} ></ThumbUpIcon>
+                        </Grid>
+                        {/* <Grid item xs={2}> 
+                        <ThumbDownIcon onClick={handleDislikeClick}></ThumbDownIcon>
+                        </Grid>
+                         */}
+
+                        <Grid item xs={2}> {numLike.num_likes}  </Grid>
+
                         </Grid>    
                         <Grid item xs={2}>
                         <IconButton size="small"><CollectionsOutlinedIcon/></IconButton>
@@ -216,6 +452,7 @@ const  Post=()=>{
             }}
           >
             by {post_owner.name}
+            by123 {checklike.num_likes_this_user}
           </Typography>
 
                       
@@ -341,8 +578,10 @@ const  Post=()=>{
                         Time
                         </Typography>
 
-                </Grid>
-                <Grid item xs={10.5} >{post_date}</Grid>
+                </Grid>  
+                {/* toDateString() */}
+                <Grid item xs={10.5} ><Time value={post_date} format="YYYY-MM-DD HH:mm"/></Grid>
+                {/* <Grid item xs={10.5} >{post_date.toDateString()}</Grid> */}
                 
                 
                 </Grid>
@@ -387,13 +626,14 @@ const  Post=()=>{
                         size="medium"
                         defaultValue=""
                         variant="outlined"
+                        onInputCapture={(e) => setcommentTxt(e.target.value)}
                         />
                         
                         
                 </Grid>
                
                 <Grid item xs={12}>
-                <Button variant='outlined'>Submit</Button>
+                <Button variant='outlined' onClick={handleComment}>Submit</Button>
                 </Grid>
                 
                 

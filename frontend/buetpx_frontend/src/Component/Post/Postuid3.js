@@ -35,10 +35,10 @@ const Img = styled('img')({
 
 // import Moment from 'react-moment';s
 
-const uid = 2002;
+const uid = 3;
 
 
-const  Post=()=>{
+const  Post3=()=>{
 
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -650,4 +650,4 @@ const  Post=()=>{
     );
     }
 
-    export default Post;
+    export default Post3;

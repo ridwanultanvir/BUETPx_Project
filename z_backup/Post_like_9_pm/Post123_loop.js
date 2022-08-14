@@ -2,7 +2,6 @@ import React from 'react';
 import {Avatar, Grid} from "@mui/material";
 import Header from '../../Static/Header';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import CommentIcon from '@mui/icons-material/Comment';
 import {IconButton} from '@mui/material';
 import { TextField } from '@mui/material';
@@ -35,7 +34,7 @@ const Img = styled('img')({
 
 // import Moment from 'react-moment';s
 
-const uid = 2002;
+const uid = 4;
 
 
 const  Post=()=>{
@@ -54,9 +53,6 @@ const  Post=()=>{
 
     const[isLike, setIsLike] = useState(false);
 
-    const[check1, setcheck1] = useState(false);
-
-    const colorStyle = {color:"blue"}; 
 
     const handleCheckIfLiked = () => {
       if (checklike.num_likes_this_user === 0) {
@@ -70,44 +66,15 @@ const  Post=()=>{
 
     }
 
-
+    const colorStyle = {color:"blue"}; 
 
     const [numLike, setnumLike] = useState([]);  
 
-    const checkLikeFunc = () => {
-      fetch("http://localhost:8000/api/check_likes/"+id+"/"+uid)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          setIsLoaded(true);
-          setchecklike(result);
-            
-          
-        },
-        (error) => {
-          setIsLoaded(true);
-          setError(error);
-        }
-      )
 
-      console.log("---checklike",checklike);   
-      console.log("ami checkLikeFunc er sheshe"); 
-      setcheck1(true);    
-      console.log("check1",check1);
-      if(checklike.num_likes_this_user === 0){
-        setIsLike(false); 
-      }else{
-        setIsLike(true); 
-      }
+    const handleLikeClick = () => {
+      setIsLike(!isLike);
+      console.log("Like Clicked ");
       
-      
-      
-      
-      
-    
-    }
-
-    const insertLikeFunc = () => {
       const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -117,7 +84,33 @@ const  Post=()=>{
           "post": id
         })
       };
-      fetch("http://localhost:8000/api/insert_like", requestOptions)
+      // notun add
+      // console.log("checklike.num_likes_this_user:", checklike.num_likes_this_user); 
+      //if (checklike.num_likes_this_user === 0) {
+      //eta kaj korbe NA; amake again api fetch korte hobe; karon eta to update hoye gese
+      fetch("http://localhost:8000/api/check_likes/"+id+"/"+uid)
+        .then(res => res.json())
+        .then(
+          (result) => {
+            setIsLoaded(true);
+            setchecklike(result);
+            console.log("checklike",result);
+            // console.log("checklike.num_likes_this_user",{checklike.num_likes_this_user});
+            
+          },
+        
+          // Note: it's important to handle errors here
+          // instead of a catch() block so that we don't swallow
+          // exceptions from actual bugs in components.
+          (error) => {
+            setIsLoaded(true);
+            setError(error);
+          }
+        )
+      console.log("checklike.num_likes_this_user:", checklike.num_likes_this_user); 
+      if (checklike.num_likes_this_user === 0) {
+        console.log("inside if");
+        fetch("http://localhost:8000/api/insert_like", requestOptions)
           .then(response => response.json())
           .then(data => {
             console.log(data);
@@ -125,10 +118,20 @@ const  Post=()=>{
           }
           )
           .catch(error => console.log('error', error));
-    }
-
-    const deleteLikeFunc = () => {
-      fetch("http://localhost:8000/api/delete_like/"+id+"/"+uid, { method: 'DELETE' })
+      } else {
+        console.log("inside else");
+        // const requestOptionsDelete = {
+        //   method: 'DELETE',
+        //   headers: { 'Content-Type': 'application/json' },
+        //   body: JSON.stringify({
+        //     "post_id": id,
+        //     "user_id": uid,
+            
+        //   })
+        // };
+          // fetch('https://jsonplaceholder.typicode.com/posts/1', { method: 'DELETE' })
+     
+          fetch("http://localhost:8000/api/delete_like/"+id+"/"+uid, { method: 'DELETE' })
           .then(res => res.json())
           .then(
             (result) => {
@@ -147,70 +150,53 @@ const  Post=()=>{
       
       
       }
-      const getLikeCount = () => {
-        fetch("http://localhost:8000/api/likes/"+id)
-        .then(res => res.json())
-        .then(
-          (result) => {
-            setIsLoaded(true);
-            setnumLike(result);
-          },
-  
-          (error) => {
-            setIsLoaded(true);
-            setError(error);
-          }
-        )
-      }
 
-    const handleLikeClick = () => {
+     
+      // jate immediate update kore like er count 
+      fetch("http://localhost:8000/api/likes/"+id)
+          .then(res => res.json())
+          .then(
+            (result) => {
+              setIsLoaded(true);
+              setnumLike(result);
+            },
+            // Note: it's important to handle errors here
+            // instead of a catch() block so that we don't swallow
+            // exceptions from actual bugs in components.
+            (error) => {
+              setIsLoaded(true);
+              setError(error);
+            }
+          )
+      
+    }
 
-      console.log("Like Clicked ");
-      checkLikeFunc();
-      /*
-      while(check1 === false){
-        console.log("ami check1 e");
-      }
-      */
-     while(check1 === false){
-      console.log("ami check1 false e");
-      setTimeout(() => {console.log("The meaning of life")
+    const handleLikeClick2 = () => {
+        setIsLike(!isLike);
+        console.log("Like Clicked ");
         
-      }, 1000);
-      break; 
-     }
-    
-      
-      
-
-      console.log("ami check1 true e");
-      if(isLike){
-        console.log("delete like");
-        deleteLikeFunc();
-        setIsLike(false);
-        // setCountUp(countUp - 1);
-      }else{
-        console.log("insert like");
-        insertLikeFunc();
-        setIsLike(true);
-        // setCountUp(countUp + 1);
+        const requestOptions = {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            "like_date": new Date(),
+            "user": uid,
+            "post": id
+          })
+        };
+        // notun add
+        
+        fetch("http://localhost:8000/api/insert_like", requestOptions)
+          .then(response => response.json())
+          .then(data => {
+            console.log(data);
+            
+          }
+          )
+          .catch(error => console.log('error', error));
+        
       }
-      
-      
 
-      
-    }
-
-    const handleDislikeClick = () => {
-
-      console.log("DisLike Clicked ");
-      
-      
-
-      
-    }
-
- 
         
 
     
@@ -223,7 +209,8 @@ const  Post=()=>{
           (result) => {
             setIsLoaded(true);
             setchecklike(result);
-            
+            console.log("checklike",result);
+            // console.log("checklike.num_likes_this_user",{checklike.num_likes_this_user});
             
           },
         
@@ -402,16 +389,17 @@ const  Post=()=>{
                         </Grid>
                         <Grid item xs={4}></Grid>
                         <Grid item xs={2}> 
+                        {/* <IconButton size="small"><ThumbUpIcon/></IconButton>  */}
+
+                        {/* NOTUN ADD KORSI  */}
+                        {/* <Button onClick={() => setCountUp(countUp + 1)}><ThumbUpIcon />{`${countUp === 0 ? '' : countUp}`}</Button> */}
+                        <ThumbUpIcon onClick={handleLikeClick} style={handleCheckIfLiked() ? colorStyle : null}></ThumbUpIcon>
+
+                        {/* <h1> {checklike.num_like_this_user}</h1> */}
                         
+                        {/* <ThumbUpIcon onClick={handleLikeClick} style={  colorStyle}></ThumbUpIcon> */}
 
-                        <Grid item xs={2}> 
-                        <ThumbUpIcon onClick={handleLikeClick} style={isLike ? colorStyle : null}></ThumbUpIcon>
-                        </Grid>
-                        {/* <Grid item xs={2}> 
-                        <ThumbDownIcon onClick={handleDislikeClick}></ThumbDownIcon>
-                        </Grid>
-                         */}
-
+                        {/* <Grid item xs={2}> 2400 </Grid> */}
                         <Grid item xs={2}> {numLike.num_likes}  </Grid>
 
                         </Grid>    

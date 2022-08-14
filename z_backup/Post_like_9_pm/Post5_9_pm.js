@@ -35,7 +35,7 @@ const Img = styled('img')({
 
 // import Moment from 'react-moment';s
 
-const uid = 2002;
+const uid = 4;
 
 
 const  Post=()=>{
@@ -56,7 +56,7 @@ const  Post=()=>{
 
     const[check1, setcheck1] = useState(false);
 
-    const colorStyle = {color:"blue"}; 
+
 
     const handleCheckIfLiked = () => {
       if (checklike.num_likes_this_user === 0) {
@@ -94,13 +94,6 @@ const  Post=()=>{
       console.log("ami checkLikeFunc er sheshe"); 
       setcheck1(true);    
       console.log("check1",check1);
-      if(checklike.num_likes_this_user === 0){
-        setIsLike(false); 
-      }else{
-        setIsLike(true); 
-      }
-      
-      
       
       
       
@@ -174,10 +167,6 @@ const  Post=()=>{
       */
      while(check1 === false){
       console.log("ami check1 false e");
-      setTimeout(() => {console.log("The meaning of life")
-        
-      }, 1000);
-      break; 
      }
     
       
@@ -186,13 +175,13 @@ const  Post=()=>{
       console.log("ami check1 true e");
       if(isLike){
         console.log("delete like");
-        deleteLikeFunc();
-        setIsLike(false);
+        // deleteLikeFunc();
+        // setIsLike(false);
         // setCountUp(countUp - 1);
       }else{
         console.log("insert like");
-        insertLikeFunc();
-        setIsLike(true);
+        // insertLikeFunc();
+        // setIsLike(true);
         // setCountUp(countUp + 1);
       }
       
@@ -405,7 +394,7 @@ const  Post=()=>{
                         
 
                         <Grid item xs={2}> 
-                        <ThumbUpIcon onClick={handleLikeClick} style={isLike ? colorStyle : null}></ThumbUpIcon>
+                        <ThumbUpIcon onClick={handleLikeClick} ></ThumbUpIcon>
                         </Grid>
                         {/* <Grid item xs={2}> 
                         <ThumbDownIcon onClick={handleDislikeClick}></ThumbDownIcon>

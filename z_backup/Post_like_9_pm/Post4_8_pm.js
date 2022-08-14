@@ -2,7 +2,6 @@ import React from 'react';
 import {Avatar, Grid} from "@mui/material";
 import Header from '../../Static/Header';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import CommentIcon from '@mui/icons-material/Comment';
 import {IconButton} from '@mui/material';
 import { TextField } from '@mui/material';
@@ -35,7 +34,7 @@ const Img = styled('img')({
 
 // import Moment from 'react-moment';s
 
-const uid = 2002;
+const uid = 4;
 
 
 const  Post=()=>{
@@ -54,9 +53,6 @@ const  Post=()=>{
 
     const[isLike, setIsLike] = useState(false);
 
-    const[check1, setcheck1] = useState(false);
-
-    const colorStyle = {color:"blue"}; 
 
     const handleCheckIfLiked = () => {
       if (checklike.num_likes_this_user === 0) {
@@ -74,14 +70,15 @@ const  Post=()=>{
 
     const [numLike, setnumLike] = useState([]);  
 
-    const checkLikeFunc = () => {
-      fetch("http://localhost:8000/api/check_likes/"+id+"/"+uid)
+    const checkLikeFunc = async () => {
+      await fetch("http://localhost:8000/api/check_likes/"+id+"/"+uid)
       .then(res => res.json())
       .then(
         (result) => {
           setIsLoaded(true);
           setchecklike(result);
-            
+          console.log("---checklike",result);   
+          console.log("ami checkLikeFunc er sheshe");       
           
         },
         (error) => {
@@ -89,25 +86,13 @@ const  Post=()=>{
           setError(error);
         }
       )
-
-      console.log("---checklike",checklike);   
-      console.log("ami checkLikeFunc er sheshe"); 
-      setcheck1(true);    
-      console.log("check1",check1);
-      if(checklike.num_likes_this_user === 0){
-        setIsLike(false); 
-      }else{
-        setIsLike(true); 
-      }
-      
-      
       
       
       
     
     }
 
-    const insertLikeFunc = () => {
+    const insertLikeFunc = async () => {
       const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -117,7 +102,7 @@ const  Post=()=>{
           "post": id
         })
       };
-      fetch("http://localhost:8000/api/insert_like", requestOptions)
+      await fetch("http://localhost:8000/api/insert_like", requestOptions)
           .then(response => response.json())
           .then(data => {
             console.log(data);
@@ -127,8 +112,8 @@ const  Post=()=>{
           .catch(error => console.log('error', error));
     }
 
-    const deleteLikeFunc = () => {
-      fetch("http://localhost:8000/api/delete_like/"+id+"/"+uid, { method: 'DELETE' })
+    const deleteLikeFunc = async () => {
+      await fetch("http://localhost:8000/api/delete_like/"+id+"/"+uid, { method: 'DELETE' })
           .then(res => res.json())
           .then(
             (result) => {
@@ -147,8 +132,8 @@ const  Post=()=>{
       
       
       }
-      const getLikeCount = () => {
-        fetch("http://localhost:8000/api/likes/"+id)
+      const getLikeCount = async () => {
+        await fetch("http://localhost:8000/api/likes/"+id)
         .then(res => res.json())
         .then(
           (result) => {
@@ -164,47 +149,26 @@ const  Post=()=>{
       }
 
     const handleLikeClick = () => {
-
+      setIsLike(!isLike);
       console.log("Like Clicked ");
-      checkLikeFunc();
-      /*
-      while(check1 === false){
-        console.log("ami check1 e");
-      }
-      */
-     while(check1 === false){
-      console.log("ami check1 false e");
+      
+      checkLikeFunc(); // check if user already liked this post
       setTimeout(() => {console.log("The meaning of life")
+        if (checklike.num_likes_this_user == 0) {
+          console.log("not liked; so INSERT------------------------------");
+          insertLikeFunc();
+        }
+        else {
+          console.log("already liked; so NO insert!!!");
+          deleteLikeFunc(); // delete like if user already liked this post
         
+        }
+        getLikeCount();
+        console.log("numLike",numLike);
       }, 1000);
-      break; 
-     }
-    
       
       
 
-      console.log("ami check1 true e");
-      if(isLike){
-        console.log("delete like");
-        deleteLikeFunc();
-        setIsLike(false);
-        // setCountUp(countUp - 1);
-      }else{
-        console.log("insert like");
-        insertLikeFunc();
-        setIsLike(true);
-        // setCountUp(countUp + 1);
-      }
-      
-      
-
-      
-    }
-
-    const handleDislikeClick = () => {
-
-      console.log("DisLike Clicked ");
-      
       
 
       
@@ -404,14 +368,14 @@ const  Post=()=>{
                         <Grid item xs={2}> 
                         
 
-                        <Grid item xs={2}> 
-                        <ThumbUpIcon onClick={handleLikeClick} style={isLike ? colorStyle : null}></ThumbUpIcon>
-                        </Grid>
-                        {/* <Grid item xs={2}> 
-                        <ThumbDownIcon onClick={handleDislikeClick}></ThumbDownIcon>
-                        </Grid>
-                         */}
+                        
+                        <ThumbUpIcon onClick={handleLikeClick} ></ThumbUpIcon>
 
+                        {/* <h1> {checklike.num_like_this_user}</h1> */}
+                        
+                        {/* <ThumbUpIcon onClick={handleLikeClick} style={  colorStyle}></ThumbUpIcon> */}
+
+                        {/* <Grid item xs={2}> 2400 </Grid> */}
                         <Grid item xs={2}> {numLike.num_likes}  </Grid>
 
                         </Grid>    

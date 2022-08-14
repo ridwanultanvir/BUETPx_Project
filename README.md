@@ -1,11 +1,24 @@
 ##
 ```
 F:\L4T1_code\CSE408_project\dj_env1\Scripts\activate
+cd Backend/buetpx_back
 python manage.py runserver 
 cd frontend/buetpx_frontend
+conda activate js_env1
 npm start
 ```
 
+```
+
+npm install --legacy-peer-deps --save firebase
+```
+
+http://localhost:8000/api/delete_like/3/2
+
+
+##
+
+http://localhost:8000/api/
 
 ##
 buetpx_frontend ==> react 
@@ -22,15 +35,5 @@ opencv image properties : https://www.javatpoint.com/opencv-basic-operation-on-i
 object detection : https://www.youtube.com/watch?v=HXDD7-EnGBY&ab_channel=Murtaza%27sWorkshop-RoboticsandAI 
 
 
-
-##
-django.db.migrations.exceptions.NodeNotFoundError
-
-delete migrations folder 
-```
-python manage.py makemigrations
-python manage.py migrate
-```
-manage.py er location e ei command: 
 
 
