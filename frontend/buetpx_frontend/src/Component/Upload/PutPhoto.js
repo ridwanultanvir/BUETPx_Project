@@ -5,10 +5,6 @@ import {Grid, Button,FormControl,InputLabel,Box, Select, Typography,MenuItem, Te
 import Header from "../../Static/Header";
 import useStyles from './ImageStyle';
 import Panel from './Panel';
-import FileUploadIcon from '@mui/icons-material/FileUpload';
-import IconButton from '@mui/material/IconButton';
-import PhotoCamera from '@mui/icons-material/PhotoCamera';
-import Stack from '@mui/material/Stack';
 
 const FireUpload = () => {
     
@@ -77,9 +73,8 @@ const FireUpload = () => {
         const uploadTask = storage.ref(`images/${file.name}`).put(file);
         uploadTask.on('state_changed',
         (snapshot) => {
-            const progres = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-            setProgress(progres);
-
+            const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+            setProgress(progress);
         },
 
         (error) => {
@@ -121,9 +116,6 @@ const FireUpload = () => {
     
 
     const handleupload = () => {
-
-        
-
         console.log("uploading");
         if(file)
         {
@@ -165,112 +157,49 @@ const FireUpload = () => {
     const [Component, setComponent] = useState(
         
         <div>
-            <Grid container spacing={24}>
-                {/* put the rounded upload button in center */}
-                <Grid item xs={12}/>
+            <Grid container direction="column" spacing={5}>
+                <Grid item sm={2} />
+                <Grid item container>
+                    <Grid item sm={5}/>
+                    <Grid item>
+                        <br/>
+                        {/* <UpButton setFile={setFile}/> */}
+                        {/* big round upload button */}
+                        {/* <input type="file" style={{ "display": "none" }} ref={fileInput} />
+                        <Button variant="contained" color="primary" onClick={handleChange}>
+                            Upload
+                        </Button> */}
+                        
+                        <input  type="file" onChangeCapture={handleChange} />
+                        {/* <Button onClick={(e)=>{
+                           
+                        }}>
+                            Upload
+                            
+                        </Button> */}
+                        {/* <button onClick={ handleupload}>Upload</button> */}
+                        {/* <progress value={progress} max="100"/> */}
+                        {/* show image in 400x600 */}
+                        {url && <img src={url} alt="image" style={{
+                            width:600, height:400}} />}
+                    </Grid>
+                    <Grid item sm={5}/>
+                </Grid>
+                <Grid item container >
+                <Grid item sm={5}/>
+                    <Grid item>
+                        <Paper className={classes.paper}>
+                            <Typography variant="h5" component="h3" sx={{ bgcolor:'#f5f5f5', paddingLeft:'20px', paddingRight:'20px', paddingTop:'20px', paddingBottom:'20px'}}>
+                               Only Image file can be uploaded
+                            </Typography>
+                            </Paper>
+                    </Grid>
+                    <Grid item sm={5}/>
+                </Grid>
+            </Grid>
                 
-                <Grid item  container>
-                    <Grid item xs={5}/>
-                    <Grid item xs={2} >
-                    <Stack>
-                    <Button variant="contained" component="label" color="primary" style={{
-                        margin: "auto",
-                        marginTop: "20px",
-                        marginBottom: "20px",
-                        width: "200px",
-                        height: "50px",
-                        borderRadius: "100px",
-                       
-                    
-                    }}>
-                        Upload
-                    <input hidden accept="image/*" multiple type="file" onChangeCapture={handleChange}/>
-                    </Button>
-                    <Typography variant="h6">{progress}%</Typography>
-                    </Stack>
-                    <Paper className="paper" style={{
-                        margin: "auto",
-                        paddingTop: "20px",
-                        paddingBottom: "20px",
-                        paddingLeft: "20px",
-                        paddingRight: "20px",
-                        width: "200px",
-                        // backgroundColor set to ash
-                        backgroundColor: "#f5f5f5",
-                    }}>
-                          <center>
-                          <p>
-                            You can upload image file only
-                          </p>
-                          </center>
-                     </Paper>
-                   
-                </Grid>
-                <Grid item xs={5}/>
-                </Grid>
-               
-                </Grid>
-                
-        </div>
-    );
-    
-    useEffect(() => {
-        setComponent(
-            <div>
-            
-            <Grid container spacing={24}>
-                {/* put the rounded upload button in center */}
-                <Grid item xs={12}/>
-                
-                <Grid item  container>
-                    <Grid item xs={5}/>
-                    <Grid item xs={2} >
-                    <Stack direction="row" alignItems="center" spacing={2}>
+        </div>);
 
-                    <Button variant="contained" component="label"  color="primary" style={{
-                        margin: "auto",
-                        marginTop: "20px",
-                        marginBottom: "20px",
-                        width: "200px",
-                        height: "50px",
-                        borderRadius: "100px",
-                       
-                    
-                    }}>
-                        Upload
-                    <input hidden accept="image/*" multiple type="file" onChangeCapture={handleChange}/>
-                    </Button>
-                    
-                    <Typography variant="h6">{progress}%</Typography>
-                    </Stack>
-                    <Paper className="paper" style={{
-                        margin: "auto",
-                        paddingTop: "20px",
-                        paddingBottom: "20px",
-                        paddingLeft: "20px",
-                        paddingRight: "20px",
-                        width: "200px",
-                        // backgroundColor set to ash
-                        backgroundColor: "#f5f5f5",
-                    }}>
-                          <center>
-                          <p>
-                            You can upload image file only
-                          </p>
-                          </center>
-                     </Paper>
-                   
-                </Grid>
-                <Grid item xs={5}/>
-                </Grid>
-               
-                </Grid>
-        </div>
-        );
-    }, [progress]);
-
-
-       
 
 
     return(
@@ -284,37 +213,3 @@ const FireUpload = () => {
 };
 
 export default FireUpload;
-
-
-// <Grid container direction="column" spacing={5}>
-//                 <Grid item sm={2} />
-//                 <Grid item container>
-//                     <Grid item sm={5}/>
-//                     <Grid item>
-//                         <br/>
-                      
-
-//                         <Stack direction="row" alignItems="center" spacing={2}>
-//                             <Button variant="contained" component="label" endIcon={<FileUploadIcon/>}>
-//                                 Upload
-//                                 <input hidden accept="image/*" multiple type="file" onChangeCapture={handleChange}/>
-//                             </Button>
-//                             <Typography variant="h6">{progress}%</Typography>
-
-//                         </Stack>
-                        
-                        
-                        
-//                     </Grid>
-//                     <Grid item sm={4}/>
-//                 </Grid>
-//                 <Grid item container >
-//                     <Grid item>
-//                         <Paper className={classes.paper}>
-//                             <Typography variant="h5" component="h3" sx={{ bgcolor:'#f5f5f5', paddingLeft:'20px', paddingRight:'20px', paddingTop:'20px', paddingBottom:'20px'}}>
-//                                Only Image file can be uploaded
-//                             </Typography>
-//                             </Paper>
-//                     </Grid>
-//                 </Grid>
-//             </Grid>

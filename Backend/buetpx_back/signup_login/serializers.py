@@ -1,9 +1,7 @@
 from dataclasses import fields
-import imp
 from rest_framework import serializers 
 from buetpx.models import UserAccount
-# from signup_login.models import MyUser
-from django.contrib.auth.models import User
+from signup_login.models import MyUser
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.validators import UniqueValidator
@@ -25,7 +23,7 @@ class SignupSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
   class Meta:
-    model=User
+    model=MyUser
     fields=[
         'id',
         'username',
@@ -36,13 +34,13 @@ class UserSerializer(serializers.ModelSerializer):
         
 class UserSerializer2(serializers.ModelSerializer): 
   class Meta:
-    model = User
+    model = MyUser
     fields = ["id", "first_name", "last_name", "email"]
     
 class RegisterSerializer(serializers.ModelSerializer):
   email = serializers.EmailField(
     required=True,
-    validators=[UniqueValidator(queryset=User.objects.all())]
+    validators=[UniqueValidator(queryset=MyUser.objects.all())]
   )
   password = serializers.CharField(
     write_only=True, required=True, validators=[validate_password])
@@ -50,44 +48,39 @@ class RegisterSerializer(serializers.ModelSerializer):
   password2 = serializers.CharField(write_only=True, required=True)
   
   class Meta:
-    model = User
-    # fields = ('username', 'password', 'password2',
-    #      'email', 'photo_url','first_name','last_name')
+    model = MyUser
     fields = ('username', 'password', 'password2',
-      'email', 'first_name','last_name')
+         'email', 'photo_url','first_name','last_name')
     extra_kwargs = {
       'first_name': {'required': True},
       'last_name': {'required': True}
     }
     
   def validate(self, attrs):
-    print("validate reached")
     if attrs['password'] != attrs['password2']:
       raise serializers.ValidationError(
         {"password": "Password fields didn't match."})
-    
     return attrs
   
   def create(self, validated_data):
-    print("create reached")
-    user = User.objects.create(
+    user = MyUser.objects.create(
       username=validated_data['username'],
       email=validated_data['email'],
-      # photo_url=validated_data['photo_url'],
-      first_name=validated_data['first_name'],
-      last_name=validated_data['last_name']
+      photo_url=validated_data['photo_url'],
+      # first_name=validated_data['first_name'],
+      # last_name=validated_data['last_name']
     )
     user.set_password(validated_data['password'])
     user.save()
     return user   
        
-# class UserSerializer(serializers.ModelSerializer):
+# class MyUserSerializer(serializers.ModelSerializer):
 #     user_id=DjangoUserSerializer(required=True)
 #     print('id',user_id)
 #     class Meta:
 
 #     # ordering = ['-id']
-#         model = User
+#         model = MyUser
 #         fields = ('id',
 #                 'photo_url',
 #                 'user_id'

@@ -17,7 +17,6 @@ from django.contrib import admin
 from django.urls import path
 # from django.conf.urls import re_path , include 
 from django.conf.urls import  include 
-from rest_framework.authtoken import views
 
 
 urlpatterns = [
@@ -29,6 +28,4 @@ urlpatterns = [
     path ('', include('gallery.urls')),
     path ('', include('signup_login.urls')),
     path ('', include('upload.urls')),
-    path('api-token-auth', views.obtain_auth_token),
-    
 ]

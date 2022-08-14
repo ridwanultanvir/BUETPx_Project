@@ -6,7 +6,6 @@ import {makeStyles} from "@mui/material";
 import { color } from "@mui/system";
 import AddIcon from '@mui/icons-material/Add';
 import { useState, useEffect } from "react";
-import SendIcon from '@mui/icons-material/Send';
 
 // take a image file and preview it
 
@@ -24,7 +23,6 @@ const UploadDetail = (url) => {
     const [postDesc,setPostDesc]=useState();
     const [selectedTags, setSelectedTags] = useState([]);
     const [places, setPlaces] = useState([]);
-    const [variant, setVariant] = useState("outlined");
     // const places=[
     //     {id:1,name: 'Azimpur',city:'Dhaka',country: 'Bangladesh'},
     //     {id:2,name: 'Sonaimuri',city:'Noakhali',country: 'Bangladesh'},
@@ -73,7 +71,6 @@ const UploadDetail = (url) => {
         console.log("reqBody:", reqBody);
     }, [PlaceID, CatID, privacy, postTitle, selectedTags, url]);
     
-    
     useEffect(() => {
             
         fetch("http://localhost:8000/api/categories")
@@ -106,7 +103,7 @@ const UploadDetail = (url) => {
 
     useEffect(() => {
         // get tags
-        let body = {photo_url: url};
+        let body = {url: url};
         const reqOptions = {
             method: 'POST',
             headers: {
@@ -115,13 +112,13 @@ const UploadDetail = (url) => {
             body: JSON.stringify(body)
         };
         
-        fetch("http://localhost:8000/api/tag_suggest", reqOptions)
+        fetch("http://localhost:8000/api/upload/tags", reqOptions)
             .then(res => res.json())
             .then(
                 (result) => {
-                    setTags(result.tags);
+                    setTags(result);
                     console.log("got tags");
-                    console.log(result.tags);
+                    console.log(result);
                 }
             )
             .catch(error => console.log(error));
@@ -222,7 +219,6 @@ const UploadDetail = (url) => {
 
                         </Grid>
                     </Grid>
-                   
                     
 
                     <Grid item sm={10}/>
@@ -330,10 +326,8 @@ const UploadDetail = (url) => {
                             
                             {tags.map(tag => (
                                 <Grid item>
-                                <Button variant={variant} endIcon={<AddIcon />}
-                                onClick={(e)=> {setSelectedTags([...selectedTags, tag])
-                                        setVariant('contained');
-                                }} >
+                                <Button variant="outlined" endIcon={<AddIcon />}
+                                onClick={(e)=> setSelectedTags([...selectedTags, tag])} >
                                     {tag}
                                 </Button>
                                 </Grid>
@@ -377,7 +371,6 @@ const UploadDetail = (url) => {
                         <Grid item sm={2}/>
                         <Button variant="contained" sx={{ width: 350 }}
                         onClick={handlePost}
-                        endIcon={<SendIcon />}
                         >
                             Post 
                         </Button>

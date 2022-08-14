@@ -15,7 +15,9 @@ npm install --legacy-peer-deps --save firebase
 
 http://localhost:8000/api/delete_like/3/2
 
-
+```
+python manage.py migrate --fake post zero
+```
 ##
 
 props.id use 
