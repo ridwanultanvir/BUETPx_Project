@@ -25,7 +25,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Router>
     <Routes>
-      <Route path="/" element={<Homefeed />} />
+      <Route path="/" element={<MyImageList />} />
       <Route path="/posts" element={<Homefeed />} />
       <Route path="/posts/:id" element={<Post />} />
       <Route path="/posts3/:id" element={<Post3 />} />

@@ -34,14 +34,7 @@ import {
   useNavigate
 } from "react-router-dom";
 
-import Time from 'react-time-format'
-const Img = styled('img')({
-  margin: 'auto',
-  display: 'block',
-  maxWidth: '100%',
-  maxHeight: 500,
-  alignContent:'left'
-});
+
 
 // import Moment from 'react-moment';s
 
@@ -53,7 +46,7 @@ const  ImgPost=(props)=>{
     console.log("props",props);
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
-    // const [post, setpost] = useState([]);  
+    const [post, setpost] = useState([]);  
     const [checklike, setchecklike] = useState([]); 
     // const[checklikebool, setchecklikebool] = useState(false);
     const [comments, setcomments] = useState([]);
@@ -81,241 +74,41 @@ const  ImgPost=(props)=>{
 
     }
 
-
-
     const [numLike, setnumLike] = useState([]);  
 
-    // const checkLikeFunc = () => {
-    //   fetch("http://localhost:8000/api/check_likes/"+id+"/"+uid)
-    //   .then(res => res.json())
-    //   .then(
-    //     (result) => {
-    //       setIsLoaded(true);
-    //       setchecklike(result);
-            
-          
-    //     },
-    //     (error) => {
-    //       setIsLoaded(true);
-    //       setError(error);
-    //     }
-    //   )
-
-    //   console.log("---checklike",checklike);   
-    //   console.log("ami checkLikeFunc er sheshe"); 
-    //   setcheck1(true);    
-    //   console.log("check1",check1);
-    //   if(checklike.num_likes_this_user === 0){
-    //     setIsLike(false); 
-    //   }else{
-    //     setIsLike(true); 
-    //   }
-      
-      
-      
-      
-      
-    
-    // }
-
-    // const insertLikeFunc = () => {
-    //   const requestOptions = {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({
-    //       "like_date": new Date(),
-    //       "user": uid,
-    //       "post": id
-    //     })
-    //   };
-    //   fetch("http://localhost:8000/api/insert_like", requestOptions)
-    //       .then(response => response.json())
-    //       .then(data => {
-    //         console.log(data);
-            
-    //       }
-    //       )
-    //       .catch(error => console.log('error', error));
-    // }
-
-    // const deleteLikeFunc = () => {
-    //   fetch("http://localhost:8000/api/delete_like/"+id+"/"+uid, { method: 'DELETE' })
-    //       .then(res => res.json())
-    //       .then(
-    //         (result) => {
-    //           setIsLoaded(true);
-              
-    //           console.log("delete_result",result);
-
-              
-    //         },
-
-    //         (error) => {
-    //           setIsLoaded(true);
-    //           setError(error);
-    //         }
-    //       )
-      
-      
-    //   }
-    //   const getLikeCount = () => {
-    //     fetch("http://localhost:8000/api/likes/"+id)
-    //     .then(res => res.json())
-    //     .then(
-    //       (result) => {
-    //         setIsLoaded(true);
-    //         setnumLike(result);
-    //       },
-  
-    //       (error) => {
-    //         setIsLoaded(true);
-    //         setError(error);
-    //       }
-    //     )
-    //   }
-
-    // const handleLikeClick = () => {
-
-    //   console.log("Like Clicked ");
-    //   checkLikeFunc();
-    //   /*
-    //   while(check1 === false){
-    //     console.log("ami check1 e");
-    //   }
-    //   */
-    //  while(check1 === false){
-    //   console.log("ami check1 false e");
-    //   setTimeout(() => {console.log("The meaning of life")
+    const imageClick = () => {
         
-    //   }, 1000);
-    //   break; 
-    //  }
-    
+        console.log('imageClick korso ');
+        navigateToSpecificPost(); 
+    }
+
+    const navigate = useNavigate();
+    const navigateToSpecificPost = () => {
+    // 👇️ navigate to /contacts
+    navigate('/posts/' + props.id);
+    };
+
+
+    useEffect(() => {
+        fetch("http://localhost:8000/api/likes/"+props.id)
+          .then(res => res.json())
+          .then(
+            (result) => {
+              setIsLoaded(true);
+              setnumLike(result);
+            },
+            // Note: it's important to handle errors here
+            // instead of a catch() block so that we don't swallow
+            // exceptions from actual bugs in components.
+            (error) => {
+              setIsLoaded(true);
+              setError(error);
+            }
+          )
+      }, [post]);
       
-      
+     console.log("num_like",numLike);
 
-    //   console.log("ami check1 true e");
-    //   if(isLike){
-    //     console.log("delete like");
-    //     deleteLikeFunc();
-    //     setIsLike(false);
-    //     // setCountUp(countUp - 1);
-    //   }else{
-    //     console.log("insert like");
-    //     insertLikeFunc();
-    //     setIsLike(true);
-    //     // setCountUp(countUp + 1);
-    //   }
-      
-      
-
-      
-    // }
-
-    // const handleDislikeClick = () => {
-
-    //   console.log("DisLike Clicked ");
-      
-      
-
-      
-    // }
-
- 
-        
-
-    
-    // const { id } = useParams();
-
-    // useEffect(() => {
-    //   fetch("http://localhost:8000/api/check_likes/"+id+"/"+uid)
-    //     .then(res => res.json())
-    //     .then(
-    //       (result) => {
-    //         setIsLoaded(true);
-    //         setchecklike(result);
-            
-            
-    //       },
-        
-    //       // Note: it's important to handle errors here
-    //       // instead of a catch() block so that we don't swallow
-    //       // exceptions from actual bugs in components.
-    //       (error) => {
-    //         setIsLoaded(true);
-    //         setError(error);
-    //       }
-    //     )
-    // }, []);
-
-    // useEffect(() => {
-    //   fetch("http://localhost:8000/api/posts_with_uid/"+id)
-    //     .then(res => res.json())
-    //     .then(
-    //       (result) => {
-    //         setIsLoaded(true);
-    //         setpost(result);
-    //       },
-    //       // Note: it's important to handle errors here
-    //       // instead of a catch() block so that we don't swallow
-    //       // exceptions from actual bugs in components.
-    //       (error) => {
-    //         setIsLoaded(true);
-    //         setError(error);
-    //       }
-    //     )
-    // }, [checklike]);
-
-
-    
-
-    // useEffect(() => {
-    //     fetch("http://localhost:8000/api/likes/"+id)
-    //       .then(res => res.json())
-    //       .then(
-    //         (result) => {
-    //           setIsLoaded(true);
-    //           setnumLike(result);
-    //         },
-    //         // Note: it's important to handle errors here
-    //         // instead of a catch() block so that we don't swallow
-    //         // exceptions from actual bugs in components.
-    //         (error) => {
-    //           setIsLoaded(true);
-    //           setError(error);
-    //         }
-    //       )
-    //   }, [post]);
-      
-    //   const {post_title,post_date,photo_url,owner,category,place,tags}=post;
-    //   // console.log(post_title);
-    //   useEffect(() => {
-    //     if(owner)
-    //     {
-    //       fetch("http://localhost:8000/api/user/"+owner)
-    //       .then(res => res.json())
-    //       .then(
-    //         (result) => {
-    //           setIsLoaded(true);
-    //           setowner(result);
-    //         },
-    //         // Note: it's important to handle errors here
-    //         // instead of a catch() block so that we don't swallow
-    //         // exceptions from actual bugs in components.
-    //         (error) => {
-    //           setIsLoaded(true);
-    //           setError(error);
-    //         }
-    //       )
-    //     }
-    //       // eslint-disable-next-line react-hooks/exhaustive-deps
-    //   }, [numLike]);
-
-    
-
-     
-
-    // console.log("post",post);
 
 
     return (
@@ -327,6 +120,7 @@ const  ImgPost=(props)=>{
                   srcSet={`${props.photo_url}?w=248&fit=crop&auto=format&dpr=2 2x`}
                   alt={props.post_title}
                   loading="lazy"
+                  onClick={() => imageClick()}
                 />
               
 
@@ -339,7 +133,7 @@ const  ImgPost=(props)=>{
                       aria-label={`info about ${props.post_title}`}
                     >
                     <ThumbUpIcon ></ThumbUpIcon>
-                    <h5> {numLike.num_likes} </h5>
+                    {numLike.num_likes} 
                     </IconButton>
                   }
                   />

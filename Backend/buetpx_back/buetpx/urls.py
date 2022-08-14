@@ -1,6 +1,7 @@
 # from django.conf.urls import re_path  
 from django.urls import path
 from buetpx import views 
+
  
 urlpatterns = [ 
     path ('api/categories', views.get_categories),

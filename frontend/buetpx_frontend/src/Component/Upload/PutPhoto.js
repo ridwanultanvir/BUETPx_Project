@@ -10,6 +10,7 @@ import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import Stack from '@mui/material/Stack';
 
+
 const FireUpload = () => {
     
     const classes = useStyles();

@@ -25,6 +25,8 @@ const UploadDetail = (url) => {
     const [selectedTags, setSelectedTags] = useState([]);
     const [places, setPlaces] = useState([]);
     const [variant, setVariant] = useState("outlined");
+    const [tagButton, setTagButton] = useState([{}]);
+
     // const places=[
     //     {id:1,name: 'Azimpur',city:'Dhaka',country: 'Bangladesh'},
     //     {id:2,name: 'Sonaimuri',city:'Noakhali',country: 'Bangladesh'},
@@ -92,6 +94,8 @@ const UploadDetail = (url) => {
             .then(
                 (result) => {
                     setPlaces(result);
+                  
+
                     console.log(result);
                 }
             )
@@ -103,6 +107,11 @@ const UploadDetail = (url) => {
         setCategoryList(CategoryList.sort((a, b) => (a.name > b.name) ? 1 : -1));
 
     }, [CategoryList]);
+
+    const getTagButtonSelectionByName = (name) => {
+        // return from tagButton
+        return tagButton[name];
+    }
 
     useEffect(() => {
         // get tags
@@ -120,6 +129,9 @@ const UploadDetail = (url) => {
             .then(
                 (result) => {
                     setTags(result.tags);
+                    // set tagButton for each tag to false
+                    setTagButton(result.tags.map(t => ({t: false})));
+
                     console.log("got tags");
                     console.log(result.tags);
                 }
@@ -329,10 +341,12 @@ const UploadDetail = (url) => {
                         
                             
                             {tags.map(tag => (
+
                                 <Grid item>
-                                <Button variant={variant} endIcon={<AddIcon />}
+                                <Button variant={tagButton[tag]?"contained":"outlined"} disabled={tagButton[tag]} endIcon={<AddIcon />}
                                 onClick={(e)=> {setSelectedTags([...selectedTags, tag])
-                                        setVariant('contained');
+                                        // set tagButton[tag] = true;
+                                        setTagButton(tagButton => ({...tagButton, [tag]: true}))
                                 }} >
                                     {tag}
                                 </Button>

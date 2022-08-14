@@ -92,7 +92,7 @@ const [user_pass, setuserpass] = useState('');
             console.log(response);
             if (response.ok) {  
               response.json()
-              window.location.href="\\";
+              window.location.href="/";
             }
             else
             {
