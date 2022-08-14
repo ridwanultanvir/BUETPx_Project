@@ -46,133 +46,7 @@ const  MyImageList=()=>{
 
     const colorStyle = {color:"blue"}; 
 
-    const checkLikeFunc = (post) => {
-      fetch("http://localhost:8000/api/check_likes/"+post.id+"/"+uid)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          setIsLoaded(true);
-          setchecklike(result);
-            
-          
-        },
-        (error) => {
-          setIsLoaded(true);
-          setError(error);
-        }
-      )
-
-      console.log("---checklike",checklike);   
-      console.log("ami checkLikeFunc er sheshe"); 
-      setcheck1(true);    
-      console.log("check1",check1);
-      if(checklike.num_likes_this_user === 0){
-        setIsLike(false); 
-      }else{
-        setIsLike(true); 
-      }
-      
-      
-      
-      
-      
     
-    }
-
-    const insertLikeFunc = (post) => {
-      const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          "like_date": new Date(),
-          "user": uid,
-          "post": post.id
-        })
-      };
-      fetch("http://localhost:8000/api/insert_like", requestOptions)
-          .then(response => response.json())
-          .then(data => {
-            console.log(data);
-            
-          }
-          )
-          .catch(error => console.log('error', error));
-    }
-
-    const deleteLikeFunc = (post) => {
-      fetch("http://localhost:8000/api/delete_like/"+post.id+"/"+uid, { method: 'DELETE' })
-          .then(res => res.json())
-          .then(
-            (result) => {
-              setIsLoaded(true);
-              
-              console.log("delete_result",result);
-
-              
-            },
-
-            (error) => {
-              setIsLoaded(true);
-              setError(error);
-            }
-          )
-      
-      
-      }
-      const getLikeCount = (post) => {
-        fetch("http://localhost:8000/api/likes/"+post.id)
-        .then(res => res.json())
-        .then(
-          (result) => {
-            setIsLoaded(true);
-            setnumLike(result);
-          },
-  
-          (error) => {
-            setIsLoaded(true);
-            setError(error);
-          }
-        )
-      }
-
-    const handleLikeClick = (post) => {
-
-      console.log("Like Clicked ");
-      checkLikeFunc(post);
-      /*
-      while(check1 === false){
-        console.log("ami check1 e");
-      }
-      */
-     while(check1 === false){
-      console.log("ami check1 false e");
-      setTimeout(() => {console.log("The meaning of life")
-        
-      }, 1000);
-      break; 
-     }
-    
-      
-      
-
-      console.log("ami check1 true e");
-      if(isLike){
-        console.log("delete like");
-        deleteLikeFunc(post);
-        setIsLike(false);
-        // setCountUp(countUp - 1);
-      }else{
-        console.log("insert like");
-        insertLikeFunc(post);
-        setIsLike(true);
-        // setCountUp(countUp + 1);
-      }
-      
-      
-
-      
-    }
-    const { tagname } = useParams();
 
 
     useEffect(() => {
@@ -181,6 +55,14 @@ const  MyImageList=()=>{
           .then(
             (result) => {
               setIsLoaded(true);
+              // add isLike field to result 
+   
+              result.map(post => {
+                                      post.isLiked = false;
+                                      
+                                      post.num_likes = 4; 
+                                      return post;
+              });
               setposts(result);
             },
             
@@ -191,22 +73,20 @@ const  MyImageList=()=>{
           )
       }, []);
       
+      const [likepostid, setlikepostid] = useState("");
+      const handleLikeClick2 = (id) => {
+
+        console.log("like clicked"); 
+        console.log("id",id);
+        // post.num_likes = post.num_likes + 1; 
+      }
       
-
-      const getPost = post => {
-        return (
-          <Grid item 
-          xs={12} sm={6} md={6} lg={4}
-           >
-           <Card {...post} />
-           </Grid>
-
-    
-    
-        );
-      };
-
-
+      const handleLikeClick = (e) => {
+        e.preventDefault();
+        console.log("button clicked! ");
+        
+        
+      }
 
     return (
         // <Grid container direction='column' spacing={2}>
@@ -251,8 +131,9 @@ const  MyImageList=()=>{
                       sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
                       aria-label={`info about ${post.post_title}`}
                     >
-                    <ThumbUpIcon onClick={handleLikeClick} style={isLike ? colorStyle : null}></ThumbUpIcon>
-                    <h5> {numLike.num_likes} </h5>
+                      
+                    <ThumbUpIcon onClick={post.num_likes+1} style={post.isLike ? colorStyle : null}></ThumbUpIcon>
+                    <h5> {post.num_likes} </h5>
                     </IconButton>
                   }
                   />
