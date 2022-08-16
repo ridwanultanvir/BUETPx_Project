@@ -259,11 +259,15 @@ const Header = ()=> {
           <NavLink className="nav-link" to="/upload">
               <Button 
                     // onClick={} 
-                  sx={{
-                    color:'white',
-                    fontSize:14,
-                    fontWeight:'bold'
-                  }}
+                    sx={{
+                      mr: 2,
+                      display: { xs: 'none', md: 'flex' },
+                      fontFamily: 'revert-layer',
+                      fontWeight: 700,
+                      // letterSpacing: '.3rem',
+                      color: 'inherit',
+                      textDecoration: 'none',
+                    }}
                     >
                       Upload
                   <FileUploadOutlinedIcon size='large' />

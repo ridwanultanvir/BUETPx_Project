@@ -78,7 +78,14 @@ const UploadDetail = (url) => {
     
     useEffect(() => {
             
-        fetch("http://localhost:8000/api/categories")
+        fetch("http://localhost:8000/api/categories",{
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+               
+                "Authorization": "Token " + localStorage.getItem("token")
+            }
+        })
           .then(res => res.json())
           .then(
             (result) => {
@@ -89,7 +96,13 @@ const UploadDetail = (url) => {
           )
             .catch(error => console.log(error));
         
-        fetch("http://localhost:8000/api/places")
+        fetch("http://localhost:8000/api/places",{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Token ' + localStorage.getItem('token')
+            }
+        })
             .then(res => res.json())
             .then(
                 (result) => {
@@ -120,6 +133,7 @@ const UploadDetail = (url) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': 'Token ' + localStorage.getItem('token')
             },
             body: JSON.stringify(body)
         };
@@ -337,9 +351,8 @@ const UploadDetail = (url) => {
                                 Suggested Keywords
                             </Typography>
                         </Grid>
+
                         <Grid item container spacing={1}>
-                        
-                            
                             {tags.map(tag => (
 
                                 <Grid item>

@@ -148,7 +148,13 @@ const  Post=()=>{
       
       }
       const getLikeCount = () => {
-        fetch("http://localhost:8000/api/likes/"+id)
+        fetch("http://localhost:8000/api/likes/"+id,{ method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Token ' + localStorage.getItem('token')
+        }
+      
+      })
         .then(res => res.json())
         .then(
           (result) => {
@@ -217,7 +223,12 @@ const  Post=()=>{
     const { id } = useParams();
 
     useEffect(() => {
-        fetch("http://localhost:8000/api/posts_with_uid/"+id)
+        fetch("http://localhost:8000/api/posts_with_uid/"+id,{
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Token ' + localStorage.getItem('token')}
+        })
           .then(res => res.json())
           .then(
             (result) => {
@@ -392,7 +403,7 @@ const  Post=()=>{
     
                 <Grid container item xs={12} >
                 <Grid item xs={12}>
-                    <ButtonBase sx={{ width: '90%', maxHeight: '100%',maxWidth:'1080px' }}>
+                    <ButtonBase sx={{ width: '90%', maxHeight: '90%',maxWidth:'1080px' }}>
                         <Img src={photo_url} alt='1.jpg'/>
                     </ButtonBase>
                     

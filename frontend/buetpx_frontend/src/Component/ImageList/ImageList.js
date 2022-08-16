@@ -52,7 +52,13 @@ const  MyImageList=()=>{
 
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/api/posts")
+        fetch("http://127.0.0.1:8000/api/posts",{
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Token " + localStorage.getItem("token")
+            }
+        })
           .then(res => res.json())
           .then(
             (result) => {
@@ -114,7 +120,7 @@ const  MyImageList=()=>{
         <Grid item xs={12} sm={10} >
                 
         <Box sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-          <ImageList variant="masonry" cols={3} gap={20}>
+          <ImageList variant="masonry" cols={4} gap={10}>
             {posts.map((post) => (
               <ImgPost {...post}/>
                   

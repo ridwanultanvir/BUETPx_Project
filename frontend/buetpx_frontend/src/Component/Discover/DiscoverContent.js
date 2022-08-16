@@ -2,6 +2,7 @@ import React from "react";
 import { Grid } from "@mui/material";
 import MyCard from '../../Static/Card';
 import {useState, useEffect} from "react";
+import ImageCard from '../../Static/ImgCard';
 
 const Content = (props) => {
 
@@ -28,7 +29,8 @@ const Content = (props) => {
 
     return (
        <Grid container spacing={1} style={{maxHeight:2000,overflow:'auto'}}>
-            {postlist.map(source => getSourceData(source))}
+         <ImageCard/>
+            {/* {postlist.map(source => getSourceData(source))} */}
         
        </Grid>
             

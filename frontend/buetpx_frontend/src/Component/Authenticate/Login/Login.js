@@ -16,19 +16,8 @@ function Login() {
       console.log(data);
      
     };
-    const token = '79274912874129ed394809384032';
-    // set token to localStorage
-    localStorage.setItem('token', token);
-    // get from localStorage
-    const tokenFromLocalStorage = localStorage.getItem('token');
-    // const requestOptions = {
-    //   method: 'GET',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'Authorization': `Bearer ${tokenFromLocalStorage}`
-
-    // delete token from localStorage
-    localStorage.removeItem('token');
+   
+    
 
     return (
         <div  style={{
