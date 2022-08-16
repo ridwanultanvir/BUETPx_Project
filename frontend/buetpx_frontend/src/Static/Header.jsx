@@ -222,6 +222,8 @@ const Header = ()=> {
               // letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
+              paddingRight: '40px',
+              marginRight: '40px',
             }}
           >
             BUETpx
@@ -230,12 +232,16 @@ const Header = ()=> {
           {/* <Grid container>
             <Grid item xs={2}></Grid>
             <Grid item xs={8}> */}
-              <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            <Box sx={{flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+              <Grid  container spacing={3}>
              
               {pages.map((page) => (
                   // <NavLink className="nav-link" to={`/${page}`}>
+                  <Grid item>
                   <Button
+                    
                     key={page}
+
                 
                     sx={{ my: 2, color: 'white', display: 'block',
                     fontSize:14,
@@ -246,13 +252,14 @@ const Header = ()=> {
                   {page}
                   
                   </Button>
+                  </Grid>
                   // </NavLink>
                  
                   
                  
               ))}
+              </Grid>
               </Box>
-
               
             {/* </Grid> */}
             {/* <Grid item xs={2}>
