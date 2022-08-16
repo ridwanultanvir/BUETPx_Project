@@ -264,10 +264,9 @@ const Header = ()=> {
 
 
 {/* user menu after click of pp */}
-          
-          <Box sx={{ flexGrow: 0 }}>
-          {/* <NavLink className="nav-link" to="/upload"> */}
-              <Button 
+
+            <Box sx={{paddingRight: '10px'}}>
+            <Button 
                     onClick={()=>{setdirectUrl(`/upload`)}}
                     sx={{
                       mr: 2,
@@ -277,12 +276,18 @@ const Header = ()=> {
                       // letterSpacing: '.3rem',
                       color: 'white',
                       textDecoration: 'none',
+                      
                     }}
                     >
                       Upload
                   <FileUploadOutlinedIcon size='large' />
               </Button>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </Box>
+          
+          <Box sx={{ flexGrow: 0 }}>
+          {/* <NavLink className="nav-link" to="/upload"> */}
+             
+              {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; */}
             
                 <Tooltip title="Open usermenu">
                   <IconButton 
