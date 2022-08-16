@@ -36,7 +36,13 @@ const  Tags=()=>{
 
 
     useEffect(() => {
-        fetch("http://localhost:8000/api/posts_by_tagname/"+tagname)
+        fetch("http://localhost:8000/api/posts_by_tagname/"+tagname,{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Token ' + localStorage.getItem('token')
+            }
+        })
           .then(res => res.json())
           .then(
             (result) => {
