@@ -1,8 +1,10 @@
 import React from "react";
-import { Grid } from "@mui/material";
+import { Grid,Box } from "@mui/material";
 import MyCard from '../../Static/Card';
 import {useState, useEffect} from "react";
 import ImageCard from '../../Static/ImgCard';
+import ImgPost from "../ImageList/ImgPost";
+import {ImageList} from "@mui/material";
 
 const Content = (props) => {
 
@@ -29,8 +31,16 @@ const Content = (props) => {
 
     return (
        <Grid container spacing={1} style={{maxHeight:2000,overflow:'auto'}}>
-         <ImageCard/>
+         {/* <ImageCard/> */}
             {/* {postlist.map(source => getSourceData(source))} */}
+            <Box sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+             <ImageList variant="masonry" cols={4} gap={10}>
+            {postlist.map((post) => (
+              <ImgPost {...post}/>
+                  
+            ))}
+          </ImageList>
+            </Box>
         
        </Grid>
             

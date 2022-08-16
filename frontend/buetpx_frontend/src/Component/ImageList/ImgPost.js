@@ -135,7 +135,7 @@ const  ImgPost=(props)=>{
                 />
               
 
-                  <ImageListItemBar
+                  {/* <ImageListItemBar
                   title={props.post_title}
                   subtitle={props.owner.name}
                   actionIcon={
@@ -148,7 +148,7 @@ const  ImgPost=(props)=>{
                     </IconButton>
                     
                   }
-                  />
+                  /> */}
 
         </ImageListItem>
         </CardActionArea>

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
+import {Box, Tab, Tabs} from '@mui/material';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
@@ -15,6 +15,7 @@ import CameraOutlinedIcon from '@mui/icons-material/CameraOutlined';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { NavLink } from "react-router-dom";
+import CardActionArea from '@mui/material/CardActionArea';
 import {useState, useEffect} from "react";
 
 const pages = ['Discover', 'Quest','Galleries'];
@@ -26,6 +27,7 @@ const Header = ()=> {
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const [user, setuser] = React.useState();
     const [menu, setmenu] = React.useState();
+    const [directUrl, setdirectUrl] = React.useState();
     // const [token, settoken] = React.useState(localStorage.getItem('token'));
     const token=localStorage.getItem('token');
 
@@ -56,6 +58,12 @@ const Header = ()=> {
 
   }
 
+   useEffect(()=>{
+    if(directUrl){
+      window.location.href=directUrl;
+    }
+
+   },[directUrl])
 
   // console.log(token)
   useEffect(() => {
@@ -223,20 +231,22 @@ const Header = ()=> {
             <Grid item xs={2}></Grid>
             <Grid item xs={8}> */}
               <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+             
               {pages.map((page) => (
-                  <NavLink className="nav-link" to={`/${page}`}>
+                  // <NavLink className="nav-link" to={`/${page}`}>
                   <Button
                     key={page}
                 
                     sx={{ my: 2, color: 'white', display: 'block',
                     fontSize:14,
                     fontWeight:'bold' }}
+                    onClick={() => {setdirectUrl(`/${page}`)}}
                   >
                     
                   {page}
                   
                   </Button>
-                  </NavLink>
+                  // </NavLink>
                  
                   
                  
@@ -256,23 +266,22 @@ const Header = ()=> {
 {/* user menu after click of pp */}
           
           <Box sx={{ flexGrow: 0 }}>
-          <NavLink className="nav-link" to="/upload">
+          {/* <NavLink className="nav-link" to="/upload"> */}
               <Button 
-                    // onClick={} 
+                    onClick={()=>{setdirectUrl(`/upload`)}}
                     sx={{
                       mr: 2,
                       display: { xs: 'none', md: 'flex' },
                       fontFamily: 'revert-layer',
                       fontWeight: 700,
                       // letterSpacing: '.3rem',
-                      color: 'inherit',
+                      color: 'white',
                       textDecoration: 'none',
                     }}
                     >
                       Upload
                   <FileUploadOutlinedIcon size='large' />
               </Button>
-              </NavLink>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             
                 <Tooltip title="Open usermenu">
