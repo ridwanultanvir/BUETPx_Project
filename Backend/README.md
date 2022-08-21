@@ -73,3 +73,7 @@ Run the Python script:
  Run the server
 
 			python manage.py runserver
+
+if your migrate does not work, do it this way
+python manage.py migrate --fake <the app for which migration struggles> zero
+python manage.py migrate <the app for which migration struggles>
