@@ -10,7 +10,7 @@ const  Upload=()=>{
     const [CategoryList, setCategoryList] = useState([]);
     const [Category, setCategory] = useState('');
     const [post_title, setPostTitle] = useState('');
-    const [PostDesc, setPostDesc] = useState('');
+    // const [PostDesc, setPostDesc] = useState('');
     // const [Area, setArea] = useState('');
     // const [City, setCity] = useState('');
     // const [Country, setCountry] = useState('');
@@ -91,7 +91,7 @@ const  Upload=()=>{
                 onChange={e => setPostTitle(e.target.value)}
             
                 />
-                <TextField
+                {/* <TextField
                     id="postDescription"
                     multiline
                     rows={2}
@@ -103,7 +103,7 @@ const  Upload=()=>{
                         
                     }}
                     onChange={e => setPostDesc(e.target.value)}
-                    />
+                    /> */}
                     <label>Location</label><br></br>
                     {/* <TextField
                     id="LocationArea"

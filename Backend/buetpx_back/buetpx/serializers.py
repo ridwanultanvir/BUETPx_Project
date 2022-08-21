@@ -7,6 +7,8 @@ from buetpx.models import Tags
 from buetpx.models import Category
 from buetpx.models import Comment
 from buetpx.models import Like, LikeCount
+# from buetpx.models import Like
+
 from buetpx.models import UserAccount
 
  

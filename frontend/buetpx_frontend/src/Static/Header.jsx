@@ -63,7 +63,7 @@ const Header = ()=> {
     {
       if(token != null)
     {
-      console.log(token)
+      console.log("token ",token)
       const requestOptions = {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' ,
@@ -97,6 +97,8 @@ const Header = ()=> {
               }
               else
               {
+
+                console.log("else e in")
                 setmenu(
                   <MenuItem key='login'
                   onClick={login}

@@ -7,7 +7,11 @@ from rest_framework import status
  
 from buetpx.models import Tutorial,Post,Comment,UserAccount,Tags, Category,Place, Like
 from buetpx.serializers import LikeSerializer,CommentSerializer, CommentSerializer2, TutorialSerializer,PostSerializer,PlaceSerializer,UserAccountSerializer,CategorySerializer
+# from buetpx.serializers import CommentSerializer, CommentSerializer2, TutorialSerializer,PostSerializer,PlaceSerializer,UserAccountSerializer,CategorySerializer
+
 from buetpx.serializers import PostSerializer2, CommentInsertSerializer, LikeInsertSerializer, LikeInsertSerializer2
+# from buetpx.serializers import PostSerializer2, CommentInsertSerializer
+
 from rest_framework.decorators import api_view
 
 from django.db.models import Count
