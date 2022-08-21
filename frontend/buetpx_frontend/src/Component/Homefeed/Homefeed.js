@@ -14,17 +14,17 @@ function Homefeed() {
         
 
         <Grid item container>
-          <Grid item xs={0} sm={1}>
+          {/* <Grid item xs={0} sm={1}>
 
-          </Grid>
+          </Grid> */}
 
           <Grid item xs={12} sm={10} >
           <Body/>
           </Grid>
 
-          <Grid item xs={0} sm={1} >
+          {/* <Grid item xs={0} sm={1} >
 
-          </Grid>
+          </Grid> */}
          
 
         </Grid>

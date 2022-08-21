@@ -12,6 +12,7 @@ import StyleOutlinedIcon from '@mui/icons-material/StyleOutlined';
 import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 import {Typography} from '@mui/material';
 import ButtonBase from '@mui/material/ButtonBase';
@@ -28,6 +29,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import { styled } from '@mui/material/styles';
 
 import {useState, useEffect} from "react";
+import { CardActionArea } from '@material-ui/core';
 
 import {
   useParams,
@@ -90,15 +92,7 @@ const  ImgPost=(props)=>{
 
 
     useEffect(() => {
-        fetch("http://localhost:8000/api/likes/"+props.id,
-        {
-          method: "GET", // *Type of request GET, POST, PUT, DELETE
-          headers: {
-            "Authorization": 'Token ' + localStorage.getItem('token')  
-          },
-          
-      }
-        )
+        fetch("http://localhost:8000/api/likes/"+props.id)
           .then(res => res.json())
           .then(
             (result) => {
@@ -121,6 +115,7 @@ const  ImgPost=(props)=>{
 
     return (
         
+      <CardActionArea>
         <ImageListItem key={props.photo_url}>
 
                 <img
@@ -132,7 +127,7 @@ const  ImgPost=(props)=>{
                 />
               
 
-                  <ImageListItemBar
+                  {/* <ImageListItemBar
                   title={props.post_title}
                   subtitle={props.owner.name}
                   actionIcon={
@@ -140,13 +135,15 @@ const  ImgPost=(props)=>{
                       sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
                       aria-label={`info about ${props.post_title}`}
                     >
-                    <ThumbUpIcon ></ThumbUpIcon>
-                    {numLike.num_likes} 
+                    <FavoriteBorderIcon ></FavoriteBorderIcon>
+                    <Typography variant="caption" color="textSecondary">{numLike.num_likes} </Typography>
                     </IconButton>
+                    
                   }
-                  />
+                  /> */}
 
         </ImageListItem>
+        </CardActionArea>
           
     
     );

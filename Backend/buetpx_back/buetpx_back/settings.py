@@ -55,6 +55,7 @@ REST_FRAMEWORK = {
                 'rest_framework.permissions.IsAuthenticated',
     ),
 }
+# python manage.py makemigrations
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

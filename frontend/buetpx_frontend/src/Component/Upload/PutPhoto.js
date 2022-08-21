@@ -9,7 +9,7 @@ import FileUploadIcon from '@mui/icons-material/FileUpload';
 import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import Stack from '@mui/material/Stack';
-
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 
 const FireUpload = () => {
     
@@ -32,6 +32,7 @@ const FireUpload = () => {
     const [url, setUrl] = useState(null);
     const [urlList, setImgList] = useState([]);
     const [progress, setProgress] = useState(0);
+    const [variant, setVariant] = useState('outlined');
 
     
     const getPlaceByID = (id) => {
@@ -71,10 +72,6 @@ const FireUpload = () => {
         if(file)
     
         {
-
-            console.log("uploading");
-           
-       
         const uploadTask = storage.ref(`images/${file.name}`).put(file);
         uploadTask.on('state_changed',
         (snapshot) => {
@@ -97,8 +94,6 @@ const FireUpload = () => {
                 setImgList([...urlList, url]);
                 // set url:url
                 setFiles([...files, {url: url, file:file}]);
-
-
             })
         });
         }
@@ -223,27 +218,33 @@ const FireUpload = () => {
                 {/* put the rounded upload button in center */}
                 <Grid item xs={12}/>
                 
-                <Grid item  container>
-                    <Grid item xs={5}/>
-                    <Grid item xs={2} >
+                <Grid item  container direction='column'>
+                    <Grid item sm={4}/>
+                    <Grid item sm={3} >
                     <Stack direction="row" alignItems="center" spacing={2}>
 
-                    <Button variant="contained" component="label"  color="primary" style={{
+                    <Button variant={variant} component="label"  color="primary" style={{
                         margin: "auto",
                         marginTop: "20px",
                         marginBottom: "20px",
-                        width: "200px",
+                        width: "300px",
                         height: "50px",
                         borderRadius: "100px",
-                       
+                        
                     
-                    }}>
-                        Upload
+                    }} onClick={()=>{setVariant('contained')}}>
+                    
+                        <ArrowUpwardIcon/>
                     <input hidden accept="image/*" multiple type="file" onChangeCapture={handleChange}/>
                     </Button>
                     
-                    <Typography variant="h6">{progress}%</Typography>
+                    
                     </Stack>
+                    <center>
+                    <Typography>Uploading</Typography>
+                    <Typography variant="h6">{progress}%</Typography>
+                    </center>
+                    <Grid item>
                     <Paper className="paper" style={{
                         margin: "auto",
                         paddingTop: "20px",
@@ -255,14 +256,15 @@ const FireUpload = () => {
                         backgroundColor: "#f5f5f5",
                     }}>
                           <center>
-                          <p>
+                          <Typography sx={{fontSize:'16px'}}>
                             You can upload image file only
-                          </p>
+                          </Typography>
                           </center>
                      </Paper>
+                    </Grid>
                    
                 </Grid>
-                <Grid item xs={5}/>
+                <Grid item sm={4}/>
                 </Grid>
                
                 </Grid>

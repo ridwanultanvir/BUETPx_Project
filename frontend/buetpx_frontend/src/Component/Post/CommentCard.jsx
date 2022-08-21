@@ -97,8 +97,9 @@ function CommentCard(props) {
               posted 1 minute ago
             </p> */}
           </Grid>
-          <Button  variant='contained' onClick={deleteCmment}>Delete</Button>
         </Grid>
+        <Button size='small' variant='outlined' onClick={deleteCmment}>Delete</Button>
+
       </Paper>
       
   )

@@ -91,7 +91,14 @@ const [user_pass, setuserpass] = useState('');
             console.log(response);
             if (response.ok) {  
               response.json()
-              window.location.href="\\";
+              .then(data=>{
+                console.log("response:",data);
+                localStorage.setItem("token", data.token);
+                console.log("token from localstorage:",localStorage.getItem("token"));
+                
+                window.location.href="\\";
+              })
+              
             }
             else
             {

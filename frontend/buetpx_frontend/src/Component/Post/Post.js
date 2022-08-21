@@ -1,8 +1,9 @@
 import React from 'react';
-import {Avatar, Grid} from "@mui/material";
+import {Avatar, Grid, Paper} from "@mui/material";
 import Header from '../../Static/Header';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import CommentIcon from '@mui/icons-material/Comment';
 import {IconButton} from '@mui/material';
 import { TextField } from '@mui/material';
@@ -12,7 +13,7 @@ import StyleOutlinedIcon from '@mui/icons-material/StyleOutlined';
 import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
-
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import {Typography} from '@mui/material';
 import ButtonBase from '@mui/material/ButtonBase';
 import { styled } from '@mui/material/styles';
@@ -32,6 +33,15 @@ const Img = styled('img')({
   maxHeight: 500,
   alignContent:'left'
 });
+
+// style to add background image
+const styles = {
+  paperContainer: {
+      height: 1356,
+      width:'100%',
+      backgroundImage: `url(${"../../Static/img/blurry-preview.jpg"})`
+  }
+};
 
 // import Moment from 'react-moment';s
 
@@ -75,7 +85,12 @@ const  Post=()=>{
     const [numLike, setnumLike] = useState([]);  
 
     const checkLikeFunc = () => {
-      fetch("http://localhost:8000/api/check_likes/"+id+"/"+uid)
+      fetch("http://localhost:8000/api/check_likes/"+id+"/"+uid,{
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Token " + localStorage.getItem("token")}
+      })
       .then(res => res.json())
       .then(
         (result) => {
@@ -110,7 +125,9 @@ const  Post=()=>{
     const insertLikeFunc = () => {
       const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json',
+        'Authorization': 'Token '+localStorage.getItem('token')
+       },
         body: JSON.stringify({
           "like_date": new Date(),
           "user": uid,
@@ -128,7 +145,13 @@ const  Post=()=>{
     }
 
     const deleteLikeFunc = () => {
-      fetch("http://localhost:8000/api/delete_like/"+id+"/"+uid, { method: 'DELETE' })
+      fetch("http://localhost:8000/api/delete_like/"+id+"/"+uid, { 
+            method: 'DELETE' , 
+            headers: { 
+              'Content-Type': 'application/json',
+              'Authorization': 'Token '+localStorage.getItem('token')
+            }
+          })
           .then(res => res.json())
           .then(
             (result) => {
@@ -148,7 +171,13 @@ const  Post=()=>{
       
       }
       const getLikeCount = () => {
-        fetch("http://localhost:8000/api/likes/"+id)
+        fetch("http://localhost:8000/api/likes/"+id,{ method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Token ' + localStorage.getItem('token')
+        }
+      
+      })
         .then(res => res.json())
         .then(
           (result) => {
@@ -217,7 +246,12 @@ const  Post=()=>{
     const { id } = useParams();
 
     useEffect(() => {
-        fetch("http://localhost:8000/api/posts_with_uid/"+id)
+        fetch("http://localhost:8000/api/posts_with_uid/"+id,{
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Token ' + localStorage.getItem('token')}
+        })
           .then(res => res.json())
           .then(
             (result) => {
@@ -387,14 +421,26 @@ const  Post=()=>{
             <Header/>
             </Grid>
      
-            <Grid container spacing={2} marginLeft={4} >
+            <Grid container  marginLeft={3} marginRight={3} >
 
-    
+                
                 <Grid container item xs={12} >
-                <Grid item xs={12}>
-                    <ButtonBase sx={{ width: '90%', maxHeight: '100%',maxWidth:'1080px' }}>
-                        <Img src={photo_url} alt='1.jpg'/>
+                <Grid item  container direction='row' xs={12} sx={{backgroundColor:'#f5f5f5'}}>
+                    
+                    <Paper  style={{width:'100%',backgroundImage: `url(${"https://c4.wallpaperflare.com/wallpaper/835/238/511/blurry-wallpaper-preview.jpg"})`}}>
+                    {/* <Grid item sm={2}/> */}
+                    
+                    {/* <Grid item> */}
+                    <center>
+                    <ButtonBase sx={{ width: '99%', maxHeight: '90%',maxWidth:'1080px' }}>
+                        <Img src={photo_url} alt='loading..'/>
                     </ButtonBase>
+                    </center>
+                    {/* </Grid> */}
+                    
+                    {/* <Grid item sm={2}/> */}
+                     
+                    </Paper>
                     
                 </Grid>
 
@@ -404,12 +450,14 @@ const  Post=()=>{
                         <Grid item xs={12}>
                         <hr></hr>
                         </Grid>
-                        <Grid item xs={4}></Grid>
+                        <Grid item xs={5}></Grid>
                         <Grid item xs={2}> 
                         
 
                         <Grid item xs={2}> 
                         <ThumbUpIcon onClick={handleLikeClick} style={isLike ? colorStyle : null}></ThumbUpIcon>
+                        {/* {checklike.num_likes_this_user} */}
+                        
                         </Grid>
                         {/* <Grid item xs={2}> 
                         <ThumbDownIcon onClick={handleDislikeClick}></ThumbDownIcon>
@@ -420,7 +468,7 @@ const  Post=()=>{
 
                         </Grid>    
                         <Grid item xs={2}>
-                        <IconButton size="small"><CollectionsOutlinedIcon/></IconButton>
+                        <IconButton size="small"><AddPhotoAlternateIcon/></IconButton>
                         <Grid item xs={4}></Grid>
                          </Grid>    
                          <Grid item xs={12}>
@@ -455,8 +503,8 @@ const  Post=()=>{
               textDecoration: 'none',
             }}
           >
-            by {post_owner.name}
-            by123 {checklike.num_likes_this_user}
+             {post_owner.name}
+             
           </Typography>
 
                       
@@ -491,7 +539,7 @@ const  Post=()=>{
                         </Typography>
 
                 </Grid>
-                <Grid item xs={10.5}><Button variant="outlined" color="secondary">   {category} </Button> </Grid>
+                <Grid item xs={10.5}><Button variant="outlined" color="primary">   {category} </Button> </Grid>
                 </Grid>
 
                 
@@ -637,7 +685,7 @@ const  Post=()=>{
                 </Grid>
                
                 <Grid item xs={12}>
-                <Button variant='outlined' onClick={handleComment}>Submit</Button>
+                <Button variant='contained' onClick={handleComment}>Submit</Button>
                 </Grid>
                 
                 

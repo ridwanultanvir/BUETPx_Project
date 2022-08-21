@@ -22,7 +22,6 @@ import {useState, useEffect} from "react";
 import RadioButton from './RadioButton';
 import CheckboxesGroup from './CheckBoxes';
 import './Style.css';
-
   
 
 

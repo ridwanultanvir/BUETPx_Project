@@ -78,7 +78,14 @@ const UploadDetail = (url) => {
     
     useEffect(() => {
             
-        fetch("http://localhost:8000/api/categories")
+        fetch("http://localhost:8000/api/categories",{
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+               
+                "Authorization": "Token " + localStorage.getItem("token")
+            }
+        })
           .then(res => res.json())
           .then(
             (result) => {
@@ -89,7 +96,13 @@ const UploadDetail = (url) => {
           )
             .catch(error => console.log(error));
         
-        fetch("http://localhost:8000/api/places")
+        fetch("http://localhost:8000/api/places",{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Token ' + localStorage.getItem('token')
+            }
+        })
             .then(res => res.json())
             .then(
                 (result) => {
@@ -120,6 +133,7 @@ const UploadDetail = (url) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': 'Token ' + localStorage.getItem('token')
             },
             body: JSON.stringify(body)
         };
@@ -176,6 +190,7 @@ const UploadDetail = (url) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': 'Token ' + localStorage.getItem('token')
             },
             body: JSON.stringify(postData)
         };
@@ -332,14 +347,43 @@ const UploadDetail = (url) => {
                     </Grid>
 
                     <Grid item container direction='column' spacing={2}>
+                        <Grid item container spacing={2}>
+                                {/* put a button for every selected tag*/}
+                                <Grid item>
+                                    <Typography variant="h6" style={{fontSize:'20',fontFamily:'sans-serif'}}>
+                                        Keywords:
+                                    </Typography>
+                                </Grid>
+                                {selectedTags.map((tag, index) => (
+                                    <Grid item key={index}>
+                                        <Button variant="contained" color="primary" onClick={(e)=>{
+                                            console.log("tag:", tag);
+                                            setSelectedTags(selectedTags.filter(t => t !== tag));
+                                        }}>{tag}</Button>
+                                    </Grid>
+                                ))}
+                                        
+                                
+                        </Grid>
+                        <Grid item>
+                            <TextField sx={{ width: 450 }} variant="outlined" id="tag-selected" label="Add Keyword" onKeyDown={(e)=>{
+                                if(e.keyCode === 13){
+                                    setSelectedTags([...selectedTags, e.target.value]);
+                                    console.log(selectedTags);
+                                    e.target.value = "";
+
+                                }
+                            }}>
+                                    
+                            </TextField>
+                        </Grid>
                         <Grid item>
                             <Typography>
                                 Suggested Keywords
                             </Typography>
                         </Grid>
+
                         <Grid item container spacing={1}>
-                        
-                            
                             {tags.map(tag => (
 
                                 <Grid item>
