@@ -20,6 +20,7 @@ import SignUp from "./Component/Signup/Signup";
 import Login from "./Component/Login/Login";
 import Galleries from "./Component/Gallery/Galleries";
 import Gallery from "./Component/Gallery/Gallery";
+import Quest from "./Component/Quest/Quest";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -46,6 +47,7 @@ root.render(
 
       <Route path="/Galleries" element={<Galleries />} />
       <Route path="/Gallery/:id" element={<Gallery />} />
+      <Route path="/quest/" element={<Quest />} />
 
 
 
