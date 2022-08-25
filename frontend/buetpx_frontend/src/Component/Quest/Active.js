@@ -14,18 +14,23 @@ import CameraEnhanceTwoToneIcon from '@mui/icons-material/CameraEnhanceTwoTone';
 import LocationOnTwoToneIcon from '@mui/icons-material/LocationOnTwoTone';
 import TagTwoToneIcon from '@mui/icons-material/TagTwoTone';
 import {useState, useEffect} from "react";
+import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
+import AwardIcon from '@mui/icons-material/EmojiEventsOutlined';
 
 const activeList = [
     {
         id: 1,
         title: 'Quest 1',
+        theme:'Theme 1',
         description: 'This is a quest',
         category: 'Adventure',
-        goal: 'What is the goal of this quest',
+        
         startDate: '01/08/2022',
-        endDate: '01/09/2022',
+        endDate: '2022-09-09 12:12:00',
         status: 'Active',
-        reward: 'Reward',
+        photoUrl:'https://i.pinimg.com/originals/fd/c5/4b/fdc54b01e6eabc23673a0415952327e5.jpg',
+
+        reward: 'USD 500',
         
 
     },
@@ -35,10 +40,12 @@ const activeList = [
         description: 'This is a quest',
         category: 'Language',
         goal: 'What is the goal of this quest',
-        startDate: '01/08/2022',
-        endDate: '08/09/2022',
+        startDate: '2022-08-01',
+        endDate: '2022-09-03 12:12:00',
         status: 'Active',
-        reward: 'Reward',
+        photoUrl:'https://images.theoutbound.com/contents/116217/assets/1484947659888?&fit=crop&w=970&q=60',
+
+        reward: 'USD 500',
     },
     {
         id: 3,
@@ -47,9 +54,10 @@ const activeList = [
         category: 'Education',
         goal: 'What is the goal of this quest',
         startDate: '01/08/2022',
-        endDate: '06/09/2022',
+        endDate: '2022-09-05 12:12:00',
         status: 'Active',
-        reward: 'Reward',
+        photoUrl:'https://images.theoutbound.com/contents/116217/assets/1484947659888?&fit=crop&w=970&q=60',
+        reward: 'USD 500',
     },
     {
         id: 4,
@@ -58,9 +66,10 @@ const activeList = [
         category: 'Culture',
         goal: 'What is the goal of this quest',
         startDate: '01/08/2022',
-        endDate: '02/09/2022',
+        endDate: '2022-09-07 12:12:00',
         status: 'Active',
-        reward: 'Reward',
+        photoUrl:'https://www.intercultural-europe.org/wp-content/uploads/2021/01/Culture_Folk_Fest_ExpatExplore.jpg',
+        reward: 'USD 500',
     },
     {
         id: 5,
@@ -68,17 +77,38 @@ const activeList = [
         description: 'This is a quest',
         category: 'Technology',
         goal: 'What is the goal of this quest',
-        startDate: '01/08/2022',
-        endDate: '03/09/2022',
+        startDate: '2022-08-03',
+        endDate: '2022-09-01 12:12:00',
         status: 'Active',
-        reward: 'Reward',
+        photoUrl:'https://i.pinimg.com/originals/64/bd/87/64bd87ae69d911486d5c5f63fc508832.jpg',
+        reward: 'USD 500',
     }
 
 ]
 
 const Active = () => {
 
-    
+
+  const [selectedId, setSelectedId] = useState(null);
+
+  useEffect(() => {
+      if(selectedId){
+        // redirect to /quest/id
+        window.location.href = `/quest/${selectedId}`;
+      }
+  },[selectedId])
+
+   const getTImeLeft = (endDate) =>  {
+        const endDate1 = new Date(endDate);
+        const currentDate = new Date();
+        const timeLeft = endDate1.getTime() - currentDate.getTime();
+        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        // const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        // const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+        return `${days} days ${hours} hours left`;
+   }
+
   const formatDate = (date) => {
     // format to i.e 6 jan, saturday at 3:00pm
     var d = new Date(date);
@@ -116,53 +146,63 @@ const Active = () => {
   }
 
     return(
-        <div>
-        <Grid container spacing={2} sx={{paddingLeft:'10px', paddingRight:'10px',paddingBottom:'10px'}}>
-            {activeList.map(quest_ => (
-              <Grid item xs={12}>
+        <Grid container spacing={2} sx={{paddingLeft:'80px', paddingRight:'80px',paddingBottom:'10px'}}>
+            {
+                activeList.map(quest => (
+                  <Grid item>
+                    <Card sx={{ minWidth: 442}}>
+                      <CardActionArea onClick={(e)=>{
+                          console.log(quest.id);
+                          console.log(" selected...");
+                          setSelectedId(quest.id);
+                        }}>
+                          
+                        <CardMedia
+                          component="img"
+                          height="140"
+                          image={quest.photoUrl}
+                          alt="loading.."
+                        />
+                        <CardContent>
+                          <Typography gutterBottom variant="h5" component="div">
+                            {quest.title}
+                          </Typography>
+                          <Typography variant="body2" color="text.secondary">
+                            {quest.description}
+                          </Typography>
+                          
+                          <Grid container spacing={1} direction='column' sx={{paddingTop:'10px'}}>
+                            <Grid item container spacing={2}>
+                                <Grid item >
+                                  <AccessTimeFilledIcon />
+                                  </Grid>
+                                  <Grid item>
+                                      <Typography variant="body2" color="text.secondary" sx={{paddingTop:'3px'}}>
+                                      {getTImeLeft(quest.endDate)}
 
-              <CardActionArea onClick={(e)=>{
-                console.log(quest_.id);
-                console.log(" selected...");
-              }}>
-              <Card style={{ minWidth:275 , height:'80%' , backgroundColor:'#f5f5f5'}}>
-              {/* <Card sx={{ minWidth: 275 }}> */}
-                <CardContent>
-                  <Typography  variant="h5"  sx={{ fontSize: 21 }} color="text.secondary" gutterBottom>
-                    {quest_.title}
-                  </Typography>
-                  
-                  <Typography  sx={{ mb: 1.5 }} color="text.secondary">
-                    {quest_.description}
-                  </Typography>
-                  <Typography  sx={{ mb: 1.5 }} color="text.secondary">
-                    {quest_.category}
-                    </Typography>
-                    <Typography  sx={{ mb: 1.5 }} color="text.secondary">
-                    {quest_.goal}
-                    </Typography>
-                    <Typography  sx={{ mb: 1.5 }} color="text.secondary">
-                     Status:: {quest_.status}
-                    </Typography>
-                  {/* make it bold */}
-                  <Typography variant="h5" sx={{ mb: 1.5, font:'caption' }} color="text.secondary">
-                    Deadline: {formatDate(quest_.endDate)}
-                  </Typography>
-                  
-                </CardContent>
-                {/* <CardActions>
-                  <Button size="small">Learn More</Button>
-                </CardActions> */}
-              </Card>
-              </CardActionArea>
-              </Grid>
-             
+                                      </Typography>
+                                </Grid>
 
-              
-              
+                            </Grid>
+                            <Grid item container spacing={2}>
+                                <Grid item >
+                                  <AwardIcon />
+                                  </Grid>
+                                  <Grid item>
+                                      <Typography variant="body2" color="text.secondary" sx={{paddingTop:'3px'}}>
+                                      {quest.reward}
+
+                                      </Typography>
+                                </Grid>
+
+                            </Grid>
+                          </Grid>
+                        </CardContent>
+                      </CardActionArea>
+                    </Card>
+                  </Grid>  
             ))}
         </Grid>
-        </div>
 
     );
 }

@@ -16,69 +16,77 @@ import TagTwoToneIcon from '@mui/icons-material/TagTwoTone';
 import {useState, useEffect} from "react";
 
 const endedList = [
-    {
-        id: 1,
-        title: 'Quest 1',
-        description: 'This is a quest',
-        category: 'Adventure',
-        goal: 'What is the goal of this quest',
-        startDate: '01/08/2022',
-        endDate: '01/09/2022',
-        status: 'Ended',
-        reward: 'Reward',
-        
+  {
+    id: 1,
+    title: 'Quest 1',
+    description: 'This is a quest',
+    category: 'Adventure',
+    goal: 'What is the goal of this quest',
+    startDate: '01/08/2022',
+    endDate: '01/09/2022',
+    status: 'Ended',
+    photoUrl:'https://i.pinimg.com/originals/fd/c5/4b/fdc54b01e6eabc23673a0415952327e5.jpg',
 
-    },
-    {
-        id: 2,
-        title: 'Quest 2',
-        description: 'This is a quest',
-        category: 'Language',
-        goal: 'What is the goal of this quest',
-        startDate: '01/08/2022',
-        endDate: '08/09/2022',
-        status: 'Ended',
-        reward: 'Reward',
-    },
-    {
-        id: 3,
-        title: 'Quest 3',
-        description: 'This is a quest',
-        category: 'Education',
-        goal: 'What is the goal of this quest',
-        startDate: '01/08/2022',
-        endDate: '06/09/2022',
-        status: 'Ended',
-        reward: 'Reward',
-    },
-    {
-        id: 4,
-        title: 'Quest 4',
-        description: 'This is a quest',
-        category: 'Culture',
-        goal: 'What is the goal of this quest',
-        startDate: '01/08/2022',
-        endDate: '02/09/2022',
-        status: 'Ended',
-        reward: 'Reward',
-    },
-    {
-        id: 5,
-        title: 'Quest 5',
-        description: 'This is a quest',
-        category: 'Technology',
-        goal: 'What is the goal of this quest',
-        startDate: '01/08/2022',
-        endDate: '03/09/2022',
-        status: 'Ended',
-        reward: 'Reward',
-    }
+    reward: 'Reward',
+    
+
+},
+{
+    id: 2,
+    title: 'Quest 2',
+    description: 'This is a quest',
+    category: 'Language',
+    goal: 'What is the goal of this quest',
+    startDate: '01/08/2022',
+    endDate: '08/09/2022',
+    status: 'Ended',
+    photoUrl:'https://images.theoutbound.com/contents/116217/assets/1484947659888?&fit=crop&w=970&q=60',
+
+    reward: 'Reward',
+},
+{
+    id: 3,
+    title: 'Quest 3',
+    description: 'This is a quest',
+    category: 'Education',
+    goal: 'What is the goal of this quest',
+    startDate: '01/08/2022',
+    endDate: '06/09/2022',
+    status: 'Ended',
+    photoUrl:'https://images.theoutbound.com/contents/116217/assets/1484947659888?&fit=crop&w=970&q=60',
+    reward: 'Reward',
+},
+{
+    id: 4,
+    title: 'Quest 4',
+    description: 'This is a quest',
+    category: 'Culture',
+    goal: 'What is the goal of this quest',
+    startDate: '01/08/2022',
+    endDate: '02/09/2022',
+    status: 'Ended',
+    photoUrl:'https://www.intercultural-europe.org/wp-content/uploads/2021/01/Culture_Folk_Fest_ExpatExplore.jpg',
+    reward: 'Reward',
+},
+{
+    id: 5,
+    title: 'Quest 5',
+    description: 'This is a quest',
+    category: 'Technology',
+    goal: 'What is the goal of this quest',
+    startDate: '01/08/2022',
+    endDate: '03/09/2022',
+    status: 'Ended',
+    photoUrl:'https://i.pinimg.com/originals/64/bd/87/64bd87ae69d911486d5c5f63fc508832.jpg',
+    reward: 'Reward',
+}
 
 ]
 
 const Ended = () => {
 
-    
+  const [selectedId, setSelectedId] = useState(null);
+
   const formatDate = (date) => {
     // format to i.e 6 jan, saturday at 3:00pm
     var d = new Date(date);
@@ -115,50 +123,54 @@ const Ended = () => {
     return date;
   }
 
-    return(
-        <div>
-        <Grid container spacing={2} sx={{paddingLeft:'10px', paddingRight:'10px',paddingBottom:'10px'}}>
-            {endedList.map(quest_ => (
-              <Grid item xs={12}>
+  // useEffect(() => {
+  //   if(selectedId){
+  //     // redirect to /quest/id
+  //     window.location.href = `/endedquest/${selectedId}`;
+  //   }
 
-              <CardActionArea onClick={(e)=>{
-                console.log(quest_.id);
-                console.log(" selected...");
-              }}>
-              <Card style={{ minWidth:275 , height:'80%' , backgroundColor:'#f5f5f5'}}>
-              {/* <Card sx={{ minWidth: 275 }}> */}
-                <CardContent>
-                  <Typography  variant="h5"  sx={{ fontSize: 21 }} color="text.secondary" gutterBottom>
-                    {quest_.title}
-                  </Typography>
-                  
-                  <Typography  sx={{ mb: 1.5 }} color="text.secondary">
-                    {quest_.description}
-                  </Typography>
-                  <Typography  sx={{ mb: 1.5 }} color="text.secondary">
-                    Status:: {quest_.status}
-                  </Typography>
-                  {/* make it bold */}
-                  <Typography variant="h5" sx={{ mb: 1.5, font:'caption' }} color="text.secondary">
-                    Ended:: {formatDate(quest_.endDate)}
-                  </Typography>
-                  
-                </CardContent>
-                {/* <CardActions>
-                  <Button size="small">Learn More</Button>
-                </CardActions> */}
-              </Card>
-              </CardActionArea>
-              </Grid>
-             
+  // },[selectedId])
 
-              
-              
-            ))}
-        </Grid>
-        </div>
 
-    );
+  return(
+    <Grid container spacing={2} sx={{paddingLeft:'80px', paddingRight:'80px',paddingBottom:'10px'}}>
+        {
+            endedList.map(quest => (
+              <Grid item>
+                <Card sx={{ minWidth: 442}}>
+                  <CardActionArea onClick={(e)=>{
+                      console.log(quest.id);
+                      console.log(" selected...");
+                      setSelectedId(quest.id);
+                      window.location.href = `/endedquest/${quest.id}`;
+
+                    }}>
+                      
+                    <CardMedia
+                      component="img"
+                      height="140"
+                      image={quest.photoUrl}
+                      alt="loading.."
+                    />
+                    <CardContent>
+                      <Typography gutterBottom variant="h5" component="div">
+                        {quest.title}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {quest.description}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {quest.status}
+                      </Typography>
+                      
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
+              </Grid>  
+        ))}
+    </Grid>
+
+);
 }
 
 export default Ended;
