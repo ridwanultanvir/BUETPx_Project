@@ -4,7 +4,7 @@ POST
 Http headers raw: 
 Accept: */*
 User-Agent: Thunder Client (https://www.thunderclient.com)
-Authorization: Token 2daf6090a8b3f317e25a932d7147b98a0049b929
+Authorization Token 2daf6090a8b3f317e25a932d7147b98a0049b929
 
 
 
@@ -60,8 +60,6 @@ Token 2daf6090a8b3f317e25a932d7147b98a0049b929
     "reward": "USD 500"
 }
 
-https://globeecho.com/wp-content/uploads/2022/06/1654814143_6870439_1654768589970-hole-in-your-soul-abba-voyage-photo-by-johan-persson-1.jpg
-
 
 
 {
@@ -75,3 +73,39 @@ https://globeecho.com/wp-content/uploads/2022/06/1654814143_6870439_165476858997
     "photo_url": "https://globeecho.com/wp-content/uploads/2022/06/1654814143_6870439_1654768589970-hole-in-your-soul-abba-voyage-photo-by-johan-persson-1.jpg",
     "reward": "USD 500"
 }
+
+
+
+{
+    "quest_title": "Valley Quest",
+    "quest_theme":"Theme Bisanakandi",
+    "quest_description": "Sylhet Quest",
+    "category": "Travel",    
+    "start_date": "2022-01-09 12:12:00",
+    "end_date": "2022-11-09 12:12:00",
+    "status": "Inactive",
+    "photo_url": "https://live.staticflickr.com/4331/37265420585_5d6ec46a6b_b.jpg",
+    "reward": "USD 400"
+}
+
+
+
+{
+    "quest_title": "Street Food Quest",
+    "quest_theme":"Theme Food",
+    "quest_description": "Food Vlog",
+    "category": "Food",    
+    "start_date": "2022-01-01 12:12:00",
+    "end_date": "2022-11-19 12:12:00",
+    "status": "Inactive",
+    "photo_url": "https://www.holidify.com/images/cmsuploads/compressed/Street_food_for_sale_in_Ao_Nang_20201217203704.jpg",
+    "reward": "USD 400"
+}
+
+
+
+##
+
+http://127.0.0.1:8000/api/get_ended_quests
+
+http://127.0.0.1:8000/api/get_posts_by_userid

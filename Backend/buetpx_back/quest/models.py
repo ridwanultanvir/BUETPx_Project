@@ -8,8 +8,9 @@ class Quest(models.Model):
     quest_title = models.CharField(max_length=500)
     quest_theme = models.CharField(max_length=500)
     quest_description = models.TextField()
-    start_date = models.DateTimeField(auto_now_add=True)
-    end_date = models.DateTimeField(auto_now_add=True)
+    start_date = models.DateTimeField()
+    # end_date = models.DateTimeField(auto_now_add=True)
+    end_date = models.DateTimeField()
     photo_url = models.CharField(max_length=500)
     category = models.CharField(max_length=500)
     # status: 'Active', 'Inactive', 'Completed'
@@ -45,4 +46,3 @@ class Submission(models.Model):
     )
     shortlisted = models.IntegerField()
     # 0 = not shortlisted; 1 = shortlisted
-    

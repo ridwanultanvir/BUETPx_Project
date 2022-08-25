@@ -6,7 +6,8 @@ from rest_framework.parsers import JSONParser
 from rest_framework import status
 from rest_framework.decorators import api_view
 
-
+from buetpx.models import Tutorial,Post,Comment,UserAccount,Tags, Category,Place, Like
+from buetpx.serializers import LikeSerializer,CommentSerializer, CommentSerializer2, TutorialSerializer,PostSerializer
 
 import json
 
@@ -54,3 +55,40 @@ def insert_submission(request):
                 submssion_serializer.save()
                 return JsonResponse(submssion_serializer.data, status=status.HTTP_201_CREATED) 
         return JsonResponse(submssion_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+@api_view(['Get'])
+
+def get_active_quests(request):
+    
+    if request.method == 'GET':
+        active_quest = Quest.objects.filter(status="Active")               
+        active_quest_serializer = QuestInsertSerializer(active_quest,many = True)
+        return JsonResponse(active_quest_serializer.data, safe=False)
+
+@api_view(['Get'])
+def get_ended_quests(request):
+    
+    if request.method == 'GET':
+        ended_quest = Quest.objects.filter(status="Ended")               
+        ended_quest_serializer = QuestInsertSerializer(ended_quest,many = True)
+        return JsonResponse(ended_quest_serializer.data, safe=False)
+    
+@api_view(['Get'])
+
+def get_all_quests(request):
+    
+    if request.method == 'GET':
+        all_quest = Quest.objects.all()           
+        all_quest_serializer = QuestInsertSerializer(all_quest,many = True)
+        return JsonResponse(all_quest_serializer.data, safe=False)
+    
+    
+@api_view(['Get'])
+
+def get_posts_by_userid(request,id):
+    
+    if request.method == 'GET':
+ 
+        posts = Post.objects.filter(owner_id = id)    
+        post_serializer = PostSerializer(posts,many = True)
+        return JsonResponse(post_serializer.data, safe=False)

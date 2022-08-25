@@ -10,7 +10,7 @@ from buetpx.models import Like, LikeCount
 # from buetpx.models import Like
 
 from buetpx.models import UserAccount
-
+from buetpx.serializers import LikeSerializer,CommentSerializer, CommentSerializer2, TutorialSerializer,PostSerializer,PlaceSerializer,UserAccountSerializer,CategorySerializer
 from quest.models import Quest, Submission
 
 
@@ -45,3 +45,36 @@ class SubmissionInsertSerializer(serializers.ModelSerializer):
               'post',
               'shortlisted',      
               )
+  
+  
+class PostSerializer(serializers.ModelSerializer):
+    owner =UserAccountSerializer()
+    # owner = serializers.SlugRelatedField(read_only=True, slug_field='name' )
+    # print("*******************This is owner*********************")
+    # print(owner)
+    # serializers.Sl
+    category = serializers.SlugRelatedField(read_only=True, slug_field='name' )
+    # place = serializers.SlugRelatedField(read_only=True, slug_field='name' )
+    # place = PlaceSerializer()
+    tags = serializers.StringRelatedField(many=True, read_only=True)
+    def get_field_names(self, *args, **kwargs):
+        field_names = self.context.get('fields', None)
+        if field_names:
+            return field_names
+
+        return super(PostSerializer, self).get_field_names(*args, **kwargs)
+    
+    class Meta:
+        # ordering  = ['-post_date']
+        model = Post
+        fields = (
+                  'id',
+                  'post_title',
+                  'post_date',
+                  'photo_url',
+                  'owner',
+                  'category',
+                  'place',
+                  'tags',
+                  )
+        extra_kwargs = {'tags':{'required': False}}
