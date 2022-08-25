@@ -32,13 +32,17 @@ class Quest(models.Model):
 
 class Submission(models.Model):
     # submission_id = models.IntegerField()
-    quest_id = models.ForeignKey(
+    # quest_id eta ; DB e automatic "id" jog kore fele 
+    quest = models.ForeignKey(
           Category, 
           on_delete=models.CASCADE,
           related_name='submission'
     )
-    post_id = models.ForeignKey(
+    post = models.ForeignKey(
             Post, 
             on_delete=models.CASCADE,
             related_name='submission'
     )
+    shortlisted = models.IntegerField()
+    # 0 = not shortlisted; 1 = shortlisted
+    
