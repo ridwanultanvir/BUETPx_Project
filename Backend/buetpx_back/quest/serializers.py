@@ -46,8 +46,16 @@ class SubmissionInsertSerializer(serializers.ModelSerializer):
               'shortlisted',      
               )
   
-  
-class PostSerializer(serializers.ModelSerializer):
+    # if request.method == 'GET':       
+
+    #     num_likes = Like.objects.filter(post=postid).count()
+    #     print("likes:", num_likes)         
+    #     response_data = {}
+    #     response_data['num_likes'] = num_likes
+    #     return JsonResponse(response_data, safe=False)
+
+
+class PostLikeSerializer(serializers.ModelSerializer):
     owner =UserAccountSerializer()
     # owner = serializers.SlugRelatedField(read_only=True, slug_field='name' )
     # print("*******************This is owner*********************")
@@ -57,12 +65,16 @@ class PostSerializer(serializers.ModelSerializer):
     # place = serializers.SlugRelatedField(read_only=True, slug_field='name' )
     # place = PlaceSerializer()
     tags = serializers.StringRelatedField(many=True, read_only=True)
-    def get_field_names(self, *args, **kwargs):
-        field_names = self.context.get('fields', None)
-        if field_names:
-            return field_names
+    
+    # likes = Like.objects.filter(post='id').count()
 
-        return super(PostSerializer, self).get_field_names(*args, **kwargs)
+    likes = serializers.SerializerMethodField()
+
+    def get_likes(self, id):
+        likes = Like.objects.filter(post=id).count()
+        response_data = {}
+        response_data['likes'] = likes
+        return response_data
     
     class Meta:
         # ordering  = ['-post_date']
@@ -76,5 +88,5 @@ class PostSerializer(serializers.ModelSerializer):
                   'category',
                   'place',
                   'tags',
+                  'likes',
                   )
-        extra_kwargs = {'tags':{'required': False}}

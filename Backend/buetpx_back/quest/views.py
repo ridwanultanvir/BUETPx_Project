@@ -13,7 +13,7 @@ import json
 
 from quest.models import Quest, Submission
 
-from quest.serializers import QuestInsertSerializer, SubmissionInsertSerializer
+from quest.serializers import QuestInsertSerializer, SubmissionInsertSerializer, PostLikeSerializer
 
 
 
@@ -91,4 +91,15 @@ def get_posts_by_userid(request,id):
  
         posts = Post.objects.filter(owner_id = id)    
         post_serializer = PostSerializer(posts,many = True)
+        return JsonResponse(post_serializer.data, safe=False)
+    
+    
+@api_view(['Get'])
+
+def get_posts_all_data(request):
+    
+    if request.method == 'GET':
+ 
+        posts = Post.objects.all()
+        post_serializer = PostLikeSerializer(posts,many = True)
         return JsonResponse(post_serializer.data, safe=False)
