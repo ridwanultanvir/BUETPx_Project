@@ -13,6 +13,25 @@ http://127.0.0.1:8000/api/insert_submission
 Authorization
 Token 2daf6090a8b3f317e25a932d7147b98a0049b929
 
+##
+
+FINAL: 
+
+{
+    "title": "Home Food Quest",
+    "theme":"Theme Food",
+    "description": "Food Vlog",
+    "category": "Food",    
+    "startDate": "2022-01-01 12:12:00",
+    "endDate": "2022-11-19 12:12:00",
+    "status": "Active",
+    "photoUrl": "https://loveincorporated.blob.core.windows.net/contentimages/gallery/9d7f99ea-cd54-4ab0-a383-c9058596daf3-burgerpile.jpg",
+    "reward": "USD 400"
+}
+
+
+
+##
 
 {
     "quest": 1,
@@ -104,8 +123,35 @@ Token 2daf6090a8b3f317e25a932d7147b98a0049b929
 
 
 
+
+
+
 ##
 
 http://127.0.0.1:8000/api/get_ended_quests
 
 http://127.0.0.1:8000/api/get_posts_by_userid
+
+
+
+
+##
+@Tanvir 
+get_active_quests()
+
+get_ended_quests()
+
+getquestByid(quest_id)
+
+
+
+getPostsByUserId(user_id)
+
+submitPhoto(quest_id, user_id, post)
+-- submitPhoto = insert_submission
+
+append likecount in post_data entry
+
+
+* baki 
+getShortQuestByQuestid(quest_id)

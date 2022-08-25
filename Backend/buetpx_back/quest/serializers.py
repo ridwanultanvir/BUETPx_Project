@@ -21,12 +21,12 @@ class QuestInsertSerializer(serializers.ModelSerializer):
     ordering = ['-id']
     model = Quest
     fields = ('id',
-              'quest_title',
-              'quest_theme',
-              'quest_description',
-              'start_date',
-              'end_date',
-              'photo_url',
+              'title',
+              'theme',
+              'description',
+              'startDate',
+              'endDate',
+              'photoUrl',
               'category',
               'status',    
               'reward',          

@@ -23,6 +23,9 @@ from quest.serializers import QuestInsertSerializer, SubmissionInsertSerializer,
 from django.db.models.query import QuerySet
 from django.http import HttpResponse
 
+
+
+
 @api_view(['POST'])
 def insert_quest(request):
     print("insert_quest:")
