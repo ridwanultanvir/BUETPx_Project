@@ -29,7 +29,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Router>
     <Routes>
-      <Route path="/" element={<MyImageList />} />
+      <Route path="/" element={<Homefeed />} />
       <Route path="/posts" element={<Homefeed />} />
       <Route path="/posts/:id" element={<Post />} />
       <Route path="/posts3/:id" element={<Post3 />} />
@@ -41,7 +41,7 @@ root.render(
       <Route path="/Upload" element={<Upload />} />
 
       <Route path="/TestForm" element={<TestForm />} />
-      <Route path="/ImageList" element={<MyImageList />} />
+      <Route path="/ImageList" element={<Homefeed />} />
 	  <Route path="/discover/filtered/:catname" element={<ShowFilteredResult />} />
 
 

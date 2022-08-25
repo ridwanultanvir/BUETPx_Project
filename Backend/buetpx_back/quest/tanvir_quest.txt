@@ -1,0 +1,77 @@
+http://127.0.0.1:8000/api/insert_quest
+POST
+
+Http headers raw: 
+Accept: */*
+User-Agent: Thunder Client (https://www.thunderclient.com)
+Authorization: Token 2daf6090a8b3f317e25a932d7147b98a0049b929
+
+
+
+http://127.0.0.1:8000/api/insert_submission
+
+Authorization
+Token 2daf6090a8b3f317e25a932d7147b98a0049b929
+
+
+{
+    "quest": 1,
+    "post":2,
+    "shortlisted": 1
+
+}
+
+
+
+
+##
+
+
+
+
+
+{
+    "quest_title": "Mountain Climb",
+    "quest_theme":"Theme Everest",
+    "quest_description": "Hill Climbing Adventure",
+    "category": "Adventure",    
+    "start_date": "2022-01-09 12:12:00",
+    "end_date": "2022-09-09 12:12:00",
+    "status": "Active",
+    "photo_url":"https://i.pinimg.com/originals/fd/c5/4b/fdc54b01e6eabc23673a0415952327e5.jpg",
+    "reward": "USD 500"
+}
+
+
+
+
+
+
+
+{
+    "quest_title": "Beach Quest",
+    "quest_theme":"Theme Kuakata",
+    "quest_description": "Nature Adventure",
+    "category": "Travel",    
+    "start_date": "2022-01-09 12:12:00",
+    "end_date": "2022-09-09 12:12:00",
+    "status": "Active",
+    "photo_url":"https://thumbs.dreamstime.com/b/row-colourful-umbrellas-kuakata-beach-bay-bengal-bangladesh-116409173.jpg",
+    "reward": "USD 500"
+}
+
+https://globeecho.com/wp-content/uploads/2022/06/1654814143_6870439_1654768589970-hole-in-your-soul-abba-voyage-photo-by-johan-persson-1.jpg
+
+
+
+{
+    "quest_title": "Concert Quest",
+    "quest_theme":"Theme Jack White",
+    "quest_description": "North America fans",
+    "category": "Adventure",    
+    "start_date": "2022-01-09 12:12:00",
+    "end_date": "2022-11-09 12:12:00",
+    "status": "Active",
+    "photo_url": "https://globeecho.com/wp-content/uploads/2022/06/1654814143_6870439_1654768589970-hole-in-your-soul-abba-voyage-photo-by-johan-persson-1.jpg",
+    "reward": "USD 500"
+}

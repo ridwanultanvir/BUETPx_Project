@@ -92,15 +92,7 @@ const  ImgPost=(props)=>{
 
 
     useEffect(() => {
-        fetch("http://localhost:8000/api/likes/"+props.id,{
-
-            method: 'GET',
-            headers: {
-
-                'Content-Type': 'application/json',
-                'Authorization': 'Token ' + localStorage.getItem("token")
-            }
-        })
+        fetch("http://localhost:8000/api/likes/"+props.id)
           .then(res => res.json())
           .then(
             (result) => {
