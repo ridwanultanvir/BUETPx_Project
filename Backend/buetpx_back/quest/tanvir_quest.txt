@@ -1,3 +1,34 @@
+http://127.0.0.1:8000/api/insert_quest
+POST
+
+Http headers raw: 
+Accept: */*
+User-Agent: Thunder Client (https://www.thunderclient.com)
+Authorization: Token 2daf6090a8b3f317e25a932d7147b98a0049b929
+
+
+
+http://127.0.0.1:8000/api/insert_submission
+
+Authorization
+Token 2daf6090a8b3f317e25a932d7147b98a0049b929
+
+
+{
+    "quest": 1,
+    "post":2,
+    "shortlisted": 1
+
+}
+
+
+
+
+##
+
+
+
+
 
 {
     "quest_title": "Mountain Climb",
@@ -12,10 +43,7 @@
 }
 
 
-http://127.0.0.1:8000/api/insert_quest
-POST
 
-Token 2daf6090a8b3f317e25a932d7147b98a0049b929
 
 
 

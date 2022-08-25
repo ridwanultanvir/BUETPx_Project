@@ -32,3 +32,16 @@ class QuestInsertSerializer(serializers.ModelSerializer):
               'reward',          
               
               )
+    
+
+class SubmissionInsertSerializer(serializers.ModelSerializer):
+    
+  class Meta:
+
+    ordering = ['-id']
+    model = Submission
+    fields = ('id',
+              'quest',
+              'post',
+              'shortlisted',      
+              )
