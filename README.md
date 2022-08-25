@@ -8,8 +8,27 @@ conda activate js_env1
 npm start
 ```
 
+
+
+
+##
+```
+python manage.py startapp quest 
 ```
 
+goto: buetpx_back/url.py
+
+```
+path ('', include('quest.urls')),
+```
+
+
+
+
+##
+
+
+```
 npm install --legacy-peer-deps --save firebase
 ```
 
