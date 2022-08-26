@@ -1,58 +1,24 @@
 import React from 'react';
 import { Grid} from "@mui/material";
-import Header from '../../Static/Header';
-import StyleOutlinedIcon from '@mui/icons-material/StyleOutlined';
-
-import {Typography} from '@mui/material';
 import { styled } from '@mui/material/styles';
-import Card from '../../Static/Card';
 import {useState, useEffect} from "react";
 import Box from '@mui/material/Box';
 import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem'
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ImgPost from '../ImageList/ImgPost'; 
 
-import ImageListItemBar from '@mui/material/ImageListItemBar';
-import ListSubheader from '@mui/material/ListSubheader';
-import IconButton from '@mui/material/IconButton';
-import InfoIcon from '@mui/icons-material/Info';
-import ImgPost from './ImgPost'; 
-
-import {
-  useParams
-} from "react-router-dom";
-
-
-const Img = styled('img')({
-  margin: 'auto',
-  display: 'block',
-  maxWidth: '100%',
-  height: 500,
-  alignContent:'left'
-});
-// import Time from 'react-time-format'
-// import Moment from 'react-moment';
-const uid = 2002;
-
-const  MyImageList=()=>{
+const PhotosBody=(props)=>{
 
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [posts, setposts] = useState([]); 
-    const  [tag, setTag] = useState([]); 
-    const [numLike, setnumLike] = useState([]); 
-    const[isLike, setIsLike] = useState(false);
-    const [checklike, setchecklike] = useState([]); 
+    const {uid}=props;
 
-    const[check1, setcheck1] = useState(false);
-
-    const colorStyle = {color:"blue"}; 
-
+    console.log("---------------------uid----------------- ",uid);
     
 
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/api/posts",
+        fetch("http://127.0.0.1:8000/api/posts_by_uid/"+(uid),
         {
           method:"GET",
           headers:{
@@ -80,29 +46,14 @@ const  MyImageList=()=>{
               setError(error);
             }
           )
-      }, []);
+      }, [uid]);
       
-      const [likepostid, setlikepostid] = useState("");
-      const handleLikeClick2 = (id) => {
-
-        console.log("like clicked"); 
-        console.log("id",id);
-        // post.num_likes = post.num_likes + 1; 
-      }
       
-      const handleLikeClick = (e) => {
-        e.preventDefault();
-        console.log("button clicked! ");
-        
-        
-      }
 
     return (
 
-      <Grid container direction='column'>
-      <Grid item>
-      <Header/>
-      </Grid>
+   
+      
 
 
       <Grid item container>
@@ -130,10 +81,9 @@ const  MyImageList=()=>{
       
 
         </Grid>
-      </Grid>
                         
     
     );
     }
 
-    export default MyImageList;
+    export default PhotosBody;

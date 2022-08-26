@@ -20,13 +20,14 @@ import SignUp from "./Component/Signup/Signup";
 import Login from "./Component/Login/Login";
 import Galleries from "./Component/Gallery/Galleries";
 import Gallery from "./Component/Gallery/Gallery";
+import UserProfile from "./Component/Profile/UserProfile";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Router>
     <Routes>
-      <Route path="/" element={<Homefeed />} />
-      <Route path="/posts" element={<Homefeed />} />
+      <Route path="/" element={<MyImageList />} />
+      <Route path="/posts" element={<MyImageList />} />
       <Route path="/posts/:id" element={<Post />} />
       <Route path="/posts3/:id" element={<Post3 />} />
       <Route path="/post_with_tags/:tagname" element={<Tags />} />
@@ -37,12 +38,13 @@ root.render(
       <Route path="/Upload" element={<Upload />} />
 
       <Route path="/TestForm" element={<TestForm />} />
-      <Route path="/ImageList" element={<Homefeed />} />
+      <Route path="/ImageList" element={<MyImageList />} />
 	  <Route path="/discover/filtered/:catname" element={<ShowFilteredResult />} />
 
 
       <Route path="/Signup" element={<SignUp />} />
       <Route path="/Login" element={<Login />} />
+      <Route path="/profile" element={<UserProfile />} />
 
       <Route path="/Galleries" element={<Galleries />} />
       <Route path="/Gallery/:id" element={<Gallery />} />

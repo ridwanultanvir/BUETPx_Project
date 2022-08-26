@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'signup_login.apps.SignupLoginConfig',
     'gallery.apps.GalleryConfig',
     'rest_framework.authtoken',
+    'user_profile.apps.UserProfileConfig',
 ]
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
@@ -55,7 +56,6 @@ REST_FRAMEWORK = {
                 'rest_framework.permissions.IsAuthenticated',
     ),
 }
-# python manage.py makemigrations
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -110,6 +110,17 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'dahl4i9hlfthmp',
+#         'USER': 'mqsjvluqkehwqb',
+#         'PASSWORD': 'b5a91b72a0454fddb54bd753c664cb3e12d76cb056cca3ffea7ca3f99ec11388',
+#         'HOST': 'ec2-34-227-135-211.compute-1.amazonaws.com',
+#         'PORT': '5432',
+#     }
+# }
 
 PASSWORD_HASHERS = [
     # 'django.contrib.auth.hashers.Brest_frameworkCryptSHA256PasswordHasher',

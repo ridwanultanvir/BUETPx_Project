@@ -92,7 +92,15 @@ const  ImgPost=(props)=>{
 
 
     useEffect(() => {
-        fetch("http://localhost:8000/api/likes/"+props.id)
+        fetch("http://localhost:8000/api/likes/"+props.id,
+        {
+          method:"GET",
+          headers:{
+              "Content-Type":"application/json",
+              "Authorization":'Token '+localStorage.getItem('token')
+          }
+        }
+        )
           .then(res => res.json())
           .then(
             (result) => {
@@ -127,7 +135,7 @@ const  ImgPost=(props)=>{
                 />
               
 
-                  {/* <ImageListItemBar
+                  <ImageListItemBar
                   title={props.post_title}
                   subtitle={props.owner.name}
                   actionIcon={
@@ -135,12 +143,12 @@ const  ImgPost=(props)=>{
                       sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
                       aria-label={`info about ${props.post_title}`}
                     >
-                    <FavoriteBorderIcon ></FavoriteBorderIcon>
-                    <Typography variant="caption" color="textSecondary">{numLike.num_likes} </Typography>
+                    {/* <ThumbUpIcon ></ThumbUpIcon> */}
+                    {/* <Typography variant="caption" color="textSecondary">{numLike.num_likes} </Typography> */}
                     </IconButton>
                     
                   }
-                  /> */}
+                  />
 
         </ImageListItem>
         </CardActionArea>

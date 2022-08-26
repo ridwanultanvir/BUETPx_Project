@@ -17,9 +17,10 @@ const style = {
   p: 4,
 };
 
-const Galleries = ()=>
+const GalleriesBody = (props)=>
 {
-    const uid=2
+    const {uid}=props;
+  
     //need to make this dynamic
     
     const [user, setuser] = useState([]);  
@@ -106,7 +107,7 @@ const Galleries = ()=>
           )
         }
           // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, []);
+      }, [uid]);
 
 
       useEffect(() => {
@@ -196,4 +197,4 @@ const Galleries = ()=>
     )
 }
 
-export default Galleries;
+export default GalleriesBody;

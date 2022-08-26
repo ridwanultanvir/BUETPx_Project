@@ -17,6 +17,8 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import {Typography} from '@mui/material';
 import ButtonBase from '@mui/material/ButtonBase';
 import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
 
 import {useState, useEffect} from "react";
 
@@ -43,9 +45,20 @@ const styles = {
   }
 };
 
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 // import Moment from 'react-moment';s
 
-const uid = 2002;
+const uid = 2000;
 
 
 const  Post=()=>{
@@ -58,7 +71,10 @@ const  Post=()=>{
     const [comments, setcomments] = useState([]);
     const [commentTxt, setcommentTxt] = useState("");
     const [post_owner, setowner] = useState([]);
-
+    const [galleries, setGalleries] = useState([]);
+  
+    
+  
     // ===   NOTUN ADD KORSI =====================
     const [countUp, setCountUp] = useState(0); 
 
@@ -66,8 +82,81 @@ const  Post=()=>{
 
     const[check1, setcheck1] = useState(false);
 
+    const [addToGalleryOpen, setaddToGalleryOpen] = useState(false);
+
+
     const colorStyle = {color:"blue"}; 
 
+    const addToGallery=(galleryId)=>{
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json',
+        'Authorization': 'Token ' + localStorage.getItem('token')
+       },
+        body: JSON.stringify({ 
+          "id": galleryId,
+          "post_id": post.id
+          
+        })
+      };
+      fetch("http://localhost:8000/api/add_remove_post_to_gallery", requestOptions)
+      .then(()=>{
+        // window.location.reload();
+        setaddToGalleryOpen(false);
+        
+      })
+
+      setaddToGalleryOpen(true);
+    }
+
+    const getGallery=gallery=>
+    { 
+
+      console.log("gallery.post_present",gallery.post_present)
+      if (gallery.post_present===true)
+      {
+        return(
+          <Button value={gallery.id} sx={{marginRight:2}} onClick={()=>{
+            addToGallery(gallery.id);
+          }} variant='contained' >{gallery.title}</Button>
+        )
+      }
+
+      return(
+        <Button value={gallery.id} sx={{marginRight:2}} onClick={()=>{
+          addToGallery(gallery.id);
+        }} variant='outlined' >{gallery.title}</Button>
+      )
+
+        
+    }
+
+    const handleAddToGalleryClick = () => {
+      fetch("http://localhost:8000/api/galleries/"+uid+"/"+post.id,{ method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Token ' + localStorage.getItem('token')
+    }
+  
+  })
+    .then(res => res.json())
+    .then(
+      (result) => {
+        setIsLoaded(true);
+        setGalleries(result);
+      },
+
+      (error) => {
+        setIsLoaded(true);
+        setError(error);
+      }
+    )
+      setaddToGalleryOpen(true);
+    }
+
+    const handleAddToGalleryClose = () => {
+      setaddToGalleryOpen(false);
+    }
     const handleCheckIfLiked = () => {
       if (checklike.num_likes_this_user === 0) {
         // console.log("not liked------------------------------");
@@ -113,13 +202,7 @@ const  Post=()=>{
         setIsLike(false); 
       }else{
         setIsLike(true); 
-      }
-      
-      
-      
-      
-      
-    
+      }   
     }
 
     const insertLikeFunc = () => {
@@ -231,13 +314,11 @@ const  Post=()=>{
     }
 
     const handleDislikeClick = () => {
-
       console.log("DisLike Clicked ");
-      
-      
-
-      
     }
+
+
+
 
  
         
@@ -468,7 +549,20 @@ const  Post=()=>{
 
                         </Grid>    
                         <Grid item xs={2}>
-                        <IconButton size="small"><AddPhotoAlternateIcon/></IconButton>
+                        <IconButton size="small"><AddPhotoAlternateIcon onClick={handleAddToGalleryClick}/></IconButton>
+                        <Modal
+                      open={addToGalleryOpen}
+                      onClose={handleAddToGalleryClose}
+                      aria-labelledby="modal-modal-title"
+                      aria-describedby="modal-modal-description"
+                    >
+                      <Box sx={style}>
+                        <Typography id="modal-modal-title" variant="h6" component="h2">
+                          Select a gallery
+                        </Typography>
+                        {galleries?.map(gallery=>getGallery(gallery))}
+                      </Box>
+                    </Modal>
                         <Grid item xs={4}></Grid>
                          </Grid>    
                          <Grid item xs={12}>
@@ -638,12 +732,6 @@ const  Post=()=>{
                 
                 </Grid>
 
-                
-
-               
-
-
-       
                 <Grid container item xs={12}   >
 
                   <Grid item xs={12} sx={{marginTop:2,marginBottom:2}}>
