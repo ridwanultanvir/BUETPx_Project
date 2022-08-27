@@ -25,9 +25,10 @@ const usermenu = ['Profile', 'Account Settings', 'Logout'];
 
 
 const Header = ()=> {
+  
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
-    const [user, setuser] = React.useState();
+    const [user, setuser] = React.useState([]);
     const [menu, setmenu] = React.useState();
     const [directUrl, setdirectUrl] = React.useState();
     // const [token, settoken] = React.useState(localStorage.getItem('token'));
@@ -94,7 +95,7 @@ const Header = ()=> {
               console.log(response);
               if (response.ok) {  
                 const currentUser = await response.json()
-                console.log('currentuser',currentUser)
+                console.log('currentuser in header',currentUser)
                 setuser(currentUser)
                 
                 console.log(user)
@@ -147,7 +148,7 @@ const Header = ()=> {
 
     authentication();
       // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [token]);
   
 
   
@@ -323,7 +324,7 @@ const Header = ()=> {
                   <IconButton 
                     onClick={handleOpenUserMenu} 
                     sx={{ p: 0 }}>
-                      <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                      <Avatar/>
                   </IconButton>
 
                 </Tooltip>

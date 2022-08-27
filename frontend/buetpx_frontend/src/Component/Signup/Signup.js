@@ -128,6 +128,7 @@ const  SignUp=()=> {
               alert(error)
 
             });
+            
     }
 
    

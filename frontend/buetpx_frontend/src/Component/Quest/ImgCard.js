@@ -4,6 +4,14 @@ import {Card,CardContent,CardActionArea ,CardMedia,Typography} from "@mui/materi
 import {useState, useEffect} from "react";
 const ImgCard = ({post}) => {
     const [selectedId, setSelectedId] = useState(null);
+
+    useEffect(() => {
+        if(selectedId)
+        {
+            console.log(selectedId);
+            window.location.href=`/posts/${selectedId}`;
+        }
+    }, [selectedId]);
     return (
 
         <Grid item >
@@ -11,7 +19,7 @@ const ImgCard = ({post}) => {
             <CardActionArea onClick={(e) => {
             console.log(post.id);
             console.log(" selected...");
-            // setSelectedId(post.id);
+            setSelectedId(post.id);
             } }>
             <CardMedia
                 component="img"

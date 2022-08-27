@@ -12,7 +12,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import authService from "./authService";
-import Header from "../../Static/Header"
+import AdminHeader from "../Static/AdminHeader"
 import {useState, useEffect} from "react";
 
 
@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function SignInSide(props) {
+export default function AdminLogin(props) {
 
 //   if(authService.isLoggedIn()){
 
@@ -96,7 +96,7 @@ const [user_pass, setuserpass] = useState('');
                 localStorage.setItem("token", data.token);
                 console.log("token from localstorage:",localStorage.getItem("token"));
                 
-                window.location.href="\\";
+                window.location.href="\\questPanel";
               })
               
             }
@@ -132,7 +132,7 @@ const [user_pass, setuserpass] = useState('');
 };
   return (
     <Grid container component="main" className={classes.root}>
-         <Header/>
+         <AdminHeader/>
       <CssBaseline />
       {/* <Grid item xs={false} sm={4} md={7} className={classes.image} /> */}
       <Grid
@@ -150,7 +150,7 @@ const [user_pass, setuserpass] = useState('');
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Admin Sign in
           </Typography>
           <form className={classes.form} noValidate>
             {/* <TextField
@@ -172,7 +172,7 @@ const [user_pass, setuserpass] = useState('');
               required
               fullWidth
               id="email"
-              label="Email"
+              label="Admin Email"
               name="email"
               autoFocus
             />
@@ -198,18 +198,13 @@ const [user_pass, setuserpass] = useState('');
             >
               Sign In
             </Button>
-            <Grid container>
-              <Grid item xs={7}>
+            {/* <Grid container>
+              <Grid item>
                 <Link href="/Signup" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
-              <Grid item xs={5} >
-                <Link href="/admin/Login"  variant="body2" display="flex" justifyContent="flex-end">
-                  {"Sign in as Admin"}
-                </Link>
-              </Grid>
-            </Grid>
+            </Grid> */}
            
           </form>
         </div>

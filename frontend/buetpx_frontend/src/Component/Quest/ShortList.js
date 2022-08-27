@@ -3,8 +3,40 @@ import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import { Grid, Typography ,Paper} from '@mui/material';
 import ImgCard from './ImgCard';
+import {useState, useEffect} from "react";
 
-export default function ShortList() {
+export default function ShortList({quest}) {
+
+  const [submissions, setSubmissions] = useState([]);
+  const [postList, setPostList] = useState([]);
+
+  useEffect(() => {
+
+    const reqOption={
+      method:'GET',
+      headers:{
+        'Content-Type':'application/json',
+        'Authorization':'Token '+localStorage.getItem('token')
+      }
+
+    }
+    fetch('http://localhost:8000/api/get_shortlisted_photo/'+quest.id,reqOption)
+    .then(res=>res.json())
+    .then(data=>{
+
+      // extract post and set to postList
+      let posts = [];
+      data.forEach(sub=>{
+        posts.push(sub.post);
+      } )
+      console.log("posts:", posts);
+      setPostList(posts);
+
+      console.log("subs:",data);
+    }).catch(err=>console.log(err))
+
+
+  }, []);
   return (
         <Grid item  >
             
@@ -13,7 +45,7 @@ export default function ShortList() {
                     <Grid item sm={2}/>
                     <Grid container spacing={1} sx={{marginLeft:7, marginRight:5}}>
                         
-                            {itemData.map((item, index) => (
+                            {postList.map((item, index) => (
                                 <Grid item key={index}>
                                     <ImgCard post={item} />
                                 </Grid>

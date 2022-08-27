@@ -86,6 +86,7 @@ const endedList = [
 const Ended = () => {
 
   const [selectedId, setSelectedId] = useState(null);
+  const [endedQList, setEQuestList] = useState([]);
 
   const formatDate = (date) => {
     // format to i.e 6 jan, saturday at 3:00pm
@@ -130,12 +131,33 @@ const Ended = () => {
   //   }
 
   // },[selectedId])
+  useEffect(() => {
+    const requestOptions = {
+      method: 'GET',
+     headers: { 'Content-Type': 'application/json',
+      'Authorization': 'Token ' + localStorage.getItem('token')
+    } 
+     
+
+    };
+
+    fetch('http://localhost:8000/api/get_ended_quests', requestOptions)
+    .then(response => response.json())
+    .then(data => {
+      setEQuestList(data);
+      console.log(data);
+    }).catch(error => {
+      console.log(error);
+
+    }
+    )
+  }, []);
 
 
   return(
     <Grid container spacing={2} sx={{paddingLeft:'80px', paddingRight:'80px',paddingBottom:'10px'}}>
         {
-            endedList.map(quest => (
+            endedQList.map(quest => (
               <Grid item>
                 <Card sx={{ minWidth: 442, maxWidth:442}}>
                   <CardActionArea onClick={(e)=>{

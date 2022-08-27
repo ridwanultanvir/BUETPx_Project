@@ -60,7 +60,7 @@ const style = {
 };
 // import Moment from 'react-moment';s
 
-const uid = 2000;
+
 
 
 const  Post=()=>{
@@ -74,6 +74,8 @@ const  Post=()=>{
     const [commentTxt, setcommentTxt] = useState("");
     const [post_owner, setowner] = useState([]);
     const [galleries, setGalleries] = useState([]);
+    const [user, setuser] = useState([]);  
+    const [uid, setuid] = useState(null);
   
     
   
@@ -90,6 +92,48 @@ const  Post=()=>{
     // filled style for like button
 
     const colorStyle = {color:"blue"}; 
+
+    useEffect(() => {
+      async function fetchData() {
+       fetch(`http://localhost:8000/api/getuserdetails`,{
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Token " + localStorage.getItem("token")}
+        }
+          )
+      .then(res => res.json())
+      .then(data => {
+          console.log("user data",data)
+          setuser(data)
+          
+      }).catch(err => console.log(err)) 
+   }
+      fetchData();
+  } , [])
+
+  // setuid(user['id'])
+  
+
+  useEffect(() => {
+      async function fetchData() {
+       fetch(`http://localhost:8000/api/getaccidfromuid/${user['id']}`,{
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Token " + localStorage.getItem("token")}
+        }
+          )
+      .then(res => res.json())
+      .then(data => {
+          console.log("user data of uid",data)
+          setuid(data)
+          // setcomponent(<PhotosBody uid={data}/>)
+          
+      }).catch(err => console.log(err)) 
+   }
+      fetchData();
+  } , [user])
 
     const addToGallery=(galleryId)=>{
       const requestOptions = {
@@ -348,7 +392,7 @@ const  Post=()=>{
           )
         }
           // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, [numLike]);
+      }, [numLike,user,uid]);
 
       useEffect(() => {
         fetch("http://localhost:8000/api/posts/"+id+"/comments",
@@ -384,7 +428,7 @@ const  Post=()=>{
           // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [post_owner]);
 
-
+      console.log("post owner",post_owner);
 
       const handleComment = (e) => {
         e.preventDefault();
@@ -393,7 +437,9 @@ const  Post=()=>{
         console.log(commentTxt);
         const requestOptions = {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json',
+        
+          'Authorization': 'Token ' + localStorage.getItem('token')},
           body: JSON.stringify({
             "comment_txt": commentTxt,
             "user": uid,
@@ -421,6 +467,7 @@ const  Post=()=>{
             console.log(data);
             // setcomments(data);
             setcommentTxt("");
+            window.location.reload();
           }
           )
           .catch(error => console.log('error', error));
@@ -597,11 +644,6 @@ const  Post=()=>{
                 <Grid item xs={10.5}><Button variant="outlined" color="primary">   {category} </Button> </Grid>
                 </Grid>
 
-                
-                  
-
-                  
-               
 
                 {/* 4th row */}
                 <Grid item container sx={{marginTop:2}}>

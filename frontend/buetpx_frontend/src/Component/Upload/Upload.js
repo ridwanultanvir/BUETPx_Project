@@ -34,7 +34,9 @@ const  Upload=()=>{
         e.preventDefault();
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json' ,
+            "Authorization": "Token " + localStorage.getItem("token")
+        },
             body: JSON.stringify({
             //   "comment_txt": commentTxt,
             //   "user": uid,
