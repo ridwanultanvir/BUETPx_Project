@@ -3,10 +3,16 @@ import { Grid} from "@mui/material";
 import Header from '../../../Static/Header';
 import StyleOutlinedIcon from '@mui/icons-material/StyleOutlined';
 
+import ImgPost from '../../ImageList/ImgPost'; 
+
+
 import {Typography} from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Card from '../../../Static/Card';
 import {useState, useEffect} from "react";
+import Box from '@mui/material/Box';
+import ImageList from '@mui/material/ImageList';
+
 
 import {
   useParams
@@ -118,10 +124,15 @@ const  Tags=()=>{
                         </Typography>
                 
                 </Grid>
-                <Grid container spacing={2}>
-            
-                         {posts.map(post => getPost(post))}    
-                </Grid>
+                <Box sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                <ImageList variant="masonry" cols={4} gap={10}>
+                  {posts.map((post) => (
+                    <ImgPost {...post}/>
+                        
+                  ))}
+                </ImageList>
+              </Box>
+               
         </Grid>
 
         <Grid item xs={0} sm={1} >

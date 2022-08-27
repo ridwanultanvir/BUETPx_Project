@@ -46,6 +46,12 @@ const Explore  = () => {
     const [checkList, setCheckList] = useState([]);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [sortOption, setSortOption] = useState();
+    const [oldPostList, setOldPostList] = useState([]);
+    const [discoverComponent, setDiscoverComponent] = useState(
+        
+        <DiscoverContent postlist={postList} />
+
+    );
     
     const open = Boolean(anchorEl);
     // const handleOptionClick = (event) => {
@@ -58,6 +64,26 @@ const Explore  = () => {
     //     setAnchorEl(null);
     // };
         
+    const getTimeDiff=(date) =>{
+        var currentDate = new Date();
+        var postDate = new Date(date);
+        var diff = currentDate.getTime() - postDate.getTime();
+        var seconds = Math.floor(diff / 1000);
+        return seconds;
+    }
+
+    const sortBasedOnTimeDiff = (postList_) => {
+        console.log("before postList_", postList_);
+        postList_.sort(function(a, b){
+            return a.timeDiff - b.timeDiff;
+        }
+        );
+        console.log("after postList_", postList_);
+
+        return postList_;
+    }
+
+
 
     let  namess = [];
     // get array of category names
@@ -132,7 +158,14 @@ const Explore  = () => {
         .then(
         (result) => {
             setIsLoaded(true);
+            
+            for (let i = 0; i < result.length; i++) {
+                result[i].timeDiff = getTimeDiff(result[i].post_date);
+            }
+            console.log("posts: ", result);
+
             setPostList(result);
+            setOldPostList(result);
             setAllPost(result);
         },
         // Note: it's important to handle errors here
@@ -166,6 +199,9 @@ const Explore  = () => {
         .then(
         (result) => {
             setIsLoaded(true);
+            for (let i = 0; i < result.length; i++) {
+                result[i].timeDiff = getTimeDiff(result[i].post_date);
+            }
             setPostList(result);
         },
         // Note: it's important to handle errors here
@@ -204,6 +240,7 @@ const Explore  = () => {
   
       //   onClick(checkedItems);
       };
+
       
       const sortBydate = (posts) => {
         posts.sort(function(a, b) {
@@ -253,9 +290,16 @@ const Explore  = () => {
 
         if (option === "likes") {
             console.log("likes sorted");
-            // sort.sort(function(a, b) {
-            //     return b.likes - a.likes;
-            // }).reverse();
+            console.log("before sorted by likes:");
+            console.log(postList);
+            postList.sort.sort(function(a, b) {
+                return b.likes.likes - a.likes.likes;
+            }).reverse();
+
+            console.log("after sorted by likes:");
+            console.log(postList);
+
+
 
             // setPostList(sort);
             // setPostList(postList.sort((a, b) => (a.created_at < b.created_at ? -1 : 1)));
@@ -269,7 +313,15 @@ const Explore  = () => {
 
       }
 
+      useEffect(() => {
 
+        if(checked.length <= 0) {
+            console.log("no checked");
+            // setPostList(oldPostList);
+        }
+      }),[checked];
+
+      
 
       const handleSubmit = (event) => {
         event.preventDefault();
@@ -296,6 +348,13 @@ const Explore  = () => {
         .then(
         (result) => {
             setIsLoaded(true);
+            // add a new property to each post, "is_liked"
+            for (let i = 0; i < result.length; i++) {
+                result[i].timeDiff = getTimeDiff(result[i].post_date);
+            }
+
+            console.log("search result:", result);
+
             setPostList(result);
         }
         // Note: it's important to handle errors here
@@ -320,19 +379,47 @@ const Explore  = () => {
             if(sortOption){
                 if( sortOption === "newest") {
                     // modify postList to be sorted by date
-                    console.log("before sorted by newest", postList);
-                    postList.sort(function(a, b) {
-                        return new Date(b.post_date) - new Date(a.post_date);
-                    }
-                    );
+                    // console.log("before sorted by newest", postList);
+                    
+                    // postList.sort(function(a, b) {
+                    //     return new Date(b.post_date) - new Date(a.post_date);
+                    // }
+                    // );
 
-                    console.log("after sorted by newest", postList);
-                    setPostList(postList);
+                    // console.log("after sorted by newest", postList);
+                    const sorted = sortBasedOnTimeDiff(postList);
+                    setDiscoverComponent(
+                        <DiscoverContent postlist={sorted} />
+                    )
+                    setPostList(sorted);
+                    
                     
 
                 }
+                if( sortOption === "likes") {
+                    // modify postList to be sorted by likes
+                    console.log("before sorted by likes", postList);
+                    postList.sort(function (a, b) {
+                        return b.likes.likes - a.likes.likes;
+                    });
+                    setDiscoverComponent(
+                        <DiscoverContent postlist={postList} />
+                    )
+                    console.log("after sorted by likes", postList);
+                    setPostList(postList);
+                }
             }
       }, [sortOption])
+
+      useEffect(() => {
+
+        console.log("postlist changed:", postList);
+
+        setDiscoverComponent(
+            <DiscoverContent postlist={postList} />
+        )
+      }, [postList])
+
         
 
      
@@ -360,14 +447,14 @@ const Explore  = () => {
                     <h1>Discover</h1>
                     </Grid>
                     <Grid item xs = {0} sm = {2}>
-                      <Box sx={{ minWidth: 60 }}>
+                      <Box  sx={{ minWidth: 100 }}>
                           <FormControl variant='standard' sx={{ m: 1, minWidth: 120 }} >
                             {/* <InputLabel  id="demo-simple-select-label">Options</InputLabel> */}
                             <Select
                               labelId="demo-simple-select-label"
                               id="demo-simple-select"
 
-                              defaultValue={20}
+                              defaultValue="tag"
                               value={optionKey}
                               label="Options"
                               onChange={handleoptionClick}
@@ -506,7 +593,7 @@ const Explore  = () => {
                         {/* <FilterDrawer />                       */}
                     </Grid>
                     <Grid item xs={12} sm={10}>
-                        <DiscoverContent postlist={postList} />
+                        {discoverComponent}
 
                     </Grid>
 

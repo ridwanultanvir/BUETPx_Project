@@ -45,7 +45,7 @@ const uid = 2002;
 
 const  ImgPost=(props)=>{
    
-    console.log("props",props);
+    // console.log("props",props);
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [post, setpost] = useState([]);  
