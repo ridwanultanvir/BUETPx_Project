@@ -313,13 +313,13 @@ const Explore  = () => {
 
       }
 
-      useEffect(() => {
+    //   useEffect(() => {
 
-        if(checked.length <= 0) {
-            console.log("no checked");
-            // setPostList(oldPostList);
-        }
-      }),[checked];
+    //     if(checked.length <= 0) {
+    //         console.log("no checked");
+    //         // setPostList(oldPostList);
+    //     }
+    //   }),[checked];
 
       
 

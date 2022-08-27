@@ -1,38 +1,10 @@
 import React from 'react';
 import { Grid} from "@mui/material";
 import Header from '../../Static/Header';
-import StyleOutlinedIcon from '@mui/icons-material/StyleOutlined';
-
-import {Typography} from '@mui/material';
-import { styled } from '@mui/material/styles';
-import Card from '../../Static/Card';
 import {useState, useEffect} from "react";
 import Box from '@mui/material/Box';
 import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem'
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-
-import ImageListItemBar from '@mui/material/ImageListItemBar';
-import ListSubheader from '@mui/material/ListSubheader';
-import IconButton from '@mui/material/IconButton';
-import InfoIcon from '@mui/icons-material/Info';
 import ImgPost from './ImgPost'; 
-
-import {
-  useParams
-} from "react-router-dom";
-
-
-const Img = styled('img')({
-  margin: 'auto',
-  display: 'block',
-  maxWidth: '100%',
-  height: 500,
-  alignContent:'left'
-});
-// import Time from 'react-time-format'
-// import Moment from 'react-moment';
-const uid = 2002;
 
 const  MyImageList=()=>{
   useEffect(() => {
@@ -46,14 +18,7 @@ const  MyImageList=()=>{
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [posts, setposts] = useState([]); 
-    const  [tag, setTag] = useState([]); 
-    const [numLike, setnumLike] = useState([]); 
-    const[isLike, setIsLike] = useState(false);
-    const [checklike, setchecklike] = useState([]); 
 
-    const[check1, setcheck1] = useState(false);
-
-    const colorStyle = {color:"blue"}; 
 
     
 
@@ -89,20 +54,20 @@ const  MyImageList=()=>{
           )
       }, []);
       
-      const [likepostid, setlikepostid] = useState("");
-      const handleLikeClick2 = (id) => {
+      // const [likepostid, setlikepostid] = useState("");
+      // const handleLikeClick2 = (id) => {
 
-        console.log("like clicked"); 
-        console.log("id",id);
-        // post.num_likes = post.num_likes + 1; 
-      }
+      //   console.log("like clicked"); 
+      //   console.log("id",id);
+      //   // post.num_likes = post.num_likes + 1; 
+      // }
       
-      const handleLikeClick = (e) => {
-        e.preventDefault();
-        console.log("button clicked! ");
+      // const handleLikeClick = (e) => {
+      //   e.preventDefault();
+      //   console.log("button clicked! ");
         
         
-      }
+      // }
 
     return (
 
@@ -113,13 +78,13 @@ const  MyImageList=()=>{
 
 
       <Grid item container>
-        <Grid item xs={0} sm={1}>
+        <Grid item xs={0} sm={.5}>
 
         
 
         </Grid>
 
-        <Grid item xs={12} sm={10} >
+        <Grid item xs={12} sm={11} >
                 
         <Box sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
           <ImageList variant="masonry" cols={4} gap={10}>
@@ -131,7 +96,7 @@ const  MyImageList=()=>{
         </Box>
         </Grid>
 
-        <Grid item xs={0} sm={1} >
+        <Grid item xs={0} sm={.5} >
 
         </Grid>
       

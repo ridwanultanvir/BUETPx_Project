@@ -85,12 +85,14 @@ const GalleryBody =()=>{
                             <h1>{galleryName}</h1>
                         </Grid>
                         <Box sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                        {photoList.length===0 ? noPhotoInList():
                             <ImageList variant="masonry" cols={4} gap={10}>
                                 {/* {posts.map((post) => (
                                 <ImgPost {...post}/> */}
-                                {photoList.length===0 ? noPhotoInList():photoList.map(photoObj => getPhotoCard(photoObj))}
+                                {photoList.map(photoObj => getPhotoCard(photoObj))}
                                 {/* ))} */}
                             </ImageList>
+                        }
                         </Box>
                      
                             
