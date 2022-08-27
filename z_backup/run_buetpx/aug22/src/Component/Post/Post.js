@@ -45,7 +45,7 @@ const styles = {
 
 // import Moment from 'react-moment';s
 
-const uid = 2002;
+const uid = 2003;
 
 
 const  Post=()=>{

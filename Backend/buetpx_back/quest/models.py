@@ -5,12 +5,13 @@ from buetpx.models import Post, UserAccount, Category
 # Create your models here.
 class Quest(models.Model):
     # id : django automatic ney 
-    quest_title = models.CharField(max_length=500)
-    quest_theme = models.CharField(max_length=500)
-    quest_description = models.TextField()
-    start_date = models.DateTimeField(auto_now_add=True)
-    end_date = models.DateTimeField(auto_now_add=True)
-    photo_url = models.CharField(max_length=500)
+    title = models.CharField(max_length=500)
+    theme = models.CharField(max_length=500)
+    description = models.TextField()
+    startDate = models.DateTimeField()
+    # end_date = models.DateTimeField(auto_now_add=True)
+    endDate = models.DateTimeField()
+    photoUrl = models.CharField(max_length=500)
     category = models.CharField(max_length=500)
     # status: 'Active', 'Inactive', 'Completed'
     status =  models.CharField(max_length=500)
@@ -27,7 +28,7 @@ class Quest(models.Model):
     # )
     
     def __str__(self):
-        return self.quest_title
+        return self.title
     
 
 class Submission(models.Model):
@@ -45,4 +46,3 @@ class Submission(models.Model):
     )
     shortlisted = models.IntegerField()
     # 0 = not shortlisted; 1 = shortlisted
-    
