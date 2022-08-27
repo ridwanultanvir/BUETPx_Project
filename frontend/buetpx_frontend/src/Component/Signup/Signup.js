@@ -40,13 +40,40 @@ const useStyles = makeStyles((theme) => ({
 
 const  SignUp=()=> {
 
-    const [user_name, setusername] = useState('');
     const [first_name, setfirstname] = useState('');
     const [last_name, setlastname] = useState('');
     const [user_mail, setusermail] = useState('');
     const [user_pass, setuserpass] = useState('');
     const [user_pass2, setuserpass2] = useState('');
     const classes = useStyles();
+
+   function UpdateAccount(user)
+    {
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' ,
+        "Authorization": "Token " + localStorage.getItem("token")
+      },
+        body: JSON.stringify({
+          "name": user['first_name']+" "+user['last_name'],
+          "email": user['email'],
+          "hashedpass":"something",
+          "photo_url":"https://tinyurl.com/2p8ma4js",
+          
+        //   photo url needs to be taken from uploaded photo
+          // "photo_url": 'http://tiny.cc/namira123',
+        //   hashing will be done in the backend
+        })
+      };
+      fetch("http://localhost:8000/api/signup", requestOptions)
+      .then(response=>
+        {
+          if(response.ok)
+          {
+            window.location.href="\\login";
+          }
+        })
+    }
 
     const ButtonClicked = async (event)=>
         {
@@ -75,7 +102,10 @@ const  SignUp=()=> {
                     // let user = await response.json()
                     const user=await response.json()
                     console.log(user)
-                    window.location.href="\\login";
+
+                    UpdateAccount(user)
+                    
+                    // window.location.href="\\login";
                     // window.location.reload(false);
                     }
                     else

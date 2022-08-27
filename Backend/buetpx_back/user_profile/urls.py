@@ -5,5 +5,6 @@ urlpatterns = [
 
     path ('api/posts_by_uid/<uid>', views.posts_by_uid),
     path ('api/user_profile_details/<uid>', views.get_user_details),
+    path('api/getaccidfromuid/<uid>',views.get_accid_from_uid),
    
 ]

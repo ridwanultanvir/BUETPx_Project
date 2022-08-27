@@ -19,8 +19,8 @@ class SignupSerializer(serializers.ModelSerializer):
     fields = ('id',
               'name',
               'email',
-              'photo_url',
-              'hashedpass'
+              'hashedpass',
+              'photo_url'
               )
 
 class UserSerializer(serializers.ModelSerializer):
@@ -79,6 +79,13 @@ class RegisterSerializer(serializers.ModelSerializer):
     )
     user.set_password(validated_data['password'])
     user.save()
+    # useraccount=UserAccount.objects.create(
+    #   email=validated_data['email'],
+    #   username=validated_data['first_name']+" "+validated_data['last_name'],
+    #   hashed_pass=user.password
+    # )
+    # # useraccount.set_password(validated_data['password'])
+    # useraccount.save()
     return user   
        
 # class UserSerializer(serializers.ModelSerializer):

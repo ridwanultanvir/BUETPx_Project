@@ -2,7 +2,7 @@ import React from 'react'
 
 const UserDetailBody = (props) => {
   return (
-    <div>User {props.name}</div>
+    <div>User {props.first_name} {props.last_name}</div>
   )
 }
 

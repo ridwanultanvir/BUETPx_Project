@@ -10,13 +10,14 @@ import UserDetailBody from "./UserDetailBody";
 
 const UserProfile = ()=>
 {
-    const uid=2000
+   
     //need to make this dynamic
     
     const [user, setuser] = useState([]);  
+    const [uid,setuid]=useState([]);
     useEffect(() => {
         async function fetchData() {
-         fetch(`http://localhost:8000/api/user_profile_details/${uid}`,{
+         fetch(`http://localhost:8000/api/getuserdetails`,{
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -27,21 +28,46 @@ const UserProfile = ()=>
         .then(data => {
             console.log("user data",data)
             setuser(data)
+            
         }).catch(err => console.log(err)) 
      }
         fetchData();
-    } , [uid])
+    } , [])
 
-    const [component, setcomponent] = useState(<UserDetailBody {...user}/>);
-    const [tab, settab] = useState('Profile');
+    // setuid(user['id'])
+
+    useEffect(() => {
+        async function fetchData() {
+         fetch(`http://localhost:8000/api/getaccidfromuid/${user['id']}`,{
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": "Token " + localStorage.getItem("token")}
+          }
+            )
+        .then(res => res.json())
+        .then(data => {
+            console.log("user data",data)
+            setuid(data)
+            
+        }).catch(err => console.log(err)) 
+     }
+        fetchData();
+    } , [user])
+
+
+
+    const [component, setcomponent] = useState(<PhotosBody {...uid}/>);
+    const [tab, settab] = useState('Photos');
     
 
 
     useEffect(()=>{
-        if(tab=== 'Profile'){
-            setcomponent(<UserDetailBody {...user}/>)
-        }
-        else if(tab=== 'Photos'){
+        // if(tab=== 'Profile'){
+        //     setcomponent(<UserDetailBody {...user}/>)
+        // }
+        // else 
+        if(tab=== 'Photos'){
             setcomponent(<PhotosBody uid={uid}/>)
         }
         else if(tab=== 'Galleries'){
@@ -50,7 +76,7 @@ const UserProfile = ()=>
         else{
             setcomponent(<UserDetailBody {...user}/>)
         }
-    },[user,tab])
+    },[user,uid,tab])
 
     const onTabChange = (e, value) => {
         console.log("value",value);
@@ -66,9 +92,12 @@ const UserProfile = ()=>
                 </Grid>
                 <Grid item container direction="column">
                     <Grid item xs={12}>
-                      <center><Avatar alt={user.name} src={user.photo_url} />
+                      <center><Avatar alt={user.first_name} src={user.photo_url} />
+                                <Typography variant="h5"> 
+                                    {user.first_name} {user.last_name}
+                                </Typography>
                                 <Typography variant="h6"> 
-                                    {user.name}
+                                    {user.email}
                                 </Typography>
                             </center>
                     </Grid>
@@ -80,7 +109,7 @@ const UserProfile = ()=>
                         onChange={onTabChange}
                         indicatorColor="primary"
                         textColor="primary">
-                            <Tab value="Profile" label="Profile" />
+                            {/* <Tab value="Profile" label="Profile" /> */}
                             <Tab value="Photos" label="Photos" />
                             <Tab value="Galleries" label="Galleries" />
 
