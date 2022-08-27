@@ -15,7 +15,7 @@ from quest.models import Quest, Submission
 
 from quest.serializers import QuestInsertSerializer, SubmissionInsertSerializer, PostLikeSerializer, QuestStatusSerializer, SubmissionShortlistedSerializer
 
-
+from quest.serializers import SubmissionPostSerializer
 
 
 
@@ -89,7 +89,7 @@ def get_active_quests(request):
 def get_ended_quests(request):
     
     if request.method == 'GET':
-        ended_quest = Quest.objects.filter(status="Ended")               
+        ended_quest = Quest.objects.filter(status__iexact="Ended")               
         ended_quest_serializer = QuestInsertSerializer(ended_quest,many = True)
         return JsonResponse(ended_quest_serializer.data, safe=False)
     
@@ -261,6 +261,18 @@ def delete_quest(request,id):
         return JsonResponse({'message': 'The Quest has been deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
     except Tutorial.DoesNotExist: 
         return JsonResponse({'message': 'The Quest does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+
+
+@api_view(['GET'])
+def get_shortlisted_photo(request,id):
+    # get posts by quest id 
+    try:
+        subs = Submission.objects.filter(quest_id = id, shortlisted = 1)
+        subs_serializer = SubmissionPostSerializer(subs,many = True)
+        return JsonResponse(subs_serializer.data, safe=False)
+    except Post.DoesNotExist:
+        return JsonResponse({'message': 'The Post does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
 
 

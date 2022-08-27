@@ -20,6 +20,7 @@ urlpatterns = [
     path ('api/get_ended_quests', views.get_ended_quests),
     path ('api/get_submission_by_questid/<id>', views.get_submission_by_questid),
     path ('api/delete_quest/<id>', views.delete_quest),
+    path ('api/get_shortlisted_photo/<id>', views.get_shortlisted_photo),
 
     
     

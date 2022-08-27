@@ -84,7 +84,7 @@ class PostLikeSerializer(serializers.ModelSerializer):
     # print(owner)
     # serializers.Sl
     category = serializers.SlugRelatedField(read_only=True, slug_field='name' )
-    # place = serializers.SlugRelatedField(read_only=True, slug_field='name' )
+    place = serializers.SlugRelatedField(read_only=True, slug_field='name' )
     # place = PlaceSerializer()
     tags = serializers.StringRelatedField(many=True, read_only=True)
     
