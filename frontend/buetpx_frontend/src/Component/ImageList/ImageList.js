@@ -53,7 +53,7 @@ const  MyImageList=()=>{
 
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/api/posts",
+        fetch("http://127.0.0.1:8000/api/get_posts_all_data",
         {
           method:"GET",
           headers:{

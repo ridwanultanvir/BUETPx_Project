@@ -50,7 +50,17 @@ const  ImgPost=(props)=>{
     const [isLoaded, setIsLoaded] = useState(false);
     const [post, setpost] = useState([]);  
     const [checklike, setchecklike] = useState([]); 
+    // const[checklikebool, setchecklikebool] = useState(false);
+    const [comments, setcomments] = useState([]);
+    const [commentTxt, setcommentTxt] = useState("");
+    const [post_owner, setowner] = useState([]);
 
+    // ===   NOTUN ADD KORSI =====================
+    const [countUp, setCountUp] = useState(0); 
+
+    const[isLike, setIsLike] = useState(false);
+
+    const[check1, setcheck1] = useState(false);
 
     const colorStyle = {color:"white"}; 
 
@@ -80,34 +90,34 @@ const  ImgPost=(props)=>{
     navigate('/posts/' + props.id);
     };
 
-    
-    // useEffect(() => {
-    //     fetch("http://localhost:8000/api/likes/"+props.id,
-    //     {
-    //       method:"GET",
-    //       headers:{
-    //           "Content-Type":"application/json",
-    //           "Authorization":'Token '+localStorage.getItem('token')
-    //       }
-    //     }
-    //     )
-    //       .then(res => res.json())
-    //       .then(
-    //         (result) => {
-    //           setIsLoaded(true);
-    //           setnumLike(result);
-    //         },
-    //         // Note: it's important to handle errors here
-    //         // instead of a catch() block so that we don't swallow
-    //         // exceptions from actual bugs in components.
-    //         (error) => {
-    //           setIsLoaded(true);
-    //           setError(error);
-    //         }
-    //       )
-    //   }, [post]);
+
+    useEffect(() => {
+        fetch("http://localhost:8000/api/likes/"+props.id,
+        {
+          method:"GET",
+          headers:{
+              "Content-Type":"application/json",
+              "Authorization":'Token '+localStorage.getItem('token')
+          }
+        }
+        )
+          .then(res => res.json())
+          .then(
+            (result) => {
+              setIsLoaded(true);
+              setnumLike(result);
+            },
+            // Note: it's important to handle errors here
+            // instead of a catch() block so that we don't swallow
+            // exceptions from actual bugs in components.
+            (error) => {
+              setIsLoaded(true);
+              setError(error);
+            }
+          )
+      }, [post]);
       
-    //  console.log("num_like",numLike);
+     console.log("num_like",numLike);
 
 
 
@@ -134,22 +144,7 @@ const  ImgPost=(props)=>{
                       aria-label={`info about ${props.post_title}`}
                     >
                     <ThumbUpIcon style={colorStyle} ></ThumbUpIcon>
-                    <Typography
-                      variant="h6"
-                      noWrap
-                      component="a"
-                      href="/"
-                      sx={{
-                        mr: 2,
-                        display: { xs: 'none', md: 'flex' },
-                        fontFamily: 'revert-layer',
-                        fontWeight: 700,
-                        // letterSpacing: '.3rem',
-                        color: 'white',
-                        textDecoration: 'none',
-                      }}
-                    > {props.likes.likes} </Typography>
-                    {/* <Typography variant="caption" color="white" >{5} </Typography> */}
+                    <Typography variant="caption" color="textSecondary">{numLike.num_likes} </Typography>
                     </IconButton>
                     
                   }
