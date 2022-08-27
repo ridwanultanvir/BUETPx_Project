@@ -252,3 +252,16 @@ def post_like_with_id(request,id):
         print("post_serializer:",post_serializer.data)
         return JsonResponse(post_serializer.data, safe=False)
     
+
+@api_view(['DELETE'])
+def delete_quest(request,id):
+    try: 
+        quest_obj = Quest.objects.get(id=id)
+        quest_obj.delete()
+        return JsonResponse({'message': 'The Quest has been deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+    except Tutorial.DoesNotExist: 
+        return JsonResponse({'message': 'The Quest does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+
+
+
