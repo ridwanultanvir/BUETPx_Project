@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'gallery.apps.GalleryConfig',
     'quest.apps.QuestConfig',
     'rest_framework.authtoken',
+    'user_profile.apps.UserProfileConfig',
 ]
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
@@ -56,7 +57,6 @@ REST_FRAMEWORK = {
                 'rest_framework.permissions.IsAuthenticated',
     ),
 }
-# python manage.py makemigrations
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -104,15 +104,13 @@ WSGI_APPLICATION = 'buetpx_back.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'buetpxdb',
+        'NAME': 'buetpxdb2',
         'USER': 'postgres',
-        'PASSWORD': 'postgres',
+        'PASSWORD': '1234',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
 }
-
-
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',

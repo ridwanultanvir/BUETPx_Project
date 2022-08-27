@@ -49,7 +49,7 @@ const GalleryBody =()=>{
             seterror(error);
             }
         )
-        }, [] )
+        }, [id] )
 
         const getPhotoCard = (photoObj) => {
             return (

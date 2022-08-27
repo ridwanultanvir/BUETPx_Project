@@ -39,20 +39,128 @@ const useStyles = makeStyles((theme) => ({
 
 
 const  SignUp=()=> {
+    localStorage.removeItem("token")
+   
+    
 
-    const [user_name, setusername] = useState('');
     const [first_name, setfirstname] = useState('');
     const [last_name, setlastname] = useState('');
     const [user_mail, setusermail] = useState('');
     const [user_pass, setuserpass] = useState('');
     const [user_pass2, setuserpass2] = useState('');
+    const [token, setToken] = useState(null);
     const classes = useStyles();
+    const [token_flag,setTokenFlag] = useState(false);
+
+    function UpdateAccount(newtoken)
+    {
+      
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' ,
+        "Authorization": "Token " + newtoken
+      },
+        body: JSON.stringify({
+          "name": first_name+" "+last_name,
+          "email": user_mail,
+          "hashedpass":user_pass,
+          "photo_url":"https://tinyurl.com/2p8ma4js",
+          
+        //   photo url needs to be taken from uploaded photo
+          // "photo_url": 'http://tiny.cc/namira123',
+        //   hashing will be done in the backend
+        })
+      };
+      fetch("http://localhost:8000/api/signup", requestOptions
+      )
+      .then(response=>
+        {
+          if(response.ok)
+          {
+            localStorage.removeItem("token");
+            window.location.href="\\login";
+          }
+        })
+
+      
+
+    }
+
+    function createToken()
+    {
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          "username": user_mail,
+          "password":user_pass
+        })
+      };
+      
+      
+      fetch("http://localhost:8000/api-token-auth", requestOptions)
+        .then(async response => 
+          {
+            // response.json()
+            console.log(response);
+            if (response.ok) {  
+              response.json()
+              .then(data=>{
+                console.log("response:",data);
+                localStorage.setItem("token", data.token);
+                UpdateAccount(data.token)
+                setToken(data.token);
+                console.log("token from localstorage:",localStorage.getItem("token"));
+                
+                // window.location.href="\\";
+              })
+              
+            }
+            else
+            {
+              throw new Error('Check email and password') 
+            }
+          })
+        .catch(error =>
+            {
+              // window.location.reload(false);
+              console.log( error)
+              alert(error)
+
+            });
+    }
+
+   
+
+
+
+    useEffect(() => {
+              // event.preventDefault();
+              console.log("create token")
+              console.log(token)
+              if(token_flag)
+              {
+                createToken();
+              }
+                    
+
+            },[token_flag]);
+
+            // useEffect(() => {
+            //   // event.preventDefault();
+            //   if(token)
+            //   {
+            //     console.log("update account")
+            //     UpdateAccount();
+            //   }
+            // },[token]);
 
     const ButtonClicked = async (event)=>
         {
             // alert('Button clicked!');
-            event.preventDefault();
-            const requestOptions = {
+           
+              event.preventDefault();
+              const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -74,8 +182,11 @@ const  SignUp=()=> {
                     if (response.ok) {
                     // let user = await response.json()
                     const user=await response.json()
-                    console.log(user)
-                    window.location.href="\\login";
+                    setTokenFlag(true);
+
+                    
+                    
+                    // window.location.href="\\login";
                     // window.location.reload(false);
                     }
                     else
@@ -97,11 +208,16 @@ const  SignUp=()=> {
                   )
                   .catch(error =>
                     {
+                      
                       // window.location.reload(false);
                       console.log( error)
                       alert(error)
         
                     });
+
+           
+
+            
 
               //   let response= await fetch("http://localhost:8000/api/register", requestOptions)
               //   // let user = await response.json().then(result=>result.data);
@@ -109,8 +225,9 @@ const  SignUp=()=> {
               //   let user = await response.json();
               //   console.log(user['username'])
               // }
-                
-      
+              console.log("Token2 : ")
+              console.log(localStorage.getItem("token"))
+                    
             
         }
 

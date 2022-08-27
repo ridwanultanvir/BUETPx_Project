@@ -54,79 +54,79 @@ const Header = async (props)=> {
   {
 
   }
-  // const token=localStorage.getItem('token')
-  // // const requestOptions = {
-  // //   method: 'GET',
-  // //   headers: { 'Content-Type': 'application/json' ,
-  // //             'Authorization': `Token ${token}` },
-  // // };
+  const token=localStorage.getItem('token')
+  // const requestOptions = {
+  //   method: 'GET',
+  //   headers: { 'Content-Type': 'application/json' ,
+  //             'Authorization': `Token ${token}` },
+  // };
 
-  // if(token != null)
-  // {
-  //   console.log(token)
-  //   const requestOptions = {
-  //       method: 'GET',
-  //       headers: { 'Content-Type': 'application/json' ,
-  //                 'Authorization': `Token ${token}` },
-  //     };
+  if(token != null)
+  {
+    console.log(token)
+    const requestOptions = {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' ,
+                  'Authorization': `Token ${token}` },
+      };
     
-  //     await fetch("http://localhost:8000/api/getuserdetails", requestOptions)
-  //       .then(async response => 
-  //         {
-  //           // response.json()
-  //           console.log(response);
-  //           if (response.ok) {  
-  //             const currentUser = await response.json()
-  //             console.log('currentuser',currentUser)
-  //             setuser(currentUser)
+      await fetch("http://localhost:8000/api/getuserdetails", requestOptions)
+        .then(async response => 
+          {
+            // response.json()
+            console.log(response);
+            if (response.ok) {  
+              const currentUser = await response.json()
+              console.log('currentuser',currentUser)
+              setuser(currentUser)
               
-  //             console.log(user)
+              console.log(user)
 
-  //             setmenu(
-  //               <MenuItem key='logout'
-  //               onClick={logout}
+              setmenu(
+                <MenuItem key='logout'
+                onClick={logout}
                 
-  //               >
+                >
                   
-  //                 <Typography textAlign="center" >Log Out</Typography>
+                  <Typography textAlign="center" >Log Out</Typography>
                   
-  //               </MenuItem>
-  //             )
+                </MenuItem>
+              )
     
-  //             // window.location.href="\\";
-  //           }
-  //           else
-  //           {
-  //             setmenu(
-  //               <MenuItem key='logout'
-  //               onClick={logout}
+              // window.location.href="\\";
+            }
+            else
+            {
+              setmenu(
+                <MenuItem key='logout'
+                onClick={logout}
                 
-  //               >
+                >
                   
-  //                 <Typography textAlign="center" >Log Out</Typography>
+                  <Typography textAlign="center" >Log Out</Typography>
                   
-  //               </MenuItem>
-  //             )
-  //           }
-  //         })
+                </MenuItem>
+              )
+            }
+          })
     
 
             
     
-  // }
+  }
 
-  // else{
-  //   setmenu(
-  //     <MenuItem key='login'
-  //     onClick={login}
+  else{
+    setmenu(
+      <MenuItem key='login'
+      onClick={login}
       
-  //     >
+      >
         
-  //       <Typography textAlign="center" >Log In</Typography>
+        <Typography textAlign="center" >Log In</Typography>
         
-  //     </MenuItem>
-  //   )
-  // }
+      </MenuItem>
+    )
+  }
 
 
   return (

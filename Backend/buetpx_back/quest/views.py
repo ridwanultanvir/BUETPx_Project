@@ -7,7 +7,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 
 from buetpx.models import Tutorial,Post,Comment,UserAccount,Tags, Category,Place, Like
-from buetpx.serializers import LikeSerializer,CommentSerializer, CommentSerializer2, TutorialSerializer,PostSerializer
+from buetpx.serializers import PostSerializer
 
 import json
 
@@ -103,47 +103,32 @@ def get_all_quests(request):
         return JsonResponse(all_quest_serializer.data, safe=False)
     
 
-@api_view(['GET', 'PUT', 'DELETE'])
-def tutorial_detail(request, pk):
-    # find tutorial by pk (id)
-    try: 
-        tutorial = Tutorial.objects.get(pk=pk) 
 
-        if request.method == 'GET': 
-            tutorial_serializer = TutorialSerializer(tutorial) 
-            return JsonResponse(tutorial_serializer.data)
-        
-        elif request.method == 'PUT': 
-            tutorial_data = JSONParser().parse(request) 
-            tutorial_serializer = TutorialSerializer(tutorial, data=tutorial_data) 
-            if tutorial_serializer.is_valid(): 
-                tutorial_serializer.save() 
-                return JsonResponse(tutorial_serializer.data) 
-            return JsonResponse(tutorial_serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
-
-        elif request.method == 'DELETE': 
-            tutorial.delete() 
-            return JsonResponse({'message': 'Tutorial was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
-   
-    except Tutorial.DoesNotExist: 
-        return JsonResponse({'message': 'The tutorial does not exist'}, status=status.HTTP_404_NOT_FOUND) 
  
 
-# @api_view(['PUT'])
+@api_view(['PUT'])
 
-# def update_quest_status(request, id ):
-#     if request.method == 'GET':
-#         all_quest = Quest.objects.filter(id=id)            
-#         all_quest_serializer = QuestInsertSerializer(all_quest,many = True)
-#         return JsonResponse(all_quest_serializer.data, safe=False)
-    
-#     if request.method == 'PUT': 
-#             tutorial_data = JSONParser().parse(request) 
-#             tutorial_serializer = TutorialSerializer(tutorial, data=tutorial_data) 
-#             if tutorial_serializer.is_valid(): 
-#                 tutorial_serializer.save() 
-#                 return JsonResponse(tutorial_serializer.data) 
-#             return JsonResponse(tutorial_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+def update_quest_status(request, id ):
+    try: 
+        quest_obj = Quest.objects.get(id=id)
+        # .update(status=True)
+
+        
+        
+        if request.method == 'PUT': 
+            quest_data = JSONParser().parse(request) 
+            quest_serializer = QuestStatusSerializer(quest_obj, data=quest_data) 
+            if quest_serializer.is_valid(): 
+                # quest_serializer.save() 
+                quest_serializer.save(update_fields=['status'])
+                # survey.save(update_fields=["active"]) 
+                # quest_serializer.save(update_fields=["status"]) 
+                return JsonResponse(quest_serializer.data) 
+            return JsonResponse(quest_serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
+
+   
+    except Tutorial.DoesNotExist: 
+        return JsonResponse({'message': 'The Quest does not exist'}, status=status.HTTP_404_NOT_FOUND) 
     
     
     

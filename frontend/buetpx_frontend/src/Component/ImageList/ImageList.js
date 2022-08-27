@@ -35,6 +35,7 @@ const Img = styled('img')({
 const uid = 2002;
 
 const  MyImageList=()=>{
+    console.log("imagelist")
 
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -52,7 +53,14 @@ const  MyImageList=()=>{
 
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/api/posts")
+        fetch("http://127.0.0.1:8000/api/posts",
+        {
+          method:"GET",
+          headers:{
+              "Content-Type":"application/json",
+              "Authorization":'Token '+localStorage.getItem('token')
+          }
+        })
           .then(res => res.json())
           .then(
             (result) => {
@@ -91,12 +99,6 @@ const  MyImageList=()=>{
       }
 
     return (
-        // <Grid container direction='column' spacing={2}>
-        //     <Grid item>
-        //       TagName: {tagname}
-        //       {posts.map(post => getPost(post))}
-        //     </Grid>
-        // </Grid>  
 
       <Grid container direction='column'>
       <Grid item>

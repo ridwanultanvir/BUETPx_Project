@@ -9,7 +9,7 @@ from rest_framework.decorators import api_view
 from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import UserSerializer2,RegisterSerializer
+from .serializers import UserSerializer2,RegisterSerializer,SignupSerializer
 from rest_framework.authentication import TokenAuthentication
 from rest_framework import generics
 # import json
@@ -23,8 +23,8 @@ def signup(request):
     if request.method == 'POST':
         
         user_info = JSONParser().parse(request)
-        user_info_serializer = UserSerializer(data=user_info)
-        print(user_info)
+        user_info_serializer = SignupSerializer(data=user_info)
+        print("======================userinfo+++++++++++++",user_info)
 
         if user_info_serializer.is_valid():
                 user_info_serializer.save()
