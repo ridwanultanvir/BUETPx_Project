@@ -1,4 +1,19 @@
 ##
+
+```
+F:\L4T1_code\CSE408_project\dj_env1\Scripts\activate
+cd Backend/buetpx_back
+python manage.py runserver 
+cd frontend/buetpx_frontend
+conda activate js_env1
+npm start
+```
+
+
+
+
+
+##
 http://localhost:8000/api/comment_insert
 {
   "id":8,
