@@ -40,9 +40,9 @@ FINAL:
     "shortlisted": 1
 
 }
+
 {
-    "quest_id": 5,
-    "post_ids":[2,4],
+    "posts":[2,4],
     "shortlisted": 1
 
 }
@@ -60,6 +60,15 @@ FINAL:
     "shortlisted": 1
 
 }
+
+
+{
+    "posts": [2,4],
+    "shortlisted": 1
+
+}
+
+
 {
     "quest": 5,
     "post":2,

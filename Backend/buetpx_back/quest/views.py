@@ -130,12 +130,46 @@ def update_post_shortlisted(request, id, post_id ):
             return JsonResponse(submission_serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
 
    
-    except Quest.DoesNotExist: 
-        return JsonResponse({'message': 'The Quest does not exist'}, status=status.HTTP_404_NOT_FOUND)  
+    except Submission.DoesNotExist: 
+        return JsonResponse({'message': 'The Submission does not exist'}, status=status.HTTP_404_NOT_FOUND)  
 
 
 
+@api_view(['PUT'])
+
+
+def update_post_shortlisted2(request, id ):   
+
+    
+    
+    if request.method == 'PUT': 
+        submission_data = JSONParser().parse(request) 
+
+        print("submission_data:",submission_data)
+        post_list = submission_data["posts"]
+        print(type(post_list[0]))
+        short_data = {'shortlisted':1}
         
+        print("before for loop: post_list", post_list)
+        for post_id in post_list:
+            print("post_id:",post_id)
+            submission_obj = Submission.objects.get(quest_id=id, post_id= post_id)
+            
+            
+            submission_serializer = SubmissionShortlistedSerializer(submission_obj, data=short_data) 
+            print("submission_obj:", submission_obj)
+            if submission_serializer.is_valid(): 
+                # submission_serializer.save() 
+                submission_serializer.save(update_fields=['shortlisted'])
+
+                 
+
+        return JsonResponse(submission_serializer.data) 
+    return JsonResponse(submission_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+                        
+
+    return JsonResponse({'message': 'The Submission DATA exist'}) 
         
 
     
