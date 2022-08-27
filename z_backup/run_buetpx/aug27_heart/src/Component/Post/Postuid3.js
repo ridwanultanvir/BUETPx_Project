@@ -1,9 +1,8 @@
 import React from 'react';
-import {Avatar, Grid, Paper} from "@mui/material";
+import {Avatar, Grid} from "@mui/material";
 import Header from '../../Static/Header';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
-import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import CommentIcon from '@mui/icons-material/Comment';
 import {IconButton} from '@mui/material';
 import { TextField } from '@mui/material';
@@ -13,14 +12,10 @@ import StyleOutlinedIcon from '@mui/icons-material/StyleOutlined';
 import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+
 import {Typography} from '@mui/material';
 import ButtonBase from '@mui/material/ButtonBase';
 import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-
 
 import {useState, useEffect} from "react";
 
@@ -38,32 +33,12 @@ const Img = styled('img')({
   alignContent:'left'
 });
 
-// style to add background image
-const styles = {
-  paperContainer: {
-      height: 1356,
-      width:'100%',
-      backgroundImage: `url(${"../../Static/img/blurry-preview.jpg"})`
-  }
-};
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
 // import Moment from 'react-moment';s
 
-const uid = 2000;
+const uid = 3;
 
 
-const  Post=()=>{
+const  Post3=()=>{
 
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -73,94 +48,16 @@ const  Post=()=>{
     const [comments, setcomments] = useState([]);
     const [commentTxt, setcommentTxt] = useState("");
     const [post_owner, setowner] = useState([]);
-    const [galleries, setGalleries] = useState([]);
-  
-    
-  
+
     // ===   NOTUN ADD KORSI =====================
-    const [countUp, setCountUp] = useState(2); 
+    const [countUp, setCountUp] = useState(0); 
 
     const[isLike, setIsLike] = useState(false);
 
     const[check1, setcheck1] = useState(false);
 
-    const [addToGalleryOpen, setaddToGalleryOpen] = useState(false);
-
-
-    // filled style for like button
-
     const colorStyle = {color:"blue"}; 
 
-    const addToGallery=(galleryId)=>{
-      const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json',
-        'Authorization': 'Token ' + localStorage.getItem('token')
-       },
-        body: JSON.stringify({ 
-          "id": galleryId,
-          "post_id": post.id
-          
-        })
-      };
-      fetch("http://localhost:8000/api/add_remove_post_to_gallery", requestOptions)
-      .then(()=>{
-        // window.location.reload();
-        setaddToGalleryOpen(false);
-        
-      })
-
-      setaddToGalleryOpen(true);
-    }
-
-    const getGallery=gallery=>
-    { 
-
-      console.log("gallery.post_present",gallery.post_present)
-      if (gallery.post_present===true)
-      {
-        return(
-          <Button value={gallery.id} sx={{marginRight:2}} onClick={()=>{
-            addToGallery(gallery.id);
-          }} variant='contained' >{gallery.title}</Button>
-        )
-      }
-
-      return(
-        <Button value={gallery.id} sx={{marginRight:2}} onClick={()=>{
-          addToGallery(gallery.id);
-        }} variant='outlined' >{gallery.title}</Button>
-      )
-
-        
-    }
-
-    const handleAddToGalleryClick = () => {
-      fetch("http://localhost:8000/api/galleries/"+uid+"/"+post.id,{ method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Token ' + localStorage.getItem('token')
-    }
-  
-  })
-    .then(res => res.json())
-    .then(
-      (result) => {
-        setIsLoaded(true);
-        setGalleries(result);
-      },
-
-      (error) => {
-        setIsLoaded(true);
-        setError(error);
-      }
-    )
-      setaddToGalleryOpen(true);
-    }
-
-    const handleAddToGalleryClose = () => {
-      setaddToGalleryOpen(false);
-    }
     const handleCheckIfLiked = () => {
       if (checklike.num_likes_this_user === 0) {
         // console.log("not liked------------------------------");
@@ -178,12 +75,7 @@ const  Post=()=>{
     const [numLike, setnumLike] = useState([]);  
 
     const checkLikeFunc = () => {
-      fetch("http://localhost:8000/api/check_likes/"+id+"/"+uid,{
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Token " + localStorage.getItem("token")}
-      })
+      fetch("http://localhost:8000/api/check_likes/"+id+"/"+uid)
       .then(res => res.json())
       .then(
         (result) => {
@@ -206,15 +98,19 @@ const  Post=()=>{
         setIsLike(false); 
       }else{
         setIsLike(true); 
-      }   
+      }
+      
+      
+      
+      
+      
+    
     }
 
     const insertLikeFunc = () => {
       const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json',
-        'Authorization': 'Token '+localStorage.getItem('token')
-       },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           "like_date": new Date(),
           "user": uid,
@@ -232,13 +128,7 @@ const  Post=()=>{
     }
 
     const deleteLikeFunc = () => {
-      fetch("http://localhost:8000/api/delete_like/"+id+"/"+uid, { 
-            method: 'DELETE' , 
-            headers: { 
-              'Content-Type': 'application/json',
-              'Authorization': 'Token '+localStorage.getItem('token')
-            }
-          })
+      fetch("http://localhost:8000/api/delete_like/"+id+"/"+uid, { method: 'DELETE' })
           .then(res => res.json())
           .then(
             (result) => {
@@ -257,21 +147,53 @@ const  Post=()=>{
       
       
       }
-      
+      const getLikeCount = () => {
+        fetch("http://localhost:8000/api/likes/"+id)
+        .then(res => res.json())
+        .then(
+          (result) => {
+            setIsLoaded(true);
+            setnumLike(result);
+          },
+  
+          (error) => {
+            setIsLoaded(true);
+            setError(error);
+          }
+        )
+      }
+
     const handleLikeClick = () => {
 
       console.log("Like Clicked ");
+      checkLikeFunc();
+      /*
+      while(check1 === false){
+        console.log("ami check1 e");
+      }
+      */
+     while(check1 === false){
+      console.log("ami check1 false e");
+      setTimeout(() => {console.log("The meaning of life")
+        
+      }, 1000);
+      break; 
+     }
+    
       
+      
+
+      console.log("ami check1 true e");
       if(isLike){
         console.log("delete like");
-        // deleteLikeFunc();
+        deleteLikeFunc();
         setIsLike(false);
-        setCountUp(countUp - 1);
+        // setCountUp(countUp - 1);
       }else{
         console.log("insert like");
-        // insertLikeFunc();
+        insertLikeFunc();
         setIsLike(true);
-        setCountUp(countUp + 1);
+        // setCountUp(countUp + 1);
       }
       
       
@@ -279,22 +201,70 @@ const  Post=()=>{
       
     }
 
+    const handleDislikeClick = () => {
+
+      console.log("DisLike Clicked ");
+      
+      
+
+      
+    }
+
+ 
+        
 
     
     const { id } = useParams();
 
     useEffect(() => {
-        fetch("http://localhost:8000/api/post_like_with_id/"+id,{
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Token ' + localStorage.getItem('token')}
-        })
+      fetch("http://localhost:8000/api/check_likes/"+id+"/"+uid)
+        .then(res => res.json())
+        .then(
+          (result) => {
+            setIsLoaded(true);
+            setchecklike(result);
+            
+            
+          },
+        
+          // Note: it's important to handle errors here
+          // instead of a catch() block so that we don't swallow
+          // exceptions from actual bugs in components.
+          (error) => {
+            setIsLoaded(true);
+            setError(error);
+          }
+        )
+    }, []);
+
+    useEffect(() => {
+      fetch("http://localhost:8000/api/posts_with_uid/"+id)
+        .then(res => res.json())
+        .then(
+          (result) => {
+            setIsLoaded(true);
+            setpost(result);
+          },
+          // Note: it's important to handle errors here
+          // instead of a catch() block so that we don't swallow
+          // exceptions from actual bugs in components.
+          (error) => {
+            setIsLoaded(true);
+            setError(error);
+          }
+        )
+    }, [checklike]);
+
+
+    
+
+    useEffect(() => {
+        fetch("http://localhost:8000/api/likes/"+id)
           .then(res => res.json())
           .then(
             (result) => {
               setIsLoaded(true);
-              setpost(result);
+              setnumLike(result);
             },
             // Note: it's important to handle errors here
             // instead of a catch() block so that we don't swallow
@@ -304,34 +274,14 @@ const  Post=()=>{
               setError(error);
             }
           )
-      }, []);
-      console.log("post",post);
-
-      
-      
+      }, [post]);
       
       const {post_title,post_date,photo_url,owner,category,place,tags}=post;
-      
       // console.log(post_title);
       useEffect(() => {
         if(owner)
         {
-          fetch("http://localhost:8000/api/user/"+owner,
-          {
-            method: "GET", // *Type of request GET, POST, PUT, DELETE
-            mode: "cors", // Type of mode of the request
-            cache: "no-cache", // options like default, no-cache, reload, force-cache
-            credentials: "same-origin", // options like include, *same-origin, omit
-            headers: {
-              "Content-Type": "application/json" // request content type,
-              ,
-              "Authorization": 'Token ' + localStorage.getItem('token')
-              
-            },
-            redirect: "follow", // manual, *follow, error
-            referrerPolicy: "no-referrer", // no-referrer, *client
-        }
-          )
+          fetch("http://localhost:8000/api/user/"+owner)
           .then(res => res.json())
           .then(
             (result) => {
@@ -351,22 +301,7 @@ const  Post=()=>{
       }, [numLike]);
 
       useEffect(() => {
-        fetch("http://localhost:8000/api/posts/"+id+"/comments",
-        {
-          method: "GET", // *Type of request GET, POST, PUT, DELETE
-          mode: "cors", // Type of mode of the request
-          cache: "no-cache", // options like default, no-cache, reload, force-cache
-          credentials: "same-origin", // options like include, *same-origin, omit
-          headers: {
-            "Content-Type": "application/json" // request content type,
-            ,
-            "Authorization": 'Token ' + localStorage.getItem('token')
-            
-          },
-          redirect: "follow", // manual, *follow, error
-          referrerPolicy: "no-referrer", // no-referrer, *client
-      }
-        )
+        fetch("http://localhost:8000/api/posts/"+id+"/comments")
           .then(res => res.json())
           .then(
             (result) => {
@@ -384,7 +319,7 @@ const  Post=()=>{
           // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [post_owner]);
 
-
+      
 
       const handleComment = (e) => {
         e.preventDefault();
@@ -400,22 +335,7 @@ const  Post=()=>{
             "post": id
           })
         };
-        fetch("http://localhost:8000/api/comment_insert", requestOptions,
-        {
-          method: "GET", // *Type of request GET, POST, PUT, DELETE
-          mode: "cors", // Type of mode of the request
-          cache: "no-cache", // options like default, no-cache, reload, force-cache
-          credentials: "same-origin", // options like include, *same-origin, omit
-          headers: {
-            "Content-Type": "application/json" // request content type,
-            ,
-            "Authorization": 'Token ' + localStorage.getItem('token')
-            
-          },
-          redirect: "follow", // manual, *follow, error
-          referrerPolicy: "no-referrer", // no-referrer, *client
-      }
-        )
+        fetch("http://localhost:8000/api/comment_insert", requestOptions)
           .then(response => response.json())
           .then(data => {
             console.log(data);
@@ -463,26 +383,14 @@ const  Post=()=>{
             <Header/>
             </Grid>
      
-            <Grid container  marginLeft={3} marginRight={3} >
+            <Grid container spacing={2} marginLeft={4} >
 
-                
+    
                 <Grid container item xs={12} >
-                <Grid item  container direction='row' xs={12} sx={{backgroundColor:'#f5f5f5'}}>
-                    
-                    <Paper  style={{width:'100%',backgroundImage: `url(${"https://c4.wallpaperflare.com/wallpaper/835/238/511/blurry-wallpaper-preview.jpg"})`}}>
-                    {/* <Grid item sm={2}/> */}
-                    
-                    {/* <Grid item> */}
-                    <center>
-                    <ButtonBase sx={{ width: '99%', maxHeight: '90%',maxWidth:'1080px' }}>
-                        <Img src={photo_url} alt='loading..'/>
+                <Grid item xs={12}>
+                    <ButtonBase sx={{ width: '90%', maxHeight: '100%',maxWidth:'1080px' }}>
+                        <Img src={photo_url} alt='1.jpg'/>
                     </ButtonBase>
-                    </center>
-                    {/* </Grid> */}
-                    
-                    {/* <Grid item sm={2}/> */}
-                     
-                    </Paper>
                     
                 </Grid>
 
@@ -492,38 +400,23 @@ const  Post=()=>{
                         <Grid item xs={12}>
                         <hr></hr>
                         </Grid>
-                        <Grid item xs={5}></Grid>
+                        <Grid item xs={4}></Grid>
                         <Grid item xs={2}> 
                         
 
                         <Grid item xs={2}> 
-                        <FavoriteIcon onClick={handleLikeClick} style={isLike ? colorStyle : null}></FavoriteIcon>
-                        
-                        
+                        <ThumbUpIcon onClick={handleLikeClick} style={isLike ? colorStyle : null}></ThumbUpIcon>
                         </Grid>
                         {/* <Grid item xs={2}> 
                         <ThumbDownIcon onClick={handleDislikeClick}></ThumbDownIcon>
                         </Grid>
                          */}
 
-                        <Grid item xs={2}> {countUp}   </Grid>
+                        <Grid item xs={2}> {numLike.num_likes}  </Grid>
 
                         </Grid>    
                         <Grid item xs={2}>
-                        <IconButton size="small"><AddPhotoAlternateIcon onClick={handleAddToGalleryClick}/></IconButton>
-                        <Modal
-                      open={addToGalleryOpen}
-                      onClose={handleAddToGalleryClose}
-                      aria-labelledby="modal-modal-title"
-                      aria-describedby="modal-modal-description"
-                    >
-                      <Box sx={style}>
-                        <Typography id="modal-modal-title" variant="h6" component="h2">
-                          Select a gallery
-                        </Typography>
-                        {galleries?.map(gallery=>getGallery(gallery))}
-                      </Box>
-                    </Modal>
+                        <IconButton size="small"><CollectionsOutlinedIcon/></IconButton>
                         <Grid item xs={4}></Grid>
                          </Grid>    
                          <Grid item xs={12}>
@@ -558,8 +451,8 @@ const  Post=()=>{
               textDecoration: 'none',
             }}
           >
-             {post_owner.name}
-             
+            by {post_owner.name}
+            by123 {checklike.num_likes_this_user}
           </Typography>
 
                       
@@ -594,7 +487,7 @@ const  Post=()=>{
                         </Typography>
 
                 </Grid>
-                <Grid item xs={10.5}><Button variant="outlined" color="primary">   {category} </Button> </Grid>
+                <Grid item xs={10.5}><Button variant="outlined" color="secondary">   {category} </Button> </Grid>
                 </Grid>
 
                 
@@ -693,6 +586,12 @@ const  Post=()=>{
                 
                 </Grid>
 
+                
+
+               
+
+
+       
                 <Grid container item xs={12}   >
 
                   <Grid item xs={12} sx={{marginTop:2,marginBottom:2}}>
@@ -734,7 +633,7 @@ const  Post=()=>{
                 </Grid>
                
                 <Grid item xs={12}>
-                <Button variant='contained' onClick={handleComment}>Submit</Button>
+                <Button variant='outlined' onClick={handleComment}>Submit</Button>
                 </Grid>
                 
                 
@@ -751,4 +650,4 @@ const  Post=()=>{
     );
     }
 
-    export default Post;
+    export default Post3;

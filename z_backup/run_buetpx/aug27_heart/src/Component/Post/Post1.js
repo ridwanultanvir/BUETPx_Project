@@ -19,8 +19,6 @@ import ButtonBase from '@mui/material/ButtonBase';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-
 
 import {useState, useEffect} from "react";
 
@@ -78,7 +76,7 @@ const  Post=()=>{
     
   
     // ===   NOTUN ADD KORSI =====================
-    const [countUp, setCountUp] = useState(2); 
+    const [countUp, setCountUp] = useState(0); 
 
     const[isLike, setIsLike] = useState(false);
 
@@ -86,8 +84,6 @@ const  Post=()=>{
 
     const [addToGalleryOpen, setaddToGalleryOpen] = useState(false);
 
-
-    // filled style for like button
 
     const colorStyle = {color:"blue"}; 
 
@@ -257,21 +253,59 @@ const  Post=()=>{
       
       
       }
+      const getLikeCount = () => {
+        fetch("http://localhost:8000/api/likes/"+id,{ method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Token ' + localStorage.getItem('token')
+        }
       
+      })
+        .then(res => res.json())
+        .then(
+          (result) => {
+            setIsLoaded(true);
+            setnumLike(result);
+          },
+  
+          (error) => {
+            setIsLoaded(true);
+            setError(error);
+          }
+        )
+      }
+
     const handleLikeClick = () => {
 
       console.log("Like Clicked ");
+      checkLikeFunc();
+      /*
+      while(check1 === false){
+        console.log("ami check1 e");
+      }
+      */
+     while(check1 === false){
+      console.log("ami check1 false e");
+      setTimeout(() => {console.log("The meaning of life")
+        
+      }, 1000);
+      break; 
+     }
+    
       
+      
+
+      console.log("ami check1 true e");
       if(isLike){
         console.log("delete like");
-        // deleteLikeFunc();
+        deleteLikeFunc();
         setIsLike(false);
-        setCountUp(countUp - 1);
+        // setCountUp(countUp - 1);
       }else{
         console.log("insert like");
-        // insertLikeFunc();
+        insertLikeFunc();
         setIsLike(true);
-        setCountUp(countUp + 1);
+        // setCountUp(countUp + 1);
       }
       
       
@@ -279,6 +313,15 @@ const  Post=()=>{
       
     }
 
+    const handleDislikeClick = () => {
+      console.log("DisLike Clicked ");
+    }
+
+
+
+
+ 
+        
 
     
     const { id } = useParams();
@@ -307,7 +350,24 @@ const  Post=()=>{
       }, []);
       console.log("post",post);
 
-      
+      useEffect(() => {
+        fetch("http://localhost:8000/api/likes/"+id)
+          .then(res => res.json())
+          .then(
+            (result) => {
+              setIsLoaded(true);
+              setnumLike(result);
+            },
+            // Note: it's important to handle errors here
+            // instead of a catch() block so that we don't swallow
+            // exceptions from actual bugs in components.
+            (error) => {
+              setIsLoaded(true);
+              setError(error);
+            }
+          )
+      }, [post]);
+
       
       
       const {post_title,post_date,photo_url,owner,category,place,tags}=post;
@@ -497,7 +557,7 @@ const  Post=()=>{
                         
 
                         <Grid item xs={2}> 
-                        <FavoriteIcon onClick={handleLikeClick} style={isLike ? colorStyle : null}></FavoriteIcon>
+                        <ThumbUpIcon onClick={handleLikeClick} style={isLike ? colorStyle : null}></ThumbUpIcon>
                         
                         
                         </Grid>
@@ -506,7 +566,7 @@ const  Post=()=>{
                         </Grid>
                          */}
 
-                        <Grid item xs={2}> {countUp}   </Grid>
+                        <Grid item xs={2}> {numLike.num_likes}   </Grid>
 
                         </Grid>    
                         <Grid item xs={2}>
