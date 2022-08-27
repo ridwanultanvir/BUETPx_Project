@@ -42,6 +42,15 @@ FINAL:
 
 
 
+##
+http://127.0.0.1:8000/api/update_quest_status/2
+
+
+{
+    "status": "Ended"
+}
+
+
 
 ##
 
