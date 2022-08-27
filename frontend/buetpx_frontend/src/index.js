@@ -21,6 +21,12 @@ import Login from "./Component/Login/Login";
 import Galleries from "./Component/Gallery/Galleries";
 import Gallery from "./Component/Gallery/Gallery";
 import UserProfile from "./Component/Profile/UserProfile";
+import Quest from "./Component/Quest/Quest";
+import QuestDetail from "./Component/Quest/QuestDetail";
+import EndedQuestDetail from "./Component/Quest/EndedQuestDetail";
+import AdminPanel from "./Component/Quest/AdminPanel";
+import ShortListQuest from "./Component/Quest/ShortListQuest";
+import MakeShort from "./Component/Quest/MakeShort";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -48,7 +54,14 @@ root.render(
 
       <Route path="/Galleries" element={<Galleries />} />
       <Route path="/Gallery/:id" element={<Gallery />} />
+      <Route path="/quest/" element={<Quest />} />
+      <Route path="/quest/:questId" element={<QuestDetail />} />
+      <Route path="/endedquest/:questId" element={<EndedQuestDetail />} />
 
+      <Route path="/questPanel/" element={<AdminPanel />} />
+      <Route path="/admin/Announce/" element={<AdminPanel />} />
+      <Route path="/admin/Quest" element={<ShortListQuest />} />
+      <Route path="/admin/quest/:id" element={<MakeShort />} />
 
 
 

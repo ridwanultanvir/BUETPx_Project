@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'signup_login.apps.SignupLoginConfig',
     'gallery.apps.GalleryConfig',
+    'quest.apps.QuestConfig',
     'rest_framework.authtoken',
     'user_profile.apps.UserProfileConfig',
 ]
@@ -110,6 +111,7 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
 
 # DATABASES = {
 #     'default': {

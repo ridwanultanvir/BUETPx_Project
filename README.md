@@ -8,14 +8,35 @@ conda activate js_env1
 npm start
 ```
 
+
+
+
+##
+```
+python manage.py startapp quest 
 ```
 
+goto: buetpx_back/url.py
+
+```
+path ('', include('quest.urls')),
+```
+
+
+
+
+##
+
+
+```
 npm install --legacy-peer-deps --save firebase
 ```
 
 http://localhost:8000/api/delete_like/3/2
 
-
+```
+python manage.py migrate --fake post zero
+```
 ##
 
 props.id use 
