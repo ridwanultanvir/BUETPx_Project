@@ -3,6 +3,7 @@ import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import { Grid, Typography ,Paper} from '@mui/material';
 import ImgCard from './ImgCard';
+
 export default function ShortList() {
   return (
         <Grid item  >
@@ -10,7 +11,7 @@ export default function ShortList() {
                 <Paper sx={{minHeight:'1080px',minWidth:'760px', backgroundColor:'#f5f5f5'}}>
                     <Grid item container>
                     <Grid item sm={2}/>
-                    <Grid container spacing={1} >
+                    <Grid container spacing={1} sx={{marginLeft:7, marginRight:5}}>
                         
                             {itemData.map((item, index) => (
                                 <Grid item key={index}>

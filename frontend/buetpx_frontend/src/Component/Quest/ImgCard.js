@@ -6,7 +6,7 @@ const ImgCard = ({post}) => {
     return (
 
         <Grid item >
-        <Card sx={{ maxWidth: 442, maxHeight:476 }}>
+        <Card sx={{ width: 342, height:400 }}>
             <CardActionArea onClick={(e) => {
             console.log(post.id);
             console.log(" selected...");
@@ -14,13 +14,15 @@ const ImgCard = ({post}) => {
             } }>
             <CardMedia
                 component="img"
-                height="476"
+                height="400"
+                width='342'
                 image={post.photo_url}
                 
                 alt="loading.."
             />
             
             </CardActionArea>
+
         </Card>
         </Grid>
     );

@@ -24,6 +24,8 @@ import Quest from "./Component/Quest/Quest";
 import QuestDetail from "./Component/Quest/QuestDetail";
 import EndedQuestDetail from "./Component/Quest/EndedQuestDetail";
 import AdminPanel from "./Component/Quest/AdminPanel";
+import ShortListQuest from "./Component/Quest/ShortListQuest";
+import MakeShort from "./Component/Quest/MakeShort";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -55,6 +57,9 @@ root.render(
       <Route path="/endedquest/:questId" element={<EndedQuestDetail />} />
 
       <Route path="/questPanel/" element={<AdminPanel />} />
+      <Route path="/admin/Announce/" element={<AdminPanel />} />
+      <Route path="/admin/Quest" element={<ShortListQuest />} />
+      <Route path="/admin/quest/:id" element={<MakeShort />} />
 
 
 
