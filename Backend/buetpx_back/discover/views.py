@@ -13,6 +13,8 @@ from buetpx.serializers import CommentSerializer, CommentSerializer2, TutorialSe
 from buetpx.serializers import PostSerializer2
 from rest_framework.decorators import api_view
 
+from discover.serializers import PostLikesSerializer
+
 
 
 
@@ -27,7 +29,7 @@ def post_list_by_catname(request, catname):
         # get posts by category name
         posts = posts.filter(category__name=catname)
         
-        post_serializer = PostSerializer(posts, many=True)
+        post_serializer = PostLikesSerializer(posts, many=True)
         return JsonResponse(post_serializer.data, safe=False)
 
 
@@ -36,7 +38,7 @@ def get_post_by_categoryid(request,id):
     
     if request.method == 'GET':
         posts = Post.objects.filter(category=id)               
-        post_serializer = PostSerializer(posts,many = True)
+        post_serializer = PostLikesSerializer(posts,many = True)
         return JsonResponse(post_serializer.data, safe=False)
 
 
@@ -54,7 +56,7 @@ def get_post_by_categories(request,list):
 
 
 
-        post_serializer = PostSerializer(posts, many=True)
+        post_serializer = PostLikesSerializer(posts, many=True)
         return JsonResponse(post_serializer.data, safe=False)
 
 
@@ -63,7 +65,7 @@ def get_post_by_categoryname(request,name):
     
     if request.method == 'GET':
         posts = Post.objects.filter(category=name)               
-        post_serializer = PostSerializer(posts,many = True)
+        post_serializer = PostLikesSerializer(posts,many = True)
         return JsonResponse(post_serializer.data, safe=False)
     
 @api_view(['GET'])
@@ -78,7 +80,7 @@ def get_newest_posts(request,keyword):
 
         # return just title, post_date and description
         
-        post_serializer = PostSerializer(posts,many = True)
+        post_serializer = PostLikesSerializer(posts,many = True)
         return JsonResponse(post_serializer.data, safe=False)
 
 
@@ -189,7 +191,7 @@ def get_search_result(request,list):
         posts = posts.order_by('-post_date')
         print("sorted")
         
-    post_serializer = PostSerializer(posts, many=True)
+    post_serializer = PostLikesSerializer(posts, many=True)
     return JsonResponse(post_serializer.data, safe=False)
     
 

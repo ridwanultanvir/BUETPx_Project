@@ -34,7 +34,7 @@ const Content = (props) => {
          {/* <ImageCard/> */}
             {/* {postlist.map(source => getSourceData(source))} */}
             <Box sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-             <ImageList variant="masonry" cols={4} gap={10}>
+             <ImageList variant="masonry" cols={3} gap={10}>
             {postlist.map((post) => (
               <ImgPost {...post}/>
                   

@@ -10,6 +10,7 @@ from buetpx.serializers import LikeSerializer,CommentSerializer, CommentSerializ
 # from buetpx.serializers import CommentSerializer, CommentSerializer2, TutorialSerializer,PostSerializer,PlaceSerializer,UserAccountSerializer,CategorySerializer
 
 from buetpx.serializers import PostSerializer2, CommentInsertSerializer, LikeInsertSerializer, LikeInsertSerializer2
+from discover.serializers import PostLikesSerializer
 # from buetpx.serializers import PostSerializer2, CommentInsertSerializer
 
 from rest_framework.decorators import api_view
@@ -101,7 +102,7 @@ def post_detail(request):
     posts = Post.objects.all()
     
     if request.method == 'GET': 
-        posts_serializer = PostSerializer(posts, many=True)
+        posts_serializer = PostLikesSerializer(posts, many=True)
         return JsonResponse(posts_serializer.data, safe=False)
         
 
