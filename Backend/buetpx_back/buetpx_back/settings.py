@@ -104,7 +104,7 @@ WSGI_APPLICATION = 'buetpx_back.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'buetpxdb2',
+        'NAME': 'buetpxdb3',
         'USER': 'postgres',
         'PASSWORD': '1234',
         'HOST': '127.0.0.1',
