@@ -32,7 +32,16 @@ class QuestInsertSerializer(serializers.ModelSerializer):
               'reward',          
               
               )
-    
+class SubmissionPostSerializer(serializers.ModelSerializer):
+    post = PostSerializer()
+    class Meta:
+      model = Submission
+      fields = ('id',
+                'quest',
+                'post',
+                'shortlisted',
+      )
+
 class QuestStatusSerializer(serializers.ModelSerializer):
     
   class Meta:
@@ -42,12 +51,12 @@ class QuestStatusSerializer(serializers.ModelSerializer):
     fields = (
               'status',          
               )
-
 class SubmissionInsertSerializer(serializers.ModelSerializer):
     
   class Meta:
 
     ordering = ['-id']
+
     model = Submission
     fields = ('id',
               'quest',
@@ -65,7 +74,7 @@ class SubmissionInsertSerializer(serializers.ModelSerializer):
 
 
 class PostLikeSerializer(serializers.ModelSerializer):
-    owner =UserAccountSerializer()
+    # owner =serializers.SlugRelatedField(read_only=True, slug_field='name' )
     # owner = serializers.SlugRelatedField(read_only=True, slug_field='name' )
     # print("*******************This is owner*********************")
     # print(owner)

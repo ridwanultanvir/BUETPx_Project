@@ -77,9 +77,11 @@ const activeList = [
     }
 
 ];
+
 const ShortListQuest = ()=>{
 
   const [selectedId, setSelectedId] = useState(null);
+  const [questList, setQuestList] = useState(activeList);
 
   useEffect(() => {
       if(selectedId){
@@ -92,12 +94,37 @@ const ShortListQuest = ()=>{
         const endDate1 = new Date(endDate);
         const currentDate = new Date();
         const timeLeft = endDate1.getTime() - currentDate.getTime();
+        
         const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
         const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         // const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
         // const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
         return `${days} days ${hours} hours left`;
+
    }
+
+   useEffect(() => {
+    const requestOptions = {
+      method: 'GET',
+     headers: { 'Content-Type': 'application/json',
+      'Authorization': 'Token ' + localStorage.getItem('token')
+    } 
+     
+
+    };
+
+    fetch('http://localhost:8000/api/get_active_quests', requestOptions)
+    .then(response => response.json())
+    .then(data => {
+      setQuestList(data);
+      console.log(data);
+    }).catch(error => {
+      console.log(error);
+
+    }
+    )
+  }, []);
+   
     return(
         <Grid container direction='column'>
         <Grid item>
@@ -106,9 +133,9 @@ const ShortListQuest = ()=>{
         <Grid item>
             <Grid container spacing={2} sx={{paddingLeft:'80px', paddingRight:'80px',paddingBottom:'10px'}}>
                 {
-                    activeList.map(quest => (
+                    questList.map(quest => (
                     <Grid item>
-                        <Card sx={{ minWidth: 442}}>
+                        <Card sx={{ minWidth: 442, maxWidth:442}}>
                         <CardActionArea onClick={(e)=>{
                             console.log(quest.id);
                             console.log(" selected...");
@@ -125,9 +152,7 @@ const ShortListQuest = ()=>{
                             <Typography gutterBottom variant="h5" component="div">
                                 {quest.title}
                             </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                                {quest.description}
-                            </Typography>
+                           
                             
                             <Grid container spacing={1} direction='column' sx={{paddingTop:'10px'}}>
                                 <Grid item container spacing={2}>

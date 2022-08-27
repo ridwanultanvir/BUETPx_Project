@@ -137,7 +137,7 @@ const Ended = () => {
         {
             endedList.map(quest => (
               <Grid item>
-                <Card sx={{ minWidth: 442}}>
+                <Card sx={{ minWidth: 442, maxWidth:442}}>
                   <CardActionArea onClick={(e)=>{
                       console.log(quest.id);
                       console.log(" selected...");
@@ -149,6 +149,7 @@ const Ended = () => {
                     <CardMedia
                       component="img"
                       height="140"
+                      
                       image={quest.photoUrl}
                       alt="loading.."
                     />
@@ -160,7 +161,7 @@ const Ended = () => {
                         {quest.description}
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
-                        {quest.status}
+                        {quest.status} at {formatDate(quest.endDate)}
                       </Typography>
                       
                     </CardContent>
