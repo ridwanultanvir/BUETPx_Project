@@ -310,12 +310,16 @@ const  Post=()=>{
         console.log("delete like");
         // deleteLikeFunc();
         setIsLike(false);
-        setCountUp(countUp - 1);
+        numLike.num_likes = numLike.num_likes -1 ; 
+        // setnumLike(numLike-1);
+        // setCountUp(countUp - 1);
       }else{
         console.log("insert like");
         // insertLikeFunc();
         setIsLike(true);
-        setCountUp(countUp + 1);
+        numLike.num_likes = numLike.num_likes +1 ; 
+        // setnumLike(numLike+1);
+        // setCountUp(countUp + 1);
       }
       
       
@@ -577,7 +581,7 @@ const  Post=()=>{
                         </Grid>
                          */}
 
-                        <Grid item xs={2}> {countUp}   </Grid>
+                        <Grid item xs={2}> {numLike.num_likes}   </Grid>
 
                         </Grid>    
                         <Grid item xs={2}>
