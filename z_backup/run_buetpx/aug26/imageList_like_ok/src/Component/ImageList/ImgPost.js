@@ -133,8 +133,6 @@ const  ImgPost=(props)=>{
                       sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
                       aria-label={`info about ${props.post_title}`}
                     >
-
-                    {/* LIKE KOYTA DEKHTE CHAILE UNCOMMENT KORO 
                     <ThumbUpIcon style={colorStyle} ></ThumbUpIcon>
                     <Typography
                       variant="h6"
@@ -150,8 +148,8 @@ const  ImgPost=(props)=>{
                         color: 'white',
                         textDecoration: 'none',
                       }}
-                    > {props.likes.likes} </Typography> */}
-       
+                    > {props.likes.likes} </Typography>
+                    {/* <Typography variant="caption" color="white" >{5} </Typography> */}
                     </IconButton>
                     
                   }

@@ -12,7 +12,6 @@ import StyleOutlinedIcon from '@mui/icons-material/StyleOutlined';
 import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 import {Typography} from '@mui/material';
 import ButtonBase from '@mui/material/ButtonBase';
@@ -29,7 +28,6 @@ import InfoIcon from '@mui/icons-material/Info';
 import { styled } from '@mui/material/styles';
 
 import {useState, useEffect} from "react";
-import { CardActionArea } from '@material-ui/core';
 
 import {
   useParams,
@@ -44,15 +42,25 @@ const uid = 2002;
 
 
 const  ImgPost=(props)=>{
-   
+    // const {post}=prop;
     console.log("props",props);
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [post, setpost] = useState([]);  
     const [checklike, setchecklike] = useState([]); 
+    // const[checklikebool, setchecklikebool] = useState(false);
+    const [comments, setcomments] = useState([]);
+    const [commentTxt, setcommentTxt] = useState("");
+    const [post_owner, setowner] = useState([]);
 
+    // ===   NOTUN ADD KORSI =====================
+    const [countUp, setCountUp] = useState(0); 
 
-    const colorStyle = {color:"white"}; 
+    const[isLike, setIsLike] = useState(false);
+
+    const[check1, setcheck1] = useState(false);
+
+    const colorStyle = {color:"blue"}; 
 
     const handleCheckIfLiked = () => {
       if (checklike.num_likes_this_user === 0) {
@@ -80,40 +88,31 @@ const  ImgPost=(props)=>{
     navigate('/posts/' + props.id);
     };
 
-    
-    // useEffect(() => {
-    //     fetch("http://localhost:8000/api/likes/"+props.id,
-    //     {
-    //       method:"GET",
-    //       headers:{
-    //           "Content-Type":"application/json",
-    //           "Authorization":'Token '+localStorage.getItem('token')
-    //       }
-    //     }
-    //     )
-    //       .then(res => res.json())
-    //       .then(
-    //         (result) => {
-    //           setIsLoaded(true);
-    //           setnumLike(result);
-    //         },
-    //         // Note: it's important to handle errors here
-    //         // instead of a catch() block so that we don't swallow
-    //         // exceptions from actual bugs in components.
-    //         (error) => {
-    //           setIsLoaded(true);
-    //           setError(error);
-    //         }
-    //       )
-    //   }, [post]);
+
+    useEffect(() => {
+        fetch("http://localhost:8000/api/likes/"+props.id)
+          .then(res => res.json())
+          .then(
+            (result) => {
+              setIsLoaded(true);
+              setnumLike(result);
+            },
+            // Note: it's important to handle errors here
+            // instead of a catch() block so that we don't swallow
+            // exceptions from actual bugs in components.
+            (error) => {
+              setIsLoaded(true);
+              setError(error);
+            }
+          )
+      }, [post]);
       
-    //  console.log("num_like",numLike);
+     console.log("num_like",numLike);
 
 
 
     return (
         
-      <CardActionArea>
         <ImageListItem key={props.photo_url}>
 
                 <img
@@ -133,32 +132,13 @@ const  ImgPost=(props)=>{
                       sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
                       aria-label={`info about ${props.post_title}`}
                     >
-
-                    {/* LIKE KOYTA DEKHTE CHAILE UNCOMMENT KORO 
-                    <ThumbUpIcon style={colorStyle} ></ThumbUpIcon>
-                    <Typography
-                      variant="h6"
-                      noWrap
-                      component="a"
-                      href="/"
-                      sx={{
-                        mr: 2,
-                        display: { xs: 'none', md: 'flex' },
-                        fontFamily: 'revert-layer',
-                        fontWeight: 700,
-                        // letterSpacing: '.3rem',
-                        color: 'white',
-                        textDecoration: 'none',
-                      }}
-                    > {props.likes.likes} </Typography> */}
-       
+                    <ThumbUpIcon ></ThumbUpIcon>
+                    {numLike.num_likes} 
                     </IconButton>
-                    
                   }
                   />
 
         </ImageListItem>
-        </CardActionArea>
           
     
     );
