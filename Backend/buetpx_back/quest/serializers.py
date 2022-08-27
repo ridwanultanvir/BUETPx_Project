@@ -42,7 +42,15 @@ class SubmissionPostSerializer(serializers.ModelSerializer):
                 'shortlisted',
       )
 
+class QuestStatusSerializer(serializers.ModelSerializer):
+    
+  class Meta:
 
+    ordering = ['-id']
+    model = Quest
+    fields = (
+              'status',          
+              )
 class SubmissionInsertSerializer(serializers.ModelSerializer):
     
   class Meta:
