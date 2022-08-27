@@ -20,6 +20,8 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 
+
+
 import {useState, useEffect} from "react";
 
 import {
@@ -494,7 +496,7 @@ const  Post=()=>{
                         
 
                         <Grid item xs={2}> 
-                        <ThumbUpIcon onClick={handleLikeClick} style={isLike ? colorStyle : null}></ThumbUpIcon>
+                        <FavoriteBorderIcon onClick={handleLikeClick} style={isLike ? colorStyle : null}></FavoriteBorderIcon>
                         
                         
                         </Grid>
