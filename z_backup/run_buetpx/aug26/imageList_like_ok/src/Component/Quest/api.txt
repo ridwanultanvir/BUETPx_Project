@@ -1,0 +1,20 @@
+
+FOR quest:::
+
+get_active_quests()
+
+get_ended_quests()
+
+getquestByid(quest_id)
+
+getShortQuestByQuestid(quest_id)
+
+getPostsByUserId(user_id)
+
+submitPhoto(quest_id, user_id, post)
+
+append likecount in post_data entry
+===============================================================
+
+
+
