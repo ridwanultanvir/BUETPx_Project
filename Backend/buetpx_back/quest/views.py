@@ -152,3 +152,29 @@ def get_posts_all_data(request):
         posts = Post.objects.all()
         post_serializer = PostLikeSerializer(posts,many = True)
         return JsonResponse(post_serializer.data, safe=False)
+
+
+@api_view(['DELETE'])
+def delete_quest(request,id):
+    try: 
+        quest_obj = Quest.objects.get(id=id)
+        quest_obj.delete()
+        return JsonResponse({'message': 'The Quest has been deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+    except Tutorial.DoesNotExist: 
+        return JsonResponse({'message': 'The Quest does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+
+
+
+
+
+
+
+
+
+# @api_view(['GET'])
+# def get_submitted_post_by_questid(request,id):
+#     if request.method == 'GET':
+#         submissions = Submission.objects.filter(quest=id)               
+#         submission_serializer = SubmissionPostSerializer(submissions,many = True)
+#         return JsonResponse(submission_serializer.data, safe=False)

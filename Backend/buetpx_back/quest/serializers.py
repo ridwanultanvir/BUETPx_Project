@@ -10,7 +10,7 @@ from buetpx.models import Like, LikeCount
 # from buetpx.models import Like
 
 from buetpx.models import UserAccount
-from buetpx.serializers import LikeSerializer,CommentSerializer, CommentSerializer2, TutorialSerializer,PostSerializer,PlaceSerializer,UserAccountSerializer,CategorySerializer
+from buetpx.serializers import LikeSerializer,CommentSerializer, CommentSerializer2, TutorialSerializer,PostSerializer,PlaceSerializer,UserAccountSerializer,CategorySerializer,PostUpSerializer
 from quest.models import Quest, Submission
 
 
@@ -33,7 +33,7 @@ class QuestInsertSerializer(serializers.ModelSerializer):
               
               )
 class SubmissionPostSerializer(serializers.ModelSerializer):
-    post = PostSerializer()
+    post = PostUpSerializer()
     class Meta:
       model = Submission
       fields = ('id',
