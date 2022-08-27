@@ -46,7 +46,7 @@ root.render(
 
       <Route path="/TestForm" element={<TestForm />} />
       <Route path="/ImageList" element={<MyImageList />} />
-	  <Route path="/discover/filtered/:catname" element={<ShowFilteredResult />} />
+	    <Route path="/discover/filtered/:catname" element={<ShowFilteredResult />} />
 
 
       <Route path="/Signup" element={<SignUp />} />
@@ -54,7 +54,7 @@ root.render(
       <Route path="/profile" element={<UserProfile />} />
 
       <Route path="/Galleries" element={<Galleries />} />
-      <Route path="/Gallery/:id" element={<Gallery />} />
+      <Route path="/Gallery/:id" element={<Gallery />} /> 
       <Route path="/quest/" element={<Quest />} />
       <Route path="/quest/:questId" element={<QuestDetail />} />
       <Route path="/endedquest/:questId" element={<EndedQuestDetail />} />
