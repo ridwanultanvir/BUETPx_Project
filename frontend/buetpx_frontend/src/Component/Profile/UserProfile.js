@@ -96,7 +96,7 @@ const UserProfile = ()=>
                                 <Typography variant="h5"> 
                                     {user.first_name} {user.last_name}
                                 </Typography>
-                                <Typography variant="h6"> 
+                                <Typography variant="subtitle1"> 
                                     {user.email}
                                 </Typography>
                             </center>

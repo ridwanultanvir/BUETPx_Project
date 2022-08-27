@@ -11,7 +11,7 @@ const ImgCard = ({post}) => {
             <CardActionArea onClick={(e) => {
             console.log(post.id);
             console.log(" selected...");
-            setSelectedId(post.id);
+            // setSelectedId(post.id);
             } }>
             <CardMedia
                 component="img"
