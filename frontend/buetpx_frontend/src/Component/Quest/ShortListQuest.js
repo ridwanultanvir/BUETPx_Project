@@ -181,7 +181,9 @@ const ShortListQuest = ()=>{
                             console.log(quest.id);
                             console.log(" selected...");
                             setSelectedId(quest.id);
-                            }}>
+                            }}
+                            // disabled={quest.status === 'Ended'}
+                            >
                             
                             <CardMedia
                             component="img"
@@ -222,7 +224,9 @@ const ShortListQuest = ()=>{
                                 </Grid>
                             </Grid>
                             </CardContent>
-                            <CardActions>
+                            
+                        </CardActionArea>
+                        <CardActions>
                             <Button  variant='outlined' color="primary" fullWidth disabled={quest.status.toLowerCase() === 'active' ? false : true} 
                             onClick={(e)=>{
                                 setToRemove(quest.id);
@@ -234,7 +238,6 @@ const ShortListQuest = ()=>{
                                 }
                             </Button>
                             </CardActions>
-                        </CardActionArea>
                         </Card>
                     </Grid>  
                 ))}

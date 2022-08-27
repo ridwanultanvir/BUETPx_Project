@@ -117,7 +117,7 @@ const UploadDetail = (url) => {
         // "tags":["shadow","dark"]
 
         console.log("reqBody:", reqBody);
-    }, [PlaceID, CatID, privacy, postTitle, selectedTags, url]);
+    }, [PlaceID, CatID, postTitle, selectedTags, url]);
     
     
     useEffect(() => {
@@ -288,7 +288,7 @@ const UploadDetail = (url) => {
                         <Grid item xs={12} sm={6}>
                             {/* put a image preview 200x200*/}
                         <Grid item>
-                            <img src={url} alt="preview" style={{width:'300%', height:'300%'}}/>
+                            <img src={url} alt="preview" style={{width:'300%', height:472}}/>
                         </Grid>
 
                         </Grid>
@@ -314,7 +314,7 @@ const UploadDetail = (url) => {
                     <Grid item/>
                     <Grid item/>
                     <Grid item>
-                        <FormControl sx={{ width: 450 }}>
+                        {/* <FormControl sx={{ width: 450 }}>
                             <InputLabel id="demo-simple-select-label">Privacy</InputLabel>
                             <Select
                                 // labelId="demo-simple-select-label"
@@ -332,7 +332,7 @@ const UploadDetail = (url) => {
                                 <MenuItem value='public'>Public</MenuItem>
                                 <MenuItem value='private'>Private</MenuItem>
                             </Select>   
-                        </FormControl>
+                        </FormControl> */}
                     </Grid>
 
                     <Grid item>
@@ -477,13 +477,13 @@ const UploadDetail = (url) => {
                     
                     <Grid item container>
                         <Grid item sm={2}/>
-                        <Button variant="contained" sx={{ width: 350 }}
+                        <Button  variant="contained" sx={{ width: 450 }}
                         onClick={handlePost}
                         endIcon={<SendIcon />}
                         >
                             Post 
                         </Button>
-                        <Grid item sm={2}/>
+                        {/* <Grid item sm={2}/> */}
                     </Grid>
                     
 

@@ -493,6 +493,45 @@ const  Post=()=>{
         );
     };
 
+    const getTimeElapsed = (date) => {
+      const date_ = new Date(date);
+      const now = new Date();
+      const diff = Math.abs(now - date_);
+      const diff_ms = diff / 1000;
+      const diff_sec = diff_ms / 60;
+      const diff_min = diff_sec / 60;
+      const diff_hrs = diff_min / 60;
+      const diff_days = diff_hrs / 24;
+      const diff_weeks = diff_days / 7;
+      const diff_months = diff_weeks / 4.35;
+      const diff_years = diff_months / 12;
+      if (diff_years > 1) {
+        return Math.floor(diff_years) + " years ago";
+      }
+      if (diff_months > 1) {
+        return Math.floor(diff_months) + " months ago";
+      }
+      if (diff_weeks > 1) {
+        return Math.floor(diff_weeks) + " weeks ago";
+      }
+      if (diff_days > 1) {
+        return Math.floor(diff_days) + " days ago";
+      }
+      if (diff_hrs > 1) {
+        return Math.floor(diff_hrs) + " hours ago";
+      }
+      if (diff_min > 1) {
+        return Math.floor(diff_min) + " minutes ago";
+      }
+      if(diff_sec > 1) {
+        return Math.floor(diff_sec) + " seconds ago";
+      }
+      else
+      {
+        return "Just now";
+      }
+    }
+
 
     const getComment = comment => {
         return (
@@ -501,6 +540,9 @@ const  Post=()=>{
     
         );
     };
+
+
+    
 
 
 
@@ -724,12 +766,12 @@ const  Post=()=>{
                         }}
                         >
                           <AccessTimeOutlinedIcon sx={{marginRight:2}}/>
-                        Time
+                        Uploaded
                         </Typography>
 
                 </Grid>  
                 {/* toDateString() */}
-                <Grid item xs={10.5} ><Time value={post_date} format="YYYY-MM-DD HH:mm"/></Grid>
+                <Grid item xs={10.5} >{getTimeElapsed(post_date)}</Grid>
                 {/* <Grid item xs={10.5} >{post_date.toDateString()}</Grid> */}
                 
                 
