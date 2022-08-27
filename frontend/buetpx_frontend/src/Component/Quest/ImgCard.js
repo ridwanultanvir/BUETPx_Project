@@ -1,8 +1,9 @@
 import React from "react";
 import { Grid } from "@mui/material";
 import {Card,CardContent,CardActionArea ,CardMedia,Typography} from "@mui/material";
-
+import {useState, useEffect} from "react";
 const ImgCard = ({post}) => {
+    const [selectedId, setSelectedId] = useState(null);
     return (
 
         <Grid item >

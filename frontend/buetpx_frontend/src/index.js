@@ -41,7 +41,7 @@ root.render(
       <Route path="/Upload" element={<Upload />} />
 
       <Route path="/TestForm" element={<TestForm />} />
-      <Route path="/ImageList" element={<Homefeed />} />
+      <Route path="/ImageList" element={<MyImageList />} />
 	  <Route path="/discover/filtered/:catname" element={<ShowFilteredResult />} />
 
 
