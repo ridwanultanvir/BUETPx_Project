@@ -10,7 +10,7 @@ from buetpx.models import Like, LikeCount
 # from buetpx.models import Like
 
 from buetpx.models import UserAccount
-from buetpx.serializers import LikeSerializer,CommentSerializer, CommentSerializer2, TutorialSerializer,PostSerializer,PlaceSerializer,UserAccountSerializer,CategorySerializer
+from buetpx.serializers import LikeSerializer,CommentSerializer, CommentSerializer2, TutorialSerializer,PostSerializer,PlaceSerializer,UserAccountSerializer,CategorySerializer,PostUpSerializer
 from quest.models import Quest, Submission
 
 
@@ -33,7 +33,7 @@ class QuestInsertSerializer(serializers.ModelSerializer):
               
               )
 class SubmissionPostSerializer(serializers.ModelSerializer):
-    post = PostSerializer()
+    post = PostUpSerializer()
     class Meta:
       model = Submission
       fields = ('id',
@@ -64,13 +64,17 @@ class SubmissionInsertSerializer(serializers.ModelSerializer):
               'shortlisted',      
               )
   
-    # if request.method == 'GET':       
+  
+class SubmissionShortlistedSerializer(serializers.ModelSerializer):
+    
+    class Meta:
 
-    #     num_likes = Like.objects.filter(post=postid).count()
-    #     print("likes:", num_likes)         
-    #     response_data = {}
-    #     response_data['num_likes'] = num_likes
-    #     return JsonResponse(response_data, safe=False)
+      ordering = ['-id']
+      model = Submission
+      fields = (
+                'shortlisted',      
+                )
+
 
 
 class PostLikeSerializer(serializers.ModelSerializer):

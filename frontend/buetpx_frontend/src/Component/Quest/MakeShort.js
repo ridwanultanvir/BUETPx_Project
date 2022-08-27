@@ -76,14 +76,58 @@ const MakeShort = () => {
     const { id } = useParams();
 
     const [Shortlist, setShortlist] = useState([]);
+    const [submissions, setSubmissions] = useState([]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(Shortlist);
     }
 
+    // useEffect(() => {
+    //     fetch(`http://localhost:8000/api/shortlist/${id}`)
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         setShortlist(data);
+    //         console.log(data);
+    //     })
+    //     .catch(err => console.log(err))
+
+    // }, []);
     useEffect(() => {
-        console.log(Shortlist);
+        const reqOption = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Token ${localStorage.getItem('token')}`
+            }
+
+
+        }
+
+        fetch(`http://localhost:8000/api/get_submission_by_questid/${id}`, reqOption)
+        .then(res => res.json())
+        .then(data => {
+            let posts = [];
+            data.forEach(sub => {
+                posts.push(sub.post);
+            } )
+            console.log("posts:", posts);
+            const newPosts = posts.map(post => {
+                return {
+                    ...post,
+                    isClicked: false
+                }
+            } )
+            console.log("newPosts:", newPosts);
+
+            setSubmissions(newPosts);
+            console.log(data);
+        }).catch(err => console.log(err))
+
+    }, []);
+
+    useEffect(() => {
+        console.log("Shortlist:", Shortlist);
     }, [Shortlist]);
     
 
@@ -94,7 +138,7 @@ const MakeShort = () => {
             </Grid>
             <Grid item container spacing={1} sx={{paddingLeft:'80px', paddingRight:'80px',paddingBottom:'10px', maxHeight:550, overflow:'auto'}}>
                 {
-                    submittedPhotos.map(photo => (
+                    submissions.map(photo => (
                     <Grid item>
                         <Card sx={{ minWidth: 442}}>
                         <CardActionArea onClick={(e)=>{

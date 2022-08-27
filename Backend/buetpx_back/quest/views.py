@@ -13,7 +13,7 @@ import json
 
 from quest.models import Quest, Submission
 
-from quest.serializers import SubmissionPostSerializer, QuestInsertSerializer, SubmissionInsertSerializer, PostLikeSerializer,QuestStatusSerializer
+from quest.serializers import QuestInsertSerializer, SubmissionInsertSerializer, PostLikeSerializer, QuestStatusSerializer, SubmissionShortlistedSerializer
 
 
 
@@ -104,7 +104,92 @@ def get_all_quests(request):
     
 
 
- 
+
+# @api_view(['PUT'])
+
+# def update_post_shortlisted(request, quest_id, post_id  ):
+#     print("quest_id:",quest_id)
+#     print("post_id:",post_id)
+#     submission = Submission.objects.filter(quest=quest_id, post=post_id)
+    
+#     # if submission_serializer.is_valid(): 
+#     #         submission_serializer.data.shortlisted = 1
+#     #         submission_serializer.save()
+#     if request.method == 'PUT': 
+#         submission_data = JSONParser().parse(request) 
+#         submission_serializer = SubmissionInsertSerializer(submission, data=submission_data) 
+#         if submission_serializer.is_valid(): 
+#             # quest_serializer.save() 
+#             # submission_serializer.save()
+#             submission_serializer.save(update_fields=['shortlisted'])
+
+#             return JsonResponse(submission_serializer.data) 
+#         return JsonResponse(submission_serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
+    
+@api_view(['PUT'])
+
+
+def update_post_shortlisted1(request, id, post_id ):
+    try: 
+        submission_obj = Submission.objects.get(quest_id=id, post_id= post_id)
+        
+
+        
+        
+        if request.method == 'PUT': 
+            submission_data = JSONParser().parse(request) 
+            submission_serializer = SubmissionShortlistedSerializer(submission_obj, data=submission_data) 
+            if submission_serializer.is_valid(): 
+                # submission_serializer.save() 
+                submission_serializer.save(update_fields=['shortlisted'])
+
+                return JsonResponse(submission_serializer.data) 
+            return JsonResponse(submission_serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
+
+   
+    except Submission.DoesNotExist: 
+        return JsonResponse({'message': 'The Submission does not exist'}, status=status.HTTP_404_NOT_FOUND)  
+
+
+
+@api_view(['PUT'])
+
+# id = quest er id 
+def update_post_shortlisted(request, id ):   
+
+    
+    
+    if request.method == 'PUT': 
+        submission_data = JSONParser().parse(request) 
+
+        # print("submission_data:",submission_data)
+        post_list = submission_data["posts"]
+        # print(type(post_list[0]))
+        short_data = {'shortlisted':1}
+        
+        # print("before for loop: post_list", post_list)
+        for post_id in post_list:
+            print("post_id:",post_id)
+            submission_obj = Submission.objects.get(quest_id=id, post_id= post_id)
+            
+            
+            submission_serializer = SubmissionShortlistedSerializer(submission_obj, data=short_data) 
+            # print("submission_obj:", submission_obj)
+            if submission_serializer.is_valid(): 
+                # submission_serializer.save() 
+                submission_serializer.save(update_fields=['shortlisted'])
+
+                 
+
+        return JsonResponse(submission_serializer.data) 
+    return JsonResponse(submission_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+                        
+        
+
+    
+
+
 
 @api_view(['PUT'])
 
@@ -127,7 +212,7 @@ def update_quest_status(request, id ):
             return JsonResponse(quest_serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
 
    
-    except Tutorial.DoesNotExist: 
+    except Quest.DoesNotExist: 
         return JsonResponse({'message': 'The Quest does not exist'}, status=status.HTTP_404_NOT_FOUND) 
     
     
@@ -152,3 +237,31 @@ def get_posts_all_data(request):
         posts = Post.objects.all()
         post_serializer = PostLikeSerializer(posts,many = True)
         return JsonResponse(post_serializer.data, safe=False)
+    
+
+@api_view(['Get'])
+def post_like_with_id(request,id):
+    
+    if request.method == 'GET':
+        # get post by id
+        post = Post.objects.get(pk = id)
+        print("post:",post)
+        print("id:",id)
+              
+        post_serializer = PostLikeSerializer(post,many = False)
+        print("post_serializer:",post_serializer.data)
+        return JsonResponse(post_serializer.data, safe=False)
+    
+
+@api_view(['DELETE'])
+def delete_quest(request,id):
+    try: 
+        quest_obj = Quest.objects.get(id=id)
+        quest_obj.delete()
+        return JsonResponse({'message': 'The Quest has been deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+    except Tutorial.DoesNotExist: 
+        return JsonResponse({'message': 'The Quest does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+
+
+

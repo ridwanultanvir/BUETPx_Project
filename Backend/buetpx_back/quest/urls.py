@@ -11,8 +11,15 @@ urlpatterns = [
     path ('api/get_active_quests', views.get_active_quests),
     path ('api/get_all_quests', views.get_all_quests),
     path ('api/update_quest_status/<id>', views.update_quest_status),
+
+    path ('api/post_like_with_id/<id>', views.post_like_with_id),
+    # update_post_shortlisted
+    path ('api/update_post_shortlisted1/<id>/<post_id>', views.update_post_shortlisted1),
+    # update_post_shortlisted2
+    path ('api/update_post_shortlisted/<id>/', views.update_post_shortlisted),
     path ('api/get_ended_quests', views.get_ended_quests),
     path ('api/get_submission_by_questid/<id>', views.get_submission_by_questid),
+    path ('api/delete_quest/<id>', views.delete_quest),
 
     
     

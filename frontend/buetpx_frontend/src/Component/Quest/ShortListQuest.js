@@ -1,4 +1,4 @@
-import {Grid, Button,FormControl,InputLabel,Box, Select, Typography,MenuItem, TextField,Autocomplete, TextareaAutosize, Paper} from "@mui/material";
+import {Grid, Button,FormControl,InputLabel,Box, Select, Typography,MenuItem, TextField,Autocomplete, TextareaAutosize, Paper, CardActions} from "@mui/material";
 import React from "react";
 import {Card, CardContent, CardActionArea, CardMedia} from "@mui/material";
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
@@ -82,6 +82,7 @@ const ShortListQuest = ()=>{
 
   const [selectedId, setSelectedId] = useState(null);
   const [questList, setQuestList] = useState(activeList);
+  const [toRemove,setToRemove] = useState(null);
 
   useEffect(() => {
       if(selectedId){
@@ -89,6 +90,44 @@ const ShortListQuest = ()=>{
         window.location.href = `/admin/quest/${selectedId}`;
       }
   },[selectedId])
+
+  useEffect(() => {
+    if(toRemove){
+
+    
+    // setQuestList(questList.filter(quest => quest.id !== toRemove));
+
+      const reqOption = {
+        method: 'PUT',
+        headers: {
+
+            'Content-Type': 'application/json',
+            'Authorization': 'Token ' + localStorage.getItem('token')
+            
+      }
+      ,
+        body: JSON.stringify({ status: 'Ended' })  
+    };
+    fetch(`http://localhost:8000/api/update_quest_status/${toRemove}`, reqOption)
+    .then(res => res.json())
+    .then(data => {
+        console.log(data);
+    }).catch(err => {
+        console.log(err);
+    }).finally(() => {
+
+        // modify status of quest to ended
+        questList.map(quest => {
+            if(quest.id === toRemove){
+                quest.status = 'Ended';
+            }
+        } )
+        setToRemove(null);
+    }
+    );
+
+    }
+  },[toRemove])
 
    const getTImeLeft = (endDate) =>  {
         const endDate1 = new Date(endDate);
@@ -113,11 +152,13 @@ const ShortListQuest = ()=>{
 
     };
 
-    fetch('http://localhost:8000/api/get_active_quests', requestOptions)
+    fetch('http://localhost:8000/api/get_all_quests', requestOptions)
     .then(response => response.json())
     .then(data => {
+
       setQuestList(data);
       console.log(data);
+
     }).catch(error => {
       console.log(error);
 
@@ -181,6 +222,18 @@ const ShortListQuest = ()=>{
                                 </Grid>
                             </Grid>
                             </CardContent>
+                            <CardActions>
+                            <Button  variant='outlined' color="primary" fullWidth disabled={quest.status.toLowerCase() === 'active' ? false : true} 
+                            onClick={(e)=>{
+                                setToRemove(quest.id);
+                            }}
+                            >
+                                {
+                                    // compare case insensitive
+                                    quest.status.toLowerCase() === 'active' ? 'End Quest' : 'Quest Ended'
+                                }
+                            </Button>
+                            </CardActions>
                         </CardActionArea>
                         </Card>
                     </Grid>  
