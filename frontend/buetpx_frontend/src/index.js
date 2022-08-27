@@ -20,17 +20,20 @@ import SignUp from "./Component/Signup/Signup";
 import Login from "./Component/Login/Login";
 import Galleries from "./Component/Gallery/Galleries";
 import Gallery from "./Component/Gallery/Gallery";
+import UserProfile from "./Component/Profile/UserProfile";
 import Quest from "./Component/Quest/Quest";
 import QuestDetail from "./Component/Quest/QuestDetail";
 import EndedQuestDetail from "./Component/Quest/EndedQuestDetail";
 import AdminPanel from "./Component/Quest/AdminPanel";
+import ShortListQuest from "./Component/Quest/ShortListQuest";
+import MakeShort from "./Component/Quest/MakeShort";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Router>
     <Routes>
-      <Route path="/" element={<Homefeed />} />
-      <Route path="/posts" element={<Homefeed />} />
+      <Route path="/" element={<MyImageList />} />
+      <Route path="/posts" element={<MyImageList />} />
       <Route path="/posts/:id" element={<Post />} />
       <Route path="/posts3/:id" element={<Post3 />} />
       <Route path="/post_with_tags/:tagname" element={<Tags />} />
@@ -47,6 +50,7 @@ root.render(
 
       <Route path="/Signup" element={<SignUp />} />
       <Route path="/Login" element={<Login />} />
+      <Route path="/profile" element={<UserProfile />} />
 
       <Route path="/Galleries" element={<Galleries />} />
       <Route path="/Gallery/:id" element={<Gallery />} />
@@ -55,6 +59,9 @@ root.render(
       <Route path="/endedquest/:questId" element={<EndedQuestDetail />} />
 
       <Route path="/questPanel/" element={<AdminPanel />} />
+      <Route path="/admin/Announce/" element={<AdminPanel />} />
+      <Route path="/admin/Quest" element={<ShortListQuest />} />
+      <Route path="/admin/quest/:id" element={<MakeShort />} />
 
 
 

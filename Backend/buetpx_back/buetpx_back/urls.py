@@ -29,6 +29,7 @@ urlpatterns = [
     path ('', include('gallery.urls')),
     path ('', include('signup_login.urls')),
     path ('', include('upload.urls')),
+    path ('', include('user_profile.urls')),
     path ('', include('quest.urls')),
     path('api-token-auth', views.obtain_auth_token),
     

@@ -18,7 +18,9 @@ import { NavLink } from "react-router-dom";
 import CardActionArea from '@mui/material/CardActionArea';
 import {useState, useEffect} from "react";
 
-const pages = ['Discover', 'Quest','Galleries'];
+// const pages = ['Discover', 'Quest','Galleries'];
+const pages = ['Discover', 'Quest'];
+
 const usermenu = ['Profile', 'Account Settings', 'Logout'];
 
 
@@ -48,13 +50,20 @@ const Header = ()=> {
     setAnchorElUser(null);
   };
 
-  const logout = () =>
+  const  logout = () =>
   {
     localStorage.removeItem('token')
+    window.location.href='/login';
   }
 
   const login = ()=>
   {
+      
+  }
+
+  const gotoprofile = ()=>
+  {
+    window.location.href='/profile';
 
   }
 
@@ -91,14 +100,24 @@ const Header = ()=> {
                 console.log(user)
   
                 setmenu(
+                  <div>
                   <MenuItem key='logout'
-                  onClick={logout}
+                  onClick={gotoprofile}
                   
+                  >
+                    
+                    <Typography textAlign="center" >Profile</Typography>
+                    
+                  </MenuItem>
+                  <MenuItem key='profile'
+                  onClick={logout}
                   >
                     
                     <Typography textAlign="center" >Log Out</Typography>
                     
                   </MenuItem>
+                  </div>
+
                 )
       
                 // window.location.href="\\";
@@ -106,7 +125,7 @@ const Header = ()=> {
               else
               {
 
-                console.log("else e in")
+                console.log("inside else")
                 setmenu(
                   <MenuItem key='login'
                   onClick={login}
@@ -193,7 +212,7 @@ const Header = ()=> {
               }}
             >
 {/* all pages linked to one of the menu items */}
-              {/* {pages.map((page) => (
+              {pages.map((page) => (
                 <NavLink className="nav-link" to={`/${page}`}>
                 <MenuItem key={page} 
                 // onClick="\"{...page}
@@ -204,7 +223,7 @@ const Header = ()=> {
                   
                 </MenuItem>
                 </NavLink>
-              ))} */}
+              ))}
 
             </Menu>
           </Box>
@@ -272,7 +291,6 @@ const Header = ()=> {
 
 
 
-{/* user menu after click of pp */}
 
             <Box sx={{paddingRight: '10px'}}>
             <Button 
@@ -292,6 +310,9 @@ const Header = ()=> {
                   <FileUploadOutlinedIcon size='large' />
               </Button>
             </Box>
+
+            
+{/* user menu after click of pp */}
           
           <Box sx={{ flexGrow: 0 }}>
           {/* <NavLink className="nav-link" to="/upload"> */}
@@ -308,7 +329,7 @@ const Header = ()=> {
                 </Tooltip>
             
             <Menu
-              sx={{ mt: '45px' }}
+              // sx={{ mt: '45px' }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
@@ -322,6 +343,7 @@ const Header = ()=> {
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
+              
             >
               {menu}
             </Menu>
