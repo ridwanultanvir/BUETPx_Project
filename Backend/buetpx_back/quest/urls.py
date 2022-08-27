@@ -10,6 +10,8 @@ urlpatterns = [
     path ('api/get_active_quests', views.get_active_quests),
     path ('api/get_all_quests', views.get_all_quests),
     path ('api/update_quest_status/<id>', views.update_quest_status),
+    # posts_like_with_uid
+    path ('api/post_like_with_id/<id>', views.post_like_with_id),
     path ('api/get_ended_quests', views.get_ended_quests),
     
     

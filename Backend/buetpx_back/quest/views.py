@@ -135,3 +135,18 @@ def get_posts_all_data(request):
         posts = Post.objects.all()
         post_serializer = PostLikeSerializer(posts,many = True)
         return JsonResponse(post_serializer.data, safe=False)
+    
+
+@api_view(['Get'])
+def post_like_with_id(request,id):
+    
+    if request.method == 'GET':
+        # get post by id
+        post = Post.objects.get(pk = id)
+        print("post:",post)
+        print("id:",id)
+              
+        post_serializer = PostLikeSerializer(post,many = False)
+        print("post_serializer:",post_serializer.data)
+        return JsonResponse(post_serializer.data, safe=False)
+    
