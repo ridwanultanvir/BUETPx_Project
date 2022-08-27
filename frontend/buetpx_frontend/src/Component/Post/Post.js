@@ -308,14 +308,18 @@ const  Post=()=>{
       
       if(isLike){
         console.log("delete like");
-        // deleteLikeFunc();
+        deleteLikeFunc();
         setIsLike(false);
-        setCountUp(countUp - 1);
+        numLike.num_likes = numLike.num_likes -1 ; 
+        // setnumLike(numLike-1);
+        // setCountUp(countUp - 1);
       }else{
         console.log("insert like");
-        // insertLikeFunc();
+        insertLikeFunc();
         setIsLike(true);
-        setCountUp(countUp + 1);
+        numLike.num_likes = numLike.num_likes +1 ; 
+        // setnumLike(numLike+1);
+        // setCountUp(countUp + 1);
       }
       
       
@@ -326,6 +330,8 @@ const  Post=()=>{
 
     
     const { id } = useParams();
+
+    
 
     useEffect(() => {
         fetch("http://localhost:8000/api/post_like_with_id/"+id,{
@@ -351,7 +357,29 @@ const  Post=()=>{
       }, []);
       console.log("post",post);
 
-      
+      useEffect(() => {
+        fetch("http://localhost:8000/api/likes/"+id,{
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Token ' + localStorage.getItem('token')}
+        }).then(res => res.json())
+          .then(
+            (result) => {
+              setIsLoaded(true);
+              setnumLike(result);
+            },
+            // Note: it's important to handle errors here
+            // instead of a catch() block so that we don't swallow
+            // exceptions from actual bugs in components.
+            (error) => {
+              setIsLoaded(true);
+              setError(error);
+            }
+          )
+      }, [post]);
+
+
       
       
       const {post_title,post_date,photo_url,owner,category,place,tags}=post;
@@ -595,7 +623,7 @@ const  Post=()=>{
                         </Grid>
                          */}
 
-                        <Grid item xs={2}> {countUp}   </Grid>
+                        <Grid item xs={2}> {numLike.num_likes}   </Grid>
 
                         </Grid>    
                         <Grid item xs={2}>

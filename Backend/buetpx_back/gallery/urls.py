@@ -9,4 +9,5 @@ urlpatterns = [
     path('api/add_gallery', views.add_gallery),
     path('api/add_remove_post_to_gallery', views.add_remove_post_to_gallery),
     path('api/remove_post_from_gallery', views.remove_post_from_gallery),
+    
 ]
