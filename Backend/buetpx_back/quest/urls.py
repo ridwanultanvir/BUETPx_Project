@@ -13,9 +13,9 @@ urlpatterns = [
 
     path ('api/post_like_with_id/<id>', views.post_like_with_id),
     # update_post_shortlisted
-    path ('api/update_post_shortlisted/<id>/<post_id>', views.update_post_shortlisted),
+    path ('api/update_post_shortlisted1/<id>/<post_id>', views.update_post_shortlisted1),
     # update_post_shortlisted2
-    path ('api/update_post_shortlisted2/<id>/', views.update_post_shortlisted2),
+    path ('api/update_post_shortlisted/<id>/', views.update_post_shortlisted),
     path ('api/get_ended_quests', views.get_ended_quests),
     
     

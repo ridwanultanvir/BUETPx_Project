@@ -14,6 +14,15 @@ http://127.0.0.1:8000/api/insert_submission
 Authorization
 Token 2daf6090a8b3f317e25a932d7147b98a0049b929
 
+
+##
+
+http://127.0.0.1:8000/api/update_post_shortlisted/3/
+
+{
+    "posts":[2,3]
+}
+
 ##
 
 FINAL: 
@@ -41,11 +50,6 @@ FINAL:
 
 }
 
-{
-    "posts":[2,4],
-    "shortlisted": 1
-
-}
 
 {
     "quest_id": 5,
