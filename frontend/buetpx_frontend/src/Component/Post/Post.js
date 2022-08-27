@@ -164,19 +164,25 @@ const  Post=()=>{
       if (gallery.post_present===true)
       {
         return(
-          <Button value={gallery.id} sx={{marginRight:2}} onClick={()=>{
+          <Button value={gallery.id} sx={{marginRight:2,marginTop:2}} onClick={()=>{
             addToGallery(gallery.id);
           }} variant='contained' >{gallery.title}</Button>
         )
       }
 
       return(
-        <Button value={gallery.id} sx={{marginRight:2}} onClick={()=>{
+        <Button value={gallery.id} sx={{marginRight:2,marginTop:2}} onClick={()=>{
           addToGallery(gallery.id);
         }} variant='outlined' >{gallery.title}</Button>
       )
 
         
+    }
+
+    const noGallery=()=>{
+      return(
+        <Typography  variant='subtitle1' sx={{marginTop:2,marginBottom:2,color:'gray'}}>No Gallery Found</Typography>
+      )
     }
 
     const handleAddToGalleryClick = () => {
@@ -614,7 +620,9 @@ const  Post=()=>{
                         
 
                         <Grid item xs={2}> 
-                        <FavoriteIcon onClick={handleLikeClick} style={isLike ? colorStyle : null}></FavoriteIcon>
+                        {/* style={isLike ? colorStyle : null} */}
+                        {isLike? <FavoriteIcon onClick={handleLikeClick} ></FavoriteIcon>:<FavoriteBorderIcon onClick={handleLikeClick} ></FavoriteBorderIcon>}
+                        
                         
                         
                         </Grid>
@@ -623,7 +631,12 @@ const  Post=()=>{
                         </Grid>
                          */}
 
-                        <Grid item xs={2}> {numLike.num_likes}   </Grid>
+                        <Grid item xs={2} > 
+                          <Typography sx={{marginLeft:0.9}}>
+                            {numLike.num_likes}  
+
+                            </Typography>  
+                          </Grid>
 
                         </Grid>    
                         <Grid item xs={2}>
@@ -634,11 +647,11 @@ const  Post=()=>{
                       aria-labelledby="modal-modal-title"
                       aria-describedby="modal-modal-description"
                     >
-                      <Box sx={style}>
+                      <Box sx={style} >
                         <Typography id="modal-modal-title" variant="h6" component="h2">
-                          Select a gallery
+                          <b>Select a gallery</b>
                         </Typography>
-                        {galleries?.map(gallery=>getGallery(gallery))}
+                        {galleries.length===0? noGallery(): galleries.map(gallery=>getGallery(gallery))}
                       </Box>
                     </Modal>
                         <Grid item xs={4}></Grid>

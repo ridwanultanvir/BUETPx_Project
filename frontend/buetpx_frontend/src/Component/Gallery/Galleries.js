@@ -4,6 +4,7 @@ import {Grid,Button,Typography, TextField} from "@mui/material";
 import Header from '../../Static/Header';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
+import GalleryCard from './GalleryCard';
 
 const style = {
   position: 'absolute',
@@ -34,8 +35,10 @@ const Galleries = ()=>
     {
 
         return(
-          <Button sx={{marginRight:2}} href = {"/Gallery/"+gallery.id} variant='outlined' >{gallery.title}</Button>
-        )
+
+            <GalleryCard gallery={gallery}/>
+       
+          )
     }
 
     const addGallery=()=>
