@@ -13,7 +13,7 @@ const PhotosBody=(props)=>{
     const [posts, setposts] = useState([]); 
     const {uid}=props;
 
-    console.log("---------------------uid----------------- ",uid);
+    console.log("---------------------uid-----------------",uid);
     
 
 

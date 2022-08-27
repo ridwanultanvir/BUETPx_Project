@@ -15,6 +15,10 @@ const UserProfile = ()=>
     
     const [user, setuser] = useState([]);  
     const [uid,setuid]=useState([]);
+    const [component, setcomponent] = useState(null);
+    const [tab, settab] = useState('Photos');
+
+    
     useEffect(() => {
         async function fetchData() {
          fetch(`http://localhost:8000/api/getuserdetails`,{
@@ -35,6 +39,7 @@ const UserProfile = ()=>
     } , [])
 
     // setuid(user['id'])
+    
 
     useEffect(() => {
         async function fetchData() {
@@ -49,6 +54,7 @@ const UserProfile = ()=>
         .then(data => {
             console.log("user data",data)
             setuid(data)
+            // setcomponent(<PhotosBody uid={data}/>)
             
         }).catch(err => console.log(err)) 
      }
@@ -56,9 +62,8 @@ const UserProfile = ()=>
     } , [user])
 
 
-
-    const [component, setcomponent] = useState(<PhotosBody {...uid}/>);
-    const [tab, settab] = useState('Photos');
+    console.log("^^^^^^^^^^^^^^^^^^^^^^^^^uid^^^^^^^^^^^^^^^^^ ",uid)
+    
     
 
 

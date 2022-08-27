@@ -33,11 +33,8 @@ def get_user_details(request,uid):
     user_serializer = UserSerializer(user_details)
     return JsonResponse(user_serializer.data, safe=False)
 
-
-
     
 @api_view(['GET'])
-
 def get_accid_from_uid(request,uid):
     user_acc_id=getaccid(uid)
     return JsonResponse(user_acc_id,safe=False)

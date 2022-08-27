@@ -35,6 +35,12 @@ const Img = styled('img')({
 const uid = 2002;
 
 const  MyImageList=()=>{
+  useEffect(() => {
+    if(!localStorage.getItem('token')){
+      window.location.href = '/login';
+    }
+  }, []);
+  
     console.log("imagelist")
 
     const [error, setError] = useState(null);
