@@ -24,8 +24,62 @@ const Announce = ()=>{
         }
     }
 
+    // announce the quest
     const handleSubmit = (event) => {
         event.preventDefault();
+
+        const today = new Date();
+        const end = new Date(endDate);
+        // format it to yyyy-mm-dd hh:mm:ss
+        const today_date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+' '+today.getHours()+':'+today.getMinutes()+':'+today.getSeconds();
+        const end_date = end.getFullYear()+'-'+(end.getMonth()+1)+'-'+end.getDate()+' '+end.getHours()+':'+end.getMinutes()+':'+end.getSeconds();
+        
+        console.log(today_date);
+        console.log(end_date);
+
+        const requestBody = {
+            title: title,
+            theme: theme,
+            description: description,
+            category: 'Exploration',
+            
+            startDate: today_date,
+            endDate: end_date,
+            status: 'active',
+            photoUrl: imageUrl,
+
+            reward: reward,
+
+        }
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json',
+            'Authorization': 'Token '+localStorage.getItem('token')
+        },
+            body: JSON.stringify(requestBody)
+        }
+
+        fetch('http://localhost:8000/api/insert_quest', requestOptions)
+        .then(response => {
+            if(response.ok){
+                alert('Quest created successfully');
+                return response.json();
+                
+            }
+            throw new Error('Request failed!');
+        }).then(response => {
+            console.log(response);
+        }).catch(error => {
+            console.log(error);
+        }
+        );
+
+        // reload the page
+        window.location.reload();
+
+
+
 
 
     }

@@ -13,7 +13,7 @@ import json
 
 from quest.models import Quest, Submission
 
-from quest.serializers import QuestInsertSerializer, SubmissionInsertSerializer, PostLikeSerializer
+from quest.serializers import SubmissionPostSerializer, QuestInsertSerializer, SubmissionInsertSerializer, PostLikeSerializer
 
 
 
@@ -24,6 +24,12 @@ from django.db.models.query import QuerySet
 from django.http import HttpResponse
 
 
+@api_view(['GET'])
+def quest_by_id(request,id):
+    if request.method == 'GET':
+        quest = Quest.objects.get(id=id)
+        quest_serializer = QuestInsertSerializer(quest)
+        return JsonResponse(quest_serializer.data, safe=False)
 
 
 @api_view(['POST'])
@@ -59,12 +65,23 @@ def insert_submission(request):
                 return JsonResponse(submssion_serializer.data, status=status.HTTP_201_CREATED) 
         return JsonResponse(submssion_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+
+@api_view(['GET'])
+def get_submission_by_questid(request,id):
+    if request.method == 'GET':
+        submissions = Submission.objects.filter(quest=id)               
+        submission_serializer = SubmissionPostSerializer(submissions,many = True)
+        return JsonResponse(submission_serializer.data, safe=False)
+
 @api_view(['Get'])
 
 def get_active_quests(request):
     
     if request.method == 'GET':
-        active_quest = Quest.objects.filter(status="Active")               
+        # case insensitive filter
+        
+        active_quest = Quest.objects.filter(status__iexact='active')              
+        # active_quest = Quest.objects.filter(status="Active")               
         active_quest_serializer = QuestInsertSerializer(active_quest,many = True)
         return JsonResponse(active_quest_serializer.data, safe=False)
 
@@ -130,14 +147,14 @@ def tutorial_detail(request, pk):
     
     
     
-@api_view(['PUT'])
+@api_view(['GET'])
 
 def get_posts_by_userid(request,id):
     
     if request.method == 'GET':
  
         posts = Post.objects.filter(owner_id = id)    
-        post_serializer = PostSerializer(posts,many = True)
+        post_serializer = PostLikeSerializer(posts,many = True)
         return JsonResponse(post_serializer.data, safe=False)
     
     

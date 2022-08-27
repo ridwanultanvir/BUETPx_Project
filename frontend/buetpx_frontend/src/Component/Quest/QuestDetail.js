@@ -16,6 +16,7 @@ import AddIcon from '@mui/icons-material/Add';
 import CategoryIcon from '@mui/icons-material/Category';
 import TimelapseOutlinedIcon from '@mui/icons-material/TimelapseOutlined';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEventsOutlined';
 import "./Style.css";
 
 const aQuest = {
@@ -53,22 +54,129 @@ const posts=[
 
 const QuestDetail = () => {
     const {questId} = useParams();
+    const Uid = 1000;
    
 
     const [option, setoption] = useState(1);
     const [quest, setquest] = useState(aQuest);
+    const [postList, setpostList] = useState([]);
+
     const [open, setOpen] = useState(false);
     const [selectedImages,setSelectedImages]= useState([]);
+    const [selectedPhoto,setSelectedPhoto]= useState();
     const [imageComponent, setImageComponent] = useState(
         <div>
             
         </div>
     );
 
+
+    const handleSubmit = () => {
+        setOpen(false);
+        
+
+
+      };
+
+    useEffect(() => {
+        if(selectedPhoto){
+            setOpen(false);
+            console.log("selectedPhoto",selectedPhoto);
+            const requestBody ={
+                quest: questId,
+                post: selectedPhoto,
+                shortlisted: 0
+            
+
+            }
+            console.log("requestBody",requestBody);
+            const reqOptions = {
+                method: 'POST',
+                headers:{
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Token ' + localStorage.getItem('token')
+                },
+                body: JSON.stringify(requestBody)
+            }
+
+            fetch('http://localhost:8000/api/insert_submission',reqOptions)
+            .then(res => res.json())
+            .then(data => {
+                console.log("response",data);
+                // alert("Submission Successful");
+                // // reload page
+                // window.location.reload();
+            }).catch(err => console.log(err));
+        
+
+
+
+
+
+            // submit to quest 
+
+        }
+    }, [selectedPhoto]);
+
+
+    useEffect(() => {
+        const requestOptions = {
+            method: 'GET',
+           headers: { 'Content-Type': 'application/json',
+            'Authorization': 'Token ' + localStorage.getItem('token')
+        } 
+    };
+
+      
+    fetch(`http://localhost:8000/api/quest_by_id/${questId}`, requestOptions)
+        .then(response => response.json())
+        .then(data => {
+            // console.log(data);
+            setquest(data);
+           
+            
+            // setquest(data);
+        })
+        .catch(error => console.log('error', error));
+
+        
+        
+    }, []);
+
+    // fetch posts by uid
+
+    useEffect(() => {
+        const requestOptions = {
+            method: 'GET',
+           headers: { 'Content-Type': 'application/json',
+            'Authorization': 'Token ' + localStorage.getItem('token')
+        } 
+    };
+
+      
+        fetch(`http://localhost:8000/api/get_posts_by_userid/${Uid}`, requestOptions)
+        .then(response => response.json())
+        .then(data => {
+            console.log("data",data);
+            const newPosts = data.map(
+                (post) => {
+                    return {
+                        ...post,
+                        isClicked: false
+                    }
+                }
+            )
+            setpostList(newPosts);
+            console.log("newPosts:",newPosts);
+
+        }).catch(error => console.log('error', error));
+    }, []);
+
+
     useEffect(() => {
         setImageComponent(
             <Grid container spacing={1}>
-                {posts.map(post => (
+                {postList.map(post => (
                     <Grid item >
                     {/* put a button a image */}
                     <Button variant='outlined' color='primary'
@@ -78,6 +186,8 @@ const QuestDetail = () => {
                         console.log('clicked');
                         // add to selectedImages
                         setSelectedImages([...selectedImages,post]);
+                        setSelectedPhoto(post.id);
+                        handleSubmit();
                         
                     }}
                     endIcon={<AddIcon/>}>
@@ -89,7 +199,8 @@ const QuestDetail = () => {
             </Grid>
         )
 
-    }, [posts]);
+    }, [postList]);
+
 
     useEffect(() => {
         console.log(selectedImages);
@@ -101,10 +212,9 @@ const QuestDetail = () => {
         setOpen(true);
       };
     
-      const handleClose = () => {
-        setOpen(false);
-      };
+      
 
+   
     
   const formatDate = (date) => {
     // format to i.e 6 jan, saturday at 3:00pm
@@ -184,17 +294,20 @@ const QuestDetail = () => {
                 <Grid item>
                     <Paper sx={{ paddingTop:'20px' ,backgroundColor:'#f5f5f5', minHeight:'760px'}}>
                         
-                    <Typography sx={{paddingLeft:'50px', paddingRight:'50px', fontSize:'h5.fontSize' ,fontWeight:'bold'}}> <DescriptionOutlinedIcon sx={{paddingRight:'4px'}} />Description </Typography>
+                    <Typography sx={{paddingLeft:'50px', paddingRight:'50px',marginTop:2, fontSize:'h5.fontSize' ,fontWeight:'bold'}}> <DescriptionOutlinedIcon sx={{paddingRight:'4px'}} />Description </Typography>
                     <Typography sx={{paddingLeft:'50px', paddingRight:'50px'}}>{quest.description}</Typography>
                     
                    
-                    <Typography sx={{paddingLeft:'50px', paddingRight:'50px', fontSize:'h5.fontSize',fontWeight:'bold'}}> <CategoryIcon sx={{paddingRight:'4px'}}/>Theme</Typography>
+                    <Typography sx={{paddingLeft:'50px', paddingRight:'50px',marginTop:2, fontSize:'h5.fontSize',fontWeight:'bold'}}> <CategoryIcon sx={{paddingRight:'4px'}}/>Theme</Typography>
                     <Typography sx={{paddingLeft:'50px', paddingRight:'50px'}}>{quest.theme}</Typography>
                     
                     
-                    <Typography sx={{paddingLeft:'50px', paddingRight:'50px', fontSize:'h5.fontSize',fontWeight:'bold'}}><TimelapseOutlinedIcon sx={{paddingRight:'4px'}}/>Timing</Typography>
+                    <Typography sx={{paddingLeft:'50px', paddingRight:'50px',marginTop:2, fontSize:'h5.fontSize',fontWeight:'bold'}}><TimelapseOutlinedIcon sx={{paddingRight:'4px'}}/>Timing</Typography>
                     <Typography sx={{paddingLeft:'50px', paddingRight:'50px'}}> Starts: {formatDate(quest.startDate)}</Typography>
                     <Typography sx={{paddingLeft:'50px', paddingRight:'50px'}}> Ends: {formatDate(quest.endDate)}</Typography>
+
+                    <Typography sx={{paddingLeft:'50px', paddingRight:'50px',marginTop:5, fontSize:'h5.fontSize',fontWeight:'bold'}}><EmojiEventsIcon sx={{paddingRight:'4px'}}/>Prize</Typography>
+                    <Typography sx={{paddingLeft:'50px', paddingRight:'50px'}}> Reward: {quest.reward}</Typography>
 
 
                             
@@ -210,7 +323,7 @@ const QuestDetail = () => {
                 maxWidth='md'
                 
                 open={open}
-                onClose={handleClose}
+                onClose={handleSubmit}
             >
 
                 <DialogTitle>Submit Photos</DialogTitle>
@@ -242,7 +355,7 @@ const QuestDetail = () => {
                 
                 </DialogContent>
                 <DialogActions>
-                <Button variant='contained' onClick={handleClose}>Submit </Button>
+                <Button variant='contained' onClick={handleSubmit}>Submit </Button>
                 </DialogActions>
             </Dialog>
 

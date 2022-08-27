@@ -90,6 +90,30 @@ const Active = () => {
 
 
   const [selectedId, setSelectedId] = useState(null);
+  const [questList, setQuestList] = useState([]);
+
+  useEffect(() => {
+    const requestOptions = {
+      method: 'GET',
+     headers: { 'Content-Type': 'application/json',
+      'Authorization': 'Token ' + localStorage.getItem('token')
+    } 
+     
+
+    };
+
+    fetch('http://localhost:8000/api/get_active_quests', requestOptions)
+    .then(response => response.json())
+    .then(data => {
+      setQuestList(data);
+      console.log(data);
+    }).catch(error => {
+      console.log(error);
+
+    }
+    )
+  }, []);
+  
 
   useEffect(() => {
       if(selectedId){
@@ -148,9 +172,9 @@ const Active = () => {
     return(
         <Grid container spacing={2} sx={{paddingLeft:'80px', paddingRight:'80px',paddingBottom:'10px'}}>
             {
-                activeList.map(quest => (
+                questList.map(quest => (
                   <Grid item>
-                    <Card sx={{ minWidth: 442}}>
+                    <Card sx={{ minWidth: 442, maxWidth:442}}>
                       <CardActionArea onClick={(e)=>{
                           console.log(quest.id);
                           console.log(" selected...");
@@ -160,6 +184,7 @@ const Active = () => {
                         <CardMedia
                           component="img"
                           height="140"
+                         
                           image={quest.photoUrl}
                           alt="loading.."
                         />
@@ -167,9 +192,7 @@ const Active = () => {
                           <Typography gutterBottom variant="h5" component="div">
                             {quest.title}
                           </Typography>
-                          <Typography variant="body2" color="text.secondary">
-                            {quest.description}
-                          </Typography>
+                         
                           
                           <Grid container spacing={1} direction='column' sx={{paddingTop:'10px'}}>
                             <Grid item container spacing={2}>
