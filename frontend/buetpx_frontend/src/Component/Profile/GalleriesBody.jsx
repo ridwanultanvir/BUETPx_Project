@@ -4,6 +4,7 @@ import {Grid,Button,Typography, TextField} from "@mui/material";
 import Header from '../../Static/Header';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
+import GalleryCard from './GalleryCard';
 
 const style = {
   position: 'absolute',
@@ -35,8 +36,10 @@ const GalleriesBody = (props)=>
     {
 
         return(
-          <Button sx={{marginRight:2}} href = {"/Gallery/"+gallery.id} variant='outlined' >{gallery.title}</Button>
-        )
+
+            <GalleryCard gallery={gallery}/>
+       
+          )
     }
 
     const addGallery=()=>
@@ -152,27 +155,8 @@ const GalleriesBody = (props)=>
                 <Grid item>
                 <Header/>
                 </Grid>
-                <Grid item container>
-                <Typography
-                        variant="h6"
-                        noWrap
-                        component="a"
-                        href=""
-                        sx={{
-                            mr: 2,
-                            display: { xs: 'none', md: 'flex' },
-                            fontFamily: 'revert-layer',
-                            fontWeight: 600,
-                            // letterSpacing: '.3rem',
-                            color: 'inherit',
-                            textDecoration: 'none',
-                        }}
-                        >
-                    Galleries
-                    </Typography>
-                    </Grid>
-                    <Grid item container>
-                    <Button sx={{marginRight:2}} onClick={handleOpen}>Add New</Button>
+                <Grid item container >
+                    <Grid item xs={3}><Button fullWidth  onClick={handleOpen} sx={{ marginRight:2,marginTop:2,height:'100%'}}>Add New</Button></Grid>
                     <Modal
                       open={open}
                       onClose={handleClose}

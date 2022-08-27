@@ -156,7 +156,7 @@ const Galleries = ()=>
                 </Grid>
                 <Grid item container>
                 <Typography
-                        variant="h6"
+                        variant="h4"
                         noWrap
                         component="a"
                         href=""
@@ -174,7 +174,9 @@ const Galleries = ()=>
                     </Typography>
                     </Grid>
                     <Grid item container>
-                    <Button sx={{marginRight:2}} onClick={handleOpen}>Add New</Button>
+                      {/* <Grid item sx={3}><Button  onClick={handleOpen} sx={{ marginRight:2,minWidth: 442, maxWidth:442,marginTop:2}}>Add New</Button></Grid> */}
+                      <Grid item xs={3}><Button fullWidth  onClick={handleOpen} sx={{ marginRight:2,marginTop:2,height:'100%'}}>Add New</Button></Grid>
+                    
                     <Modal
                       open={open}
                       onClose={handleClose}
@@ -186,7 +188,7 @@ const Galleries = ()=>
                           Enter the gallery name:
                         </Typography>
                         <TextField onInputCapture={(e) => setnew_gallery_title(e.target.value)}/>
-                        <Button onClick={addGallery}>Add</Button>
+                        <Button onClick={addGallery} >Add</Button>
                       </Box>
                     </Modal>
 
