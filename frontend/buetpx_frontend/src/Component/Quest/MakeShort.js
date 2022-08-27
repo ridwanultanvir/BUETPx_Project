@@ -81,6 +81,37 @@ const MakeShort = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(Shortlist);
+        const requestBody={
+            posts: Shortlist
+        }
+        const reqOptions = {
+            method: 'PUT',
+            headers: {'Content-Type': 'application/json',
+            'Authorization': 'Token ' + localStorage.getItem('token')}
+        ,
+            body: JSON.stringify(requestBody)
+
+        }
+
+        fetch(`http://localhost:8000/api/update_post_shortlisted/${id}/`, reqOptions)
+        .then(res => res.json())
+        .then(data => {
+            console.log("response: ",data);
+            alert("Shortlisted Successfully");
+            
+        }).catch(err => {
+            console.log(err);
+            alert("Something went wrong");
+            window.location.reload();
+
+
+        })
+        .finally(() => {
+            window.location.href = '/admin/quest';
+        }
+        )
+        ;
+
     }
 
     // useEffect(() => {
@@ -159,7 +190,7 @@ const MakeShort = () => {
                                     (e) => {
                                         // add if isClicked is false
                                         if(!photo.isClicked){
-                                            setShortlist([...Shortlist, photo]);
+                                            setShortlist([...Shortlist, photo.id]);
                                         }
                                         // remove if isClicked is true
                                         else{

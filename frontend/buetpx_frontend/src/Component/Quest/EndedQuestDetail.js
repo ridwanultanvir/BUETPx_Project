@@ -73,6 +73,30 @@ const EndedQuestDetail = () => {
     );
 
     useEffect(() => {
+        const requestOptions = {
+            method: 'GET',
+           headers: { 'Content-Type': 'application/json',
+            'Authorization': 'Token ' + localStorage.getItem('token')
+        } 
+    };
+
+      
+    fetch(`http://localhost:8000/api/quest_by_id/${questId}`, requestOptions)
+        .then(response => response.json())
+        .then(data => {
+            // console.log(data);
+            setquest(data);
+           
+            
+            // setquest(data);
+        })
+        .catch(error => console.log('error', error));
+
+        
+        
+    }, []);
+
+    useEffect(() => {
         setImageComponent(
             <Grid container spacing={1}>
                 {posts.map(post => (
@@ -161,11 +185,11 @@ const EndedQuestDetail = () => {
     }
     else if(value==='short'){
         setComponent(
-            <ShortList/>
+            <ShortList quest={quest}/>
 
         );
     }
-  }, [value]);
+  }, [value, quest]);
 
   const handleChangeMultiple = (event) => {
     
