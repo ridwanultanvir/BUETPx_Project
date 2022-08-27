@@ -64,6 +64,7 @@ root.render(
       <Route path="/admin/Quest" element={<ShortListQuest />} />
       <Route path="/admin/quest/:id" element={<MakeShort />} />
       <Route path="/admin/Login" element={<AdminLogin />} />
+      
 
 
 
