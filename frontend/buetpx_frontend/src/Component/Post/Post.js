@@ -620,7 +620,9 @@ const  Post=()=>{
                         
 
                         <Grid item xs={2}> 
-                        <FavoriteIcon onClick={handleLikeClick} style={isLike ? colorStyle : null}></FavoriteIcon>
+                        {/* style={isLike ? colorStyle : null} */}
+                        {isLike? <FavoriteIcon onClick={handleLikeClick} ></FavoriteIcon>:<FavoriteBorderIcon onClick={handleLikeClick} ></FavoriteBorderIcon>}
+                        
                         
                         
                         </Grid>
@@ -629,7 +631,12 @@ const  Post=()=>{
                         </Grid>
                          */}
 
-                        <Grid item xs={2}> {numLike.num_likes}   </Grid>
+                        <Grid item xs={2} > 
+                          <Typography sx={{marginLeft:0.9}}>
+                            {numLike.num_likes}  
+
+                            </Typography>  
+                          </Grid>
 
                         </Grid>    
                         <Grid item xs={2}>
