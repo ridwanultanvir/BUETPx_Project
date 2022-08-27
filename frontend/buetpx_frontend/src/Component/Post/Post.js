@@ -308,14 +308,14 @@ const  Post=()=>{
       
       if(isLike){
         console.log("delete like");
-        // deleteLikeFunc();
+        deleteLikeFunc();
         setIsLike(false);
         numLike.num_likes = numLike.num_likes -1 ; 
         // setnumLike(numLike-1);
         // setCountUp(countUp - 1);
       }else{
         console.log("insert like");
-        // insertLikeFunc();
+        insertLikeFunc();
         setIsLike(true);
         numLike.num_likes = numLike.num_likes +1 ; 
         // setnumLike(numLike+1);
