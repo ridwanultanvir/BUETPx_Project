@@ -212,7 +212,7 @@ def post_list_by_tagname(request, tagname):
         post_serializer = PostSerializer(posts, many=True)
         return JsonResponse(post_serializer.data, safe=False)
 
-@api_view(['Get'])
+@api_view(['GET'])
 def get_post_by_id(request,id):
     
     if request.method == 'GET':

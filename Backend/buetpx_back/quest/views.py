@@ -115,7 +115,7 @@ def update_quest_status(request, id ):
     
     
     
-@api_view(['PUT'])
+@api_view(['GET'])
 
 def get_posts_by_userid(request,id):
     
