@@ -5,6 +5,7 @@ import Header from '../../Static/Header';
 import Box from '@mui/material/Box';
 import {Card, CardContent, CardMedia, CardActionArea, CardActions} from '@mui/material';
 import Modal from '@mui/material/Modal';
+import ImageList from '@mui/material/ImageList';
 
 const GalleryCard = ({gallery})=>{
 
@@ -19,12 +20,12 @@ const GalleryCard = ({gallery})=>{
             component="img"
             height="140"
            
-            // image={quest.photoUrl}
+            image={gallery.photoUrl}
             alt="loading.."
           />
           <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              {gallery.title}
+            <Typography gutterBottom variant="subtitle1" component="div">
+              <b>{gallery.title}</b>
             </Typography>
            
             

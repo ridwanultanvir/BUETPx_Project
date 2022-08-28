@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import Card from "../../Static/Card";
+import Box from '@mui/material/Box';
+import ImageList from '@mui/material/ImageList';
+import ImgPost from '../ImageList/ImgPost'; 
 import { Grid } from "@mui/material";
 import {
     useParams,
@@ -14,6 +17,7 @@ const GalleryBody =()=>{
     const [error, seterror] = useState(null);
     const [isLoaded, setisLoaded] = useState(false);
     const [photoList, setphotoList] = useState([]);
+    const [galleryName, setgalleryName] = useState("");
         
   
     useEffect(() => {
@@ -38,7 +42,8 @@ const GalleryBody =()=>{
         .then(
             (result) => {
             setisLoaded(true);
-            setphotoList(result)
+            setphotoList(result['posts']);
+            setgalleryName(result['gallery_name']);
             },
             // Note: it's important to handle errors here
             // instead of a catch() block so that we don't swallow
@@ -54,18 +59,44 @@ const GalleryBody =()=>{
         const getPhotoCard = (photoObj) => {
             return (
                 <Grid item 
-               xs={12} sm={6} md={6} lg={4}
                 >
-                <Card {...photoObj} />
+                <ImgPost {...photoObj} />
+                </Grid>
+            );
+        }
+
+        const noPhotoInList=()=>
+        {
+            return (
+                <Grid item xs={12} sm={6} md={6} lg={4} sx={{
+                    color: "gray",
+                    fontSize: "1.5rem",
+                }}>
+                    No Photo in this gallery
                 </Grid>
             );
         }
 
     
         return (
-                    <Grid container spacing={2}>
-            
-                    {photoList.map(photoObj => getPhotoCard(photoObj))}
+                    <Grid container spacing={2} >
+
+                        <Grid item xs={12} alignContent="center">
+                            <h1>{galleryName}</h1>
+                        </Grid>
+                        <Box sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                        {photoList.length===0 ? noPhotoInList():
+                            <ImageList variant="masonry" cols={4} gap={10}>
+                                {/* {posts.map((post) => (
+                                <ImgPost {...post}/> */}
+                                {photoList.map(photoObj => getPhotoCard(photoObj))}
+                                {/* ))} */}
+                            </ImageList>
+                        }
+                        </Box>
+                     
+                            
+                   
                     </Grid>
                 );
         

@@ -1,3 +1,4 @@
+import json
 from turtle import position
 from django.shortcuts import render
 from buetpx.serializers import PostSerializer,PostSerializer2
@@ -20,7 +21,17 @@ def get_galleries_by_uid(request,uid):
         galleries_serializer = GallerySerializer(galleries,many = True)
         
         print(galleries_serializer.data)
-        return JsonResponse(galleries_serializer.data, safe=False)
+        gallery_list=[]
+        for gallery in galleries_serializer.data:
+            
+            posts=Post.objects.filter(gallery=gallery['id'])
+            if(len(posts)>0) :
+                gallery_list.append({'title':gallery['title'],'owner':gallery['owner'],'id':gallery['id'],'photoUrl':posts[0].photo_url})
+            else:
+                gallery_list.append({'title':gallery['title'],'owner':gallery['owner'],'id':gallery['id'],'photoUrl':'https://icons.iconarchive.com/icons/alecive/flatwoken/512/Apps-Gallery-icon.png'})
+        print("gallery_list:",gallery_list)
+            
+        return JsonResponse(gallery_list, safe=False)
 # get_galleries_by_uid_pid    
 @api_view(['GET'])
 def get_galleries_by_uid_pid(request,uid,pid):
@@ -70,6 +81,7 @@ def get_gallery_posts_by_id(request,id):
         gallery = Gallery.objects.get(pk=id)
         print('#############gallery####################',gallery)
         gallery_serializer = GalleryPostSerializer(gallery)
+        gallery_name=GallerySerializer(gallery).data['title']
         post_id_list=list(gallery_serializer.data['posts'])
         for pid in post_id_list:
             post=Post.objects.get(pk=pid)
@@ -81,8 +93,10 @@ def get_gallery_posts_by_id(request,id):
             
             post_detail_list.append(postserializer.data)
             print('-------p id------',pid)
+        jsonResponse=JsonResponse({'gallery_name':gallery_name,'posts':post_detail_list})
+
         
-        return JsonResponse(post_detail_list, safe=False)
+        return jsonResponse
     
 @api_view(['POST'])
 # add Gallery
