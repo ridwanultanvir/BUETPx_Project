@@ -125,9 +125,14 @@ const Announce = ()=>{
                
                 <Grid item xs={3} container direction='column' spacing={2} >
                     <Grid item/>
+                    
                     <Grid item/>
                     <Grid item/>
-                    <Grid item/>
+                    <Grid item alignContent="center">
+                        <Typography variant='h5'  alignContent="center">
+                            Announce Quest
+                        </Typography>
+                    </Grid>
                     <Grid item/>
                     <Grid item/>
                     

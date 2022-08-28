@@ -28,6 +28,8 @@ import AdminPanel from "./Component/Quest/AdminPanel";
 import ShortListQuest from "./Component/Quest/ShortListQuest";
 import MakeShort from "./Component/Quest/MakeShort";
 import AdminLogin from "./Component/Quest/Authentication/AdminLogin";
+import Exhibition from "./Component/Exhibition/Exhibition";
+import ExhibitionPhotos from "./Component/Exhibition/ExhibitionPhotos";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -64,6 +66,8 @@ root.render(
       <Route path="/admin/Quest" element={<ShortListQuest />} />
       <Route path="/admin/quest/:id" element={<MakeShort />} />
       <Route path="/admin/Login" element={<AdminLogin />} />
+      <Route path="/exhibition" element={<Exhibition />} />
+      <Route path="/exhibition/:id" element={<ExhibitionPhotos />} />
       
 
 

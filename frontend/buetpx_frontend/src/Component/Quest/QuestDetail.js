@@ -54,8 +54,8 @@ const posts=[
 
 const QuestDetail = () => {
     const {questId} = useParams();
-    const Uid = 1000;
-   
+    const Uid = localStorage.getItem('uid')?localStorage.getItem('uid'):2000;
+    console.log("Uid:",Uid);
 
     const [option, setoption] = useState(1);
     const [quest, setquest] = useState(aQuest);

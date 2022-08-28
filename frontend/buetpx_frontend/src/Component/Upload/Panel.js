@@ -70,6 +70,9 @@ const UploadDetail = (url) => {
         .then(data => {
             console.log("user data",data)
             setOwnerId(data)
+            // save to local storage
+            localStorage.setItem("uid",data)
+            console.log("uid in panel",data)
             // setcomponent(<PhotosBody uid={data}/>)
             
         }).catch(err => console.log(err)) 

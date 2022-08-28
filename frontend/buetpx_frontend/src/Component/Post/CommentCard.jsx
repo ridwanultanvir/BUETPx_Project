@@ -98,7 +98,7 @@ function CommentCard(props) {
             </p> */}
           </Grid>
         </Grid>
-        <Button size='small' variant='outlined' onClick={deleteCmment}>Delete</Button>
+        {/* <Button size='small' variant='outlined' onClick={deleteCmment}>Delete</Button> */}
 
       </Paper>
       
