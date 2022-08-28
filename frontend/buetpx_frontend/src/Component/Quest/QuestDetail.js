@@ -29,7 +29,7 @@ const aQuest = {
         startDate: '01/08/2022  10:10:10',
         endDate: '2022-09-07 12:12:00',
         status: 'Active',
-        photoUrl:'https://www.intercultural-europe.org/wp-content/uploads/2021/01/Culture_Folk_Fest_ExpatExplore.jpg',
+        photoUrl:'https://wallpaperaccess.com/full/6913161.jpg',
         reward: 'USD 500',
 }
 
@@ -64,6 +64,7 @@ const QuestDetail = () => {
     const [open, setOpen] = useState(false);
     const [selectedImages,setSelectedImages]= useState([]);
     const [selectedPhoto,setSelectedPhoto]= useState();
+    const [flag, setFlag] = useState(false);
     const [imageComponent, setImageComponent] = useState(
         <div>
             
@@ -77,10 +78,18 @@ const QuestDetail = () => {
 
 
       };
+    // const handlePhotoSubmit = (e)=>{
+    //     e.preventDefault();
+    //     console.log('post id:', selectedPhoto)
+    //     setFlag(true);
+    //     setOpen(false);
+
+    // }
+    
 
     useEffect(() => {
         if(selectedPhoto){
-            setOpen(false);
+            // setOpen(false);
             console.log("selectedPhoto",selectedPhoto);
             const requestBody ={
                 quest: questId,
@@ -104,6 +113,8 @@ const QuestDetail = () => {
             .then(data => {
                 console.log("response",data);
                 alert("Submission Successful");
+                // remove the selected photo from the list
+                setpostList([...postList.filter(post => post.id !== selectedPhoto)]);
                 // // reload page
                 // window.location.reload();
             }).catch(err => console.log(err));
@@ -180,14 +191,25 @@ const QuestDetail = () => {
                     <Grid item >
                     {/* put a button a image */}
                     <Button variant='outlined' color='primary'
-                     disabled={post.isClicked}
+                     
                     
                     onClick={()=>{
                         console.log('clicked');
+
                         // add to selectedImages
-                        setSelectedImages([...selectedImages,post]);
-                        setSelectedPhoto(post.id);
-                        handleSubmit();
+                       
+
+                            setSelectedImages([...selectedImages,post]);
+                            setSelectedPhoto(post.id);
+                            handleSubmit();
+                        
+                       
+
+
+
+
+                        
+                        // handleSubmit();
                         
                     }}
                     endIcon={<AddIcon/>}>
@@ -261,10 +283,10 @@ const QuestDetail = () => {
             <Grid item>
                 <Header/>
             </Grid>
-            <Grid item container direction='column'>
-                {/* <Grid item>
-                    <img src={quest.photoUrl} alt='img' width='100%' height='400px'/>
-                </Grid> */}
+            <Grid item container direction='column' >
+                <Grid item>
+                    {/* <img src={quest.photoUrl} alt='img'maxHeight='300'/> */}
+                </Grid>S
                 <Grid item>
                     <Paper sx={{paddingBottom:'20px'}}>
                         <center>
@@ -355,7 +377,7 @@ const QuestDetail = () => {
                 
                 </DialogContent>
                 <DialogActions>
-                <Button variant='contained' onClick={handleSubmit}>Submit </Button>
+                {/* <Button variant='contained' onClick={handlePhotoSubmit}>Submit </Button> */}
                 </DialogActions>
             </Dialog>
 
