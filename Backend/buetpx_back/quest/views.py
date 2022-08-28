@@ -99,6 +99,9 @@ def get_all_quests(request):
     
     if request.method == 'GET':
         all_quest = Quest.objects.all()           
+        # sort them by status
+        all_quest = all_quest.order_by('status')
+        
         all_quest_serializer = QuestInsertSerializer(all_quest,many = True)
         return JsonResponse(all_quest_serializer.data, safe=False)
     
