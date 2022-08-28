@@ -184,18 +184,27 @@ const MakeShort = () => {
                             image={photo.photo_url}
                             alt="loading.."
                             />
+                            </CardActionArea>
                            
                             <CardActions>
                                 <Button fullWidth variant={photo.isClicked?'outlined':''} color="primary" endIcon={photo.isClicked? <RemoveIcon/>:<AddIcon/> }  onClick={
                                     (e) => {
                                         // add if isClicked is false
                                         if(!photo.isClicked){
+                                            console.log("add");
+                                            console.log('isclicked:', photo.isClicked);
                                             setShortlist([...Shortlist, photo.id]);
                                         }
                                         // remove if isClicked is true
                                         else{
                                             // remove from shortlist
-                                            setShortlist(Shortlist.filter(item => item.id !== photo.id));
+                                            console.log("Shortlist removing:", photo.id);
+                                            console.log("isclicked:", photo.isClicked);
+                                            // remove from shortlist
+                                            const newShortlist = Shortlist.filter(id => id !== photo.id);
+                                            // Shortlist.filter(id => id !== photo.id);
+                                            setShortlist(newShortlist);
+                                            console.log("Shortlist after removing:", newShortlist);
 
                                         }
                                         photo.isClicked = !photo.isClicked;
@@ -209,7 +218,7 @@ const MakeShort = () => {
                                 </Button>
                                 
                             </CardActions>
-                        </CardActionArea>
+                        
                         </Card>
                     </Grid>  
                 ))}

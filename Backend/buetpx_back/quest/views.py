@@ -69,7 +69,7 @@ def insert_submission(request):
 @api_view(['GET'])
 def get_submission_by_questid(request,id):
     if request.method == 'GET':
-        submissions = Submission.objects.filter(quest=id)               
+        submissions = Submission.objects.filter(quest=id,shortlisted=0)               
         submission_serializer = SubmissionPostSerializer(submissions,many = True)
         return JsonResponse(submission_serializer.data, safe=False)
 
