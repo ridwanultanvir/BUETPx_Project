@@ -14,8 +14,13 @@ import SendIcon from '@mui/icons-material/Send';
 
 const UploadDetail = (url) => {
 
+    const uid=parseInt(localStorage.getItem('uid'));
+    console.log("uid from local ",uid);
+    //convert to int
+
+
     
-    const [ownerId, setOwnerId] = useState(2000);
+    const [ownerId, setOwnerId] = useState(uid);
     const [user, setUser] = useState([]);
     console.log("got url:", url);
     url = url.url;
@@ -35,50 +40,50 @@ const UploadDetail = (url) => {
     //     {id:3,name: 'Padma',city:'Rajshahi',country: 'Bangladesh'},
     // ]
 
-    useEffect(() => {
-        async function fetchData() {
-         fetch(`http://localhost:8000/api/getuserdetails`,{
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": "Token " + localStorage.getItem("token")}
-          }
-            )
-        .then(res => res.json())
-        .then(data => {
-            console.log("user data",data)
-            setUser(data)
+    // useEffect(() => {
+    //     async function fetchData() {
+    //      fetch(`http://localhost:8000/api/getuserdetails`,{
+    //         method: "GET",
+    //         headers: {
+    //           "Content-Type": "application/json",
+    //           "Authorization": "Token " + localStorage.getItem("token")}
+    //       }
+    //         )
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         console.log("user data",data)
+    //         setUser(data)
             
-        }).catch(err => console.log(err)) 
-     }
-        fetchData();
-    } , [])
+    //     }).catch(err => console.log(err)) 
+    //  }
+    //     fetchData();
+    // } , [])
 
-    // setuid(user['id'])
+    // // setuid(user['id'])
     
 
-    useEffect(() => {
-        async function fetchData() {
-         fetch(`http://localhost:8000/api/getaccidfromuid/${user['id']}`,{
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": "Token " + localStorage.getItem("token")}
-          }
-            )
-        .then(res => res.json())
-        .then(data => {
-            console.log("user data",data)
-            setOwnerId(data)
-            // save to local storage
-            localStorage.setItem("uid",data)
-            console.log("uid in panel",data)
-            // setcomponent(<PhotosBody uid={data}/>)
+    // useEffect(() => {
+    //     async function fetchData() {
+    //      fetch(`http://localhost:8000/api/getaccidfromuid/${user['id']}`,{
+    //         method: "GET",
+    //         headers: {
+    //           "Content-Type": "application/json",
+    //           "Authorization": "Token " + localStorage.getItem("token")}
+    //       }
+    //         )
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         console.log("user data",data)
+    //         setOwnerId(data)
+    //         // save to local storage
+    //         localStorage.setItem("uid",data)
+    //         console.log("uid in panel",data)
+    //         // setcomponent(<PhotosBody uid={data}/>)
             
-        }).catch(err => console.log(err)) 
-     }
-        fetchData();
-    } , [user])
+    //     }).catch(err => console.log(err)) 
+    //  }
+    //     fetchData();
+    // } , [user])
 
     const [CategoryList, setCategoryList] = useState([]);
     const [postTitle, setPostTitle] = useState('');

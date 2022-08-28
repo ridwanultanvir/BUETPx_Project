@@ -38,6 +38,11 @@ def get_user_details(request,uid):
 def get_accid_from_uid(request,uid):
     user_acc_id=getaccid(uid)
     return JsonResponse(user_acc_id,safe=False)
+
+@api_view(['GET'])
+def get_acc_id_from_email(request,email):
+    user_acc_id=UserAccount.objects.get(email=email).id
+    return JsonResponse(user_acc_id,safe=False)
     
     
     

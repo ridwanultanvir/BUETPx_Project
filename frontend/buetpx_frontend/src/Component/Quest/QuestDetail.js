@@ -54,7 +54,7 @@ const posts=[
 
 const QuestDetail = () => {
     const {questId} = useParams();
-    const Uid = localStorage.getItem('uid')?localStorage.getItem('uid'):2000;
+    const Uid = localStorage.getItem('uid')?parseInt(localStorage.getItem('uid')):3;
     console.log("Uid:",Uid);
 
     const [option, setoption] = useState(1);
@@ -103,7 +103,7 @@ const QuestDetail = () => {
             .then(res => res.json())
             .then(data => {
                 console.log("response",data);
-                // alert("Submission Successful");
+                alert("Submission Successful");
                 // // reload page
                 // window.location.reload();
             }).catch(err => console.log(err));
